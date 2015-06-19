@@ -10,11 +10,12 @@ angular.module('starter.controllers', [])
   //
   //$scope.$on('$ionicView.enter', function(e) {
   //});
-  
+
   $scope.entries = Entries.all();
   $scope.remove = function(entry) {
     Entries.remove(entry);
-  }
+  };
+
 })
 
 .controller('EntryDetailCtrl', function($scope, $stateParams, Entries) {

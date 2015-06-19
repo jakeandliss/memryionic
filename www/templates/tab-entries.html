@@ -4,11 +4,60 @@
   The FriendsCtrl pulls data from the Friends service (service.js)
   The Friends service returns an array of friend data
 -->
-<ion-view view-title="{{entry}}">
+<ion-view view-title="Entries">
   <ion-content class="padding">
-    <img ng-src="{{entry.image}}" style="width: 64px; height: 64px">
-    <p>
-      {{entry.content}} - test
-    </p>
+    <div ng-controller="EntriesCtrl as entry">
+      <div class="list card" ng-repeat="entry in entries">
+
+        <div class="item item-avatar gray">
+          <img ng-src="{{entry.image}}">
+
+          <button class="button button-icon ion-drag right"></button>
+          <h2>{{entry.title}}</h2>
+          <p>{{entry.date | date: "mm/dd/yyyy"}}</p>
+        </div>
+
+        <div class="item item-body">
+          <p>
+            {{entry.content}}
+          </p>
+          <img class="full-image" ng-src="{{entry.image}}">
+          <p>
+            Labels: <a href="#" class="subdued" ng-repeat="tag in entry.tags">{{tag.name}}{{$last ? '' : ','}}</a>
+          </p>
+        </div>
+
+        <div class="item tabs tabs-secondary tabs-icon-left gray">
+          <a class="tab-item" href="#">
+            <i class="icon ion-thumbsup"></i>
+            Like
+          </a>
+          <a class="tab-item" href="#">
+            <i class="icon ion-chatbox"></i>
+            Comment
+          </a>
+          <a class="tab-item" href="#">
+            <i class="icon ion-share"></i>
+            Share
+          </a>
+        </div>
+
+      </div>
+    </div>
   </ion-content>
 </ion-view>
+<!-- Popover for editing and deleting-->
+<script id="my-popover.html" type="text/ng-template">
+  <ion-popover-view>
+    <ion-content>
+      <div class="list">
+        <a class="item" href="#" target="_blank">
+          Edit
+        </a>
+        <a class="item" href="#" target="_blank">
+          Delete
+        </a>
+      </div>
+    </ion-content>
+  </ion-popover-view>
+</script>

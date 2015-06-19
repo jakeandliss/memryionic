@@ -8,27 +8,36 @@ angular.module('starter.services', [])
     id: 0,
     title: 'Ben Sparrow',
     content: 'You on your way?',
-    image: 'https://pbs.twimg.com/profile_images/514549811765211136/9SgAuHeY.png'
+    image: 'https://pbs.twimg.com/profile_images/514549811765211136/9SgAuHeY.png',
+    date: 12/13/1985,
+    tags: [
+      {name: 'tag'},
+      {name: 'important'}
+    ],
   }, {
     id: 1,
     title: 'Max Lynx',
     content: 'Hey, it\'s me',
-    image: 'https://avatars3.githubusercontent.com/u/11214?v=3&s=460'
+    image: 'https://avatars3.githubusercontent.com/u/11214?v=3&s=460',
+    date: 12/13/1985
   },{
     id: 2,
     title: 'Adam Bradleyson',
     content: 'I should buy a boat',
-    image: 'https://pbs.twimg.com/profile_images/479090794058379264/84TKj_qa.jpeg'
+    image: 'https://pbs.twimg.com/profile_images/479090794058379264/84TKj_qa.jpeg',
+    date: 12/13/1985
   }, {
     id: 3,
     title: 'Perry Governor',
     content: 'Look at my mukluks!',
-    image: 'https://pbs.twimg.com/profile_images/598205061232103424/3j5HUXMY.png'
+    image: 'https://pbs.twimg.com/profile_images/598205061232103424/3j5HUXMY.png',
+    date: 12/13/1985
   }, {
     id: 4,
     title: 'Mike Harrington',
     content: 'This is wicked good ice cream.',
-    image: 'https://pbs.twimg.com/profile_images/578237281384841216/R3ae1n61.png'
+    image: 'https://pbs.twimg.com/profile_images/578237281384841216/R3ae1n61.png',
+    date: 12/13/1985
   }];
 
   return {
