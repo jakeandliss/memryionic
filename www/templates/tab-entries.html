@@ -4,48 +4,54 @@
   The FriendsCtrl pulls data from the Friends service (service.js)
   The Friends service returns an array of friend data
 -->
-<ion-view view-title="Entries">
-  <ion-content class="padding">
-    <div ng-controller="EntriesCtrl as entry">
-      <div class="list card" ng-repeat="entry in entries">
+<div id="entries">
+  <ion-view view-title="Entries">
+    <ion-content class="padding">
+      <div ng-controller="EntriesCtrl as entry">
+        <div class="list card" ng-repeat="entry in entries">
 
-        <div class="item item-avatar gray">
-          <img ng-src="{{entry.image}}">
+          <div class="item item-avatar gray">
+            <img ng-src="{{entry.image}}">
 
-          <button class="button button-icon ion-drag right"></button>
-          <h2>{{entry.title}}</h2>
-          <p>{{entry.date | date: "mm/dd/yyyy"}}</p>
+            <button class="button button-icon ion-drag right" ng-click="openPopover($event)"></button>
+            <h2>{{entry.title}}</h2>
+            <p>{{entry.date | date: "mm/dd/yyyy"}}</p>
+          </div>
+
+          <div class="item item-body">
+            <p>
+              {{entry.content}}
+            </p>
+            <ion-slide-box does-continue="true">
+              <ion-slide ng-repeat="image in entry.images">
+                <img class="full-image" ng-src="{{image.image}}" >
+              </ion-slide>
+            </ion-slide-box>
+            <p>
+              Labels: <a href="#" class="subdued" ng-repeat="tag in entry.tags">{{tag.name}}{{$last ? '' : ','}}</a>
+            </p>
+          </div>
+
+          <div class="item tabs tabs-secondary tabs-icon-left gray">
+            <a class="tab-item" href="#">
+              <i class="icon ion-share"></i>
+              Share
+            </a>
+            <a class="tab-item" href="#">
+              <i class="icon ion-mic-c"></i>
+              Audio
+            </a>
+            <a class="tab-item" href="#">
+              <i class="icon ion-document-text"></i>
+              Files
+            </a>
+          </div>
+
         </div>
-
-        <div class="item item-body">
-          <p>
-            {{entry.content}}
-          </p>
-          <img class="full-image" ng-src="{{entry.image}}">
-          <p>
-            Labels: <a href="#" class="subdued" ng-repeat="tag in entry.tags">{{tag.name}}{{$last ? '' : ','}}</a>
-          </p>
-        </div>
-
-        <div class="item tabs tabs-secondary tabs-icon-left gray">
-          <a class="tab-item" href="#">
-            <i class="icon ion-thumbsup"></i>
-            Like
-          </a>
-          <a class="tab-item" href="#">
-            <i class="icon ion-chatbox"></i>
-            Comment
-          </a>
-          <a class="tab-item" href="#">
-            <i class="icon ion-share"></i>
-            Share
-          </a>
-        </div>
-
       </div>
-    </div>
-  </ion-content>
-</ion-view>
+    </ion-content>
+  </ion-view>
+</div>
 <!-- Popover for editing and deleting-->
 <script id="my-popover.html" type="text/ng-template">
   <ion-popover-view>

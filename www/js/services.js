@@ -8,7 +8,10 @@ angular.module('starter.services', [])
     id: 0,
     title: 'Ben Sparrow',
     content: 'You on your way?',
-    image: 'https://pbs.twimg.com/profile_images/514549811765211136/9SgAuHeY.png',
+    images: [
+    { image: 'https://pbs.twimg.com/profile_images/514549811765211136/9SgAuHeY.png'},
+    { image: 'https://avatars3.githubusercontent.com/u/11214?v=3&s=460'}
+    ],
     date: 12/13/1985,
     tags: [
       {name: 'tag'},
