@@ -1,0 +1,7 @@
+.form .row, .form .row .col {
+  padding: 0;
+}
+
+.form input[type="textarea"] {
+  border: none;
+}

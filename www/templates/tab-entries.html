@@ -10,15 +10,29 @@
       <div ng-controller="EntriesCtrl as entry">
         <div class="list card" ng-repeat="entry in entries">
 
-          <div class="item item-avatar gray">
-            <img ng-src="{{entry.image}}">
-
+          <div class="item item-text-wrap gray">
             <button class="button button-icon ion-drag right" ng-click="openPopover($event)"></button>
             <h2>{{entry.title}}</h2>
-            <p>{{entry.date | date: "mm/dd/yyyy"}}</p>
+            <p>{{entry.date | date: "longDate"}}</p>
+          </div>
+
+          <div class="item tabs tabs-secondary tabs-icon-left">
+            <a class="tab-item" href="#" ng-click="isSelected()">
+              <i class="icon ion-ios-glasses"></i>
+              Visual
+            </a>
+            <a class="tab-item" href="#" ng-click="isSelected()">
+              <i class="icon ion-mic-c"></i>
+              Audio
+            </a>
+            <a class="tab-item" href="#" ng-click="isSelected()">
+              <i class="icon ion-document-text"></i>
+              Files
+            </a>
           </div>
 
           <div class="item item-body">
+
             <p>
               {{entry.content}}
             </p>
@@ -36,14 +50,6 @@
             <a class="tab-item" href="#">
               <i class="icon ion-share"></i>
               Share
-            </a>
-            <a class="tab-item" href="#">
-              <i class="icon ion-mic-c"></i>
-              Audio
-            </a>
-            <a class="tab-item" href="#">
-              <i class="icon ion-document-text"></i>
-              Files
             </a>
           </div>
 
