@@ -1,7 +1,7 @@
 <ion-view view-title="New Entry">
   <ion-content>
-    <form>
-    <div class="row">
+    <form id="new-entry">
+    <!-- <div class="row">
       <div class="col">
         <a href="#" class="padding">cancel</a>
       </div>
@@ -11,7 +11,20 @@
       <div class="col">
         <input type="submit" class="button button-full button-assertive button-outline">
       </div>
+    </div> -->
+
+    <div class="bar bar-header bar-stable item-input-inset">
+      <button class="button button-clear">
+        Cancel
+      </button>
+      <h1 class="title">
+        New Entry
+      </h1>
+      <button class="button button-outline button-assertive">
+        Save Entry
+      </button>
     </div>
+
     <div class="list form">
       <div class="row">
         <div class="col col-67">
@@ -32,7 +45,7 @@
         <input type="text" placeholder="labels">
       </label>
       <label class="item item-input">
-        <input type="file" class="ion-android-upload">
+        <input type="file" class="">
       </label>
     </div>
   </form>
