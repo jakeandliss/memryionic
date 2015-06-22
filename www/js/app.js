@@ -72,7 +72,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     views: {
       'tab-profile': {
         templateUrl: 'templates/tab-profile.html',
-        controller: 'AccountCtrl'
+        controller: 'ProfileCtrl'
+      }
+    }
+  })
+
+  .state('tab.tags', {
+    url: '/tags',
+    views: {
+      'tab-tags': {
+        templateUrl: 'templates/tab-tags.html',
+        controller: 'TagsCtrl'
       }
     }
   });

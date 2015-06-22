@@ -1,0 +1,9 @@
+<ion-view view-title="Labels">
+  <ion-content>
+    <div class="list" ng-controller="TagsCtrl as tag">
+      <div class="item" ng-repeat="tag in tags">
+        <a href="#">{{ tag.name }}</a>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

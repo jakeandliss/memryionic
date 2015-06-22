@@ -50,11 +50,18 @@ function($scope, $ionicPopover) {
 
 })
 
+.controller('TagsCtrl', function($scope, Tags) {
+  $scope.tags = Tags.all();
+  $scope.remove = function(tag) {
+    Tags.remove(tag);
+  };
+})
+
 .controller('EntryDetailCtrl', function($scope, $stateParams, Entries) {
   $scope.entry = Entries.get($stateParams.EntryId);
 })
 
-.controller('AccountCtrl', function($scope) {
+.controller('ProfileCtrl', function($scope) {
   $scope.settings = {
     enableFriends: true
   };

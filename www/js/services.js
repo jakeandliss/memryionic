@@ -59,4 +59,32 @@ angular.module('starter.services', [])
       return null;
     }
   };
-});
+})
+
+.factory('Tags', function() {
+
+  var tags = [
+    {name: "test 0"},
+    {name: "test 1"},
+    {name: "test 2"},
+    {name: "test 3"},
+    {name: "test 4"}
+  ];
+
+  return {
+    all: function() {
+      return tags;
+    },
+    remove: function(tag) {
+      tags.splice(entries.indexOf(tag), 1);
+    },
+    get: function(TagId) {
+      for (var i = 0; i < entries.length; i++) {
+        if (tags[i].id === parseInt(tagId)) {
+          return tags[i];
+        }
+      }
+      return null;
+    }
+  };
+})
