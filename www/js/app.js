@@ -72,7 +72,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     views: {
       'tab-profile': {
         templateUrl: 'templates/tab-profile.html',
-        controller: 'ProfileCtrl'
+        controller: 'UserCtrl'
       }
     }
   })
@@ -85,9 +85,36 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         controller: 'TagsCtrl'
       }
     }
+  })
+
+  // Create a state for the 'users' directive
+    .state('user', {
+    url: "/user",
+    abstract: true,
+    templateUrl: "templates/user/user.html"
+  })
+
+  .state('user.new', {
+    url: '/new',
+    views: {
+      'new': {
+        templateUrl: 'templates/user/new.html',
+        controller: 'UserCtrl'
+      }
+    }
+  })
+
+  .state('user.login', {
+    url: '/login',
+    views: {
+      'login': {
+        templateUrl: 'templates/user/login.html',
+        controller: 'UserCtrl'
+      }
+    }
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/new');
+  $urlRouterProvider.otherwise('/tab/entries');
 
 });

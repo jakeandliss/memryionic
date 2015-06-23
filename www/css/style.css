@@ -1,8 +1,37 @@
 /* Empty. Add your own CSS if you like */
 
+p {
+	font-family: 'Ubuntu', sans-serif;
+	/*font-family: 'Ubuntu Condensed', sans-serif;*/
+}
+
+.logo {
+	font-family: 'Lobster Two', cursive;
+}
+
+.center {
+	text-align: center;
+}
+
 .right {
 	float: right;
 }
+
+.no-border {
+	border:	none;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+
+
+/********
+
+Color Styling
+
+********/
 
 .gray {
 	background-color: #f5f5f5;
@@ -14,4 +43,35 @@
 
 .salmon {
 	background-color: #FD9781;
+}
+
+.font-white {
+	color: white;
+}
+
+
+/***************
+
+Welcome Screen
+
+***************/
+
+#welcome {
+	background-image: url('/img/family.jpg');
+	background-size: cover;
+	padding-top: 125px;
+	padding-bottom: 50px;
+}
+
+#registration .row {
+    padding: 0;
+    margin-bottom: 1px;
+}
+
+#registration .row .first {
+    border-right: none;
+}
+
+#registration .row .last {
+    border-left: none;
 }

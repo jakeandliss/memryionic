@@ -65,7 +65,7 @@ function($scope, $ionicPopover) {
   $scope.entry = Entries.get($stateParams.EntryId);
 })
 
-.controller('ProfileCtrl', function($scope) {})
+.controller('UserCtrl', function($scope) {})
 //   $scope.user =  {
 //     id: "",
 //     first_name: "Jake",
