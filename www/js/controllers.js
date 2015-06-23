@@ -1,7 +1,5 @@
 angular.module('starter.controllers', [])
 
-.controller('NewCtrl', function($scope) {})
-
 .controller('EntriesCtrl', function($scope, Entries) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -16,12 +14,12 @@ angular.module('starter.controllers', [])
     Entries.remove(entry);
   };
 
+  $scope.entry = {};
   $scope.addEntry = function(newEntry) {
     alert(1);
-    Entries.push(newEntry);
+    $scope.entries.push($scope.newEntry);
     $scope.newEntry = '';
-  };
-
+  }
 },
 
 // popover to edit and delete entries

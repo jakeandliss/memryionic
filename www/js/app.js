@@ -43,7 +43,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     views: {
       'tab-new': {
         templateUrl: 'templates/tab-new.html',
-        controller: 'NewCtrl'
+        controller: 'EntriesCtrl'
       }
     }
   })
