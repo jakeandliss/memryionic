@@ -61,8 +61,18 @@ function($scope, $ionicPopover) {
   $scope.entry = Entries.get($stateParams.EntryId);
 })
 
-.controller('ProfileCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
-  };
-});
+.controller('ProfileCtrl', function($scope) {})
+// .controller('ProfileCtrl', function($scope, User) {
+//   $scope.user = user function () {
+//     id: "",
+//     first_name: "Jake",
+//     last_name: "Thompson",
+//     email = [
+//       { email: "jaketest@gmail.com" },
+//       { email: "jaketest@gmail.com" }
+//     ],
+//     password: "",
+//     password_confirmation: "",
+//     avatar: "img/ionic.png"
+//   };
+// })
