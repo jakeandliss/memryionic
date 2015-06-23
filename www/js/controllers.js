@@ -16,6 +16,12 @@ angular.module('starter.controllers', [])
     Entries.remove(entry);
   };
 
+  $scope.addEntry = function(newEntry) {
+    alert(1);
+    Entries.push(newEntry);
+    $scope.newEntry = '';
+  };
+
 },
 
 // popover to edit and delete entries
@@ -62,8 +68,7 @@ function($scope, $ionicPopover) {
 })
 
 .controller('ProfileCtrl', function($scope) {})
-// .controller('ProfileCtrl', function($scope, User) {
-//   $scope.user = user function () {
+//   $scope.user =  {
 //     id: "",
 //     first_name: "Jake",
 //     last_name: "Thompson",
@@ -74,5 +79,4 @@ function($scope, $ionicPopover) {
 //     password: "",
 //     password_confirmation: "",
 //     avatar: "img/ionic.png"
-//   };
 // })

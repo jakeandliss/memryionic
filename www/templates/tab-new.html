@@ -1,41 +1,40 @@
-<ion-view view-title="New Entry">
+<ion-view view-title="New Entry" hide-nav-bar="true">
   <ion-content>
-    <form id="new-entry">
+    <form name="entryForm" ng-submit="EntriesCtrl.addEntry(entry)">
 
-    <div class="bar bar-header bar-stable item-input-inset">
+    <ion-header-bar class="bar bar-header bar-stable item-input-inset">
       <button class="button button-clear">
         Cancel
       </button>
       <h1 class="title">
         New Entry
       </h1>
-      <button class="button button-outline button-assertive">
-        Save Entry
-      </button>
-    </div>
+      <input type="submit" value="Save Entry" class="button button-outline button-assertive">
+      </input>
+    </ion-header-bar>
 
     <div class="list form">
       <div class="row">
         <div class="col col-67">
           <label class="item item-input">
-            <input type="text" placeholder="Title this entry">
+            <input type="text" placeholder="Title this entry" ng-model="entry.title">
           </label>
         </div>
         <div class="col">
           <label class="item item-input">
-            <input type="text" placeholder="date">
+            <input type="date" placeholder="date" ng-model="entry.date">
           </label>
         </div>
       </div>
       <label class="item item-input">
-        <textarea rows="7" placeholder="What would you like to remember?"></textarea>
+        <textarea rows="7" placeholder="What would you like to remember?" ng-model="entry.content"></textarea>
       </label>
       <label class="item item-input">
         <input type="text" placeholder="labels">
       </label>
-      <label class="item item-input item-icon-left">
+      <label class="item item-icon-left">
         <i class="icon ion-android-upload"></i>
-        <input type="file" class="">
+        <input type="file" multiple="true">
       </label>
     </div>
   </form>
