@@ -78,3 +78,16 @@ function($scope, $ionicPopover) {
 //     password_confirmation: "",
 //     avatar: "img/ionic.png"
 // })
+
+// Controller for switching between tabs
+.controller('PanelCtrl', function($scope) {
+  $scope.tab = 1;
+
+  this.selectTab = function(setTab) {
+    $scope.tab = setTab;
+  }
+
+  this.isSelected = function(checkTab) {
+    return $scope.tab === checkTab;
+  }
+})

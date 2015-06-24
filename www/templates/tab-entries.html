@@ -5,8 +5,8 @@
       <button class="button button-clear icon ion-ios-search"></button>
     </ion-nav-view> -->
 
-    <ion-content class="padding-top">
-      <div class="item-input-inset">
+    <ion-content>
+      <div class="item-input-inset no-padding-top-bottom">
         <label class="item-input-wrapper">
           <i class="icon ion-ios-search placeholder-icon"></i>
           <input type="search" placeholder="Search">
@@ -25,35 +25,57 @@
             <p>{{entry.date | date: "longDate"}}</p>
           </div>
 
-          <div class="item tabs tabs-secondary tabs-icon-left" ng-show="">
-            <a class="tab-item" href="#" ng-click="isSelected()">
-              <i class="icon ion-ios-glasses"></i>
-              Visual
-            </a>
-            <a class="tab-item" href="#" ng-click="isSelected()">
-              <i class="icon ion-mic-c"></i>
-              Audio
-            </a>
-            <a class="tab-item" href="#" ng-click="isSelected()">
-              <i class="icon ion-document-text"></i>
-              Files
-            </a>
-          </div>
+          <section  ng-controller="PanelCtrl as panel">
+            <div class="item tabs tabs-secondary tabs-icon-left">
+              <a class="tab-item" href="#" ng-click="panel.selectTab(1)">
+                <i class="icon ion-ios-glasses"></i>
+                Visual
+              </a>
+              <a class="tab-item" href="#" ng-click="panel.selectTab(2)">
+                <i class="icon ion-mic-c"></i>
+                Audio
+              </a>
+              <a class="tab-item" href="#" ng-click="panel.selectTab(3)">
+                <i class="icon ion-document-text"></i>
+                Files
+              </a>
+            </div>
 
-          <div class="item item-body">
+            <!-- Video/Images content -->
+            <div class="item item-body panel" ng-show="panel.isSelected(1)">
+              <p>
+                {{entry.content}}
+              </p>
+              <ion-slide-box does-continue="true">
+                <ion-slide ng-repeat="attachment in entry.attachments">
+                  <img class="full-image" ng-src="{{attachment.file}}" >
+                </ion-slide>
+              </ion-slide-box>
+              <p>
+                Labels: <a href="#" class="subdued" ng-repeat="tag in entry.tags">{{tag.name}}{{$last ? '' : ','}}</a>
+              </p>
+            </div>
 
-            <p>
-              {{entry.content}}
-            </p>
-            <ion-slide-box does-continue="true">
-              <ion-slide ng-repeat="image in entry.images">
-                <img class="full-image" ng-src="{{image.image}}" >
-              </ion-slide>
-            </ion-slide-box>
-            <p>
-              Labels: <a href="#" class="subdued" ng-repeat="tag in entry.tags">{{tag.name}}{{$last ? '' : ','}}</a>
-            </p>
-          </div>
+            <!-- Audio content -->
+            <div class="item item-body panel" ng-show="panel.isSelected(2)">
+              <p>
+                this is audio
+              </p>
+              <p>
+                Labels: <a href="#" class="subdued" ng-repeat="tag in entry.tags">{{tag.name}}{{$last ? '' : ','}}</a>
+              </p>
+            </div>
+
+            <!-- Files content -->
+            <div class="item item-body panel" ng-show="panel.isSelected(3)">
+              <p>
+                this is files
+              </p>
+              <p>
+                Labels: <a href="#" class="subdued" ng-repeat="tag in entry.tags">{{tag.name}}{{$last ? '' : ','}}</a>
+              </p>
+            </div>
+          </section>
 
           <div class="item tabs tabs-secondary tabs-icon-left gray">
             <a class="tab-item" href="#">

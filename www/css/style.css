@@ -25,6 +25,15 @@ p {
 	font-weight: bold;
 }
 
+.no-padding {
+	padding: 0;
+}
+
+.no-padding-top-bottom {
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
 
 
 /********
