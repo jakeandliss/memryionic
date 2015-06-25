@@ -13,17 +13,19 @@ angular.module('starter.controllers', [])
   $scope.remove = function(entry) {
     Entries.remove(entry);
   };
+})
 
+.controller('NewCtrl', function($scope) {
   $scope.entry = {};
-  $scope.addEntry = function(newEntry) {
-    alert(1);
-    $scope.entries.push($scope.newEntry);
-    $scope.newEntry = '';
+
+  $scope.add = function(entry) {
+    $scope.entries.push($scope.entry);
+    $scope.entry = '';
   }
-},
+})
 
 // popover to edit and delete entries
-function($scope, $ionicPopover) {
+.controller('PopoverCtrl', function($scope, $ionicPopover) {
 
   // .fromTemplateUrl() method
   $ionicPopover.fromTemplateUrl('my-popover.html', {
@@ -59,10 +61,6 @@ function($scope, $ionicPopover) {
   $scope.remove = function(tag) {
     Tags.remove(tag);
   };
-})
-
-.controller('EntryDetailCtrl', function($scope, $stateParams, Entries) {
-  $scope.entry = Entries.get($stateParams.EntryId);
 })
 
 .controller('UserCtrl', function($scope) {})

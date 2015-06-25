@@ -19,7 +19,7 @@
       <div ng-controller="EntriesCtrl as entry">
         <div class="list card" ng-repeat="entry in entries">
 
-          <div class="item item-text-wrap gray">
+          <div class="item item-text-wrap gray" ng-controller="PopoverCtrl">
             <button class="button button-icon icon ion-android-more-horizontal right" ng-click="openPopover($event)"></button>
             <h2>{{entry.title}}</h2>
             <p>{{entry.date | date: "longDate"}}</p>
@@ -27,15 +27,15 @@
 
           <section  ng-controller="PanelCtrl as panel">
             <div class="item tabs tabs-secondary tabs-icon-left">
-              <a class="tab-item" href="#" ng-click="panel.selectTab(1)">
+              <a class="tab-item" href="#" ng-click="panel.selectTab(1)" ng-class="{ active:panel.isSelected(1) }">
                 <i class="icon ion-ios-glasses"></i>
                 Visual
               </a>
-              <a class="tab-item" href="#" ng-click="panel.selectTab(2)">
+              <a class="tab-item" href="#" ng-click="panel.selectTab(2)" ng-class="{ active:panel.isSelected(2) }">
                 <i class="icon ion-mic-c"></i>
                 Audio
               </a>
-              <a class="tab-item" href="#" ng-click="panel.selectTab(3)">
+              <a class="tab-item" href="#" ng-click="panel.selectTab(3)" ng-class="{ active: panel.isSelected(3) }">
                 <i class="icon ion-document-text"></i>
                 Files
               </a>
