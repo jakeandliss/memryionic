@@ -8,12 +8,12 @@ angular.module('starter.services', [])
     id: 0,
     title: 'When I was on my way home today this happened...',
     content: 'You on your way? Because there is a really cool party and I want to go to it really really bad. There is only one way to go. With a friend.',
-    attachments: [
-    { file: 'https://pbs.twimg.com/profile_images/514549811765211136/9SgAuHeY.png'},
-    { file: 'https://avatars3.githubusercontent.com/u/11214?v=3&s=460'},
+    resources: [
+    { attachment: 'https://pbs.twimg.com/profile_images/514549811765211136/9SgAuHeY.png'},
+    { attachment: 'https://avatars3.githubusercontent.com/u/11214?v=3&s=460'},
     {
-      file: 'http://techslides.com/demos/sample-videos/small.mp4',
-      avatar_content_type: "video"
+      attachment: 'http://techslides.com/demos/sample-videos/small.mp4',
+      attachment_content_type: "video"
     }
 
     ],

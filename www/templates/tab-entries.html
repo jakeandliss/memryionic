@@ -45,8 +45,8 @@
                 {{entry.content}}
               </p>
               <ion-slide-box does-continue="true">
-                <ion-slide ng-repeat="attachment in entry.attachments">
-                  <img class="full-image" ng-src="{{attachment.file}}" >
+                <ion-slide ng-repeat="resource in entry.resources">
+                  <img class="full-image" ng-src="{{resource.attachment}}" >
                 </ion-slide>
               </ion-slide-box>
               <p>
