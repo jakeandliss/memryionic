@@ -42,8 +42,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     url: '/new',
     views: {
       'tab-new': {
-        templateUrl: 'templates/tab-new.html',
-        controller: 'NewCtrl'
+        templateUrl: 'templates/entries/new.html',
+        controller: 'EntriesCtrl'
       }
     }
   })
@@ -108,4 +108,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/entries');
 
+})
+
+
+.config(function ($ionicConfigProvider) {
+
+  // place nav bar on bottom for all devices
+  $ionicConfigProvider.tabs.position("bottom");
 });

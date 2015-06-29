@@ -1,11 +1,7 @@
 <div id="entries">
   <ion-view view-title="MemryBook">
-    <!-- <ion-nav-view class="bar bar-header bar-dark">
-      <ion-nav class="h1 title">Entries</ion-nav>
-      <button class="button button-clear icon ion-ios-search"></button>
-    </ion-nav-view> -->
 
-    <ion-content>
+    <ion-nav-title>
       <div class="item-input-inset no-padding-top-bottom">
         <label class="item-input-wrapper">
           <i class="icon ion-ios-search placeholder-icon"></i>
@@ -15,7 +11,9 @@
           Cancel
         </button>
       </div>
+    </ion-nav-title>
 
+    <ion-content>
       <div ng-controller="EntriesCtrl as entry">
         <div class="list card" ng-repeat="entry in entries">
 
@@ -77,8 +75,8 @@
             </div>
           </section>
 
-          <div class="item tabs tabs-secondary tabs-icon-left gray">
-            <a class="tab-item" href="#">
+          <div class="item tabs tabs-secondary tabs-icon-left gray" ng-controller="ShareCtrl">
+            <a class="tab-item" href="#" ng-click="modal.show()">
               <i class="icon ion-share"></i>
               Share
             </a>
@@ -93,8 +91,8 @@
 <script id="my-popover.html" type="text/ng-template">
   <ion-popover-view>
     <ion-content>
-      <div class="list">
-        <a class="item" href="#" target="_blank">
+      <div class="list" ng-controller="EntriesCtrl">
+        <a class="item" href="#" ng-click="modal.show()">
           Edit
         </a>
         <a class="item" href="#" target="_blank">

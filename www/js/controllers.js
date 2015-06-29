@@ -8,20 +8,29 @@ angular.module('starter.controllers', [])
   //
   //$scope.$on('$ionicView.enter', function(e) {
   //});
+  $scope.entry = {};
 
+  // Add Entry
+  $scope.entry.add = function(entry) {
+    $scope.entries.push($scope.entry);
+    $scope.entry = '';
+  };
+
+  // Edit Entry
   $scope.entries = Entries.all();
+  $scope.edit = function(entry) {
+    Entries.remove(entry);
+  };
+
+  // Update Entry
+  $scope.remove = function(entry) {
+    Entries.update(entry);
+  };
+
+  // Remove Entry
   $scope.remove = function(entry) {
     Entries.remove(entry);
   };
-})
-
-.controller('NewCtrl', function($scope) {
-  $scope.entry = {};
-
-  $scope.add = function(entry) {
-    $scope.entries.push($scope.entry);
-    $scope.entry = '';
-  }
 })
 
 // popover to edit and delete entries
@@ -54,6 +63,19 @@ angular.module('starter.controllers', [])
     // Execute action
   });
 
+})
+
+.controller('ShareCtrl', function($scope, $ionicModal) {
+
+    // Load the modal from the given template URL
+    $ionicModal.fromTemplateUrl('/templates/entries/share.html', function($ionicModal) {
+        $scope.modal = $ionicModal;
+    }, {
+        // Use our scope for the scope of the modal to keep it simple
+        scope: $scope,
+        // The animation we want to use for the modal entrance
+        animation: 'slide-in-up'
+      });
 })
 
 .controller('TagsCtrl', function($scope, Tags) {

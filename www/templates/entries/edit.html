@@ -1,7 +1,7 @@
 <ion-view view-title="New Entry" hide-nav-bar="true">
   <ion-content>
-    <div ng-controller="NewCtrl as entry">
-    <form name="entryForm" ng-submit="entry.entry.add">
+    <div ng-controller="EntriesCtrl as entry">
+    <form name="editEntryForm" ng-submit="entry.entry.edit">
 
     <ion-header-bar class="bar bar-header bar-stable item-input-inset">
       <button class="button button-clear">
