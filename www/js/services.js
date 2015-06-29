@@ -17,7 +17,7 @@ angular.module('starter.services', [])
     }
 
     ],
-    date: 12/13/1985,
+    date: "2012-04-23",
     tags: [
       {name: 'tag'},
       {name: 'important'}
@@ -27,25 +27,25 @@ angular.module('starter.services', [])
     title: 'Max Lynx',
     content: 'Hey, it\'s me',
     image: 'https://avatars3.githubusercontent.com/u/11214?v=3&s=460',
-    date: 12/13/1985
+    date: "1929-01-05"
   },{
     id: 2,
     title: 'Adam Bradleyson',
     content: 'I should buy a boat',
     image: 'https://pbs.twimg.com/profile_images/479090794058379264/84TKj_qa.jpeg',
-    date: 12/13/1985
+    date: "1989-01-05"
   }, {
     id: 3,
     title: 'Perry Governor',
     content: 'Look at my mukluks!',
     image: 'https://pbs.twimg.com/profile_images/598205061232103424/3j5HUXMY.png',
-    date: 12/13/1985
+    date: "1995-12-05"
   }, {
     id: 4,
     title: 'Mike Harrington',
     content: 'This is wicked good ice cream.',
     image: 'https://pbs.twimg.com/profile_images/578237281384841216/R3ae1n61.png',
-    date: 12/13/1985
+    date: "1992-11-05"
   }];
 
   return {
