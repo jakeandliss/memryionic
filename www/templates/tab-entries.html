@@ -1,19 +1,29 @@
 <div id="entries">
   <ion-view view-title="MemryBook">
-
     <ion-nav-title>
-      <div class="item-input-inset no-padding-top-bottom">
+      <div class="bar bar-header item-input-inset">
         <label class="item-input-wrapper">
           <i class="icon ion-ios-search placeholder-icon"></i>
           <input type="search" placeholder="Search">
         </label>
         <button class="button button-clear">
-          Cancel
+          <p>Cancel</p>
         </button>
       </div>
     </ion-nav-title>
 
-    <ion-content>
+    <!-- New Entry and Labels Tabs -->
+      <div class="tabs tabs-icon-left tabs-top dark" ng-controller="NewCtrl">
+        <a class="tab-item" ng-click="modal.show()">
+          <i class="icon ion-compose"></i>
+            New Entry
+        </a>
+        <a class="tab-item">
+          <i class="icon ion-ios-pricetag-outline"></i>
+          Labels
+        </a>
+      </div>
+    <ion-content class="has-subheader">
       <div ng-controller="EntriesCtrl as entry">
         <div class="list card" ng-repeat="entry in entries | orderBy:'-date'">
 
@@ -47,7 +57,7 @@
               <ion-slide-box does-continue="true" >
                 <ion-slide ng-repeat="resource in entry.resources">
                   <img class="full-image" ng-src="{{resource.attachment}}" ng-if="resource.attachment_content_type == 'image'" />
-                  <video class="" ng-src="{{resource.attachment}}" ng-if="resource.attachment_content_type == 'video'" />
+                  <!-- <video class="" ng-src="{{resource.attachment}}" ng-if="resource.attachment_content_type == 'video'" /> -->
                 </ion-slide>
               </ion-slide-box>
               <p>
@@ -58,7 +68,7 @@
             <!-- Audio content -->
             <div class="item item-body panel" ng-show="panel.isSelected(2)">
               <p ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'audio'">
-                <i class="icon ion-document-text"></i>
+                <i class="icon ion-mic-c"></i>
                 <a href="{{resource.attachment}}">{{resource.attachment_file_name}}</a>
               </p>
               <p>
@@ -78,6 +88,7 @@
             </div>
           </section>
 
+          <!-- Share Entry -->
           <div class="item tabs tabs-secondary tabs-icon-left gray" ng-controller="ShareCtrl">
             <a class="tab-item" href="#" ng-click="modal.show()">
               <i class="icon ion-share"></i>

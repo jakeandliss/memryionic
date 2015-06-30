@@ -1,10 +1,10 @@
-<ion-view view-title="New Entry" hide-nav-bar="true">
+<ion-view view-title="New Entry" hide-nav-bar="true" class="modal">
   <ion-content>
     <div ng-controller="EntriesCtrl as entry">
     <form name="entryForm" ng-submit="entry.add()">
 
     <ion-header-bar class="bar bar-header bar-stable item-input-inset">
-      <button class="button button-clear">
+      <button class="button button-clear" ng-click="modal.hide()">
         Cancel
       </button>
       <h1 class="title">
