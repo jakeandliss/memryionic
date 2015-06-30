@@ -46,7 +46,8 @@
               </p>
               <ion-slide-box does-continue="true">
                 <ion-slide ng-repeat="resource in entry.resources">
-                  <img class="full-image" ng-src="{{resource.attachment}}" />
+                  <img class="full-image" ng-src="{{resource.attachment}}" ng-if="resource.attachment_content_type == 'image'" />
+                  <video class="full-image" ng-src="{{resource.attachment}}" ng-if="resource.attachment_content_type == 'video'" />
                 </ion-slide>
               </ion-slide-box>
               <p>
