@@ -46,7 +46,7 @@
               </p>
               <ion-slide-box does-continue="true">
                 <ion-slide ng-repeat="resource in entry.resources">
-                  <img class="full-image" ng-src="{{resource.attachment}}" >
+                  <img class="full-image" ng-src="{{resource.attachment}}" />
                 </ion-slide>
               </ion-slide-box>
               <p>
@@ -56,8 +56,8 @@
 
             <!-- Audio content -->
             <div class="item item-body panel" ng-show="panel.isSelected(2)">
-              <p>
-                this is audio
+              <p ng-repeat="resource in entry.resources">
+                <!-- <audio ng-src="{{resource.attachment}}" /> -->
               </p>
               <p>
                 Labels: <a href="#" class="subdued" ng-repeat="tag in entry.tags">{{tag.name}}{{$last ? '' : ','}}</a>
