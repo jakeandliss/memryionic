@@ -18,6 +18,26 @@ angular.module('starter.services', [])
       attachment_content_type: "image"
     },
     {
+      attachment: 'http://www.urartuuniversity.com/content_images/pdf-sample.pdf',
+      attachment_content_type: "pdf",
+      attachment_file_name: "pdf-sample"
+    },
+    {
+      attachment: 'http://www.urartuuniversity.com/content_images/pdf-sample.pdf',
+      attachment_content_type: "pdf",
+      attachment_file_name: "pdf-sample"
+    },
+    {
+      attachment: 'http://www.stephaniequinn.com/Music/Canon.mp3',
+      attachment_content_type: "audio",
+      attachment_file_name: "canon.mp3"
+    },
+    {
+      attachment: 'http://www.stephaniequinn.com/Music/Canon.mp3',
+      attachment_content_type: "audio",
+      attachment_file_name: "canon.mp3"
+    },
+    {
       attachment: 'http://techslides.com/demos/sample-videos/small.mp4',
       attachment_content_type: "video"
     }],

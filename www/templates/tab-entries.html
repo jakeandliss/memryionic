@@ -44,10 +44,10 @@
               <p>
                 {{entry.content}}
               </p>
-              <ion-slide-box does-continue="true">
+              <ion-slide-box does-continue="true" >
                 <ion-slide ng-repeat="resource in entry.resources">
                   <img class="full-image" ng-src="{{resource.attachment}}" ng-if="resource.attachment_content_type == 'image'" />
-                  <video class="full-image" ng-src="{{resource.attachment}}" ng-if="resource.attachment_content_type == 'video'" />
+                  <video class="" ng-src="{{resource.attachment}}" ng-if="resource.attachment_content_type == 'video'" />
                 </ion-slide>
               </ion-slide-box>
               <p>
@@ -57,8 +57,9 @@
 
             <!-- Audio content -->
             <div class="item item-body panel" ng-show="panel.isSelected(2)">
-              <p ng-repeat="resource in entry.resources">
-                <!-- <audio ng-src="{{resource.attachment}}" /> -->
+              <p ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'audio'">
+                <i class="icon ion-document-text"></i>
+                <a href="{{resource.attachment}}">{{resource.attachment_file_name}}</a>
               </p>
               <p>
                 Labels: <a href="#" class="subdued" ng-repeat="tag in entry.tags">{{tag.name}}{{$last ? '' : ','}}</a>
@@ -67,9 +68,10 @@
 
             <!-- Files content -->
             <div class="item item-body panel" ng-show="panel.isSelected(3)">
-              <p>
-                this is files
-              </p>
+                <p ng-repeat="resource in entry.resources"  ng-if="resource.attachment_content_type == 'pdf'">
+                  <i class="icon ion-document-text"></i>
+                  <a href="{{resource.attachment}}">{{resource.attachment_file_name}}</a>
+                </p>
               <p>
                 Labels: <a href="#" class="subdued" ng-repeat="tag in entry.tags">{{tag.name}}{{$last ? '' : ','}}</a>
               </p>
