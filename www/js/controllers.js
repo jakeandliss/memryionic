@@ -23,7 +23,7 @@ angular.module('starter.controllers', [])
   };
 
   // Update Entry
-  $scope.remove = function(entry) {
+  $scope.update = function(entry) {
     Entries.update(entry);
   };
 
@@ -31,9 +31,23 @@ angular.module('starter.controllers', [])
   $scope.remove = function(entry) {
     Entries.remove(entry);
   };
+
 })
 
 .controller('NewCtrl', function($scope, $ionicModal) {
+
+    // Load the modal from the given template URL
+    $ionicModal.fromTemplateUrl('/templates/entries/new.html', function($ionicModal) {
+        $scope.modal = $ionicModal;
+    }, {
+        // Use our scope for the scope of the modal to keep it simple
+        scope: $scope,
+        // The animation we want to use for the modal entrance
+        animation: 'slide-in-up'
+      });
+})
+
+.controller('EditCtrl', function($scope, $ionicModal) {
 
     // Load the modal from the given template URL
     $ionicModal.fromTemplateUrl('/templates/entries/new.html', function($ionicModal) {

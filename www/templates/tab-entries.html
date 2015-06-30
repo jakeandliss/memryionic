@@ -1,115 +1,114 @@
-<div id="entries">
-  <ion-view view-title="MemryBook">
-    <ion-nav-title>
-      <div class="bar bar-header item-input-inset">
-        <label class="item-input-wrapper">
-          <i class="icon ion-ios-search placeholder-icon"></i>
-          <input type="search" placeholder="Search">
-        </label>
-        <button class="button button-clear">
-          <p>Cancel</p>
-        </button>
-      </div>
-    </ion-nav-title>
+<ion-view view-title="MemryBook">
+  <ion-nav-title>
+    <div class="bar bar-header item-input-inset">
+      <label class="item-input-wrapper">
+        <i class="icon ion-ios-search placeholder-icon"></i>
+        <input type="search" placeholder="Search">
+      </label>
+      <button class="button button-clear">
+        <p>Cancel</p>
+      </button>
+    </div>
+  </ion-nav-title>
 
-    <!-- New Entry and Labels Tabs -->
-      <div class="tabs tabs-icon-left tabs-top dark" ng-controller="NewCtrl">
-        <a class="tab-item" ng-click="modal.show()">
-          <i class="icon ion-compose"></i>
-            New Entry
-        </a>
-        <a class="tab-item">
-          <i class="icon ion-ios-pricetag-outline"></i>
-          Labels
-        </a>
-      </div>
-    <ion-content class="has-subheader">
-      <div ng-controller="EntriesCtrl as entry">
-        <div class="list card" ng-repeat="entry in entries | orderBy:'-date'">
+  <!-- New Entry and Labels Tabs -->
+    <ion-header-bar class="bar bar-subheader tabs tabs-icon-left tabs-top dark" ng-controller="NewCtrl">
+      <a class="tab-item" ng-click="modal.show()">
+        <i class="icon ion-compose"></i>
+          New Entry
+      </a>
+      <a class="tab-item">
+        <i class="icon ion-ios-pricetag-outline"></i>
+        Labels
+      </a>
+    </ion-header-bar>
+  <ion-content class="has-subheader">
+    <div ng-controller="EntriesCtrl as entry">
+      <div class="list card" ng-repeat="entry in entries | orderBy:'-date'">
 
-          <div class="item item-text-wrap gray" ng-controller="PopoverCtrl">
-            <button class="button button-icon icon ion-android-more-horizontal right" ng-click="openPopover($event)"></button>
-            <h2>{{entry.title}}</h2>
-            <p>{{entry.date | date: "longDate"}}</p>
-          </div>
+        <div class="item item-text-wrap gray" ng-controller="PopoverCtrl">
+          <button class="button button-icon icon ion-android-more-horizontal right" ng-click="openPopover($event)"></button>
+          <h2>{{entry.title}}</h2>
+          <p>{{entry.date | date: "longDate"}}</p>
+        </div>
 
-          <section  ng-controller="PanelCtrl as panel">
-            <div class="item tabs tabs-secondary tabs-icon-left">
-              <a class="tab-item" href="#" ng-click="panel.selectTab(1)" ng-class="{ active:panel.isSelected(1) }">
-                <i class="icon ion-ios-glasses"></i>
-                Visual
-              </a>
-              <a class="tab-item" href="#" ng-click="panel.selectTab(2)" ng-class="{ active:panel.isSelected(2) }">
-                <i class="icon ion-mic-c"></i>
-                Audio
-              </a>
-              <a class="tab-item" href="#" ng-click="panel.selectTab(3)" ng-class="{ active: panel.isSelected(3) }">
-                <i class="icon ion-document-text"></i>
-                Files
-              </a>
-            </div>
-
-            <!-- Video/Images content -->
-            <div class="item item-body panel" ng-show="panel.isSelected(1)">
-              <p>
-                {{entry.content}}
-              </p>
-              <ion-slide-box does-continue="true" >
-                <ion-slide ng-repeat="resource in entry.resources">
-                  <img class="full-image" ng-src="{{resource.attachment}}" ng-if="resource.attachment_content_type == 'image'" />
-                  <!-- <video class="" ng-src="{{resource.attachment}}" ng-if="resource.attachment_content_type == 'video'" /> -->
-                </ion-slide>
-              </ion-slide-box>
-              <p>
-                Labels: <a href="#" class="subdued" ng-repeat="tag in entry.tags">{{tag.name}}{{$last ? '' : ','}}</a>
-              </p>
-            </div>
-
-            <!-- Audio content -->
-            <div class="item item-body panel" ng-show="panel.isSelected(2)">
-              <p ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'audio'">
-                <i class="icon ion-mic-c"></i>
-                <a href="{{resource.attachment}}">{{resource.attachment_file_name}}</a>
-              </p>
-              <p>
-                Labels: <a href="#" class="subdued" ng-repeat="tag in entry.tags">{{tag.name}}{{$last ? '' : ','}}</a>
-              </p>
-            </div>
-
-            <!-- Files content -->
-            <div class="item item-body panel" ng-show="panel.isSelected(3)">
-                <p ng-repeat="resource in entry.resources"  ng-if="resource.attachment_content_type == 'pdf'">
-                  <i class="icon ion-document-text"></i>
-                  <a href="{{resource.attachment}}">{{resource.attachment_file_name}}</a>
-                </p>
-              <p>
-                Labels: <a href="#" class="subdued" ng-repeat="tag in entry.tags">{{tag.name}}{{$last ? '' : ','}}</a>
-              </p>
-            </div>
-          </section>
-
-          <!-- Share Entry -->
-          <div class="item tabs tabs-secondary tabs-icon-left gray" ng-controller="ShareCtrl">
-            <a class="tab-item" href="#" ng-click="modal.show()">
-              <i class="icon ion-share"></i>
-              Share
+        <section  ng-controller="PanelCtrl as panel">
+          <div class="item tabs tabs-secondary tabs-icon-left">
+            <a class="tab-item" href="#" ng-click="panel.selectTab(1)" ng-class="{ active:panel.isSelected(1) }">
+              <i class="icon ion-ios-glasses"></i>
+              Visual
+            </a>
+            <a class="tab-item" href="#" ng-click="panel.selectTab(2)" ng-class="{ active:panel.isSelected(2) }">
+              <i class="icon ion-mic-c"></i>
+              Audio
+            </a>
+            <a class="tab-item" href="#" ng-click="panel.selectTab(3)" ng-class="{ active: panel.isSelected(3) }">
+              <i class="icon ion-document-text"></i>
+              Files
             </a>
           </div>
 
+          <!-- Video/Images content -->
+          <div class="item item-body panel" ng-show="panel.isSelected(1)">
+            <p>
+              {{entry.content}}
+            </p>
+            <ion-slide-box does-continue="true" >
+              <ion-slide ng-repeat="resource in entry.resources">
+                <img class="full-image" ng-src="{{resource.attachment}}" ng-if="resource.attachment_content_type == 'image'" />
+                <!-- <video class="" ng-src="{{resource.attachment}}" ng-if="resource.attachment_content_type == 'video'" /> -->
+              </ion-slide>
+            </ion-slide-box>
+            <p>
+              Labels: <a href="#" class="subdued" ng-repeat="tag in entry.tags">{{tag.name}}{{$last ? '' : ','}}</a>
+            </p>
+          </div>
+
+          <!-- Audio content -->
+          <div class="item item-body panel" ng-show="panel.isSelected(2)">
+            <p ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'audio'">
+              <i class="icon ion-mic-c"></i>
+              <a href="{{resource.attachment}}">{{resource.attachment_file_name}}</a>
+            </p>
+            <p>
+              Labels: <a href="#" class="subdued" ng-repeat="tag in entry.tags">{{tag.name}}{{$last ? '' : ','}}</a>
+            </p>
+          </div>
+
+          <!-- Files content -->
+          <div class="item item-body panel" ng-show="panel.isSelected(3)">
+              <p ng-repeat="resource in entry.resources"  ng-if="resource.attachment_content_type == 'pdf'">
+                <i class="icon ion-document-text"></i>
+                <a href="{{resource.attachment}}">{{resource.attachment_file_name}}</a>
+              </p>
+            <p>
+              Labels: <a href="#" class="subdued" ng-repeat="tag in entry.tags">{{tag.name}}{{$last ? '' : ','}}</a>
+            </p>
+          </div>
+        </section>
+
+        <!-- Share Entry -->
+        <div class="item tabs tabs-secondary tabs-icon-left gray" ng-controller="ShareCtrl">
+          <a class="tab-item" href="#" ng-click="modal.show()">
+            <i class="icon ion-share"></i>
+            Share
+          </a>
         </div>
+
       </div>
-    </ion-content>
-  </ion-view>
-</div>
+    </div>
+  </ion-content>
+</ion-view>
+
 <!-- Popover for editing and deleting-->
 <script id="my-popover.html" type="text/ng-template">
   <ion-popover-view>
     <ion-content>
-      <div class="list" ng-controller="EntriesCtrl">
-        <a class="item" href="#" ng-click="modal.show()">
+      <div class="list" ng-controller="EditCtrl">
+        <a class="item" href="#" ng-click="modal.show(entry)">
           Edit
         </a>
-        <a class="item" href="#" target="_blank">
+        <a class="item" href="#" ng-click="entry.remove()">
           Delete
         </a>
       </div>
