@@ -32,6 +32,8 @@ angular.module('starter.controllers', [])
     Entries.remove(entry);
   };
 
+  $scope.entry.date = new Date();
+
 })
 
 .controller('NewCtrl', function($scope, $ionicModal) {
