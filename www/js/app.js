@@ -105,6 +105,19 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     }
   })
 
+  .state('edit', {
+    url: '/user/edit',
+    templateUrl: 'templates/user/edit.html',
+    controller: 'UserCtrl'
+  })
+
+  .state('update-password', {
+    url: '/user/update-password',
+    templateUrl: 'templates/user/update-password.html',
+    controller: 'UserCtrl'
+  })
+
+
   .state('user.login', {
     url: '/login',
     views: {

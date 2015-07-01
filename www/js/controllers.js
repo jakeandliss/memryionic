@@ -115,7 +115,11 @@ angular.module('starter.controllers', [])
 })
 
 .controller('UserCtrl', function($scope) {
-
+  $scope.user = {
+    first_name: "Jake",
+    last_name: "Thompson",
+    email: "test@gmail.com"
+  }
   // $scope.user.addUser
 })
 
