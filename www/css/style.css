@@ -62,7 +62,7 @@ Color Styling
   background-color: #444 !important;
 }
 
-.dark button, .dark p, .dark i, .dark a {
+.dark button, .dark p, .dark i, .dark a, .dark h1 {
   color: #fff !important;
 }
 
