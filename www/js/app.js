@@ -95,6 +95,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     }
   })
 
+  .state('user.forgot-password', {
+    url: '/forgot-password',
+    views: {
+      'forgot-password': {
+        templateUrl: 'templates/user/forgot-password.html',
+        controller: 'UserCtrl'
+      }
+    }
+  })
+
   .state('user.login', {
     url: '/login',
     views: {

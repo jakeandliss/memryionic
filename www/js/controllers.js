@@ -114,19 +114,11 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('UserCtrl', function($scope) {})
-//   $scope.user =  {
-//     id: "",
-//     first_name: "Jake",
-//     last_name: "Thompson",
-//     email = [
-//       { email: "jaketest@gmail.com" },
-//       { email: "jaketest@gmail.com" }
-//     ],
-//     password: "",
-//     password_confirmation: "",
-//     avatar: "img/ionic.png"
-// })
+.controller('UserCtrl', function($scope) {
+
+  // $scope.user.addUser
+})
+
 
 // Controller for switching between tabs
 .controller('PanelCtrl', function($scope) {
