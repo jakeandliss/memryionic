@@ -52,7 +52,7 @@ angular.module('starter.controllers', [])
 .controller('EditCtrl', function($scope, $ionicModal) {
 
     // Load the modal from the given template URL
-    $ionicModal.fromTemplateUrl('/templates/entries/new.html', function($ionicModal) {
+    $ionicModal.fromTemplateUrl('/templates/entries/edit.html', function($ionicModal) {
         $scope.modal = $ionicModal;
     }, {
         // Use our scope for the scope of the modal to keep it simple
