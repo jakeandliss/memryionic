@@ -1,11 +1,7 @@
 <ion-view view-title="Labels">
   <ion-content>
-    <div class="list" style="margin-bottom:-1px;">
-      <div class="item item-icon-left item-dark">
-        <i class="icon ion-ios-pricetag"></i>
-        Selected Tag
-        <span class="item-note">Edit</span>
-      </div>
+
+    <!-- Partial for editing labels -->
       <form id="edit-tag">
         <label class="item item-input">
           <span class="input-label">Name</span>
@@ -23,13 +19,16 @@
           </select>
         </label>
       </form>
-    </div>
+
     <ion-list class="list" ng-controller="TagsCtrl as tag" show-delete="shouldShowDelete" can-swipe="listCanSwipe">
-      <a href="#" class="item item-icon-left item-icon-right" ng-repeat="tag in tags">
+      <ion-item ng-repeat="tag in tags">
+        <a href="#" class="item-icon-left item-icon-right item-stable">
         <i class="icon ion-ios-pricetag"></i>
         {{ tag.name }}
-        <span class="badge badge-assertive">2</span>
-        <ion-option-button class="button-assertive icon ion-trash-a"></ion-option-button>
+        <span class="badge badge-assertive">2</span></a>
+        <ion-option-button class="button-dark" ng-click="edit(tag)">Edit</ion-option-button>
+        <ion-option-button class="button-assertive icon ion-trash-a" ng-click="remove(tag)"></ion-option-button>
+      </ion-item>
       </a>
     </ion-list>
   </ion-content>

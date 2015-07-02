@@ -109,12 +109,11 @@ angular.module('starter.controllers', [])
 
 .controller('TagsCtrl', function($scope, Tags) {
   $scope.tags = Tags.all();
-  $scope.remove = function(tag) {
-    Tags.remove(tag);
+  $scope.remove = function(index){
+    $scope.tags.splice(index,1);
   };
 
   $scope.shouldShowDelete = false;
-  $scope.shouldShowReorder = false;
   $scope.listCanSwipe = true
 })
 
