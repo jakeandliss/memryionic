@@ -1,10 +1,5 @@
 /* Empty. Add your own CSS if you like */
 
-p {
-	font-family: 'Ubuntu', sans-serif;
-	/*font-family: 'Ubuntu Condensed', sans-serif;*/
-}
-
 .logo {
 	font-family: 'Lobster Two', cursive;
 }
@@ -22,7 +17,7 @@ p {
 }
 
 .bold {
-	font-weight: bold;
+	font-weight: bold !important;
 }
 
 .no-padding {
@@ -34,6 +29,9 @@ p {
 	padding-bottom: 0;
 }
 
+.box-shadow {
+	box-shadow: 0 0 5px 0px #444;
+}
 
 
 
