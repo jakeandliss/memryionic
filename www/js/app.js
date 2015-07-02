@@ -99,7 +99,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     url: '/forgot-password',
     views: {
       'forgot-password': {
-        templateUrl: 'templates/user/forgot-password.html',
+        templateUrl: 'templates/user/passwords/new.html',
         controller: 'UserCtrl'
       }
     }
@@ -113,7 +113,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
   .state('update-password', {
     url: '/user/update-password',
-    templateUrl: 'templates/user/update-password.html',
+    templateUrl: 'templates/user/passwords/edit.html',
     controller: 'UserCtrl'
   })
 
@@ -122,7 +122,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     url: '/login',
     views: {
       'login': {
-        templateUrl: 'templates/user/login.html',
+        templateUrl: 'templates/user/sessions/new.html',
         controller: 'UserCtrl'
       }
     }
