@@ -5,20 +5,19 @@
 $light:                           #fff !default;
 $stable:                          #f8f8f8 !default;
 $positive:                        #387ef5 !default;
-$calm:                            #11c1f3 !default;
+$calm:                            #A9D5C6 !default; // greendew
 $balanced:                        #33cd5f !default;
 $energized:                       #ffc900 !default;
-$assertive:                       #FD9781 !default;
+$assertive:                       #FD9781 !default; // salmon
 $royal:                           #886aea !default;
 $dark:                            #444 !default;
-$salmon:                          #FD9781 !default;
-
+$stationary:                      #EBE5CD !default;
 
 // Base
 // -------------------------------
 
-$font-family-sans-serif:          "Helvetica Neue", "Roboto", "Segoe UI", sans-serif !default;
-$font-family-light-sans-serif:    "HelveticaNeue-Light", "Roboto-Light", "Segoe UI-Light", sans-serif-light !default;
+$font-family-sans-serif:          'Ubuntu', sans-serif;
+$font-family-light-sans-serif:    'Ubuntu', sans-serif;
 $font-family-serif:               serif !default;
 $font-family-monospace:           monospace !default;
 
@@ -233,7 +232,7 @@ $bar-default-active-border:       $bar-light-active-border !default;
 
 $tabs-height:                     49px !default;
 $tabs-text-font-size:             14px !default;
-$tabs-text-font-size-side-icon:   10px !default;
+$tabs-text-font-size-side-icon:   12px !default;
 $tabs-icon-size:                  32px !default;
 $tabs-badge-padding:              1px 6px !default;
 $tabs-badge-font-size:            12px !default;

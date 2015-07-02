@@ -1,0 +1,25 @@
+<!-- Edit Profile -->
+
+<ion-view view-title="Edit Profile">
+  <ion-content ng-controller="UserCtrl as user">
+
+    <form id="registration" ng-submit="user.updateUser">
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label">First Name</span>
+          <input type="text" ng-model="user.first_name" required>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Last Name</span>
+          <input type="text" ng-model="user.last_name" required>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Email</span>
+          <input type="email"  ng-model="user.email" required>
+        </label>
+        <input type="submit" value="SAVE CHANGES" class="button button-block salmon font-white no-border bold">
+      </div>
+    </form>
+
+  </ion-content>
+</ion-view>

@@ -1,10 +1,5 @@
 /* Empty. Add your own CSS if you like */
 
-p {
-	font-family: 'Ubuntu', sans-serif;
-	/*font-family: 'Ubuntu Condensed', sans-serif;*/
-}
-
 .logo {
 	font-family: 'Lobster Two', cursive;
 }
@@ -22,7 +17,7 @@ p {
 }
 
 .bold {
-	font-weight: bold;
+	font-weight: bold !important;
 }
 
 .no-padding {
@@ -32,6 +27,10 @@ p {
 .no-padding-top-bottom {
 	padding-top: 0;
 	padding-bottom: 0;
+}
+
+.box-shadow {
+	box-shadow: 0 0 5px 0px #444;
 }
 
 
@@ -51,7 +50,15 @@ Color Styling
 }
 
 .salmon {
-	background-color: #FD9781;
+	background-color: #FD9781 !important;
+}
+
+.salmon-dark {
+	background-color: #E47E68;
+}
+
+.stationary {
+	background-color: #EBE5CD;
 }
 
 .font-white {
@@ -73,10 +80,36 @@ Welcome Screen
 ***************/
 
 #welcome {
-	background-image: url('/img/family.jpg');
-	background-size: cover;
-  padding-top: 20%;
-  padding-bottom: 10%;
+	background-color: #A9D5C6;
+}
+
+#welcome img {
+	width: 30%;
+	border-radius: 100%;
+	background-color: #EBE5CD;
+	padding: 5%;
+}
+
+#welcome h1 {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+#welcome .pane, #welcome .list {
+	background-color: #FD9781;
+}
+
+#welcome .item {
+    border: none;
+    margin: 5%;
+		background-color: #eee;
+	  padding: 1% 5%;
+  	text-align: right;
+}
+
+#welcome .list {
+    margin: 0 15%;
+    border-radius: 5%;
 }
 
 #registration .row {
