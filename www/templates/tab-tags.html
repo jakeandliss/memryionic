@@ -1,35 +1,43 @@
 <ion-view view-title="Labels">
   <ion-content>
-
-    <!-- Partial for editing labels -->
-      <form id="edit-tag">
-        <label class="item item-input">
-          <span class="input-label">Name</span>
-          <input type="text" value="Seleted Tag">
-        </label>
-        <label class="item item-input item-select">
-          <div class="input-label">
-            Parent
-          </div>
-          <select name="parent-id">
-            <option value="test 0">test 0</option>
-            <option value="test 1">test 1</option>
-            <option value="test 2">test 2</option>
-            <option value="test 3">test 3</option>
-          </select>
-        </label>
-      </form>
+    <div class="list" style="margin-bottom:-1px;">
+      <div class="item item-icon-left item-dark">
+        <i class="icon ion-ios-pricetag"></i>
+        Selected Tag
+        <span class="item-note">Edit</span>
+      </div>
 
     <ion-list class="list" ng-controller="TagsCtrl as tag" show-delete="shouldShowDelete" can-swipe="listCanSwipe">
-      <ion-item ng-repeat="tag in tags">
-        <a href="#" class="item-icon-left item-icon-right item-stable">
-        <i class="icon ion-ios-pricetag"></i>
-        {{ tag.name }}
-        <span class="badge badge-assertive">2</span></a>
-        <ion-option-button class="button-dark" ng-click="edit(tag)">Edit</ion-option-button>
-        <ion-option-button class="button-assertive icon ion-trash-a" ng-click="remove(tag)"></ion-option-button>
-      </ion-item>
-      </a>
+      <div ng-repeat="tag in tags">
+        <ion-item ng-if="tag.parent_id == ''">
+          <a href="#" class="item-icon-left item-icon-right item-stable">
+            <i class="icon ion-ios-pricetag"></i>
+            {{ tag.name }}
+            <span class="badge badge-assertive">2</span>
+          </a>
+          <ion-option-button class="button-dark" ng-click="edit(tag)">Edit</ion-option-button>
+          <ion-option-button class="button-assertive icon ion-trash-a" ng-click="remove(tag)"></ion-option-button>
+        </ion-item>
+      </div>
     </ion-list>
+
+    <!-- Partial for editing labels -->
+    <form id="edit-tag">
+      <label class="item item-input">
+        <span class="input-label">Name</span>
+        <input type="text" value="Seleted Tag">
+      </label>
+      <label class="item item-input item-select">
+        <div class="input-label">
+          Parent
+        </div>
+        <select name="parent_id">
+          <option value="test 0">test 0</option>
+          <option value="test 1">test 1</option>
+          <option value="test 2">test 2</option>
+          <option value="test 3">test 3</option>
+        </select>
+      </label>
+    </form>
   </ion-content>
 </ion-view>
