@@ -114,12 +114,31 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('UserCtrl', function($scope) {
-  $scope.user = {
-    first_name: "Jake",
-    last_name: "Thompson",
-    email: "test@gmail.com"
+.controller('UserCtrl', function($scope, $http) {
+
+  $scope.register = function(user){
+    // console.log(user);
+    var user_data = {
+      'user': {
+        first_name: user.first_name,
+        last_name: user.last_name,
+        email: user.email,
+        password: user.password
+      }
+    }
+    $http.post('http://da1a5e94.ngrok.io/api/v1/registrations',user_data).success(function(res){
+      if("ok" == res.status){
+        $scope.showMessage = true;
+        $scope.message = res.message;
+      }
+    })
   }
+
+  // $scope.user = {
+  //   first_name: "Jake",
+  //   last_name: "Thompson",
+  //   email: "test@gmail.com"
+  // }
   // $scope.user.addUser
 })
 

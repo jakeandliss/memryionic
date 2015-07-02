@@ -90,7 +90,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     views: {
       'new': {
         templateUrl: 'templates/user/new.html',
-        controller: 'UserCtrl'
+        // controller: 'UserCtrl'
       }
     }
   })
