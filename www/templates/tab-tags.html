@@ -24,12 +24,13 @@
         </label>
       </form>
     </div>
-    <div class="list" ng-controller="TagsCtrl as tag">
+    <ion-list class="list" ng-controller="TagsCtrl as tag" show-delete="shouldShowDelete" can-swipe="listCanSwipe">
       <a href="#" class="item item-icon-left item-icon-right" ng-repeat="tag in tags">
         <i class="icon ion-ios-pricetag"></i>
         {{ tag.name }}
         <span class="badge badge-assertive">2</span>
+        <ion-option-button class="button-assertive icon ion-trash-a"></ion-option-button>
       </a>
-    </div>
+    </ion-list>
   </ion-content>
 </ion-view>

@@ -112,6 +112,10 @@ angular.module('starter.controllers', [])
   $scope.remove = function(tag) {
     Tags.remove(tag);
   };
+
+  $scope.shouldShowDelete = false;
+  $scope.shouldShowReorder = false;
+  $scope.listCanSwipe = true
 })
 
 .controller('UserCtrl', function($scope) {
