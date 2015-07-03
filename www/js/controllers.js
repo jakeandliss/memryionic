@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('EntriesCtrl', function($scope, Entries) {
+.controller('EntriesCtrl', function($scope, Entries, $ionicModal) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
@@ -34,19 +34,14 @@ angular.module('starter.controllers', [])
 
   $scope.entry.date = new Date();
 
-})
-
-.controller('NewCtrl', function($scope, $ionicModal) {
-
-    // Load the modal from the given template URL
-    $ionicModal.fromTemplateUrl('/templates/entries/new.html', function($ionicModal) {
-        $scope.modal = $ionicModal;
-    }, {
-        // Use our scope for the scope of the modal to keep it simple
-        scope: $scope,
-        // The animation we want to use for the modal entrance
-        animation: 'slide-in-up'
-      });
+  $ionicModal.fromTemplateUrl('/templates/entries/new.html', function($ionicModal) {
+      $scope.modal = $ionicModal;
+  }, {
+      // Use our scope for the scope of the modal to keep it simple
+      scope: $scope,
+      // The animation we want to use for the modal entrance
+      animation: 'slide-in-up'
+    });
 })
 
 .controller('EditCtrl', function($scope, $ionicModal) {
