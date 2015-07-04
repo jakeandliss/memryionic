@@ -14,7 +14,7 @@ angular.module('starter.services', [])
   this.setLayout = function(layoutPref){
     // layout pref can be 'mobile' & 'desktop'
     if(layoutPref == 'desktop'){
-      var layout = SetLayout.desktop();
+      var layout = Layout.desktop();
       console.log(layout);
       // Removing layout for ionic and adding ui-router's default placeholder
       $("#ion_nav").remove();
@@ -23,14 +23,14 @@ angular.module('starter.services', [])
     } else {
       // Do nothing as of now we will later need it for automating the
       // resizing of window
-      // var layout = SetLayout.mobile();
+      // var layout = Layout.mobile();
       // $("#body").append(layout);
     }
   };
 })
 
 // Factory will store the layouts for ionic and desktop views
-.factory('SetLayout', function () {
+.factory('Layout', function () {
 
   var service = {
     mobile: mobile,
