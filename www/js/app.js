@@ -7,18 +7,29 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
-.run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-    if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-    }
-    if (window.StatusBar) {
-      // org.apache.cordova.statusbar required
-      StatusBar.styleLightContent();
-    }
-  });
+.run(function($ionicPlatform, Init) {
+  window.jq = $;
+  // If the window width is more than 480 call the states for browser.
+  if(Init.getLayout() == 'desktop'){
+    Init.setLayout('desktop');
+  } // else we let go ionic framework do its job
+  else {
+    // add
+    Init.setLayout('mobile');
+    $ionicPlatform.ready(function() {
+      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+      // for form inputs)
+      if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
+        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+      }
+      if (window.StatusBar) {
+        // org.apache.cordova.statusbar required
+        StatusBar.styleLightContent();
+      }
+    });
+  }
+
+
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -105,11 +116,20 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     }
   });
 
+  // Browser states start here these states urls matter as it will be shown to the
+  // in the url bar so use proper urls
+  $stateProvider
+    .state('browser', {
+      url: '/',
+      abstract: true,
+      templateUrl: "templates/tabs.html"
+    })
+
   // if none of the above states are matched, use this as the fallback
+  // redirect using the service first
   $urlRouterProvider.otherwise('/tab/entries');
 
 })
-
 
 .config(function ($ionicConfigProvider) {
 
