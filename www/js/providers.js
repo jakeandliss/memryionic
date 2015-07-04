@@ -8,18 +8,18 @@
 
       // Init set the window width
       // USAGE: LayoutsProvider.setLayout() this sets the provider value to
-      // 'browser' or 'mobile'
+      // 'desktop' or 'mobile'
       this.setLayout = function(){
         var width = $(window).width();
         /* We are considering that window size with width less than 480
          * is a mobile device(served ionic views) and width greater than
-         * that is browser screen
+         * that is desktop screen
          */
         windowLayout =  width > 10 && width < 480 ? 'mobile' : 'desktop';
       }
 
       // this method will be used in config phase
-      // USAGE: LayoutsProvider.getLayout() -> 'browser'/'mobile'
+      // USAGE: LayoutsProvider.getLayout() -> 'desktop'/'mobile'
       // Should be only used in Config phase
       this.getLayout = function () {
         if(windowLayout) return windowLayout;
@@ -29,7 +29,7 @@
         }
       }
 
-      // USAGE: Layouts.layout()  -> 'browser'/'mobile'
+      // USAGE: Layouts.layout()  -> 'desktop'/'mobile'
       // Can be used in or after run phase
       this.$get = function(){
         return {

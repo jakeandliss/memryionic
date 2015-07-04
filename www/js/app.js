@@ -8,7 +8,7 @@
 angular.module('memryApp', ['ionic', 'memryApp.controllers', 'memryApp.services', 'memryApp.providers'])
 
 .run(function($ionicPlatform, Init, Layouts) {
-  // If the window width is more than 480 call the states for browser.
+  // If the window width is more than 480 call the states for desktop.
   if(Init.getLayout() == 'desktop'){
 
     Init.setLayout('desktop');
@@ -122,16 +122,16 @@ angular.module('memryApp', ['ionic', 'memryApp.controllers', 'memryApp.services'
   // Browser states start here these states urls matter as it will be shown to the
   // in the url bar so use proper urls
   $stateProvider
-    .state('browser', {
+    .state('desktop', {
       url: '/',
       abstract: true,
-      // browser-index.html layout for browser
-      templateUrl: "templates/browser-index.html"
+      // desktop-index.html layout for desktop
+      templateUrl: "templates/desktop-index.html"
     })
 
-    .state('browser.entries', {
+    .state('desktop.entries', {
       url: 'entries',
-      templateUrl: "templates/entries/browser/index.html",
+      templateUrl: "templates/entries/desktop/index.html",
     })
       controller: "EntriesCtrl as entries"
 
