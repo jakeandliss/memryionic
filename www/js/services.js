@@ -4,7 +4,7 @@ angular.module('starter.services', [])
  * templates or simple angular templates
  */
 
-.service('Init', function(SetLayout, $state){
+.service('Init', function(Layout){
   this.getLayout = function(){
     var width = $(window).width();
     return width > 10 && width < 480 ? 'mobile' : 'desktop';
