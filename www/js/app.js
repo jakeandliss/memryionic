@@ -137,10 +137,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       controller: "EntriesCtrl as entries"
 
   if(LayoutsProvider.getLayout() == 'mobile'){
-    console.log('mobile view');
+    console.log("DEBUG: Mobile layout");
     $urlRouterProvider.otherwise('/tab/entries');
   }
   else {
+    console.log("DEBUG: Browser layout");
     $urlRouterProvider.otherwise('/entries');
   }
 
@@ -151,7 +152,5 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
   // place nav bar on bottom for all devices
   if(LayoutsProvider.getLayout() == 'mobile'){
     $ionicConfigProvider.tabs.position("bottom");
-  }else{
-    console.log('DEBUG: Layout browser');
   }
 });
