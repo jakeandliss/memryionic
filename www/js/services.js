@@ -5,9 +5,19 @@ angular.module('starter.services', [])
  */
 
 .service('Init', function(Layout){
+  var layout = null;
+
   this.getLayout = function(){
+    console.log('in get layout method', layout);
+    // return layout if already set
+    if(layout){
+      console.log('Layout already set ', layout);
+      return layout;
+    }
+
+    // else use window width
     var width = $(window).width();
-    return width > 10 && width < 480 ? 'mobile' : 'desktop';
+    return layout = width > 10 && width < 480 ? 'mobile' : 'desktop';
   };
 
   // this will set the layout preference for user

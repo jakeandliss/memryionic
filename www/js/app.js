@@ -5,10 +5,11 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'starter.providers'])
 
-.run(function($ionicPlatform, Init) {
+.run(function($ionicPlatform, Init, Layouts) {
   window.jq = $;
+  window.t1 = Layouts;
   // If the window width is more than 480 call the states for browser.
   if(Init.getLayout() == 'desktop'){
     Init.setLayout('desktop');
@@ -32,7 +33,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, LayoutsProvider) {
+  // Set layout as soon as application starts
+  LayoutsProvider.setLayout();
+
 
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
@@ -127,6 +131,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
   // if none of the above states are matched, use this as the fallback
   // redirect using the service first
+  // if()
+  window.t = LayoutsProvider;
   $urlRouterProvider.otherwise('/tab/entries');
 
 })
