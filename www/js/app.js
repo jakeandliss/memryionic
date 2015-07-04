@@ -5,7 +5,13 @@
 // the 2nd parameter is an array of 'requires'
 // 'memryApp.services' is found in services.js
 // 'memryApp.controllers' is found in controllers.js
-angular.module('memryApp', ['ionic', 'memryApp.controllers', 'memryApp.services', 'memryApp.providers'])
+angular.module('memryApp', [
+  'ionic',
+  'memryApp.controllers',
+  'memryApp.services',
+  'memryApp.providers',
+  'ngMaterial']
+)
 
 .run(function($ionicPlatform, Init, Layouts) {
   // If the window width is more than 480 call the states for desktop.
