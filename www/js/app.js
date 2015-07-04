@@ -96,14 +96,14 @@ angular.module('memryApp', ['ionic', 'memryApp.controllers', 'memryApp.services'
     .state('user', {
     url: "/user",
     abstract: true,
-    templateUrl: "templates/user/user.html"
+    templateUrl: "templates/user/mobile/user.html"
   })
 
   .state('user.new', {
     url: '/new',
     views: {
       'new': {
-        templateUrl: 'templates/user/new.html',
+        templateUrl: 'templates/user/mobile/new.html',
         controller: 'UserCtrl'
       }
     }
@@ -113,7 +113,7 @@ angular.module('memryApp', ['ionic', 'memryApp.controllers', 'memryApp.services'
     url: '/login',
     views: {
       'login': {
-        templateUrl: 'templates/user/login.html',
+        templateUrl: 'templates/user/mobile/login.html',
         controller: 'UserCtrl'
       }
     }
