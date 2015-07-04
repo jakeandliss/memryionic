@@ -1,4 +1,4 @@
-angular.module('starter.controllers', [])
+angular.module('memryApp.controllers', [])
 
 .controller('EntriesCtrl', function($scope, Entries, $ionicModal) {
   // With the new view caching in Ionic, Controllers are only called

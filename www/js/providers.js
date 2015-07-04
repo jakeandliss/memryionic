@@ -2,7 +2,7 @@
 
 (function(){
   angular
-    .module('starter.providers', [])
+    .module('memryApp.providers', [])
     .provider('Layouts', function Layouts(){
       var windowLayout = null;
 
