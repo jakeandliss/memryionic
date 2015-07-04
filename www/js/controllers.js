@@ -9,6 +9,7 @@ angular.module('starter.controllers', [])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
   $scope.entry = {};
+  console.log('in entries controller');
 
   // Add Entry
   $scope.entry.add = function(entry) {
@@ -34,7 +35,8 @@ angular.module('starter.controllers', [])
 
   $scope.entry.date = new Date();
 
-  $ionicModal.fromTemplateUrl('/templates/entries/new.html', function($ionicModal) {
+  // This modal should only be used for mobile.
+  $ionicModal.fromTemplateUrl('/templates/entries/mobile/new.html', function($ionicModal) {
       $scope.modal = $ionicModal;
   }, {
       // Use our scope for the scope of the modal to keep it simple

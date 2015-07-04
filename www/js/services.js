@@ -8,10 +8,8 @@ angular.module('starter.services', [])
   var layout = null;
 
   this.getLayout = function(){
-    console.log('in get layout method', layout);
     // return layout if already set
     if(layout){
-      console.log('Layout already set ', layout);
       return layout;
     }
 
@@ -25,7 +23,6 @@ angular.module('starter.services', [])
     // layout pref can be 'mobile' & 'desktop'
     if(layoutPref == 'desktop'){
       var layout = Layout.desktop();
-      console.log(layout);
       // Removing layout for ionic and adding ui-router's default placeholder
       $("#ion_nav").remove();
       $("#ion_nav_view").remove();
@@ -48,6 +45,7 @@ angular.module('starter.services', [])
   }
 
   return service;
+
   //////////////////////////////////////////////////////////////////////////////
   // returns ionic navbar and ion-nav-view
   function mobile(){

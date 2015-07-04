@@ -9,9 +9,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
 .run(function($ionicPlatform, Init, Layouts) {
   window.jq = $;
-  window.t1 = Layouts;
   // If the window width is more than 480 call the states for browser.
   if(Init.getLayout() == 'desktop'){
+
     Init.setLayout('desktop');
   } // else we let go ionic framework do its job
   else {
@@ -57,7 +57,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     url: '/new',
     views: {
       'tab-new': {
-        templateUrl: 'templates/entries/new.html',
+        templateUrl: 'templates/entries/mobile/new.html',
         controller: 'EntriesCtrl'
       }
     }
@@ -126,19 +126,32 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     .state('browser', {
       url: '/',
       abstract: true,
-      templateUrl: "templates/tabs.html"
+      // browser-index.html layout for browser
+      templateUrl: "templates/browser-index.html"
     })
 
-  // if none of the above states are matched, use this as the fallback
-  // redirect using the service first
-  // if()
-  window.t = LayoutsProvider;
-  $urlRouterProvider.otherwise('/tab/entries');
+    .state('browser.entries', {
+      url: 'entries',
+      templateUrl: "templates/entries/browser/index.html",
+    })
+      controller: "EntriesCtrl as entries"
+
+  if(LayoutsProvider.getLayout() == 'mobile'){
+    console.log('mobile view');
+    $urlRouterProvider.otherwise('/tab/entries');
+  }
+  else {
+    $urlRouterProvider.otherwise('/entries');
+  }
 
 })
 
-.config(function ($ionicConfigProvider) {
+.config(function ($ionicConfigProvider, LayoutsProvider) {
 
   // place nav bar on bottom for all devices
-  $ionicConfigProvider.tabs.position("bottom");
+  if(LayoutsProvider.getLayout() == 'mobile'){
+    $ionicConfigProvider.tabs.position("bottom");
+  }else{
+    console.log('DEBUG: Layout browser');
+  }
 });
