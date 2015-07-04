@@ -3,6 +3,7 @@
   "private": "true",
   "devDependencies": {
     "ionic": "driftyco/ionic-bower#1.0.0",
-    "jquery": "1.11.1"
+    "jquery": "1.11.1",
+    "angular-material": "latest"
   }
 }
