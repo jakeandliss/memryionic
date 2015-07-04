@@ -138,8 +138,22 @@ angular.module('memryApp', [
     .state('desktop.entries', {
       url: 'entries',
       templateUrl: "templates/entries/desktop/index.html",
-    })
       controller: "EntriesCtrl as entries"
+    });
+
+  $stateProvider
+
+    .state('desktop.userSignup', {
+      url: 'signup',
+      templateUrl: 'templates/user/desktop/new.html',
+      controller: 'UserCtrl'
+    })
+
+    .state('desktop.userLogin', {
+      url: 'login',
+      templateUrl: 'templates/user/desktop/login.html',
+      controller: 'UserCtrl'
+    })
 
   if(LayoutsProvider.getLayout() == 'mobile'){
     console.log("DEBUG: Mobile layout");

@@ -110,7 +110,9 @@ angular.module('memryApp.controllers', [])
   };
 })
 
-.controller('UserCtrl', function($scope) {})
+.controller('UserCtrl', function($scope) {
+  // All the login & signup code goes here
+})
 //   $scope.user =  {
 //     id: "",
 //     first_name: "Jake",
