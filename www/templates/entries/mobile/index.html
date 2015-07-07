@@ -1,5 +1,4 @@
 <ion-view view-title="MemryBook">
-
   <ion-nav-title>
     <div class="bar bar-header item-input-inset">
       <label class="item-input-wrapper">
@@ -14,11 +13,12 @@
 
   <!-- New Entry and Labels Tabs -->
   <ion-header-bar class="bar bar-subheader tabs tabs-icon-left tabs-top dark" ng-controller="EntriesCtrl">
+
     <a class="tab-item" ng-click="modal.show()">
       <i class="icon ion-compose"></i>
       New Entry
     </a>
-    <a class="tab-item" ui-sref="tab.tags">
+    <a class="tab-item">
       <i class="icon ion-ios-pricetag-outline"></i>
       Labels
     </a>

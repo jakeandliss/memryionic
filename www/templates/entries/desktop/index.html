@@ -1,69 +1,79 @@
-<<<<<<< HEAD
-<md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2"
+<div layout="row" ng-controller="EntriesCtrl as entries">
+  <md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2"
               md-component-id="left"
               md-is-locked-open="$mdMedia('gt-sm')">
 
-  <md-toolbar class="md-whiteframe-z1">
-    <h1>Labels</h1>
-  </md-toolbar>
+    <md-list ng-controller="TagsCtrl as tags">
+      <md-list-item ng-repeat="tag in tags">
+          <md-button ng-class="{'selected' : it === ul.selected }">
+            {{tag.name}}
+          </md-button>
+      </md-list-item>
+    </md-list>
+  </md-sidenav>
 
-  <md-list ng-controller="TagsCtrl as tags">
-    <md-list-item ng-repeat="tag in tags">
-        <md-button ng-class="{'selected' : it === ul.selected }">
-          {{tag.name}}
-        </md-button>
-    </md-list-item>
-  </md-list>
+  <div flex layout="column" tabIndex="-1" role="main" layout-margin>
 
-</md-sidenav>
-
-<div flex layout="column" tabIndex="-1" role="main" class="md-whiteframe-z2">
-
-  <md-content flex id="content" layout-margin>
-    <div layout="row" layout-sm="column">
-      <md-input-container flex>
-        <label>Entry Title</label>
-        <input type="text"/>
-      </md-input-container>
-      <md-input-container>
-        <label>Date</label>
-        <input type="date"/>
-      </md-input-container>
+    <md-content flex id="content">
+      <div layout-margin>
+      <form name="entryForm" ng-submit="entry.add()">
+        <div layout="row" layout-sm="column">
+          <md-input-container flex>
+            <label>Entry Title</label>
+            <input type="text" ng-model="entry.title"/>
+          </md-input-container>
+          <md-input-container>
+            <label>Date</label>
+            <input type="date" ng-model="entry.date"/>
+          </md-input-container>
+        </div>
+        <md-input-container flex>
+          <label>What would you like to remember?</label>
+          <textarea ng-model="entry.content"></textarea>
+        </md-input-container>
+        <!-- <md-chips
+            ng-model="tags.name"
+            placeholder="Enter a Label"
+            delete-button-label="Remove Tag"
+            delete-hint="Press delete to remove tag"
+            secondary-placeholder="+Label">
+        </md-chips> -->
+        <div layout="row" layout-sm="column">
+          <div flex>
+            <md-button class="md-fab md-primary" aria-label="Attach File">
+              <md-icon class="material-icons">attachment file</md-icon>
+              <md-tooltip>
+                Attach Video, Image, Audio, or PDF
+              </md-tooltip>
+            </md-button>
+          </div>
+          <div flex>
+            <md-button class="md-raised md-warn right">Save Entry</md-button>
+          </div>
+        </div>
+      </form>
     </div>
-    <div layout="row">
-      <md-input-container flex>
-        <label>What would you like to remember?</label>
-        <textarea></textarea>
-      </md-input-container>
-    </div>
-    <div layout="row" layout-sm="column">
-      <div flex>
-        <md-button class="md-fab md-primary" aria-label="Attach File">
-          <md-icon class="material-icons">attachment file</md-icon>
-          <md-tooltip>
-            Attach Video, Image, Audio, or PDF
-          </md-tooltip>
-        </md-button>
-      </div>
-      <div flex>
-        <md-button class="md-raised md-warn right">Save Entry</md-button>
-      </div>
-    </div>
-    <div ng-controller="EntriesCtrl as entries">
-    <md-card ng-repeat="entry in entries">
-      <img ng-repeat="resource in entry.resources" ng-src="{{resource.attachment}}" class="md-card-image" alt="Washed Out">
-      <md-card-content>
-        <h2 class="md-title">{{entry.title}}</h2>
-        <p>
-          {{entry.content}}
-        </p>
-      </md-card-content>
-      <div class="md-actions" layout="row" layout-align="end center">
-        <md-button>Action 1</md-button>
-        <md-button>Action 2</md-button>
-      </div>
-    </md-card>
-  </div>
-    <br/>
+    </md-content>
 
-  </md-content>
+
+  <div layout="row">
+    <div flex="70">
+      <md-card ng-repeat="entry in entries">
+        <md-card-content>
+          <h2 class="md-title">{{entry.title}}</h2>
+          <p>
+            {{entry.content}}
+          </p>
+        </md-card-content>
+        <img ng-repeat="resource in entry.resources" ng-src="{{resource.attachment}}" class="md-card-image">
+        <div class="md-actions" layout="row" layout-align="end center">
+          <md-button>Action 1</md-button>
+          <md-button>Action 2</md-button>
+        </div>
+      </md-card>
+    </div>
+    <div ng-repeat="tag in entry.tags" flex>
+      <md-button>{{tag.name}}</md-button>
+    </div>
+
+</div>

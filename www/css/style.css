@@ -1,5 +1,9 @@
 /* Empty. Add your own CSS if you like */
 
+body#body {
+  background-color: #eee;
+}
+
 .logo {
 	font-family: 'Lobster Two', cursive;
 }

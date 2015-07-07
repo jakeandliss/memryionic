@@ -49,7 +49,7 @@ angular.module('memryApp.services', [])
     }],
     date: "2012-04-23",
     tags: [
-      {name: 'tag'},
+      {name: 'hellofriend'},
       {name: 'important'}
     ],
   }, {
