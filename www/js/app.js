@@ -9,13 +9,12 @@ angular.module('memryApp', [
   'ionic',
   'memryApp.controllers',
   'memryApp.services',
-  'memryApp.providers',
   'ngMaterial',
   'reTree',                 // dependency of deviceDetector
   'ng.deviceDetector']
 )
 
-.run(function($ionicPlatform, $rootScope,Init, Layouts, deviceDetector) {
+.run(function($ionicPlatform, $rootScope, deviceDetector) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -47,7 +46,7 @@ angular.module('memryApp', [
   }
 })
 
-.config(function($stateProvider, $urlRouterProvider, LayoutsProvider) {
+.config(function($stateProvider, $urlRouterProvider) {
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
   // Set up the various states which the app can be in.
@@ -141,6 +140,6 @@ angular.module('memryApp', [
   $urlRouterProvider.otherwise('/tab/entries');
 })
 
-.config(function ($ionicConfigProvider, LayoutsProvider) {
+.config(function ($ionicConfigProvider) {
   $ionicConfigProvider.tabs.position("bottom");
 });

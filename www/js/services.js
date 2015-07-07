@@ -4,67 +4,6 @@ angular.module('memryApp.services', [])
  * templates or simple angular templates
  */
 
-.service('Init', function(Layout){
-  var layout = null;
-
-  this.getLayout = function(){
-    // return layout if already set
-    if(layout){
-      return layout;
-    }
-
-    // else use window width
-    var width = $(window).width();
-    return layout = width > 10 && width < 480 ? 'mobile' : 'desktop';
-  };
-
-  // this will set the layout preference for user
-  this.setLayout = function(layoutPref){
-    // layout pref can be 'mobile' & 'desktop'
-    if(layoutPref == 'desktop'){
-      var layout = Layout.desktop();
-      // Removing layout for ionic and adding ui-router's default placeholder
-      $("#ion_nav").remove();
-      $("#ion_nav_view").remove();
-      $("#body").append(layout);
-    } else {
-      // Do nothing as of now we will later need it for automating the
-      // resizing of window
-      // var layout = Layout.mobile();
-      // $("#body").append(layout);
-    }
-  };
-})
-
-// Factory will store the layouts for ionic and desktop views
-.factory('Layout', function () {
-
-  var service = {
-    mobile: mobile,
-    desktop: desktop
-  }
-
-  return service;
-
-  //////////////////////////////////////////////////////////////////////////////
-  // returns ionic navbar and ion-nav-view
-  function mobile(){
-    return "<ion-nav-bar id='ion_nav' class='bar-dark'> \
-              <ion-nav-back-button> \
-              </ion-nav-back-button> \
-            </ion-nav-bar> \
-            <!-- The views will be rendered in the <ion-nav-view> directive below \
-            Templates are in the /templates folder --> \
-            <ion-nav-view id='ion_nav'></ion-nav-view>";
-  };
-
-  // returns div to render partials in ui-view
-  function desktop(){
-    return "<div ui-view></div>";
-  };
-})
-
-
 // Clean the below factories later
 
 .factory('Entries', function() {
