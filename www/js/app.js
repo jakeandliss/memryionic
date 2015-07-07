@@ -59,7 +59,7 @@ angular.module('memryApp', [
     abstract: true,
     // default.html is the file responsible for layout of
     // ionic or desktop views
-    templateUrl: "templates/tabs.html"
+    templateUrl: "templates/default.html"
   })
 
   // Each tab has its own nav history stack:
