@@ -92,7 +92,7 @@ angular.module('memryApp', [
     views: {
       'tab-profile': {
         templateUrl: function(){
-          return 'templates/tab-profile.html';
+          return 'templates/user/' + window.templateMode + '/profile.html';
         },
         controller: 'UserCtrl'
       }
@@ -104,7 +104,7 @@ angular.module('memryApp', [
     views: {
       'tab-tags': {
         templateUrl: function(){
-          return 'templates/tab-tags.html';
+          return 'templates/user/' + window.templateMode + '/tags.html';
         },
         controller: 'TagsCtrl'
       }
@@ -131,7 +131,6 @@ angular.module('memryApp', [
   .state('user.login', {
     url: '/login',
     templateUrl: function() {
-      console.log('in template url method');
       return 'templates/user/' + window.templateMode + '/login.html';
     },
     controller: 'UserCtrl'
