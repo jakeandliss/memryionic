@@ -55,11 +55,11 @@ angular.module('memryApp', [
 
   // setup an abstract state for the tabs directive
     .state('tab', {
-    url: "/tab",
+    url: "",
     abstract: true,
     // default.html is the file responsible for layout of
-    // ionic or dektop views
-    templateUrl: "templates/default.html"
+    // ionic or desktop views
+    templateUrl: "templates/tabs.html"
   })
 
   // Each tab has its own nav history stack:
@@ -159,7 +159,7 @@ angular.module('memryApp', [
     controller: 'UserCtrl'
   });
 
-  $urlRouterProvider.otherwise('/tab/entries');
+  $urlRouterProvider.otherwise('/entries');
 })
 
 .config(function ($ionicConfigProvider) {
