@@ -111,20 +111,13 @@ angular.module('memryApp.controllers', [])
 })
 
 .controller('UserCtrl', function($scope) {
-  // All the login & signup code goes here
+  $scope.user = {
+    first_name: "Jake",
+    last_name: "Thompson",
+    email: "test@gmail.com"
+  }
+  // $scope.user.addUser
 })
-//   $scope.user =  {
-//     id: "",
-//     first_name: "Jake",
-//     last_name: "Thompson",
-//     email = [
-//       { email: "jaketest@gmail.com" },
-//       { email: "jaketest@gmail.com" }
-//     ],
-//     password: "",
-//     password_confirmation: "",
-//     avatar: "img/ionic.png"
-// })
 
 // Controller for switching between tabs
 .controller('PanelCtrl', function($scope) {

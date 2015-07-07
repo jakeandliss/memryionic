@@ -128,6 +128,29 @@ angular.module('memryApp', [
     controller: 'UserCtrl'
   })
 
+  .state('user.forgot-password', {
+    url: '/forgot-password',
+    views: {
+      'forgot-password': {
+        templateUrl: 'templates/user/passwords/new.html',
+        controller: 'UserCtrl'
+      }
+    }
+  })
+
+  .state('edit', {
+    url: '/user/edit',
+    templateUrl: 'templates/user/edit.html',
+    controller: 'UserCtrl'
+  })
+
+  .state('update-password', {
+    url: '/user/update-password',
+    templateUrl: 'templates/user/passwords/edit.html',
+    controller: 'UserCtrl'
+  })
+
+
   .state('user.login', {
     url: '/login',
     templateUrl: function() {

@@ -1,10 +1,11 @@
-<!-- <div id="welcome" class="center padding-top">
+<div id="welcome" class="center padding-top">
+  <img src="/img/logo.png" />
   <h1 class="logo">MemryBook</h1>
-  <p>Login to see your most treasured moments</p>
-</div> -->
+  <p>Make Memories Last</p>
+
 
 <ion-nav-view id="ion_nav_view"></ion-nav-view>
-<ion-tabs class="tabs-color-active-positive">
+<ion-tabs class="tabs-dark">
   <!-- Login Tab -->
   <ion-tab title="Login" href="#/user/login">
     <!-- <ion-nav-view name="login"></ion-nav-view> -->
@@ -15,4 +16,10 @@
     <!-- <ion-nav-view name="new"></ion-nav-view> -->
   </ion-tab>
 
+  <!-- New User Tab -->
+  <ion-tab title="Forgot Password" href="#/user/forgot-password" hidden="true">
+    <ion-nav-view name="forgot-password"></ion-nav-view>
+  </ion-tab>
+
 </ion-tabs>
+</div>
