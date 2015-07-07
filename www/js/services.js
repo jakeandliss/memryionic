@@ -111,7 +111,7 @@ angular.module('starter.services', [])
     {
       name: "test 3",
       id: 3,
-      parent_id: "1"
+      parent_id: "0"
     },
     {
       name: "test 4",

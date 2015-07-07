@@ -8,17 +8,9 @@
       </div>
 
     <ion-list class="list" ng-controller="TagsCtrl as tag" show-delete="shouldShowDelete" can-swipe="listCanSwipe">
-      <div ng-repeat="tag in tags">
-        <ion-item ng-if="tag.parent_id == ''">
-          <a href="#" class="item-icon-left item-icon-right item-stable">
-            <i class="icon ion-ios-pricetag"></i>
-            {{ tag.name }}
-            <span class="badge badge-assertive">2</span>
-          </a>
-          <ion-option-button class="button-dark" ng-click="edit(tag)">Edit</ion-option-button>
-          <ion-option-button class="button-assertive icon ion-trash-a" ng-click="remove(tag)"></ion-option-button>
-        </ion-item>
-      </div>
+      <ul>
+         <li ng-repeat="(parent_id, tag) in tags" ng-include="'tag'"></li>
+      </ul>
     </ion-list>
 
     <!-- Partial for editing labels -->
@@ -41,3 +33,20 @@
     </form>
   </ion-content>
 </ion-view>
+
+<script type="text/ng-template" id="tag">
+
+  <ion-item>
+    <a href="#" class="item-icon-left item-icon-right item-stable">
+      <i class="icon ion-ios-pricetag"></i>
+      {{ tag.name }}
+      <span class="badge badge-assertive">2</span>
+    </a>
+    <ion-option-button class="button-dark" ng-click="edit(tag)">Edit</ion-option-button>
+    <ion-option-button class="button-assertive icon ion-trash-a" ng-click="remove(tag)"></ion-option-button>
+  </ion-item>
+</div>
+<ul ng-if="tag.parent_id">
+  <li ng-repeat="(parent_id, tag) in tags" ng-include="'tag'"></li>
+</ul>
+</script>
