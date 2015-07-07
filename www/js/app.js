@@ -28,21 +28,21 @@ angular.module('memryApp', [
   });
 
   if(deviceDetector){
-    var isBrowserOrTablet;
+    var isDesktopOrTablet;
       /*
        * detects memry platform is desktop or tablet for loading related templates
-       * rootScope.isBrowserOrTablet object is used for loading desktop view in index.html
+       * rootScope.isDesktopOrTablet object is used for loading desktop view in index.html
        * window object is used for loaing desktop view templates in modules wise
        */
-      isBrowserOrTablet = (deviceDetector.isDesktop() || deviceDetector.isTablet());
-      console.log('Browser or tablet', isBrowserOrTablet);
-      if (isBrowserOrTablet) {
+      isDesktopOrTablet = (deviceDetector.isDesktop() || deviceDetector.isTablet());
+      console.log('Browser or tablet', isDesktopOrTablet);
+      if (isDesktopOrTablet) {
         window.templateMode = "desktop";
       } else {
         window.templateMode = "mobile";
       }
-      window.isBrowserOrTablet = isBrowserOrTablet;
-      $rootScope.isBrowserOrTablet = isBrowserOrTablet;
+      window.isDesktopOrTablet = isDesktopOrTablet;
+      $rootScope.isDesktopOrTablet = isDesktopOrTablet;
   }
 })
 

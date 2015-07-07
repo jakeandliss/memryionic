@@ -34,12 +34,12 @@
   </head>
   <body id="body" ng-app="memryApp">
     <!-- Desktop views -->
-    <div ng-if="isBrowserOrTablet">
+    <div ng-if="isDesktopOrTablet">
       <div ui-view></div>
     </div>
 
     <!-- Mobile views -->
-    <div ng-if="!isBrowserOrTablet">
+    <div ng-if="!isDesktopOrTablet">
       <ion-nav-bar id="ion_nav" class="bar-dark">
         <ion-nav-back-button>
         </ion-nav-back-button>
