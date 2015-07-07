@@ -10,39 +10,44 @@ angular.module('memryApp', [
   'memryApp.controllers',
   'memryApp.services',
   'memryApp.providers',
-  'ngMaterial']
+  'ngMaterial',
+  'reTree',                 // dependency of deviceDetector
+  'ng.deviceDetector']
 )
 
-.run(function($ionicPlatform, Init, Layouts) {
-  // If the window width is more than 480 call the states for desktop.
-  if(Init.getLayout() == 'desktop'){
+.run(function($ionicPlatform, $rootScope,Init, Layouts, deviceDetector) {
+  $ionicPlatform.ready(function() {
+    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+    // for form inputs)
+    if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
+      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+    }
+    if (window.StatusBar) {
+      // org.apache.cordova.statusbar required
+      StatusBar.styleLightContent();
+    }
+  });
 
-    Init.setLayout('desktop');
-  } // else we let go ionic framework do its job
-  else {
-    // add
-    Init.setLayout('mobile');
-    $ionicPlatform.ready(function() {
-      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-      // for form inputs)
-      if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
-        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+  if(deviceDetector){
+    var isBrowserOrTablet;
+      /*
+       * detects memry platform is desktop or tablet for loading related templates
+       * rootScope.isBrowserOrTablet object is used for loading desktop view in index.html
+       * window object is used for loaing desktop view templates in modules wise
+       */
+      isBrowserOrTablet = (deviceDetector.isDesktop() || deviceDetector.isTablet());
+      console.log('Browser or tablet', isBrowserOrTablet);
+      if (isBrowserOrTablet) {
+        window.templateMode = "desktop";
+      } else {
+        window.templateMode = "mobile";
       }
-      if (window.StatusBar) {
-        // org.apache.cordova.statusbar required
-        StatusBar.styleLightContent();
-      }
-    });
+      window.isBrowserOrTablet = isBrowserOrTablet;
+      $rootScope.isBrowserOrTablet = isBrowserOrTablet;
   }
-
-
 })
 
 .config(function($stateProvider, $urlRouterProvider, LayoutsProvider) {
-  // Set layout as soon as application starts
-  LayoutsProvider.setLayout();
-
-
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
   // Set up the various states which the app can be in.
@@ -53,16 +58,19 @@ angular.module('memryApp', [
     .state('tab', {
     url: "/tab",
     abstract: true,
-    templateUrl: "templates/tabs.html"
+    // default.html is the file responsible for layout of
+    // ionic or dektop views
+    templateUrl: "templates/default.html"
   })
 
   // Each tab has its own nav history stack:
-
   .state('tab.new', {
     url: '/new',
     views: {
       'tab-new': {
-        templateUrl: 'templates/entries/mobile/new.html',
+        templateUrl: function(){
+          return 'templates/entries/'+ window.templateMode +'/new.html';
+        },
         controller: 'EntriesCtrl'
       }
     }
@@ -72,7 +80,9 @@ angular.module('memryApp', [
       url: '/entries',
       views: {
         'tab-entries': {
-          templateUrl: 'templates/tab-entries.html',
+          templateUrl: function(){
+            return 'templates/entries/' + window.templateMode + '/index.html';
+          },
           controller: 'EntriesCtrl'
         }
       }
@@ -82,7 +92,9 @@ angular.module('memryApp', [
     url: '/profile',
     views: {
       'tab-profile': {
-        templateUrl: 'templates/tab-profile.html',
+        templateUrl: function(){
+          return 'templates/tab-profile.html';
+        },
         controller: 'UserCtrl'
       }
     }
@@ -92,7 +104,9 @@ angular.module('memryApp', [
     url: '/tags',
     views: {
       'tab-tags': {
-        templateUrl: 'templates/tab-tags.html',
+        templateUrl: function(){
+          return 'templates/tab-tags.html';
+        },
         controller: 'TagsCtrl'
       }
     }
@@ -102,74 +116,31 @@ angular.module('memryApp', [
     .state('user', {
     url: "/user",
     abstract: true,
-    templateUrl: "templates/user/mobile/user.html"
+    templateUrl: function(){
+      return 'templates/user/' + window.templateMode + '/user.html'
+    }
   })
 
   .state('user.new', {
     url: '/new',
-    views: {
-      'new': {
-        templateUrl: 'templates/user/mobile/new.html',
-        controller: 'UserCtrl'
-      }
-    }
+    templateUrl: function(){
+      return 'templates/user/' + window.templateMode + '/new.html';
+    },
+    controller: 'UserCtrl'
   })
 
   .state('user.login', {
     url: '/login',
-    views: {
-      'login': {
-        templateUrl: 'templates/user/mobile/login.html',
-        controller: 'UserCtrl'
-      }
-    }
+    templateUrl: function() {
+      console.log('in template url method');
+      return 'templates/user/' + window.templateMode + '/login.html';
+    },
+    controller: 'UserCtrl'
   });
 
-  // Browser states start here these states urls matter as it will be shown to the
-  // in the url bar so use proper urls
-  $stateProvider
-    .state('desktop', {
-      url: '/',
-      abstract: true,
-      // desktop-index.html layout for desktop
-      templateUrl: "templates/desktop-index.html"
-    })
-
-    .state('desktop.entries', {
-      url: 'entries',
-      templateUrl: "templates/entries/desktop/index.html",
-      controller: "EntriesCtrl as entries"
-    });
-
-  $stateProvider
-
-    .state('desktop.userSignup', {
-      url: 'signup',
-      templateUrl: 'templates/user/desktop/new.html',
-      controller: 'UserCtrl'
-    })
-
-    .state('desktop.userLogin', {
-      url: 'login',
-      templateUrl: 'templates/user/desktop/login.html',
-      controller: 'UserCtrl'
-    })
-
-  if(LayoutsProvider.getLayout() == 'mobile'){
-    console.log("DEBUG: Mobile layout");
-    $urlRouterProvider.otherwise('/tab/entries');
-  }
-  else {
-    console.log("DEBUG: Browser layout");
-    $urlRouterProvider.otherwise('/entries');
-  }
-
+  $urlRouterProvider.otherwise('/tab/entries');
 })
 
 .config(function ($ionicConfigProvider, LayoutsProvider) {
-
-  // place nav bar on bottom for all devices
-  if(LayoutsProvider.getLayout() == 'mobile'){
-    $ionicConfigProvider.tabs.position("bottom");
-  }
+  $ionicConfigProvider.tabs.position("bottom");
 });
