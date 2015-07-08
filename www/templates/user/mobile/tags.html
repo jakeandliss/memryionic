@@ -7,9 +7,19 @@
         <span class="item-note">Edit</span>
       </div>
 
-    <ion-list class="list" ng-controller="TagsCtrl as tag" show-delete="shouldShowDelete" can-swipe="listCanSwipe">
+    <ion-list class="list" ng-controller="TagsCtrl as tags" show-delete="shouldShowDelete" can-swipe="listCanSwipe">
       <ul>
-         <li ng-repeat="(parent_id, tag) in tags" ng-include="'tag'"></li>
+         <li ng-repeat="tag in tags">
+           <ion-item>
+                <a href="#" class="item-icon-left item-icon-right item-stable">
+                  <i class="icon ion-ios-pricetag"></i>
+                  {{ tag.name }}
+                  <span class="badge badge-assertive">2</span>
+                </a>
+                <ion-option-button class="button-dark" ng-click="edit(tag)">Edit</ion-option-button>
+                <ion-option-button class="button-assertive icon ion-trash-a" ng-click="remove(tag)"></ion-option-button>
+              </ion-item>
+         </li>
       </ul>
     </ion-list>
 
@@ -36,17 +46,17 @@
 
 <script type="text/ng-template" id="tag">
 
-  <ion-item>
-    <a href="#" class="item-icon-left item-icon-right item-stable">
-      <i class="icon ion-ios-pricetag"></i>
-      {{ tag.name }}
-      <span class="badge badge-assertive">2</span>
-    </a>
-    <ion-option-button class="button-dark" ng-click="edit(tag)">Edit</ion-option-button>
-    <ion-option-button class="button-assertive icon ion-trash-a" ng-click="remove(tag)"></ion-option-button>
-  </ion-item>
-</div>
-<ul ng-if="tag.parent_id">
-  <li ng-repeat="(parent_id, tag) in tags" ng-include="'tag'"></li>
-</ul>
-</script>
+ //   <ion-item>
+ //     <a href="#" class="item-icon-left item-icon-right item-stable">
+ //       <i class="icon ion-ios-pricetag"></i>
+ //       {{ tag.name }}
+ //       <span class="badge badge-assertive">2</span>
+ //     </a>
+ //     <ion-option-button class="button-dark" ng-click="edit(tag)">Edit</ion-option-button>
+ //     <ion-option-button class="button-assertive icon ion-trash-a" ng-click="remove(tag)"></ion-option-button>
+ //   </ion-item>
+ // </div>
+ // <ul ng-if="tag.parent_id">
+ //   <li ng-repeat="(parent_id, tag) in tags" ng-include="'tag'"></li>
+ // </ul>
+ </script>
