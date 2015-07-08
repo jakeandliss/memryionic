@@ -1,4 +1,3 @@
-<div id="bottom"></div>
 <div layout="row" id="entries" ng-controller="EntriesCtrl as entries">
   <md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2"
               md-component-id="left"
@@ -58,6 +57,7 @@
 
 
 
+
   <div layout="row" ng-repeat="entry in entries">
     <div flex="70">
       <md-card class="entry">
@@ -76,7 +76,42 @@
             {{entry.content}}
           </p>
         </md-card-content>
-        <img ng-repeat="resource in entry.resources" ng-src="{{resource.attachment}}" class="md-card-image">
+
+        <md-tabs md-dynamic-height md-border-bottom>
+          <md-tab label="Visual">
+            <md-content class="md-padding">
+              <img ng-repeat="resource in entry.resources" ng-src="{{resource.attachment}}" class="md-card-image">
+            </md-content>
+          </md-tab>
+          <md-tab label="Audio">
+            <md-content class="md-padding">
+              <md-list>
+                <md-list-item class="md-2-line" ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'audio'">
+                  <md-icon class="material-icons">music_note</md-icon>
+                  <div class="md-list-item-text">
+                    <h3> {{ resource.attachment }} </h3>
+                    <p> {{ resource.attachment_file_name }} </p>
+                  </div>
+                </md-list-item>
+              </md-list>
+            </md-content>
+          </md-tab>
+          <md-tab label="Files">
+            <md-content class="md-padding">
+              <md-list>
+                <md-list-item class="md-2-line" ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'pdf'">
+                  <md-icon class="material-icons">picture_as_pdf</md-icon>
+                  <div class="md-list-item-text">
+                    <h3> {{ resource.attachment }} </h3>
+                    <p> {{ resource.attachment_file_name }} </p>
+                  </div>
+                </md-list-item>
+              </md-list>
+            </md-content>
+          </md-tab>
+        </md-tabs>
+
+
         <div class="md-actions footer" layout="row" layout-align="end center">
           <md-button>Action 1</md-button>
           <md-button>Action 2</md-button>

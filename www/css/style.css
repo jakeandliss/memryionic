@@ -1,8 +1,12 @@
 /* Empty. Add your own CSS if you like */
 
+* {
+    font-family: 'Ubuntu', sans-serif;
+}
+
 html, body {
   height: initial !important;
-  background-color: #eee !important;
+  background-color: #f6f6f6 !important;
 }
 
 
