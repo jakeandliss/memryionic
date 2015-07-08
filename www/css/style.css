@@ -1,10 +1,7 @@
 /* Empty. Add your own CSS if you like */
 
 html, body {
-  margin: 0 !important;
-  padding: 0 !important;
-  height: 100% !important;
-  width: 100% !important;
+  height: initial !important;
   background-color: #eee !important;
 }
 
@@ -40,6 +37,10 @@ html, body {
 
 .box-shadow {
 	box-shadow: 0 0 5px 0px #444;
+}
+
+md-bottom-sheet {
+    position: fixed !important;
 }
 
 
