@@ -1,13 +1,20 @@
-// Ionic Starter App
+// MemryApp
 
 // angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
+// 'memryApp' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-// 'starter.services' is found in services.js
-// 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+// 'memryApp.services' is found in services.js
+// 'memryApp.controllers' is found in controllers.js
+angular.module('memryApp', [
+  'ionic',
+  'memryApp.controllers',
+  'memryApp.services',
+  'ngMaterial',
+  'reTree',                 // dependency of deviceDetector
+  'ng.deviceDetector']
+)
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $rootScope, deviceDetector) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -19,10 +26,27 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       StatusBar.styleLightContent();
     }
   });
+
+  if(deviceDetector){
+    var isDesktopOrTablet;
+      /*
+       * detects memry platform is desktop or tablet for loading related templates
+       * rootScope.isDesktopOrTablet object is used for loading desktop view in index.html
+       * window object is used for loaing desktop view templates in modules wise
+       */
+      isDesktopOrTablet = (deviceDetector.isDesktop() || deviceDetector.isTablet());
+      console.log('Browser or tablet', isDesktopOrTablet);
+      if (isDesktopOrTablet) {
+        window.templateMode = "desktop";
+      } else {
+        window.templateMode = "mobile";
+      }
+      window.isDesktopOrTablet = isDesktopOrTablet;
+      $rootScope.isDesktopOrTablet = isDesktopOrTablet;
+  }
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
-
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
   // Set up the various states which the app can be in.
@@ -33,16 +57,19 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     .state('tab', {
     url: "/tab",
     abstract: true,
-    templateUrl: "templates/tabs.html"
+    // default.html is the file responsible for layout of
+    // ionic or dektop views
+    templateUrl: "templates/default.html"
   })
 
   // Each tab has its own nav history stack:
-
   .state('tab.new', {
     url: '/new',
     views: {
       'tab-new': {
-        templateUrl: 'templates/entries/new.html',
+        templateUrl: function(){
+          return 'templates/entries/'+ window.templateMode +'/new.html';
+        },
         controller: 'EntriesCtrl'
       }
     }
@@ -52,7 +79,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       url: '/entries',
       views: {
         'tab-entries': {
-          templateUrl: 'templates/tab-entries.html',
+          templateUrl: function(){
+            return 'templates/entries/' + window.templateMode + '/index.html';
+          },
           controller: 'EntriesCtrl'
         }
       }
@@ -62,7 +91,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     url: '/profile',
     views: {
       'tab-profile': {
-        templateUrl: 'templates/tab-profile.html',
+        templateUrl: function(){
+          return 'templates/user/' + window.templateMode + '/profile.html';
+        },
         controller: 'UserCtrl'
       }
     }
@@ -72,7 +103,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     url: '/tags',
     views: {
       'tab-tags': {
-        templateUrl: 'templates/tab-tags.html',
+        templateUrl: function(){
+          return 'templates/user/' + window.templateMode + '/tags.html';
+        },
         controller: 'TagsCtrl'
       }
     }
@@ -82,17 +115,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     .state('user', {
     url: "/user",
     abstract: true,
-    templateUrl: "templates/user/user.html"
+    templateUrl: function(){
+      return 'templates/user/' + window.templateMode + '/user.html'
+    }
   })
 
   .state('user.new', {
     url: '/new',
-    views: {
-      'new': {
-        templateUrl: 'templates/user/new.html',
-        controller: 'UserCtrl'
-      }
-    }
+    templateUrl: function(){
+      return 'templates/user/' + window.templateMode + '/new.html';
+    },
+    controller: 'UserCtrl'
   })
 
   .state('user.forgot-password', {
@@ -120,22 +153,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
   .state('user.login', {
     url: '/login',
-    views: {
-      'login': {
-        templateUrl: 'templates/user/sessions/new.html',
-        controller: 'UserCtrl'
-      }
-    }
+    templateUrl: function() {
+      return 'templates/user/' + window.templateMode + '/login.html';
+    },
+    controller: 'UserCtrl'
   });
 
-  // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/entries');
-
 })
 
-
 .config(function ($ionicConfigProvider) {
-
-  // place nav bar on bottom for all devices
   $ionicConfigProvider.tabs.position("bottom");
 });

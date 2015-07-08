@@ -1,4 +1,4 @@
-angular.module('starter.controllers', [])
+angular.module('memryApp.controllers', [])
 
 .controller('EntriesCtrl', function($scope, Entries, $ionicModal) {
   // With the new view caching in Ionic, Controllers are only called
@@ -34,7 +34,8 @@ angular.module('starter.controllers', [])
 
   $scope.entry.date = new Date();
 
-  $ionicModal.fromTemplateUrl('/templates/entries/new.html', function($ionicModal) {
+  // This modal should only be used for mobile.
+  $ionicModal.fromTemplateUrl('/templates/entries/mobile/new.html', function($ionicModal) {
       $scope.modal = $ionicModal;
   }, {
       // Use our scope for the scope of the modal to keep it simple
@@ -47,7 +48,7 @@ angular.module('starter.controllers', [])
 .controller('EditCtrl', function($scope, $ionicModal) {
 
     // Load the modal from the given template URL
-    $ionicModal.fromTemplateUrl('/templates/entries/edit.html', function($ionicModal) {
+    $ionicModal.fromTemplateUrl('/templates/entries/mobile/edit.html', function($ionicModal) {
         $scope.modal = $ionicModal;
     }, {
         // Use our scope for the scope of the modal to keep it simple
@@ -92,7 +93,7 @@ angular.module('starter.controllers', [])
 .controller('ShareCtrl', function($scope, $ionicModal) {
 
     // Load the modal from the given template URL
-    $ionicModal.fromTemplateUrl('/templates/entries/share.html', function($ionicModal) {
+    $ionicModal.fromTemplateUrl('/templates/entries/mobile/share.html', function($ionicModal) {
         $scope.modal = $ionicModal;
     }, {
         // Use our scope for the scope of the modal to keep it simple
@@ -120,7 +121,6 @@ angular.module('starter.controllers', [])
   }
   // $scope.user.addUser
 })
-
 
 // Controller for switching between tabs
 .controller('PanelCtrl', function($scope) {

@@ -1,4 +1,10 @@
-angular.module('starter.services', [])
+angular.module('memryApp.services', [])
+
+/* This will be called in the run method to check if we have to serve ionic
+ * templates or simple angular templates
+ */
+
+// Clean the below factories later
 
 .factory('Entries', function() {
   // Might use a resource here that returns a JSON array
