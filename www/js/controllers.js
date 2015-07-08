@@ -58,12 +58,9 @@ angular.module('memryApp.controllers', [])
 
 .controller('GridBottomSheetCtrl', function($scope, $mdBottomSheet) {
   $scope.items = [
-    { name: 'Hangout', icon: 'hangout' },
-    { name: 'Mail', icon: 'mail' },
-    { name: 'Message', icon: 'message' },
-    { name: 'Copy', icon: 'copy2' },
-    { name: 'Facebook', icon: 'facebook' },
-    { name: 'Twitter', icon: 'twitter' },
+    { name: 'Edit', icon: 'edit' },
+    { name: 'Share', icon: 'share' },
+    { name: 'Delete', icon: 'delete' },
   ];
   $scope.listItemClick = function($index) {
     var clickedItem = $scope.items[$index];

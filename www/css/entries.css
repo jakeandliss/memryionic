@@ -14,3 +14,19 @@
 #entries .entry .footer {
   background-color: #eee;
 }
+
+.md-inline-list-icon-label {
+  display: inline-block;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: -10px;
+  height: 24px;
+  vertical-align: middle; }
+.md-grid-item-content {
+  height: 96px; }
+  .md-grid-item-content md-icon {
+    font-size: 35px;
+    margin-left: 15px;
+  }
+.md-grid-text {
+  padding-bottom: 5px; }
