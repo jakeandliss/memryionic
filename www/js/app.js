@@ -74,18 +74,6 @@ angular.module('memryApp', [
     }
   })
 
-  .state('tab.tags', {
-    url: '/tags',
-    views: {
-      'tab-tags': {
-        templateUrl: function(){
-          return 'templates/user/' + window.templateMode + '/tags.html';
-        },
-        controller: 'TagsCtrl'
-      }
-    }
-  })
-
   // Create a state for the 'users' directive
     .state('user', {
     url: "/user",

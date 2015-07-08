@@ -25,7 +25,7 @@
                 templateUrl: function(){
                   return 'js/modules/entry/views/' + window.templateMode + '/index.html';
                 },
-                controller: 'EntriesCtrl'
+                controller: 'EntryListCtrl'
               }
             }
           })

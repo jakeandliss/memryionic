@@ -13,7 +13,7 @@
   </ion-nav-title>
 
   <!-- New Entry and Labels Tabs -->
-  <ion-header-bar class="bar bar-subheader tabs tabs-icon-left tabs-top dark" ng-controller="EntriesCtrl">
+  <ion-header-bar class="bar bar-subheader tabs tabs-icon-left tabs-top dark" ng-controller="EntryListCtrl">
     <a class="tab-item" ng-click="modal.show()">
       <i class="icon ion-compose"></i>
       New Entry
@@ -24,7 +24,7 @@
     </a>
   </ion-header-bar>
 
-  <ion-content class="has-subheader" ng-controller="EntriesCtrl as entry">
+  <ion-content class="has-subheader" ng-controller="EntryListCtrl as entry">
     <div class="list card" ng-repeat="entry in entries | orderBy:'-date'">
       <div class="item item-text-wrap gray" ng-controller="PopoverCtrl">
         <button class="button button-icon icon ion-android-more-horizontal right" ng-click="openPopover($event)"></button>
