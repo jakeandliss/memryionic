@@ -1,8 +1,13 @@
 /* Empty. Add your own CSS if you like */
 
-body#body {
-  background-color: #eee;
+html, body {
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 100% !important;
+  width: 100% !important;
+  background-color: #eee !important;
 }
+
 
 .logo {
 	font-family: 'Lobster Two', cursive;

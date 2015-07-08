@@ -1,6 +1,6 @@
 angular.module('memryApp.controllers', [])
 
-.controller('EntriesCtrl', function($scope, Entries, $ionicModal) {
+.controller('EntriesCtrl', function($scope, Entries, $ionicModal, $mdBottomSheet) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
@@ -43,6 +43,32 @@ angular.module('memryApp.controllers', [])
       // The animation we want to use for the modal entrance
       animation: 'slide-in-up'
     });
+
+    $scope.showGridBottomSheet = function($event) {
+    $scope.alert = '';
+    $mdBottomSheet.show({
+      templateUrl: '/templates/entries/desktop/bottom-sheet.html',
+      controller: 'GridBottomSheetCtrl',
+      targetEvent: $event
+    }).then(function(clickedItem) {
+      $scope.alert = clickedItem.name + ' clicked!';
+    });
+  };
+})
+
+.controller('GridBottomSheetCtrl', function($scope, $mdBottomSheet) {
+  $scope.items = [
+    { name: 'Hangout', icon: 'hangout' },
+    { name: 'Mail', icon: 'mail' },
+    { name: 'Message', icon: 'message' },
+    { name: 'Copy', icon: 'copy2' },
+    { name: 'Facebook', icon: 'facebook' },
+    { name: 'Twitter', icon: 'twitter' },
+  ];
+  $scope.listItemClick = function($index) {
+    var clickedItem = $scope.items[$index];
+    $mdBottomSheet.hide(clickedItem);
+  };
 })
 
 .controller('EditCtrl', function($scope, $ionicModal) {
