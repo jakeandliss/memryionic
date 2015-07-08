@@ -63,17 +63,17 @@ angular.module('memryApp', [
   })
 
   // Each tab has its own nav history stack:
-  .state('tab.new', {
-    url: '/new',
-    views: {
-      'tab-new': {
-        templateUrl: function(){
-          return 'templates/entries/'+ window.templateMode +'/new.html';
-        },
-        controller: 'EntriesCtrl'
-      }
-    }
-  })
+  // .state('tab.new', {
+  //   url: '/new',
+  //   views: {
+  //     'tab-new': {
+  //       templateUrl: function(){
+  //         return 'templates/entries/'+ window.templateMode +'/new.html';
+  //       },
+  //       controller: 'EntriesCtrl'
+  //     }
+  //   }
+  // })
 
   .state('tab.entries', {
       url: '/entries',
