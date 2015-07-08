@@ -93,14 +93,14 @@ Welcome Screen
 
 ***************/
 
-#welcome {
-	background-color: #A9D5C6;
+#welcome h1, #welcome p {
+	color: #774F38;
 }
 
 #welcome img {
 	width: 30%;
 	border-radius: 100%;
-	background-color: #EBE5CD;
+	background-color: #ECE5CE ;
 	padding: 5%;
 }
 
@@ -110,7 +110,7 @@ Welcome Screen
 }
 
 #welcome .pane, #welcome .list {
-	background-color: #FD9781;
+	background-color: #C5E0DC ;
 }
 
 #welcome .item {
