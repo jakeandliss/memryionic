@@ -23,13 +23,12 @@
             views: {
               'tab-entries': {
                 templateUrl: function(){
-                  return 'templates/entries/' + window.templateMode + '/index.html';
+                  return 'js/modules/entry/views/' + window.templateMode + '/index.html';
                 },
                 controller: 'EntriesCtrl'
               }
             }
           })
-
     };
 
 })();
