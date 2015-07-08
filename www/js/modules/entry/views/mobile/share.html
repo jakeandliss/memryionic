@@ -1,0 +1,32 @@
+<div class="modal">
+  <form name="shareForm" ng-submit="entry.share">
+    <ion-header-bar class="bar bar-header bar-dark item-input-inset">
+      <button class="button button-clear" ng-click="modal.hide()">
+        Cancel
+      </button>
+      <h1 class="title">
+        Share Entry
+      </h1>
+      <input type="submit" value="Share Entry" class="button button-outline button-assertive bold">
+      </input>
+    </ion-header-bar>
+
+    <div class="list list-inset form">
+        <label class="item item-input">
+          <input type="text" placeholder="Email Address" ng-model="share.email">
+        </label>
+        <div class="row">
+          <div class="col">
+            <label class="item item-input">
+              <input type="text" placeholder="First Name" ng-model="share.first_name">
+            </label>
+          </div>
+          <div class="col">
+          <label class="item item-input">
+            <input type="text" placeholder="Last Name" ng-model="share.last_name">
+          </label>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

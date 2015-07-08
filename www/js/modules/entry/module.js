@@ -5,6 +5,7 @@
     Config.$inject = ['$stateProvider'];
     function Config($stateProvider){
       $stateProvider
+        // Create new entry
         .state('tab.new', {
           url: '/new',
           views: {
@@ -16,6 +17,19 @@
             }
           }
         })
+        // Entries index page
+        .state('tab.entries', {
+            url: '/entries',
+            views: {
+              'tab-entries': {
+                templateUrl: function(){
+                  return 'templates/entries/' + window.templateMode + '/index.html';
+                },
+                controller: 'EntriesCtrl'
+              }
+            }
+          })
+
     };
 
 })();
