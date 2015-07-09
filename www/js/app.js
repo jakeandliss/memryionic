@@ -52,48 +52,14 @@ angular.module('memryApp', [
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
   $stateProvider
-
-  // setup an abstract state for the tabs directive
+    // setup an abstract state for the tabs directive
     .state('tab', {
-    url: "/tab",
-    abstract: true,
-    // default.html is the file responsible for layout of
-    // ionic or dektop views
-    templateUrl: "templates/default.html"
-  })
-
-  .state('user.forgot-password', {
-    url: '/forgot-password',
-    views: {
-      'forgot-password': {
-        templateUrl: 'templates/user/passwords/new.html',
-        controller: 'UserCtrl'
-      }
-    }
-  })
-
-  // .state('edit', {
-  //   url: '/user/edit',
-  //   templateUrl: function(){
-  //     return 'js/modules/user/views/' + window.templateMode + '/edit.html';
-  //   },
-  //   controller: 'UserCtrl'
-  // })
-
-  .state('update-password', {
-    url: '/user/update-password',
-    templateUrl: 'templates/user/passwords/edit.html',
-    controller: 'UserCtrl'
-  })
-
-
-  .state('user.login', {
-    url: '/login',
-    templateUrl: function() {
-      return 'templates/user/' + window.templateMode + '/login.html';
-    },
-    controller: 'UserCtrl'
-  });
+      url: "/tab",
+      abstract: true,
+      // default.html is the file responsible for layout of
+      // ionic or dektop views
+      templateUrl: "templates/default.html"
+    });
 
   $urlRouterProvider.otherwise('/tab/entries');
 })

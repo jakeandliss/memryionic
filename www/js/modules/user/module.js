@@ -22,6 +22,27 @@
           },
           controller: 'UserCtrl'
         })
+
+        .state('user.login', {
+          url: '/login',
+          templateUrl: function() {
+            return 'js/modules/user/views/' + window.templateMode + '/login.html';
+          },
+          controller: 'UserCtrl'
+        })
+
+        .state('user.forgot-password', {
+          url: '/forgot-password',
+          views: {
+            'forgot-password': {
+              templateUrl: function(){
+                return 'js/modules/user/views/' + window.templateMode + '/new_password.html';
+              },
+              controller: 'UserCtrl'
+            }
+          }
+        })
+
         // user profile
         .state('tab.profile', {
           url: '/profile',
@@ -42,6 +63,16 @@
           },
           controller: 'UserCtrl'
         })
+        // update password
+        .state('update-password', {
+          url: '/user/update-password',
+          templateUrl: function(){
+            return 'js/modules/user/views/' + window.templateMode + '/update_password.html';
+          },
+          controller: 'UserCtrl'
+        })
+
+
 
     };
 })();
