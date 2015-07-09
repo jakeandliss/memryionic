@@ -34,5 +34,14 @@
             }
           }
         })
+        // edit a user profile
+        .state('userEdit', {
+          url: '/user/edit',
+          templateUrl: function(){
+            return 'js/modules/user/views/' + window.templateMode + '/edit.html';
+          },
+          controller: 'UserCtrl'
+        })
+
     };
 })();

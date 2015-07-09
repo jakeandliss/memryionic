@@ -72,11 +72,13 @@ angular.module('memryApp', [
     }
   })
 
-  .state('edit', {
-    url: '/user/edit',
-    templateUrl: 'templates/user/edit.html',
-    controller: 'UserCtrl'
-  })
+  // .state('edit', {
+  //   url: '/user/edit',
+  //   templateUrl: function(){
+  //     return 'js/modules/user/views/' + window.templateMode + '/edit.html';
+  //   },
+  //   controller: 'UserCtrl'
+  // })
 
   .state('update-password', {
     url: '/user/update-password',
