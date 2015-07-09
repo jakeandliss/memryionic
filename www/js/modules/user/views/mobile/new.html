@@ -1,0 +1,27 @@
+<ion-view view-title="MemryBook Signup" hide-nav-bar="true">
+  <ion-content ng-controller="UserCtrl as user">
+
+    <form id="registration" ng-submit="user.addUser">
+      <div class="list list-inset">
+        <a class="item item-icon-left salmon " href="#" style="border: 1px dashed #444;padding: 8px;">
+          <i class="icon ion-person"></i>
+          Add Profile Picture
+        </a>
+        <label class="item item-input item-icon-left">
+          <input type="text" placeholder="First Name" required>
+        </label>
+        <label class="item item-input">
+          <input type="text" placeholder="Last Name" required>
+        </label>
+        <label class="item item-input">
+          <input type="email" placeholder="Email" required>
+        </label>
+        <label class="item item-input">
+          <input type="password" placeholder="Password" required>
+        </label>
+        <input type="submit" value="Create My Account" class="button button-block salmon-dark font-white no-border bold">
+      </div>
+    </form>
+
+  </ion-content>
+</ion-view>

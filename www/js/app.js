@@ -74,23 +74,6 @@ angular.module('memryApp', [
     }
   })
 
-  // Create a state for the 'users' directive
-    .state('user', {
-    url: "/user",
-    abstract: true,
-    templateUrl: function(){
-      return 'templates/user/' + window.templateMode + '/user.html'
-    }
-  })
-
-  .state('user.new', {
-    url: '/new',
-    templateUrl: function(){
-      return 'templates/user/' + window.templateMode + '/new.html';
-    },
-    controller: 'UserCtrl'
-  })
-
   .state('user.forgot-password', {
     url: '/forgot-password',
     views: {

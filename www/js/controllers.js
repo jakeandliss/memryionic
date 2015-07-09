@@ -58,15 +58,6 @@ angular.module('memryApp.controllers', [])
       });
 })
 
-.controller('UserCtrl', function($scope) {
-  $scope.user = {
-    first_name: "Jake",
-    last_name: "Thompson",
-    email: "test@gmail.com"
-  }
-  // $scope.user.addUser
-})
-
 // Controller for switching between tabs
 .controller('PanelCtrl', function($scope) {
   $scope.tab = 1;
