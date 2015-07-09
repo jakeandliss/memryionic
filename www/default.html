@@ -7,23 +7,20 @@ navigation history that also transitions its views in and out.
 <div ng-if="!isDesktopOrTablet">
  <ion-tabs class="tabs-icon-top tabs-color-active-positive">
 
-
-    <ion-tab title="New Entry" icon-off="ion-ios-compose-outline" icon-on="ion-ios-compose" href="#/tab/new">
+    <ion-tab title="New Entry" icon-off="ion-ios-compose-outline" icon-on="ion-ios-compose" ui-sref="tab.new">
       <ion-nav-view name="tab-new"></ion-nav-view>
     </ion-tab>
 
-
-    <ion-tab title="Entries" icon-off="ion-ios-chatboxes-outline" icon-on="ion-ios-chatboxes" href="#/tab/entries">
+    <ion-tab title="Entries" icon-off="ion-ios-chatboxes-outline" icon-on="ion-ios-chatboxes" ui-sref="tab.entries">
       <ion-nav-view name="tab-entries" id="entries"></ion-nav-view>
     </ion-tab>
 
 
-    <ion-tab title="Labels" icon-off="ion-ios-pricetag-outline" icon-on="ion-ios-pricetag" href="#/tab/tags">
+    <ion-tab title="Labels" icon-off="ion-ios-pricetag-outline" icon-on="ion-ios-pricetag" ui-sref="tab.tags">
       <ion-nav-view name="tab-tags"></ion-nav-view>
     </ion-tab>
 
-
-    <ion-tab title="Profile" icon-off="ion-ios-gear-outline" icon-on="ion-ios-gear" href="#/tab/profile">
+    <ion-tab title="Profile" icon-off="ion-ios-gear-outline" icon-on="ion-ios-gear" ui-sref="tab.profile">
       <ion-nav-view name="tab-profile"></ion-nav-view>
     </ion-tab>
 
@@ -65,5 +62,7 @@ navigation history that also transitions its views in and out.
     <div ui-view="tab-new"></div>
     <div ui-view="tab-tags"></div>
     <div ui-view="tab-profile"></div>
+    <div ui-view="forgot-password"></div>
+
   </div>
 </div>
