@@ -57,114 +57,18 @@ angular.module('memryApp', [
     .accentPalette('deep-orange');
 
   $stateProvider
-
-  // setup an abstract state for the tabs directive
+    // setup an abstract state for the tabs directive
     .state('tab', {
-    url: "",
-    abstract: true,
-    // default.html is the file responsible for layout of
-    // ionic or desktop views
-    templateUrl: "templates/default.html"
-  })
+      url: "/tab",
+      abstract: true,
+      // default.html is the file responsible for layout of
+      // ionic or dektop views
+      templateUrl: "default.html"
+      // Later this state will implement a resolve for AuthService
+      // So it is left in the app.js
+    });
 
-  // Each tab has its own nav history stack:
-  .state('tab.new', {
-    url: '/new',
-    views: {
-      'tab-new': {
-        templateUrl: function(){
-          return 'templates/entries/'+ window.templateMode +'/new.html';
-        },
-        controller: 'EntriesCtrl'
-      }
-    }
-  })
-
-  .state('tab.entries', {
-      url: '/entries',
-      views: {
-        'tab-entries': {
-          templateUrl: function(){
-            return 'templates/entries/' + window.templateMode + '/index.html';
-          },
-          controller: 'EntriesCtrl'
-        }
-      }
-    })
-
-  .state('tab.profile', {
-    url: '/profile',
-    views: {
-      'tab-profile': {
-        templateUrl: function(){
-          return 'templates/user/' + window.templateMode + '/profile.html';
-        },
-        controller: 'UserCtrl'
-      }
-    }
-  })
-
-  .state('tab.tags', {
-    url: '/tags',
-    views: {
-      'tab-tags': {
-        templateUrl: function(){
-          return 'templates/user/' + window.templateMode + '/tags.html';
-        },
-        controller: 'TagsCtrl'
-      }
-    }
-  })
-
-  // Create a state for the 'users' directive
-    .state('user', {
-    url: "/user",
-    abstract: true,
-    templateUrl: function(){
-      return 'templates/user/' + window.templateMode + '/user.html'
-    }
-  })
-
-  .state('user.new', {
-    url: '/new',
-    templateUrl: function(){
-      return 'templates/user/' + window.templateMode + '/new.html';
-    },
-    controller: 'UserCtrl'
-  })
-
-  .state('user.forgot-password', {
-    url: '/forgot-password',
-    views: {
-      'forgot-password': {
-        templateUrl: 'templates/user/passwords/new.html',
-        controller: 'UserCtrl'
-      }
-    }
-  })
-
-  .state('edit', {
-    url: '/user/edit',
-    templateUrl: 'templates/user/edit.html',
-    controller: 'UserCtrl'
-  })
-
-  .state('update-password', {
-    url: '/user/update-password',
-    templateUrl: 'templates/user/passwords/edit.html',
-    controller: 'UserCtrl'
-  })
-
-
-  .state('user.login', {
-    url: '/login',
-    templateUrl: function() {
-      return 'templates/user/' + window.templateMode + '/login.html';
-    },
-    controller: 'UserCtrl'
-  });
-
-  $urlRouterProvider.otherwise('/entries');
+  $urlRouterProvider.otherwise('/tab/entries');
 })
 
 .config(function ($ionicConfigProvider) {
