@@ -22,5 +22,17 @@
           },
           controller: 'UserCtrl'
         })
+        // user profile
+        .state('tab.profile', {
+          url: '/profile',
+          views: {
+            'tab-profile': {
+              templateUrl: function(){
+                return 'js/modules/user/views/' + window.templateMode + '/profile.html';
+              },
+              controller: 'UserCtrl'
+            }
+          }
+        })
     };
 })();

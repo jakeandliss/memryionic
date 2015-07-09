@@ -62,18 +62,6 @@ angular.module('memryApp', [
     templateUrl: "templates/default.html"
   })
 
-  .state('tab.profile', {
-    url: '/profile',
-    views: {
-      'tab-profile': {
-        templateUrl: function(){
-          return 'templates/user/' + window.templateMode + '/profile.html';
-        },
-        controller: 'UserCtrl'
-      }
-    }
-  })
-
   .state('user.forgot-password', {
     url: '/forgot-password',
     views: {
