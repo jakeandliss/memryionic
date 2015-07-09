@@ -58,7 +58,9 @@ angular.module('memryApp', [
       abstract: true,
       // default.html is the file responsible for layout of
       // ionic or dektop views
-      templateUrl: "templates/default.html"
+      templateUrl: "default.html"
+      // Later this state will implement a resolve for AuthService
+      // So it is left in the app.js
     });
 
   $urlRouterProvider.otherwise('/tab/entries');

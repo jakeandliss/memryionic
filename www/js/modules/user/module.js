@@ -17,18 +17,26 @@
         // user new state
         .state('user.new', {
           url: '/new',
-          templateUrl: function(){
-            return 'js/modules/user/views/' + window.templateMode + '/new.html';
-          },
-          controller: 'UserCtrl'
+          views: {
+            'user-new': {
+              templateUrl: function(){
+                return 'js/modules/user/views/' + window.templateMode + '/new.html';
+              },
+              controller: 'UserCtrl'
+            }
+          }
         })
 
         .state('user.login', {
           url: '/login',
-          templateUrl: function() {
-            return 'js/modules/user/views/' + window.templateMode + '/login.html';
-          },
-          controller: 'UserCtrl'
+          views: {
+            'user-login': {
+              templateUrl: function() {
+                return 'js/modules/user/views/' + window.templateMode + '/login.html';
+              },
+              controller: 'UserCtrl'
+            }
+          }
         })
 
         .state('user.forgot-password', {
@@ -58,21 +66,23 @@
         // edit a user profile
         .state('userEdit', {
           url: '/user/edit',
+
           templateUrl: function(){
             return 'js/modules/user/views/' + window.templateMode + '/edit.html';
           },
           controller: 'UserCtrl'
         })
         // update password
-        .state('update-password', {
-          url: '/user/update-password',
-          templateUrl: function(){
-            return 'js/modules/user/views/' + window.templateMode + '/update_password.html';
-          },
-          controller: 'UserCtrl'
+        .state('user.update-password', {
+          url: '/update-password',
+          views: {
+            'update-password': {
+              templateUrl: function(){
+                return 'js/modules/user/views/' + window.templateMode + '/update_password.html';
+              },
+              controller: 'UserCtrl'
+            }
+          }
         })
-
-
-
     };
 })();

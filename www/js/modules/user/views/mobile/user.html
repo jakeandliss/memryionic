@@ -3,22 +3,31 @@
   <h1 class="logo">MemryBook</h1>
   <p>Make Memories Last</p>
 
+<!-- Below commented lead to wierd behaviour b/w states
+     ion-nav-views should only go in the ion-tab -->
 
-<ion-nav-view id="ion_nav_view"></ion-nav-view>
+<!-- <ion-nav-view id="ion_nav_view"></ion-nav-view> -->
+<!-- <ion-nav-view name="user-new"></ion-nav-view> -->
+<!-- <ion-nav-view name="user-login"></ion-nav-view> -->
+
 <ion-tabs class="tabs-dark">
   <!-- Login Tab -->
   <ion-tab title="Login" href="#/user/login">
-    <!-- <ion-nav-view name="login"></ion-nav-view> -->
+    <ion-nav-view name="user-login"></ion-nav-view>
   </ion-tab>
 
   <!-- New User Tab -->
   <ion-tab title="Signup" href="#/user/new">
-    <!-- <ion-nav-view name="new"></ion-nav-view> -->
+    <ion-nav-view name="user-new"></ion-nav-view>
   </ion-tab>
 
   <!-- New User Tab -->
   <ion-tab title="Forgot Password" href="#/user/forgot-password" hidden="true">
     <ion-nav-view name="forgot-password"></ion-nav-view>
+  </ion-tab>
+
+  <ion-tab title="Update Password" href="#/user/update-password" hidden="true">
+    <ion-nav-view name="update-password"></ion-nav-view>
   </ion-tab>
 
 </ion-tabs>
