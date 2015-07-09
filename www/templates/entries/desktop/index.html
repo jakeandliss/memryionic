@@ -3,7 +3,16 @@
               md-component-id="left"
               md-is-locked-open="$mdMedia('gt-sm')">
 
+
+
     <md-list ng-controller="TagsCtrl as tags">
+      <md-list-item class="md-2-line">
+        <img src="https://avatars3.githubusercontent.com/u/11214?v=3&s=460" class="md-avatar" alt="" />
+        <div class="md-list-item-text">
+          <h3>Jake Thompson</h3>
+          <u>Edit Profile</u>
+        </div>
+      </md-list-item>
       <md-list-item ng-repeat="tag in tags">
           <md-button ng-class="{'selected' : it === ul.selected }">
             {{tag.name}}
@@ -23,7 +32,7 @@
               <input type="text" ng-model="entry.title"/>
             </md-input-container>
             <md-input-container>
-              <label>Date</label>
+              <label>Entry Date</label>
               <input type="date" ng-model="entry.date"/>
             </md-input-container>
           </div>
@@ -54,9 +63,6 @@
         </form>
       </div>
   </md-content>
-
-
-
 
   <div layout="row" ng-repeat="entry in entries">
     <div flex="70">
@@ -118,8 +124,10 @@
         </div>
       </md-card>
     </div>
-    <div ng-repeat="tag in entry.tags" flex>
-      <md-button class="tag">{{tag.name}}</md-button>
+    <div  layout="column" layout-align="start center" class= flex>
+      <div ng-repeat="tag in entry.tags" class="expand">
+        <md-button class='md-accent md-raised md-hue-3 expand tag'>{{tag.name}}</md-button>
+      </div>
     </div>
   </div>
 

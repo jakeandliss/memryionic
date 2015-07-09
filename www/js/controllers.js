@@ -50,7 +50,7 @@ angular.module('memryApp.controllers', [])
       templateUrl: '/templates/entries/desktop/bottom-sheet.html',
       controller: 'GridBottomSheetCtrl',
       targetEvent: $event,
-      // parent: 
+      // parent:
     }).then(function(clickedItem) {
       $scope.alert = clickedItem.name + ' clicked!';
     });

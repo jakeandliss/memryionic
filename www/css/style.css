@@ -6,7 +6,7 @@
 
 html, body {
   height: initial !important;
-  background-color: #f6f6f6 !important;
+  background-color: #ddd !important;
 }
 
 
@@ -43,6 +43,10 @@ html, body {
 	box-shadow: 0 0 5px 0px #444;
 }
 
+.expand {
+  width: 100%;
+}
+
 md-bottom-sheet {
     position: fixed !important;
 }
@@ -73,6 +77,10 @@ Color Styling
 
 .stationary {
 	background-color: #EBE5CD;
+}
+
+.bg-brown {
+  background-color: #774F38;
 }
 
 .font-white {
