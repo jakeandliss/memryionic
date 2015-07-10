@@ -9,7 +9,7 @@
         .state('tab.new', {
           url: '/new',
           views: {
-            'tab-new': {
+            'new': {
               templateUrl: function(){
                 return 'js/modules/entry/views/'+ window.templateMode +'/new.html';
               },
@@ -21,7 +21,7 @@
         .state('tab.entries', {
             url: '/entries',
             views: {
-              'tab-entries': {
+              'entries': {
                 templateUrl: function(){
                   return 'js/modules/entry/views/' + window.templateMode + '/index.html';
                 },

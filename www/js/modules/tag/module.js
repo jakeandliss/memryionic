@@ -8,7 +8,7 @@
         .state('tab.tags', {
           url: '/tags',
           views: {
-            'tab-tags': {
+            'tags': {
               templateUrl: function() {
                 return 'js/modules/tag/views/' + window.templateMode + '/tags.html';
               },

@@ -55,7 +55,7 @@
         .state('tab.profile', {
           url: '/profile',
           views: {
-            'tab-profile': {
+            'profile': {
               templateUrl: function(){
                 return 'js/modules/user/views/' + window.templateMode + '/profile.html';
               },

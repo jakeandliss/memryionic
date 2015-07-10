@@ -24,7 +24,7 @@
     </a>
   </ion-header-bar>
 
-  <ion-content class="has-subheader" ng-controller="EntryListCtrl as entry">
+  <ion-content class="has-subheader" ng-controller="EntriesCtrl as entry">
     <div class="list card" ng-repeat="entry in entries | orderBy:'-date'">
       <div class="item item-text-wrap gray" ng-controller="PopoverCtrl">
         <button class="button button-icon icon ion-android-more-horizontal right" ng-click="openPopover($event)"></button>
