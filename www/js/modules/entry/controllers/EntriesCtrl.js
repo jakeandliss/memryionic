@@ -2,10 +2,10 @@
   'use strict';
 
   angular.module('memryApp')
-    .controller('EntryListCtrl', EntryListCtrl);
+    .controller('EntriesCtrl', EntriesCtrl);
 
-    EntryListCtrl.$inject = ['$scope', 'Entries', '$ionicModal'];
-    function EntryListCtrl($scope, Entries, $ionicModal){
+    EntriesCtrl.$inject = ['$scope', 'Entries', '$ionicModal'];
+    function EntriesCtrl($scope, Entries, $ionicModal){
       $scope.entry = {};
 
       // Add Entry

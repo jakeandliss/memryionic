@@ -54,7 +54,7 @@ angular.module('memryApp', [
   $stateProvider
     // setup an abstract state for the tabs directive
     .state('tab', {
-      url: "/tab",
+      url: "",
       abstract: true,
       // default.html is the file responsible for layout of
       // ionic or dektop views
@@ -63,7 +63,7 @@ angular.module('memryApp', [
       // So it is left in the app.js
     });
 
-  $urlRouterProvider.otherwise('/tab/entries');
+  $urlRouterProvider.otherwise('/entries');
 })
 
 .config(function ($ionicConfigProvider) {
