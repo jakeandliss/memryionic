@@ -13,7 +13,7 @@
               templateUrl: function(){
                 return 'js/modules/entry/views/'+ window.templateMode +'/new.html';
               },
-              controller: 'EntryListCtrl'
+              controller: 'EntriesCtrl'
             }
           }
         })
@@ -25,7 +25,7 @@
                 templateUrl: function(){
                   return 'js/modules/entry/views/' + window.templateMode + '/index.html';
                 },
-                controller: 'EntryListCtrl'
+                controller: 'EntriesCtrl'
               }
             }
           })
