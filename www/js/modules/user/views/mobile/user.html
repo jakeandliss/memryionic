@@ -12,21 +12,21 @@
 
 <ion-tabs class="tabs-dark">
   <!-- Login Tab -->
-  <ion-tab title="Login" href="#/user/login">
+  <ion-tab title="Login" ui-sref="user.login">
     <ion-nav-view name="user-login"></ion-nav-view>
   </ion-tab>
 
   <!-- New User Tab -->
-  <ion-tab title="Signup" href="#/user/new">
+  <ion-tab title="Signup" ui-sref="user.new">
     <ion-nav-view name="user-new"></ion-nav-view>
   </ion-tab>
 
   <!-- New User Tab -->
-  <ion-tab title="Forgot Password" href="#/user/forgot-password" hidden="true">
+  <ion-tab title="Forgot Password" ui-sref="user.forgot-password" hidden="true">
     <ion-nav-view name="forgot-password"></ion-nav-view>
   </ion-tab>
 
-  <ion-tab title="Update Password" href="#/user/update-password" hidden="true">
+  <ion-tab title="Update Password" ui-sref="user.update-password" hidden="true">
     <ion-nav-view name="update-password"></ion-nav-view>
   </ion-tab>
 
