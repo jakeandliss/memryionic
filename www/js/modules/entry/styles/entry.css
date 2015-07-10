@@ -1,3 +1,4 @@
+/* All the stylesheets for entry module */
 #entries .item.item-body {
   padding-top: 0;
 }
@@ -36,3 +37,12 @@
   }
 .md-grid-text {
   padding-bottom: 5px; }
+
+
+.mobile .form .row, .form .row .col {
+  padding: 0;
+}
+
+.mobile .form input[type="textarea"] {
+  border: none;
+}
