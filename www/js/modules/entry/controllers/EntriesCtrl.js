@@ -6,7 +6,19 @@
 
     EntriesCtrl.$inject = ['$scope', 'Entries', '$ionicModal'];
     function EntriesCtrl($scope, Entries, $ionicModal){
+      // viewModel acts as binding b/w views and ctrl
+      // $scope should be left for events onlty slowly
+      // shift all functions and vars to use vm
+      var vm = this;
+
       $scope.entry = {};
+
+      /* when user hits the cross icon in search bar
+       * query should get cleared
+       */
+      vm.clearQuery = function(){
+        vm.query = null;
+      }
 
       // Add Entry
       $scope.entry.add = function(entry) {
