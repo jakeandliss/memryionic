@@ -39,10 +39,10 @@
           return tags;
         },
         remove: function(tag) {
-          tags.splice(entries.indexOf(tag), 1);
+          tags.splice(tags.indexOf(tag), 1);
         },
         get: function(TagId) {
-          for (var i = 0; i < entries.length; i++) {
+          for (var i = 0; i < tags.length; i++) {
             if (tags[i].id === parseInt(tagId)) {
               return tags[i];
             }
