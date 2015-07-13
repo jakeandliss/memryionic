@@ -1,17 +1,16 @@
 <ion-view view-title="Labels">
   <ion-content>
-    <div class="list" style="margin-bottom:-1px;">
-      <div class="item item-icon-left item-dark">
+      <div class="item item-icon-left item-dark" >
         <i class="icon ion-ios-pricetag"></i>
-        Selected Tag
-        <span class="item-note">Edit</span>
+        {{tag.name}}
+        <span class="item-note" ng-click="">Edit</span>
       </div>
 
     <ion-list class="list" show-delete="shouldShowDelete" can-swipe="listCanSwipe">
       <ul>
         <li ng-repeat="tag in tags" ng-if="tag.parent_id == ''">
           <ion-item>
-               <a href="#" class="item-icon-left item-icon-right item-stable">
+               <a ui-sref="tab.tags({ id: tag.id })" class="item-icon-left item-icon-right item-stable">
                  <i class="icon ion-ios-pricetag"></i>
                  {{ tag.name }}
                  <span class="badge badge-assertive">2</span>
@@ -50,7 +49,7 @@
 
 <script type="text/ng-template" id="nested_tag1">
     <ion-item>
-      <a href="#" class="item-icon-left item-icon-right item-stable">
+      <a ui-sref="tab.tags({ id: nested_tag1.id })" class="item-icon-left item-icon-right item-stable">
         <i class="icon ion-ios-pricetag"></i>
         {{ nested_tag1.name }}
         <span class="badge badge-assertive">2</span>
@@ -65,7 +64,7 @@
 
  <script type="text/ng-template" id="nested_tag2">
     <ion-item>
-      <a href="#" class="item-icon-left item-icon-right item-stable">
+      <a ui-sref="tab.tags({ id: nested_tag2.id })" class="item-icon-left item-icon-right item-stable">
         <i class="icon ion-ios-pricetag"></i>
           {{ nested_tag2.name }}
         <span class="badge badge-assertive">2</span>

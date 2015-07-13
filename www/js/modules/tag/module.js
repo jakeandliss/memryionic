@@ -6,7 +6,7 @@
     function Config($stateProvider){
       $stateProvider
         .state('tab.tags', {
-          url: '/tags',
+          url: '/tags/:id',
           views: {
             'tags': {
               templateUrl: function() {
