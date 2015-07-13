@@ -52,14 +52,14 @@
 
 
      <ion-item>
-          <a href="#" class="item-icon-left item-icon-right item-stable">
-            <i class="icon ion-ios-pricetag"></i>
-            {{ tag.name }}
-            <span class="badge badge-assertive">2</span>
-          </a>
-          <ion-option-button class="button-dark" ng-click="edit(tag)">Edit</ion-option-button>
-          <ion-option-button class="button-assertive icon ion-trash-a" ng-click="remove(tag)"></ion-option-button>
-        </ion-item>
+        <a href="#" class="item-icon-left item-icon-right item-stable">
+          <i class="icon ion-ios-pricetag"></i>
+          {{ tag.name }}
+          <span class="badge badge-assertive">2</span>
+        </a>
+        <ion-option-button class="button-dark" ng-click="edit(tag)">Edit</ion-option-button>
+        <ion-option-button class="button-assertive icon ion-trash-a" ng-click="remove(tag)"></ion-option-button>
+      </ion-item>
 
      <ul >
        <li ng-repeat="tag in tags" ng-include="'tag'" ng-if="tag.id == tag.parent_id"></li>

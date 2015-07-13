@@ -1,5 +1,9 @@
 /* Empty. Add your own CSS if you like */
 
+
+ul {
+	margin-left: 25px;
+}
 .logo {
 	font-family: 'Lobster Two', cursive;
 }

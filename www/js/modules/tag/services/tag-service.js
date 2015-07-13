@@ -8,11 +8,6 @@
     function Tags(){
       var tags = [
         {
-          name: "test -1",
-          id: -1,
-          parent_id: "0"
-        },
-        {
           name: "test 0",
           id: 0,
           parent_id: ""
@@ -36,6 +31,11 @@
           name: "test 4",
           id: 4,
           parent_id: "1"
+        },
+        {
+          name: "test 5",
+          id: 5,
+          parent_id: ""
         }
       ];
 
