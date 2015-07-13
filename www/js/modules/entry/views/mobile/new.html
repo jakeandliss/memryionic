@@ -1,7 +1,7 @@
 <ion-view view-title="New Entry" hide-nav-bar="true" class="modal">
   <ion-content>
 
-    <form name="entryForm" ng-submit="entry.add()">
+    <form name="entryForm" >
       <ion-header-bar class="bar bar-header bar-dark item-input-inset">
         <button class="button button-clear padding-left" ng-click="modal.hide()">
           Cancel
@@ -9,7 +9,7 @@
         <h1 class="title">
           New Entry
         </h1>
-        <input type="submit" value="Save Entry" class="button button-outline button-assertive bold">
+        <input type="submit" ng-click="entry.add()" value="Save Entry" class="button button-outline button-assertive bold">
         </input>
       </ion-header-bar>
 

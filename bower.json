@@ -6,6 +6,7 @@
     "angular-material": "latest"
   },
   "dependencies": {
-    "ng-device-detector": "~1.1.7"
+    "ng-device-detector": "~1.1.7",
+    "angular-resource": "~1.4.2"
   }
 }

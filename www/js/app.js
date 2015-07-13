@@ -7,6 +7,7 @@
 // 'memryApp.controllers' is found in controllers.js
 angular.module('memryApp', [
   'ionic',
+  'ngResource',
   'memryApp.controllers',
   'memryApp.services',
   'ngMaterial',

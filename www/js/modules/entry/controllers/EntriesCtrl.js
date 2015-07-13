@@ -4,8 +4,8 @@
   angular.module('memryApp')
     .controller('EntriesCtrl', EntriesCtrl);
 
-    EntriesCtrl.$inject = ['$scope', 'Entries', '$ionicModal'];
-    function EntriesCtrl($scope, Entries, $ionicModal){
+    EntriesCtrl.$inject = ['$scope', 'EntriesUtil', '$ionicModal'];
+    function EntriesCtrl($scope, EntriesUtil, $ionicModal){
       // viewModel acts as binding b/w views and ctrl
       // $scope should be left for events onlty slowly
       // shift all functions and vars to use vm
@@ -20,26 +20,34 @@
         vm.query = null;
       }
 
+      vm.searchEntry = function(){
+        // use vm.query to search
+        // Firstly search for local entries
+        // Call search entry api to get the matching entries.
+      }
+
       // Add Entry
       $scope.entry.add = function(entry) {
-        $scope.entries.push($scope.entry);
+        console.log('entries are ', $scope.entries);
+        vm.entries.push($scope.entry);
         $scope.entry = '';
       };
 
       // Edit Entry
-      $scope.entries = Entries.all();
+      vm.entries = EntriesUtil.all();
+      
       $scope.edit = function(entry) {
-        Entries.remove(entry);
+        EntriesUtil.remove(entry);
       };
 
       // Update Entry
       $scope.update = function(entry) {
-        Entries.update(entry);
+        EntriesUtil.update(entry);
       };
 
       // Remove Entry
       $scope.remove = function(entry) {
-        Entries.remove(entry);
+        EntriesUtil.remove(entry);
       };
 
       $scope.entry.date = new Date();

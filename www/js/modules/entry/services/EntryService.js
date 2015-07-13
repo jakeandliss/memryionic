@@ -6,7 +6,7 @@ angular.module('memryApp.services', [])
 
 // Clean the below factories later
 
-.factory('Entries', function() {
+.factory('EntriesUtil', function() {
   // Might use a resource here that returns a JSON array
 
   // Some fake testing data
