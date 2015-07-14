@@ -10,9 +10,14 @@ angular.module('memryApp', [
   'memryApp.controllers',
   'memryApp.services',
   'ngMaterial',
-  'reTree',                 // dependency of deviceDetector
-  'ng.deviceDetector']
-)
+  'reTree', // dependency of deviceDetector
+  'ng.deviceDetector',
+  "ngSanitize",
+  "com.2fdevs.videogular",
+  "com.2fdevs.videogular.plugins.controls",
+  "com.2fdevs.videogular.plugins.overlayplay",
+  "com.2fdevs.videogular.plugins.poster"
+])
 
 .run(function($ionicPlatform, $rootScope, deviceDetector) {
   $ionicPlatform.ready(function() {
@@ -27,22 +32,22 @@ angular.module('memryApp', [
     }
   });
 
-  if(deviceDetector){
+  if (deviceDetector) {
     var isDesktopOrTablet;
-      /*
-       * detects memry platform is desktop or tablet for loading related templates
-       * rootScope.isDesktopOrTablet object is used for loading desktop view in index.html
-       * window object is used for loaing desktop view templates in modules wise
-       */
-      isDesktopOrTablet = (deviceDetector.isDesktop() || deviceDetector.isTablet());
-      console.log('Browser or tablet', isDesktopOrTablet);
-      if (isDesktopOrTablet) {
-        window.templateMode = "desktop";
-      } else {
-        window.templateMode = "mobile";
-      }
-      window.isDesktopOrTablet = isDesktopOrTablet;
-      $rootScope.isDesktopOrTablet = isDesktopOrTablet;
+    /*
+     * detects memry platform is desktop or tablet for loading related templates
+     * rootScope.isDesktopOrTablet object is used for loading desktop view in index.html
+     * window object is used for loaing desktop view templates in modules wise
+     */
+    isDesktopOrTablet = (deviceDetector.isDesktop() || deviceDetector.isTablet());
+    console.log('Browser or tablet', isDesktopOrTablet);
+    if (isDesktopOrTablet) {
+      window.templateMode = "desktop";
+    } else {
+      window.templateMode = "mobile";
+    }
+    window.isDesktopOrTablet = isDesktopOrTablet;
+    $rootScope.isDesktopOrTablet = isDesktopOrTablet;
   }
 })
 
@@ -57,20 +62,20 @@ angular.module('memryApp', [
     .accentPalette('deep-orange');
 
   $stateProvider
-    // setup an abstract state for the tabs directive
+  // setup an abstract state for the tabs directive
     .state('tab', {
-      url: "",
-      abstract: true,
-      // default.html is the file responsible for layout of
-      // ionic or dektop views
-      templateUrl: "default.html"
+    url: "",
+    abstract: true,
+    // default.html is the file responsible for layout of
+    // ionic or dektop views
+    templateUrl: "default.html"
       // Later this state will implement a resolve for AuthService
       // So it is left in the app.js
-    });
+  });
 
   $urlRouterProvider.otherwise('/entries');
 })
 
-.config(function ($ionicConfigProvider) {
+.config(function($ionicConfigProvider) {
   $ionicConfigProvider.tabs.position("bottom");
 });
