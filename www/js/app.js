@@ -16,8 +16,9 @@ angular.module('memryApp', [
   "com.2fdevs.videogular",
   "com.2fdevs.videogular.plugins.controls",
   "com.2fdevs.videogular.plugins.overlayplay",
-  "com.2fdevs.videogular.plugins.poster"
-])
+  "com.2fdevs.videogular.plugins.poster",
+  'ui.bootstrap']
+)
 
 .run(function($ionicPlatform, $rootScope, deviceDetector) {
   $ionicPlatform.ready(function() {
