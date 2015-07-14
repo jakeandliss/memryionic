@@ -21,7 +21,7 @@
              </ion-item>
 
           <ul>
-            <li ng-repeat="tag in tags" ng-include="'tag'" ng-if="tag.id == tag.parent_id"></li>
+            <li ng-repeat="nested_tag1 in tags" ng-include="'nested_tag1'" ng-if="tag.id == nested_tag1.parent_id"></li>
           </ul>
         </li>
       </ul>
@@ -48,21 +48,32 @@
   </ion-content>
 </ion-view>
 
-<script type="text/ng-template" id="tag">
-
-
-     <ion-item>
-        <a href="#" class="item-icon-left item-icon-right item-stable">
-          <i class="icon ion-ios-pricetag"></i>
-          {{ tag.name }}
-          <span class="badge badge-assertive">2</span>
-        </a>
+<script type="text/ng-template" id="nested_tag1">
+    <ion-item>
+      <a href="#" class="item-icon-left item-icon-right item-stable">
+        <i class="icon ion-ios-pricetag"></i>
+        {{ nested_tag1.name }}
+        <span class="badge badge-assertive">2</span>
+      </a>
         <ion-option-button class="button-dark" ng-click="edit(tag)">Edit</ion-option-button>
         <ion-option-button class="button-assertive icon ion-trash-a" ng-click="remove(tag)"></ion-option-button>
-      </ion-item>
+    </ion-item>
+  <ul>
+   <li ng-repeat="nested_tag2 in tags" ng-include="'nested_tag2'" ng-if="nested_tag1.id == nested_tag2.parent_id"></li>
+  </ul>
+</script>
 
-     <ul >
-       <li ng-repeat="tag in tags" ng-include="'tag'" ng-if="tag.id == tag.parent_id"></li>
-     </ul>
-
- </script>
+ <script type="text/ng-template" id="nested_tag2">
+    <ion-item>
+      <a href="#" class="item-icon-left item-icon-right item-stable">
+        <i class="icon ion-ios-pricetag"></i>
+          {{ nested_tag2.name }}
+        <span class="badge badge-assertive">2</span>
+      </a>
+       <ion-option-button class="button-dark" ng-click="edit(tag)">Edit</ion-option-button>
+       <ion-option-button class="button-assertive icon ion-trash-a" ng-click="remove(tag)"></ion-option-button>
+    </ion-item>
+  <ul>
+    <li ng-repeat="nested_tag1 in tags" ng-include="'nested_tag1'" ng-if="nested_tag2.id == nested_tag1.parent_id"></li>
+  </ul>
+</script>
