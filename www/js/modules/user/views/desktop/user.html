@@ -1,12 +1,34 @@
-<p> Welcome page</p>
-<!-- Default Layout for Login/Logout functionality goes here-->
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand logo" href="#">MemryBook</a>
+    </div>
 
-<md-button class="md-raised" ui-sref="user.new">Sign up</md-button>
 
-<md-button class="md-raised" ui-sref="user.login">Login</md-button>
+    <ul class="nav navbar-nav navbar-right">
+      <form class="navbar-form navbar-left">
+        <div class="form-group">
+          <input type="email" class="form-control" placeholder="Email" ng-model="user.email">
+        </div>
+        <div class="form-group">
+          <input type="password" class="form-control" placeholder="Password" ng-model="user.password">
+        </div>
+        <button type="submit" class="btn btn-default">Log In</button>
+      </form>
+      <li><md-button  class="button">Forgot Password?</md-button></li>
+    </ul>
+  </div><!-- /.container-fluid -->
+</nav>
+
 <!-- login/signup pages get rendered below -->
 <div ui-view></div>
-
 <div ui-view="forgot-password"></div>
 <div ui-view="update-password"></div>
 <div ui-view="user-new"></div>
@@ -15,3 +37,8 @@
 <!-- Note: Forgot password should be taken out of this file as
      user is not logged in at this moment it's just a boilerplate code
 -->
+<div class="user footer row">
+  <div class="col-md-2 col-md-offset-5">
+    &copy; MemryBook
+  </div>
+</div>

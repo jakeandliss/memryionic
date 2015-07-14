@@ -1,4 +1,10 @@
 
+/******************
+
+Mobile
+
+*******************/
+
 #welcome h1, #welcome p {
 	color: #774F38;
 }
@@ -43,4 +49,22 @@
 
 #registration .row .last {
     border-left: none;
+}
+
+
+/******************
+
+Desktop
+
+*******************/
+
+.user.footer {
+	margin-top: 1rem;
+	padding: 2rem;
+	background-color: white;
+}
+
+#welcome-register span.thin {
+  font-weight: lighter;
+	font-size: 18px;
 }
