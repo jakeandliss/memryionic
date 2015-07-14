@@ -9,5 +9,9 @@
       $scope.remove = function(tag) {
         Tags.remove(tag);
       };
+
+      $scope.shouldShowDelete = false;
+      $scope.listCanSwipe = true
+      
     };
 })();

@@ -24,6 +24,7 @@
   </ion-header-bar>
 
   <ion-content class="has-subheader" ng-controller="EntriesCtrl as entry">
+
     <div class="list card" ng-repeat="entry in entries | orderBy:'-date'">
       <div class="item item-text-wrap gray" ng-controller="PopoverCtrl">
         <button class="button button-icon icon ion-android-more-horizontal right" ng-click="openPopover($event)"></button>
@@ -47,15 +48,22 @@
           </a>
         </div>
 
+
         <!-- Video/Images content -->
         <div class="item item-body panel" ng-show="panel.isSelected(1)">
           <p>
             {{entry.content}}
           </p>
+
           <ion-slide-box does-continue="true" >
-            <ion-slide ng-repeat="resource in entry.resources">
+            <ion-slide ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'image' || resource.attachment_content_type == 'video'">
+
               <img class="full-image" ng-src="{{resource.attachment}}" ng-if="resource.attachment_content_type == 'image'" />
-              <!-- <video class="" ng-src="{{resource.attachment}}" ng-if="resource.attachment_content_type == 'video'" /> -->
+
+              <videogular vg-theme="config.theme.url" ng-if="resource.attachment_content_type == 'video'">
+                <vg-media vg-src="config.sources" vg-native-controls="true"></vg-media>
+              </videogular>
+
             </ion-slide>
           </ion-slide-box>
           <p>

@@ -1,5 +1,11 @@
 /* Empty. Add your own CSS if you like */
 
+
+
+ul {
+	margin-left: 25px;
+}
+
 * {
     font-family: 'Ubuntu', sans-serif;
 }
@@ -8,7 +14,6 @@ html, body {
   height: initial !important;
   background-color: #ddd !important;
 }
-
 
 .logo {
 	font-family: 'Lobster Two', cursive;
