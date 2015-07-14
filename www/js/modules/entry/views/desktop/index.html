@@ -57,7 +57,7 @@
               </md-button>
             </div>
             <div flex>
-              <md-button class="md-raised md-primary right">Save Entry</md-button>
+              <md-button class="md-raised md-primary pull-right">Save Entry</md-button>
             </div>
           </div>
         </form>
@@ -68,7 +68,7 @@
     <div flex="70">
       <md-card class="entry">
         <md-card-content class="header">
-          <md-button class="right" aria-label="Edit or Delete" class="md-primary md-raised" ng-click="showBottomSheet()">
+          <md-button class="pull-right" aria-label="Edit or Delete" class="md-primary md-raised" ng-click="showBottomSheet()">
             <md-icon class="material-icons">more_horiz</md-icon>
             <md-tooltip>
               Edit or Delete
@@ -87,7 +87,7 @@
           <md-tab label="Visual">
             <md-content class="md-padding">
               <carousel>
-                <slide ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'image'">
+                <slide ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'image'" style="width:40%;margin:0 auto;">
                   <img ng-src="{{resource.attachment}}" class="md-card-image">
                 </slide>
               </carousel>
