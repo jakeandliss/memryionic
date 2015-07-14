@@ -6,12 +6,17 @@
 
 html, body {
   height: initial !important;
-  background-color: #ddd !important;
+  background-color: #eee;
 }
 
 
 .logo {
 	font-family: 'Lobster Two', cursive;
+  font-size: 33px;
+}
+
+.font-white {
+	color: white;
 }
 
 .center {
@@ -80,32 +85,45 @@ Color Styling
 
 ********/
 
-.gray {
+
+.bg-white {
+	background-color: #fff;
+}
+
+.bg-gray {
 	background-color: #f5f5f5;
 }
 
-.greendew {
-	background-color: #A9D5C6;
+.bg-calm {
+  background-color: #C5E0DC;
 }
 
-.salmon {
-	background-color: #FD9781 !important;
+.bg-calm, .bg-calm p, .bg-calm i, .bg-calm, .bg-calm h1, .bg-calm span  {
+  color: #fff;
 }
 
-.salmon-dark {
-	background-color: #E47E68;
+.bg-assertive {
+  background-color: #E08E79;
 }
 
-.stationary {
-	background-color: #EBE5CD;
+.bg-assertive, .bg-assertive p, .bg-assertive i, .bg-assertive, .bg-assertive h1  {
+  color: #fff;
+}
+
+.bg-cream {
+  background-color: #F1D4AF;
+}
+
+.bg-powderpuff {
+  background-color: #ECE5CE;
 }
 
 .bg-brown {
   background-color: #774F38;
 }
 
-.font-white {
-	color: white;
+.bg-brown, .bg-brown p, .bg-brown i, .bg-brown, .bg-brown h1  {
+  color: #fff;
 }
 
 .dark {

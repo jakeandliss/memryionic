@@ -61,10 +61,23 @@ Desktop
 .user.footer {
 	margin-top: 1rem;
 	padding: 2rem;
-	background-color: white;
+	background-color: #fff;
 }
 
 #welcome-register span.thin {
   font-weight: lighter;
 	font-size: 18px;
 }
+
+#user .navbar-default {
+  border-bottom: 1px solid white;
+}
+
+#welcome-register .form {
+  box-shadow: 0 0 8px -4px;
+  border-radius: 5px;
+}
+/*
+#welcome-register h1, #welcome-register p, #welcome-register span, #welcome-register h3, #welcome-register label {
+	color: #774F38;
+}*/
