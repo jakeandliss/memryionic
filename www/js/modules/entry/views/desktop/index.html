@@ -1,1 +1,138 @@
-<p> Listing all entries </p>
+<div layout="row" id="entries" ng-controller="EntriesCtrl as entries">
+  <md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2"
+              md-component-id="left"
+              md-is-locked-open="$mdMedia('gt-sm')">
+
+
+
+    <md-list ng-controller="TagsCtrl as tags">
+      <md-list-item class="md-2-line">
+        <img src="https://avatars3.githubusercontent.com/u/11214?v=3&s=460" class="md-avatar" alt="" />
+        <div class="md-list-item-text">
+          <h3>Jake Thompson</h3>
+          <u>Edit Profile</u>
+        </div>
+      </md-list-item>
+      <md-list-item ng-repeat="tag in tags">
+          <md-button ng-class="{'selected' : it === ul.selected }">
+            {{tag.name}}
+          </md-button>
+      </md-list-item>
+    </md-list>
+  </md-sidenav>
+
+  <div flex layout="column" tabIndex="-1" role="main" layout-margin>
+
+    <md-content flex id="content" class="md-whiteframe-z1">
+      <div layout-margin>
+        <form name="entryForm" ng-submit="entry.add()">
+          <div layout="row" layout-sm="column">
+            <md-input-container flex>
+              <label>Entry Title</label>
+              <input type="text" ng-model="entry.title"/>
+            </md-input-container>
+            <md-input-container>
+              <label>Entry Date</label>
+              <input type="date" ng-model="entry.date"/>
+            </md-input-container>
+          </div>
+          <md-input-container flex>
+            <label>What would you like to remember?</label>
+            <textarea ng-model="entry.content"></textarea>
+          </md-input-container>
+          <!-- <md-chips
+              ng-model="tags.name"
+              placeholder="Enter a Label"
+              delete-button-label="Remove Tag"
+              delete-hint="Press delete to remove tag"
+              secondary-placeholder="+Label">
+          </md-chips> -->
+          <div layout="row" layout-sm="column">
+            <div flex>
+              <md-button class="md-fab md-primary" aria-label="Attach File">
+                <md-icon class="material-icons">attachment file</md-icon>
+                <md-tooltip>
+                  Attach Video, Image, Audio, or PDF
+                </md-tooltip>
+              </md-button>
+            </div>
+            <div flex>
+              <md-button class="md-raised md-primary right">Save Entry</md-button>
+            </div>
+          </div>
+        </form>
+      </div>
+  </md-content>
+
+  <div layout="row" ng-repeat="entry in entries">
+    <div flex="70">
+      <md-card class="entry">
+        <md-card-content class="header">
+          <md-button class="right" aria-label="Edit or Delete" class="md-primary md-raised" ng-click="showBottomSheet()">
+            <md-icon class="material-icons">more_horiz</md-icon>
+            <md-tooltip>
+              Edit or Delete
+            </md-tooltip>
+          </md-button>
+          <h2 class="md-title">{{entry.title}}</h2>
+          <p>{{entry.date | date: "longDate"}}</p>
+        </md-card-content>
+        <md-card-content class="content">
+          <p>
+            {{entry.content}}
+          </p>
+        </md-card-content>
+
+        <md-tabs md-dynamic-height md-border-bottom>
+          <md-tab label="Visual">
+            <md-content class="md-padding">
+              <carousel>
+                <slide ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'image'">
+                  <img ng-src="{{resource.attachment}}" class="md-card-image">
+                </slide>
+              </carousel>
+            </md-content>
+          </md-tab>
+          <md-tab label="Audio">
+            <md-content class="md-padding">
+              <md-list>
+                <md-list-item class="md-2-line" ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'audio'">
+                  <md-icon class="material-icons">music_note</md-icon>
+                  <div class="md-list-item-text">
+                    <h3> {{ resource.attachment }} </h3>
+                    <p> {{ resource.attachment_file_name }} </p>
+                  </div>
+                </md-list-item>
+              </md-list>
+            </md-content>
+          </md-tab>
+          <md-tab label="Files">
+            <md-content class="md-padding">
+              <md-list>
+                <md-list-item class="md-2-line" ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'pdf'">
+                  <md-icon class="material-icons">picture_as_pdf</md-icon>
+                  <div class="md-list-item-text">
+                    <h3> {{ resource.attachment }} </h3>
+                    <p> {{ resource.attachment_file_name }} </p>
+                  </div>
+                </md-list-item>
+              </md-list>
+            </md-content>
+          </md-tab>
+        </md-tabs>
+
+
+        <div class="md-actions footer" layout="row" layout-align="end center">
+          <md-button>Action 1</md-button>
+          <md-button>Action 2</md-button>
+        </div>
+      </md-card>
+    </div>
+    <div  layout="column" layout-align="start center" class= flex>
+      <div ng-repeat="tag in entry.tags" class="expand">
+        <md-button class='md-accent md-raised md-hue-3 expand tag'>{{tag.name}}</md-button>
+      </div>
+    </div>
+  </div>
+
+</div>

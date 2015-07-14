@@ -4,8 +4,8 @@
   angular.module('memryApp')
     .controller('EntriesCtrl', EntriesCtrl);
 
-    EntriesCtrl.$inject = ['$scope', 'Entries', '$ionicModal'];
-    function EntriesCtrl($scope, Entries, $ionicModal){
+    EntriesCtrl.$inject = ['$scope', 'Entries', '$ionicModal', '$mdBottomSheet'];
+    function EntriesCtrl($scope, Entries, $ionicModal, $mdBottomSheet ){
       $scope.entry = {};
 
       // Add Entry
@@ -41,5 +41,24 @@
         // The animation we want to use for the modal entrance
         animation: 'slide-in-up'
       });
-    }
+
+
+      $scope.items = [
+      { name: 'Edit', icon: 'edit' },
+      { name: 'Share', icon: 'share' },
+      { name: 'Delete', icon: 'delete' },
+    ];
+
+      $scope.showBottomSheet = function() {
+      $scope.alert = '';
+      $mdBottomSheet.show({
+        templateUrl: '/js/modules/entry/views/desktop/bottom-sheet.html',
+
+        // parent:
+      }).then(function(clickedItem) {
+        $scope.alert = clickedItem.name + ' clicked!';
+      })
+      };
+
+  }
 })();

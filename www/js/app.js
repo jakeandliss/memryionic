@@ -11,7 +11,8 @@ angular.module('memryApp', [
   'memryApp.services',
   'ngMaterial',
   'reTree',                 // dependency of deviceDetector
-  'ng.deviceDetector']
+  'ng.deviceDetector',
+  'ui.bootstrap']
 )
 
 .run(function($ionicPlatform, $rootScope, deviceDetector) {
@@ -46,11 +47,16 @@ angular.module('memryApp', [
   }
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, $mdThemingProvider) {
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
+
+  $mdThemingProvider.theme('default')
+    .primaryPalette('light-blue')
+    .accentPalette('deep-orange');
+
   $stateProvider
     // setup an abstract state for the tabs directive
     .state('tab', {

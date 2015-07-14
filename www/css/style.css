@@ -1,5 +1,15 @@
 /* Empty. Add your own CSS if you like */
 
+* {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+html, body {
+  height: initial !important;
+  background-color: #ddd !important;
+}
+
+
 .logo {
 	font-family: 'Lobster Two', cursive;
 }
@@ -33,6 +43,14 @@
 	box-shadow: 0 0 5px 0px #444;
 }
 
+.expand {
+  width: 100%;
+}
+
+md-bottom-sheet {
+    position: fixed !important;
+}
+
 
 
 /********
@@ -61,6 +79,10 @@ Color Styling
 	background-color: #EBE5CD;
 }
 
+.bg-brown {
+  background-color: #774F38;
+}
+
 .font-white {
 	color: white;
 }
@@ -71,56 +93,4 @@ Color Styling
 
 .dark button, .dark p, .dark i, .dark a, .dark h1 {
   color: #fff !important;
-}
-
-/***************
-
-Welcome Screen
-
-***************/
-
-#welcome h1, #welcome p {
-	color: #774F38;
-}
-
-#welcome img {
-	width: 30%;
-	border-radius: 100%;
-	background-color: #ECE5CE ;
-	padding: 5%;
-}
-
-#welcome h1 {
-	margin-top: 0;
-	margin-bottom: 0;
-}
-
-#welcome .pane, #welcome .list {
-	background-color: #C5E0DC ;
-}
-
-#welcome .item {
-    border: none;
-    margin: 5%;
-		background-color: #eee;
-	  padding: 1% 5%;
-  	text-align: right;
-}
-
-#welcome .list {
-    margin: 0 15%;
-    border-radius: 5%;
-}
-
-#registration .row {
-    padding: 0;
-    margin-bottom: 1px;
-}
-
-#registration .row .first {
-    border-right: none;
-}
-
-#registration .row .last {
-    border-left: none;
 }

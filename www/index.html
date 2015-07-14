@@ -7,14 +7,23 @@
 
 
     <!-- compiled css output -->
-    <link href="css/ionic.app.css" rel="stylesheet">
+    <div ng-if="!isDesktopOrTablet">
+      <link href="css/ionic.app.css" rel="stylesheet">
+    </div>
     <link href="css/style.css" rel="stylesheet">
-    <link href="css/entries.css" rel="stylesheet">
-    <link href="css/new.css" rel="stylesheet">
+    <link href="js/modules/entry/styles/entry.css" rel="stylesheet">
+    <link href="js/modules/user/styles/user.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700,300italic,400italic,500italic,700italic|Ubuntu+Condensed|Lobster+Two:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
 
     <!-- Complid css output -->
-    <div ng-if="isDesktopOrTablet"><link href="lib/angular-material/angular-material.css" rel="stylesheet"></div>
+    <div ng-if="isDesktopOrTablet">
+      <link href="lib/angular-material/angular-material.css" rel="stylesheet">
+      <link href="lib/angular-bootstrap/ui-bootstrap-csp.css" rel="stylesheet">
+      <link href="lib/bootstrap/bootstrap.min.css" rel="stylesheet">
+    </div>
 
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
@@ -22,6 +31,8 @@
     <script src="lib/angular-aria/angular-aria.js"></script>
     <script src="lib/ng-device-detector/ng-device-detector.js"></script>
     <script src="lib/re-tree/re-tree.js"></script>
+    <script src="lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+
 
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
@@ -38,6 +49,7 @@
     <script src="js/modules/entry/controllers/ShareCtrl.js"></script>
     <script src="js/modules/entry/controllers/EditCtrl.js"></script>
     <script src="js/modules/entry/controllers/PopoverCtrl.js"></script>
+    <script src="js/modules/entry/controllers/PanelCtrl.js"></script>
 
     <script src="js/modules/tag/controllers/TagsCtrl.js"></script>
     <script src="js/modules/user/controllers/UserCtrl.js"></script>
@@ -49,7 +61,7 @@
     <script src="js/modules/user/services/user-service.js"></script>
 
   </head>
-  <body id="body" ng-app="memryApp">
+  <body ng-app="memryApp">
     <!-- Desktop views -->
     <div ng-if="isDesktopOrTablet">
       <div ui-view></div>
