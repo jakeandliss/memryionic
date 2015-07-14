@@ -23,7 +23,7 @@
         </div>
         <md-button type="submit" class="md-primary md-raised no-margin">Log In <md-icon class="material-icons">launch</md-icon></md-button>
       </form>
-      <li><md-button ui-sref="user.forgot-password" class="button font-white">Forgot Password?</md-button></li>
+      <li><md-button class="button font-white" ng-click="showDialog()">Forgot Password?</md-button></li>
     </ul>
   </div><!-- /.container-fluid -->
 </nav>
@@ -44,3 +44,24 @@
     &copy; MemryBook
   </div>
 </div>
+
+
+<!-- Popover for editing and deleting-->
+<script id="forgot-password-dialog.html" type="text/ng-template">
+  <md-dialog aria-label="Forgot Password">
+    <md-dialog-content>
+    <h2>Forgot Your Password? No Problem...</h2>
+      <form>
+        <div class="form-group">
+          <label>Enter your email and we will send you a new one.</label>
+          <input type="email" class="form-control" placeholder="Email" ng-model="user.email">
+        </div>
+        <div class="form-group">
+          <md-button type="submit" class="md-primary md-raised no-margin">Reset My Password</md-button>
+          <md-button class="md-warn no-margin pull-right" ng-click="closeDialog()">Cancel</md-button>
+        </div>
+
+      </form>
+    </md-dialog-content>
+  </md-dialog>
+</script>
