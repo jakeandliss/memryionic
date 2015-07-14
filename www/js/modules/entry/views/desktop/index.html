@@ -87,8 +87,11 @@
           <md-tab label="Visual">
             <md-content class="md-padding">
               <carousel>
-                <slide ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'image'" style="width:40%;margin:0 auto;">
-                  <img ng-src="{{resource.attachment}}" class="md-card-image">
+                <slide ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'image' || resource.attachment_content_type == 'video'" style="width:40%;margin:0 auto;">
+                  <img ng-src="{{resource.attachment}}" class="md-card-image" ng-if="resource.attachment_content_type == 'image'">
+                  <videogular vg-theme="config.theme.url" ng-if="resource.attachment_content_type == 'video'">
+                    <vg-media vg-src="config.sources" vg-native-controls="true"></vg-media>
+                  </videogular>
                 </slide>
               </carousel>
             </md-content>
