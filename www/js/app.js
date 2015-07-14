@@ -11,7 +11,8 @@ angular.module('memryApp', [
   'memryApp.services',
   'ngMaterial',
   'reTree',                 // dependency of deviceDetector
-  'ng.deviceDetector']
+  'ng.deviceDetector',
+  'ui.bootstrap']
 )
 
 .run(function($ionicPlatform, $rootScope, deviceDetector) {
