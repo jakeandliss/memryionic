@@ -8,6 +8,7 @@ body {
   display: table;
   height: 100%;
   background-color: #eee;
+  width: 100%;
 }
 
 .logo {
