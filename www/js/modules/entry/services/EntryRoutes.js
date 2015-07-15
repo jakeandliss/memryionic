@@ -6,19 +6,19 @@
     .factory('Entries', Entries);
 
     // Collection routes
-    Entries.$inject = ['$resource'];
-    function Entries($resource) {
-      return $resource('http://localhost:3000/api/v1/entries', {}, {
-        search: { 
+    Entries.$inject = ['$resource', 'Environment'];
+    function Entries($resource, Environment) {
+      return $resource(Environment.api_url + '/api/v1/entries', {}, {
+        search: {
           method: 'GET',
-          url: 'http://localhost:3000/api/v1/entries/search'
+          url: Environment.api_url + '/api/v1/entries/search'
         }
       });
     };
 
     // Member routes
-    Entry.$inject = ['$resource'];
-    function Entry($resource){
-      return $resource('http://localhost:3000/api/v1/entries', {}, {});
+    Entry.$inject = ['$resource', Environment];
+    function Entry($resource, Environment){
+      return $resource(Environment.api_url + '/api/v1/entries', {}, {});
     };
 })();

@@ -8,6 +8,7 @@
 angular.module('memryApp', [
   'ionic',
   'ngResource',
+  'memryApp.config',
   'memryApp.controllers',
   'memryApp.services',
   'ngMaterial',
