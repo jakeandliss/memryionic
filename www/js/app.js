@@ -8,7 +8,7 @@
 angular.module('memryApp', [
   'ionic',
   'ngResource',
-  'memryApp.config',
+  'memryApp.config',        // Needs runnig the gulp config-development/config-production task
   'memryApp.controllers',
   'memryApp.services',
   'ngMaterial',
