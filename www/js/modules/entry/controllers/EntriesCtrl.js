@@ -25,14 +25,11 @@
 
     // Edit Entry
     $scope.entries = Entries.all();
-
     var config = {
-      sources: [{
-        src: $sce.trustAsResourceUrl("http://static.videogular.com/assets/videos/videogular.mp4"),
-        type: "video/mp4"
-      }, ],
+      sources: Entries.getVideos(),
       theme: {url: "http://www.videogular.com/styles/themes/default/latest/videogular.css" }
     };
+    console.log(config.sources);
     $scope.config = config;
 
     $scope.edit = function(entry) {
