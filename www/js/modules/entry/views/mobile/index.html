@@ -4,8 +4,12 @@
     <div class="bar bar-header item-input-inset">
       <label class="item-input-wrapper">
         <i class="icon ion-ios-search placeholder-icon"></i>
-        <input ng-model="entries.query" type="search" placeholder="Search">
-        <button 
+        <input 
+          ng-model="entries.query" 
+          ng-change="entries.searchEntry()"
+          type="search" 
+          placeholder="Search">
+        <button
           ng-if="entries.query" 
           ng-click="entries.clearQuery()" 
           class="button button-positive button-clear ion-ios-close-outline icon">
@@ -27,7 +31,7 @@
   </ion-header-bar>
 
   <ion-content class="has-subheader">
-    <div class="list card" ng-repeat="entry in entries.entries | orderBy:'-date'">
+    <div class="list card" ng-repeat="entry in entries.entries | orderBy:'-date' | filter: entries.query">
       <div class="item item-text-wrap gray" ng-controller="PopoverCtrl">
         <button class="button button-icon icon ion-android-more-horizontal right" ng-click="openPopover($event)"></button>
         <h2>{{entry.title}}</h2>

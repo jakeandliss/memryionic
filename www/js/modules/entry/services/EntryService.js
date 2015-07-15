@@ -76,6 +76,13 @@ angular.module('memryApp.services', [])
     content: 'This is wicked good ice cream.',
     image: 'https://pbs.twimg.com/profile_images/578237281384841216/R3ae1n61.png',
     date: "1992-11-05"
+  },
+  {
+    id: 5,
+    title: 'Mike Harrington',
+    content: 'This is a second test entry.',
+    image: 'https://pbs.twimg.com/profile_images/578237281384841216/R3ae1n61.png',
+    date: "1992-11-05"
   }];
 
   return {
