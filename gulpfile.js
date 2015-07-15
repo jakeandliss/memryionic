@@ -4,6 +4,7 @@ var bower = require('bower');
 var concat = require('gulp-concat');
 var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
+var gulpNgConfig = require('gulp-ng-config');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
 
@@ -25,6 +26,24 @@ gulp.task('sass', function(done) {
     .pipe(rename({ extname: '.min.css' }))
     .pipe(gulp.dest('./www/css/'))
     .on('end', done);
+});
+
+// Task to setup production environment
+gulp.task('config-production', function(){
+  gulp.src('config.json')
+    .pipe(gulpNgConfig('memryApp.config', {
+      environment: 'production'
+    }))
+    .pipe(gulp.dest('www/'));
+});
+
+// Task to setup development environment
+gulp.task('config-development', function(){
+  gulp.src('config.json')
+    .pipe(gulpNgConfig('memryApp.config', {
+      environment: 'development'
+    }))
+    .pipe(gulp.dest('www/'));
 });
 
 gulp.task('watch', function() {
