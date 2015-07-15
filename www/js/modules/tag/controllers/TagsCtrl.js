@@ -12,6 +12,6 @@
 
       $scope.shouldShowDelete = false;
       $scope.listCanSwipe = true
-      
+
     };
 })();
