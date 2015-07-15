@@ -1,4 +1,4 @@
-<div layout="row" id="entries" ng-controller="EntriesCtrl as entries">
+<div layout="row" id="entries">
   <md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2"
               md-component-id="left"
               md-is-locked-open="$mdMedia('gt-sm')">
@@ -50,7 +50,7 @@
           <div layout="row" layout-sm="column">
             <div flex>
               <md-button class="md-fab md-primary" aria-label="Attach File">
-                <md-icon class="material-icons">attachment file</md-icon>
+                <md-icon class="material-icons md-36">attach_file</md-icon>
                 <md-tooltip>
                   Attach Video, Image, Audio, or PDF
                 </md-tooltip>
@@ -133,7 +133,7 @@
     </div>
     <div  layout="column" layout-align="start center" class= flex>
       <div ng-repeat="tag in entry.tags" class="expand">
-        <md-button class='md-accent md-raised md-hue-3 expand tag'>{{tag.name}}</md-button>
+        <md-button class='md-primary md-raised expand tag'>{{tag.name}}</md-button>
       </div>
     </div>
   </div>
