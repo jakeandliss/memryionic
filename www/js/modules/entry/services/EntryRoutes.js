@@ -17,7 +17,7 @@
     };
 
     // Member routes
-    Entry.$inject = ['$resource', Environment];
+    Entry.$inject = ['$resource', 'Environment'];
     function Entry($resource, Environment){
       return $resource(Environment.api_url + '/api/v1/entries', {}, {});
     };
