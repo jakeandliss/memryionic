@@ -64,13 +64,17 @@ Desktop
 	background-color: #fff;
 }
 
+#user .navbar-default {
+  border-bottom: 0 px solid white;
+}
+
+#user .navbar-default input {
+	border: none;
+}
+
 #welcome-register span.thin {
   font-weight: lighter;
 	font-size: 18px;
-}
-
-#user .navbar-default {
-  border-bottom: 1px solid white;
 }
 
 #welcome-register .form {

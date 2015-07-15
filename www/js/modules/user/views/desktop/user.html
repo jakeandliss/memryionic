@@ -1,5 +1,5 @@
 <div id="user">
-  <nav class="navbar navbar-default bg-calm">
+  <nav class="navbar navbar-default bg-calm box-shadow">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -23,7 +23,7 @@
         </div>
         <md-button type="submit" class="md-primary md-raised no-margin">Log In <md-icon class="material-icons">launch</md-icon></md-button>
       </form>
-      <li><md-button class="button font-white" ng-click="showDialog()">Forgot Password?</md-button></li>
+      <li><md-button class="button font-white bold" ng-click="showDialog()">Forgot Password?</md-button></li>
     </ul>
   </div><!-- /.container-fluid -->
 </nav>
@@ -39,8 +39,8 @@
 <!-- Note: Forgot password should be taken out of this file as
      user is not logged in at this moment it's just a boilerplate code
 -->
-<div class="user footer row">
-  <div class="col-md-2 col-md-offset-5">
+<div class="user footer box-shadow">
+  <div class="center">
     &copy; MemryBook
   </div>
 </div>
@@ -60,7 +60,6 @@
           <md-button type="submit" class="md-primary md-raised no-margin">Reset My Password</md-button>
           <md-button class="md-warn no-margin pull-right" ng-click="closeDialog()">Cancel</md-button>
         </div>
-
       </form>
     </md-dialog-content>
   </md-dialog>

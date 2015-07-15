@@ -15,6 +15,7 @@
           templateUrl: 'forgot-password-dialog.html',
           parent: angular.element(document.body),
           targetEvent: ev,
+          controller: 'UserCtrl'
         })
       };
 

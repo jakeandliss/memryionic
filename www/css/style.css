@@ -4,11 +4,10 @@
     font-family: 'Ubuntu', sans-serif;
 }
 
-html, body {
-  height: initial !important;
+body {
+  height: initial;
   background-color: #eee;
 }
-
 
 .logo {
 	font-family: 'Lobster Two', cursive;
@@ -53,12 +52,13 @@ html, body {
 }
 
 .box-shadow {
-	box-shadow: 0 0 5px 0px #444;
+	box-shadow: 0 0 8px -4px #000;
 }
 
 .expand {
   width: 100%;
 }
+
 
 md-bottom-sheet {
     position: fixed !important;
