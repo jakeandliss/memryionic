@@ -1,0 +1,12 @@
+{
+    "development": {
+        "Environment": {
+            "api_url": "http://localhost:3000"
+        }
+    },
+    "production": {
+        "Environment": {
+            "api_url": "PRODUCTION_PATH"
+        }
+    }
+}
