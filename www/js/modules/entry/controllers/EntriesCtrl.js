@@ -29,7 +29,6 @@
       sources: Entries.getVideos(),
       theme: {url: "http://www.videogular.com/styles/themes/default/latest/videogular.css" }
     };
-    console.log(config.sources);
     $scope.config = config;
 
     $scope.edit = function(entry) {
