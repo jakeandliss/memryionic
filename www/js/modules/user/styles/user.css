@@ -62,6 +62,9 @@ Desktop
 	margin-top: 1rem;
 	padding: 2rem;
 	background-color: #fff;
+	position: absolute;
+	width: 100%;
+	bottom: 0;
 }
 
 #user .navbar-default {
