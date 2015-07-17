@@ -68,6 +68,10 @@ md-bottom-sheet {
     position: fixed !important;
 }
 
+md-sidenav {
+	background: none;
+}
+
 // Rules for sizing the icon.
 .material-icons.md-18 { display:inline; font-size: 18px; }
 .material-icons.md-24 { display:inline; font-size: 24px; }

@@ -32,15 +32,23 @@ navigation history that also transitions its views in and out.
 <!-- Desktop views -->
 <!-- Add here which we want in desktop layout when the user is logged in -->
 <div ng-if="isDesktopOrTablet">
-  <div>
-    <md-toolbar>
-      <div class="md-toolbar-tools dark">
-        <h2>
-          <span class="logo">MemryBook</span>
-        </h2>
-        <span flex></span>
+  <nav class="navbar-default dark font-white box-shadow">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <a class="navbar-brand logo" ui-sref="tab.entries">MemryBook</a>
       </div>
-    </md-toolbar>
+
+
+      <ul class="nav navbar-nav navbar-right">
+        <li><md-button class="button font-white bold" ui-sref="tab.entries">Entries</md-button></li>
+        <li><md-button class="button font-white bold" ui-sref="tab.tags">Labels</md-button></li>
+        <li><md-button class="button font-white bold" ui-sref="tab.profile">Profile</md-button></li>
+        <li><md-button class="button font-white bold" ui-sref="tab.tags">Logout</md-button></li>
+      </ul>
+    </div><!-- /.container-fluid -->
+  </nav>
+
     <!-- All partials gets rendered on ui-view  -->
     <div ui-view="entries"></div>
     <div ui-view="new"></div>
@@ -48,5 +56,4 @@ navigation history that also transitions its views in and out.
     <div ui-view="profile"></div>
     <div ui-view="forgot-password"></div>
 
-  </div>
 </div>

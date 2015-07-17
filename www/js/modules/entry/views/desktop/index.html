@@ -1,5 +1,5 @@
 <div layout="row" id="entries">
-  <md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2"
+  <md-sidenav class="site-sidenav md-sidenav-left"
               md-component-id="left"
               md-is-locked-open="$mdMedia('gt-sm')">
 
@@ -133,7 +133,7 @@
     </div>
     <div  layout="column" layout-align="start center" class= flex>
       <div ng-repeat="tag in entry.tags" class="expand">
-        <md-button class='md-primary md-raised expand tag'>{{tag.name}}</md-button>
+        <md-button class='md-accent md-raised expand tag'>{{tag.name}}</md-button>
       </div>
     </div>
   </div>
