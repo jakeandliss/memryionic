@@ -8,8 +8,7 @@ navigation history that also transitions its views in and out.
   <ion-tabs class="tabs-icon-top">
 
     <!-- New Entry Tab -->
-    <ion-tab title="New Entry" icon-off="ion-ios-compose-outline" icon-on="ion-ios-compose" ui-sref="tab.new">
-      <ion-nav-view name="new"></ion-nav-view>
+    <ion-tab title="New Entry" icon-off="ion-ios-compose-outline" icon-on="ion-ios-compose" ng-click="modal.show()" ng-controller="EntriesCtrl">
     </ion-tab>
 
     <!-- Entries Tab -->
@@ -35,7 +34,7 @@ navigation history that also transitions its views in and out.
 <div ng-if="isDesktopOrTablet">
   <div>
     <md-toolbar>
-      <div class="md-toolbar-tools bg-brown">
+      <div class="md-toolbar-tools dark">
         <h2>
           <span class="logo">MemryBook</span>
         </h2>

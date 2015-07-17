@@ -1,5 +1,11 @@
 /* Empty. Add your own CSS if you like */
 
+
+
+ul {
+	margin-left: 25px;
+}
+
 * {
     font-family: 'Ubuntu', sans-serif;
 }
@@ -22,10 +28,6 @@ body {
 
 .center {
 	text-align: center;
-}
-
-.right {
-	float: right;
 }
 
 .no-border {

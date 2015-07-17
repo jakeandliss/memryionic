@@ -1,4 +1,4 @@
-<div layout="row" id="entries" ng-controller="EntriesCtrl as entries">
+<div layout="row" id="entries">
   <md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2"
               md-component-id="left"
               md-is-locked-open="$mdMedia('gt-sm')">
@@ -50,14 +50,14 @@
           <div layout="row" layout-sm="column">
             <div flex>
               <md-button class="md-fab md-primary" aria-label="Attach File">
-                <md-icon class="material-icons">attachment file</md-icon>
+                <md-icon class="material-icons md-36">attach_file</md-icon>
                 <md-tooltip>
                   Attach Video, Image, Audio, or PDF
                 </md-tooltip>
               </md-button>
             </div>
             <div flex>
-              <md-button class="md-raised md-primary right">Save Entry</md-button>
+              <md-button class="md-raised md-primary pull-right">Save Entry</md-button>
             </div>
           </div>
         </form>
@@ -68,7 +68,7 @@
     <div flex="70">
       <md-card class="entry">
         <md-card-content class="header">
-          <md-button class="right" aria-label="Edit or Delete" class="md-primary md-raised" ng-click="showBottomSheet()">
+          <md-button class="pull-right" aria-label="Edit or Delete" class="md-primary md-raised" ng-click="showBottomSheet()">
             <md-icon class="material-icons">more_horiz</md-icon>
             <md-tooltip>
               Edit or Delete
@@ -87,8 +87,11 @@
           <md-tab label="Visual">
             <md-content class="md-padding">
               <carousel>
-                <slide ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'image'">
-                  <img ng-src="{{resource.attachment}}" class="md-card-image">
+                <slide ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'image' || resource.attachment_content_type == 'video'" style="width:40%;margin:0 auto;">
+                  <img ng-src="{{resource.attachment}}" class="md-card-image" ng-if="resource.attachment_content_type == 'image'">
+                  <videogular vg-theme="config.theme.url" ng-if="resource.attachment_content_type == 'video'">
+                    <vg-media vg-src="config.sources" vg-native-controls="true"></vg-media>
+                  </videogular>
                 </slide>
               </carousel>
             </md-content>
@@ -130,7 +133,7 @@
     </div>
     <div  layout="column" layout-align="start center" class= flex>
       <div ng-repeat="tag in entry.tags" class="expand">
-        <md-button class='md-accent md-raised md-hue-3 expand tag'>{{tag.name}}</md-button>
+        <md-button class='md-primary md-raised expand tag'>{{tag.name}}</md-button>
       </div>
     </div>
   </div>
