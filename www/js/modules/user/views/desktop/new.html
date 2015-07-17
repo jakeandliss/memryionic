@@ -1,3 +1,34 @@
-<p>Signup page</p>
+<div id="welcome-register">
+  <div layout="row">
+    <div flex="40" offset="5">
+      <h1 class="center"><u>Make Memories Last</u></h1>
 
-<p> Add form for sign up here</p>
+      <h3><md-icon class="material-icons md-24">message</md-icon> Digitize your memories. <span class="thin">Use images, video, audio, and files to enhance your experience.</span></h3>
+      <h3><md-icon class="material-icons md-24">group_add</md-icon> Share Entries <span class="thin">with users and non-users alike. No account necessary for non-users.</span></h3>
+      <h3><md-icon class="material-icons md-24">money_off</md-icon> Spend Nothing <span class="thin">ever. We believe memories make the world a better place and are committed to keeping MemryBook free forever.</span></h3>
+    </div>
+
+    <div class="bg-white form" flex="40" offset="5" layout-padding>
+      <h1>Quick Signup <span class="thin">Its free and easy.</span></h1>
+
+      <form>
+        <label>What's Your Name?</label>
+          <div class="form-group form-inline">
+            <input type="text" class="form-control" placeholder="First Name" ng-model="user.first_name">
+            <input type="text" class="form-control" placeholder="Last Name" ng-model="user.last_name">
+          </div>
+        <div class="form-group">
+          <label>Add Your Email</label>
+          <input type="email" class="form-control" placeholder="Email" ng-model="user.email">
+        </div>
+        <div class="form-group">
+          <label>Create Your Password</label>
+          <input type="password" class="form-control" placeholder="Password" ng-model="user.password">
+        </div>
+        <div class="form-group">
+          <md-button type="submit" class="md-primary md-raised no-margin">Create My Account <md-icon class="material-icons">launch</md-icon></md-button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -12,7 +12,8 @@
           abstract: true,
           templateUrl: function(){
             return 'js/modules/user/views/' + window.templateMode + '/user.html';
-          }
+          },
+          controller: 'UserCtrl'
         })
         // user new state
         .state('user.new', {
