@@ -68,16 +68,33 @@
 
     $scope.dropzoneConfig = {
       'options': {
+        'previewTemplate': document.querySelector('#preview-template').innerHTML,
         'paramName': "resource[avatar]",
+        'thumbnailHeight': 120,
+        'thumbnailWidth': 120,
         'url': '/resources',
-        'clickable': true,
         'addRemoveLinks': true,
+        'dictCancelUpload': "Cancel",
+        'dictRemoveFile': "Remove",
       },
       'eventHandlers': {
         'sending': function(file, xhr, formData) {},
         'success': function(file, response) {},
-        'error': function(file, response){
-           angular.element(document.querySelector( '.dz-error-message')).text("This is not a valid resource upload url");
+        'error': function(file, response) {},
+        'dragover': function(event){
+          angular.element(document.querySelector('.dropzone')).addClass('dropzone-custom')
+          angular.element(document.querySelector('.drag')).removeClass('hidden')
+          angular.element(document.querySelector('.default-message')).addClass('hidden')
+        },
+        'drop': function(event){
+          angular.element(document.querySelector('.drag')).addClass('hidden')
+          angular.element(document.querySelector('.default-message')).removeClass('hidden')
+          angular.element(document.querySelector('.dropzone')).removeClass('dropzone-custom')
+        },
+        'uploadprogress': function(file, progress){
+          if (100 == progress){
+            angular.element(document.querySelector('.dz-progress')).remove();
+          }
         }
       }
     };

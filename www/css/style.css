@@ -1,57 +1,43 @@
 /* Empty. Add your own CSS if you like */
 
 * {
-    font-family: 'Ubuntu', sans-serif;
+  font-family: 'Ubuntu', sans-serif;
 }
-
 html, body {
   height: initial !important;
   background-color: #ddd !important;
 }
-
-
 .logo {
-	font-family: 'Lobster Two', cursive;
+  font-family: 'Lobster Two', cursive;
 }
-
 .center {
-	text-align: center;
+  text-align: center;
 }
-
 .right {
-	float: right;
+  float: right;
 }
-
 .no-border {
-	border:	none;
+  border: none;
 }
-
 .bold {
-	font-weight: bold !important;
+  font-weight: bold !important;
 }
-
 .no-padding {
-	padding: 0;
+  padding: 0;
 }
-
 .no-padding-top-bottom {
-	padding-top: 0;
-	padding-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
 }
-
 .box-shadow {
-	box-shadow: 0 0 5px 0px #444;
+  box-shadow: 0 0 5px 0px #444;
 }
-
 .expand {
   width: 100%;
 }
-
 md-bottom-sheet {
-    position: fixed !important;
+  position: fixed !important;
 }
-
-
 
 /********
 
@@ -60,46 +46,29 @@ Color Styling
 ********/
 
 .gray {
-	background-color: #f5f5f5;
+  background-color: #f5f5f5;
 }
-
 .greendew {
-	background-color: #A9D5C6;
+  background-color: #A9D5C6;
 }
-
 .salmon {
-	background-color: #FD9781 !important;
+  background-color: #FD9781 !important;
 }
-
 .salmon-dark {
-	background-color: #E47E68;
+  background-color: #E47E68;
 }
-
 .stationary {
-	background-color: #EBE5CD;
+  background-color: #EBE5CD;
 }
-
 .bg-brown {
   background-color: #774F38;
 }
-
 .font-white {
-	color: white;
+  color: white;
 }
-
 .dark {
   background-color: #444 !important;
 }
-
 .dark button, .dark p, .dark i, .dark a, .dark h1 {
   color: #fff !important;
 }
-
-/*.dropzone {
-    border: 2px dashed #0087F7;
-    border-radius: 5px;
-    background: white;
-    min-height: 150px;
-    padding: 54px 54px;
-    box-sizing: border-box;
-}*/
