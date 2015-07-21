@@ -12,17 +12,17 @@ navigation history that also transitions its views in and out.
     </ion-tab>
 
     <!-- Entries Tab -->
-    <ion-tab title="Entries" icon-off="ion-ios-chatboxes-outline" icon-on="ion-ios-chatboxes" ui-sref="tab.entries">
+    <ion-tab title="Entries" icon-off="ion-ios-chatboxes-outline" icon-on="ion-ios-chatboxes" ui-sref="app.entries">
       <ion-nav-view name="entries" id="entries"></ion-nav-view>
     </ion-tab>
 
     <!-- Labels Tab -->
-    <ion-tab title="Labels" icon-off="ion-ios-pricetag-outline" icon-on="ion-ios-pricetag" ui-sref="tab.tags">
+    <ion-tab title="Labels" icon-off="ion-ios-pricetag-outline" icon-on="ion-ios-pricetag" ui-sref="app.tags">
       <ion-nav-view name="tags"></ion-nav-view>
     </ion-tab>
 
     <!-- Profile Tab -->
-    <ion-tab title="Profile" icon-off="ion-ios-gear-outline" icon-on="ion-ios-gear" ui-sref="tab.profile">
+    <ion-tab title="Profile" icon-off="ion-ios-gear-outline" icon-on="ion-ios-gear" ui-sref="app.profile">
       <ion-nav-view name="profile"></ion-nav-view>
     </ion-tab>
 
@@ -36,15 +36,15 @@ navigation history that also transitions its views in and out.
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
-        <a class="navbar-brand logo" ui-sref="tab.entries">MemryBook</a>
+        <a class="navbar-brand logo" ui-sref="app.entries">MemryBook</a>
       </div>
 
 
       <ul class="nav navbar-nav navbar-right">
-        <li><md-button class="button font-white bold" ui-sref="tab.entries">Entries</md-button></li>
-        <li><md-button class="button font-white bold" ui-sref="tab.tags">Labels</md-button></li>
-        <li><md-button class="button font-white bold" ui-sref="tab.profile">Profile</md-button></li>
-        <li><md-button class="button font-white bold" ui-sref="tab.tags">Logout</md-button></li>
+        <li><md-button class="button font-white bold" ui-sref="app.entries">Entries</md-button></li>
+        <li><md-button class="button font-white bold" ui-sref="app.tags">Labels</md-button></li>
+        <li><md-button class="button font-white bold" ui-sref="app.profile">Profile</md-button></li>
+        <li><md-button class="button font-white bold" ui-sref="app.tags">Logout</md-button></li>
       </ul>
     </div><!-- /.container-fluid -->
   </nav>

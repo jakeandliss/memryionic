@@ -66,7 +66,7 @@ angular.module('memryApp', [
   });
   $mdThemingProvider.definePalette('calm', {"50":"#f9fcfc","100":"#eef6f5","200":"#e2f0ee","300":"#d8eae8","400":"#cfe5e2","500":"#c5e0dc","600":"#acc4c1","700":"#94a8a5","800":"#7b8c8a","900":"#63706e","A100":"#eef6f5","A200":"#e2f0ee","A400":"#cfe5e2","A700":"#94a8a5",
     'contrastDefaultColor': 'light',
-    'contrastDarkColors': ['50', '100', '200', '300', '400', '500', 'A100'], 
+    'contrastDarkColors': ['50', '100', '200', '300', '400', '500', 'A100'],
   });
 
   $mdThemingProvider.theme('default')
@@ -77,11 +77,11 @@ angular.module('memryApp', [
 
   $stateProvider
   // setup an abstract state for the tabs directive
-    .state('tab', {
+    .state('app', {
     url: "",
     abstract: true,
     // default.html is the file responsible for layout of
-    // ionic or dektop views
+    // ionic or desktop views
     templateUrl: "default.html"
       // Later this state will implement a resolve for AuthService
       // So it is left in the app.js

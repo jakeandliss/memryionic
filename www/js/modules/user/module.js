@@ -53,7 +53,7 @@
         })
 
         // user profile
-        .state('tab.profile', {
+        .state('app.profile', {
           url: '/profile',
           views: {
             'profile': {
