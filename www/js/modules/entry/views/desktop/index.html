@@ -14,7 +14,7 @@
         </div>
       </md-list-item>
       <md-list-item ng-repeat="tag in tags">
-          <md-button ng-class="{'selected' : it === ul.selected }">
+          <md-button ng-class="{'selected' : it === ul.selected }" class="md-raised md-primary expand" ui-sref="app.entries({ tag: tag.name })">
             {{tag.name}}
           </md-button>
       </md-list-item>

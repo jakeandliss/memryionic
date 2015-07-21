@@ -1,1 +1,69 @@
-<p> Tags for browser</p>
+<div layout="row" layout-margin>
+  <div flex="25">
+  </div>
+  <div flex>
+  <md-content>
+    <md-list class="list" show-delete="shouldShowDelete" can-swipe="listCanSwipe">
+    <ul>
+      <li ng-repeat="tag in tags" ng-if="tag.parent_id == ''">
+        <md-item>
+             <a ui-sref="app.tags({ id: tag.id })" class="item-icon-left item-icon-right item-stable">
+               <i class="icon ion-ios-pricetag"></i>
+               {{ tag.name }}
+               <span class="badge badge-assertive">2</span>
+             </a>
+           </md-item>
+
+        <ul>
+          <li ng-repeat="nested_tag1 in tags" ng-include="'nested_tag1'" ng-if="tag.id == nested_tag1.parent_id" class="nested"></li>
+        </ul>
+      </li>
+</ul>
+  </md-list>
+
+  <!-- Partial for editing labels -->
+  <form id="edit-tag">
+    <label class="item item-input">
+      <span class="input-label">Name</span>
+      <input type="text" value="Seleted Tag">
+    </label>
+    <label class="item item-input item-select">
+      <div class="input-label">
+        Parent
+      </div>
+      <select name="parent_id">
+        <option value="test 0">test 0</option>
+        <option value="test 1">test 1</option>
+        <option value="test 2">test 2</option>
+        <option value="test 3">test 3</option>
+      </select>
+    </label>
+  </form>
+</md-content>
+</div>
+
+<script type="text/ng-template" id="nested_tag1">
+    <md-item>
+      <a ui-sref="app.tags({ id: nested_tag1.id })" class="item-icon-left item-icon-right item-stable">
+        <i class="icon ion-ios-pricetag"></i>
+        {{ nested_tag1.name }}
+        <span class="badge badge-assertive">2</span>
+      </a>
+    </md-item>
+  <ul>
+   <li ng-repeat="nested_tag2 in tags" ng-include="'nested_tag2'" ng-if="nested_tag1.id == nested_tag2.parent_id"></li>
+  </ul>
+</script>
+
+ <script type="text/ng-template" id="nested_tag2">
+    <md-item>
+      <a ui-sref="app.tags({ id: nested_tag2.id })" class="item-icon-left item-icon-right item-stable">
+        <i class="icon ion-ios-pricetag"></i>
+          {{ nested_tag2.name }}
+        <span class="badge badge-assertive">2</span>
+      </a>
+    </md-item>
+  <ul>
+    <li ng-repeat="nested_tag1 in tags" ng-include="'nested_tag1'" ng-if="nested_tag2.id == nested_tag1.parent_id" class="nested"></li>
+  </ul>
+</script>
