@@ -24,7 +24,7 @@
     <md-content flex id="content" class="md-whiteframe-z1">
       <div layout-margin>
         <form name="entryForm" ng-submit="entry.add()">
-          <div layout="row" layout-sm="column">
+          <div layout="row" layout-sm="column" class="dz-hide">
             <md-input-container flex>
               <label>Entry Title</label>
               <input type="text" ng-model="entry.title" />
@@ -34,26 +34,22 @@
               <input type="date" ng-model="entry.date" />
             </md-input-container>
           </div>
-          <md-input-container flex>
-            <label>What would you like to remember?</label>
-            <textarea ng-model="entry.content"></textarea>
-          </md-input-container>
-          <!-- <md-chips
-              ng-model="tags.name"
-              placeholder="Enter a Label"
-              delete-button-label="Remove Tag"
-              delete-hint="Press delete to remove tag"
-              secondary-placeholder="+Label">
-          </md-chips> -->
+          <div class="dz-hide">
+            <md-input-container flex>
+              <label>What would you like to remember?</label>
+              <textarea ng-model="entry.content"></textarea>
+            </md-input-container>
+            <!-- <md-chips
+                ng-model="tags.name"
+                placeholder="Enter a Label"
+                delete-button-label="Remove Tag"
+                delete-hint="Press delete to remove tag"
+                secondary-placeholder="+Label">
+            </md-chips> -->
 
-          <div class="dropzone" dropzone="dropzoneConfig">
-            <div class="drag hidden">Drag files here</div>
-            <div class="dz-message default-message"> Drag or click to upload  </div>
-          </div>
+        </div>
 
-          <div class="clear-fix"></div>
-
-          <div layout="row" layout-sm="column">
+          <div layout="row" layout-sm="column" class="dz-hide">
             <div flex>
               <md-button class="md-fab md-primary" aria-label="Attach File">
                 <md-icon class="material-icons">attachment file</md-icon>
@@ -65,6 +61,10 @@
             <div flex>
               <md-button class="md-raised md-primary right">Save Entry</md-button>
             </div>
+          </div>
+          <div class="dropzone" dropzone="dropzoneConfig">
+            <div class="dz-drag hidden"><p>Drag files here</p></div>
+            <div class="dz-message default-message"><p>Drag or click to upload</p></div>
           </div>
         </form>
       </div>

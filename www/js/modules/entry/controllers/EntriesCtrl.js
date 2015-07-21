@@ -83,13 +83,21 @@
         'error': function(file, response) {},
         'dragover': function(event){
           angular.element(document.querySelector('.dropzone')).addClass('dropzone-custom')
-          angular.element(document.querySelector('.drag')).removeClass('hidden')
-          angular.element(document.querySelector('.default-message')).addClass('hidden')
+          angular.element(document.querySelector('.dz-drag')).removeClass('hidden')
+          angular.element(document.querySelector('.dz-message')).addClass('hidden')
+          // angular.element(document.querySelectorAll('.dz-hide')).addClass('hidden')
+        },
+        'dragleave': function(event){
+          angular.element(document.querySelector('.dropzone')).removeClass('dropzone-custom')
+          angular.element(document.querySelector('.dz-drag')).addClass('hidden')
+          angular.element(document.querySelector('.dz-message')).removeClass('hidden')
+          // angular.element(document.querySelectorAll('.dz-hide')).removeClass('hidden')
         },
         'drop': function(event){
-          angular.element(document.querySelector('.drag')).addClass('hidden')
+          angular.element(document.querySelector('.dz-drag')).addClass('hidden')
           angular.element(document.querySelector('.default-message')).removeClass('hidden')
           angular.element(document.querySelector('.dropzone')).removeClass('dropzone-custom')
+          angular.element(document.querySelectorAll('.dz-hide')).removeClass('hidden')
         },
         'uploadprogress': function(file, progress){
           if (100 == progress){

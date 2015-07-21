@@ -5,6 +5,13 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <title></title>
 
+    <!-- Complid css output -->
+    <div ng-if="isDesktopOrTablet">
+      <link href="lib/angular-material/angular-material.css" rel="stylesheet">
+      <link href="lib/angular-bootstrap/ui-bootstrap-csp.css" rel="stylesheet">
+      <link href="lib/bootstrap/bootstrap.min.css" rel="stylesheet">
+    </div>
+    <script src="http://www.dropzonejs.com/new-js/dropzone.js"></script>
 
     <!-- compiled css output -->
     <div ng-if="!isDesktopOrTablet">
@@ -19,12 +26,7 @@
 
 
 
-    <!-- Complid css output -->
-    <div ng-if="isDesktopOrTablet">
-      <link href="lib/angular-material/angular-material.css" rel="stylesheet">
-      <link href="lib/angular-bootstrap/ui-bootstrap-csp.css" rel="stylesheet">
-      <link href="lib/bootstrap/bootstrap.min.css" rel="stylesheet">
-    </div>
+
 
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
@@ -33,8 +35,6 @@
     <script src="lib/ng-device-detector/ng-device-detector.js"></script>
     <script src="lib/re-tree/re-tree.js"></script>
     <script src="lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-
-    <script src="http://www.dropzonejs.com/new-js/dropzone.js"></script>
 
 
 
