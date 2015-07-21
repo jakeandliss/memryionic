@@ -1,4 +1,4 @@
-<div layout="row" id="profile">
+<div layout="row" id="profile" ng-controller="PanelCtrl as panel">
   <md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2"
               md-component-id="left"
               md-is-locked-open="$mdMedia('gt-sm')">
@@ -16,16 +16,16 @@
     </md-list>
 
     <ul class="nav nav-pills nav-stacked padding" >
-      <li role="presentation" class="active"><a ui-sref="profile.edit">Edit Profile</a></li>
-      <li role="presentation"><a ui-sref="profile.new-password">Update Password</a></li>
-      <li role="presentation"><a ui-sref="tab.profile.delete">Delete Account</a></li>
+      <li role="presentation" ng-class="{ active:panel.isSelected(1) }"><a ng-click="panel.selectTab(1)" class="pointer">Edit Profile</a></li>
+      <li role="presentation" ng-class="{ active:panel.isSelected(2) }"><a ng-click="panel.selectTab(2)" class="pointer">Update Password</a></li>
+      <li role="presentation" ng-class="{ active:panel.isSelected(3) }"><a ng-click="panel.selectTab(3)" class="pointer">Delete Account</a></li>
     </ul>
-    
+
   </md-sidenav>
 
   <div flex layout="column" role="main" layout-margin>
 
-    <md-content flex id="content" class="md-whiteframe-z1" layout-padding>
+    <md-content flex id="content" class="md-whiteframe-z1" layout-padding ng-show="panel.isSelected(1)">
       <form>
         <div layout="row" layout-sm="column">
           <md-input-container flex="50">
@@ -49,7 +49,7 @@
       </form>
     </md-content>
 
-    <md-content flex id="content" class="md-whiteframe-z1" layout-padding>
+    <md-content flex id="content" class="md-whiteframe-z1" layout-padding ng-show="panel.isSelected(2)">
       <form>
         <div layout="row" layout-sm="column">
           <md-input-container flex="50">
@@ -65,7 +65,7 @@
       </form>
     </md-content>
 
-    <md-content flex id="content" class="md-whiteframe-z1" layout-padding>
+    <md-content flex id="content" class="md-whiteframe-z1" layout-padding ng-show="panel.isSelected(3)">
       <h3>Delete My Account</h3>
       <p>We never recommend deleting your account, but this is your private information and we respect your choice to delete it if you'd like.
       By deleting your account, everything you've created will be permanently deleted.</p>

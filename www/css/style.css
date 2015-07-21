@@ -63,6 +63,9 @@ body {
   width: 100%;
 }
 
+.pointer {
+	cursor: pointer;
+}
 
 md-bottom-sheet {
     position: fixed !important;
