@@ -10,14 +10,14 @@
       </md-list-item>
     </md-list>
       <div ng-repeat="tag in tags">
-          <button ng-class="{'selected' : it === ul.selected }" class="btn expand box-shadow margin-bottom bg-white" ui-sref="app.entries({ tag: tag.name })">
+          <button ng-class="{'selected' : it === ul.selected }" class="btn btn-block btn-lg btn-primary margin-bottom" ui-sref="app.entries({ tag: tag.name })">
             {{tag.name}}
           </button>
       </div>
 
   </div>
 
-  <div class="col-sm-9">
+  <div class="col-xs-9" style="margin-right:-.9rem">
     <form name="entryForm" class="box-shadow bg-white padding" ng-submit="entry.add()">
       <div class="row">
         <md-input-container class="col-sm-8">
@@ -51,7 +51,7 @@
           <p>Drag or Click to Upload</p>
         </div>
         <div class="col-sm-4">
-          <button class="btn expand margin-top" type="submit">Save Entry</button>
+          <button class="btn btn-block btn-lg btn-primary" type="submit">Save Entry</button>
         </div>
       </div>
     </form>
@@ -119,9 +119,9 @@
         </md-card>
       </div>
 
-      <div class="col-sm-3">
-        <div ng-repeat="tag in entry.tags" class="expand margin-bottom">
-          <button class='btn expand'>{{tag.name}}</button>
+      <div class="col-xs-3" style="margin-left:-.9rem;">
+        <div ng-repeat="tag in entry.tags" class="margin-bottom">
+          <button class='btn btn-block btn-lg btn-primary'>{{tag.name}}</button>
         </div>
       </div>
     </div>
