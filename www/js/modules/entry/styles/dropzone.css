@@ -80,8 +80,9 @@
 }
 
 .dz-drag {
-  margin: 2em 0;
-  text-align: center;
+    padding: 7em 0;
+    text-align: center;
+    background-color: #eee;
 }
 
 .dropzone * {
@@ -93,8 +94,13 @@
 }
 
 .dropzone {
-  min-height: 150px;
   border: 2px dashed #eee;
-  padding: 1rem;
+  padding: 0;
   border-bottom: 2px dashed #444;
+  min-height: 0;
+}
+
+.dropzone .dz-message {
+    text-align: center;
+    margin: .5rem 0;
 }
