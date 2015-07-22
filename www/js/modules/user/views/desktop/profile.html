@@ -11,11 +11,13 @@
       </md-list-item>
     </md-list>
 
-    <ul class="nav nav-pills nav-stacked padding" >
-      <li role="presentation" ng-class="{ active:panel.isSelected(1) }"><a ng-click="panel.selectTab(1)" class="pointer">Edit Profile</a></li>
-      <li role="presentation" ng-class="{ active:panel.isSelected(2) }"><a ng-click="panel.selectTab(2)" class="pointer">Update Password</a></li>
-      <li role="presentation" ng-class="{ active:panel.isSelected(3) }"><a ng-click="panel.selectTab(3)" class="pointer">Delete Account</a></li>
+    <nav class="navbar navbar-default navbar-inverse navbar-embossed" role="navigation">
+      <ul class="nav navbar-nav nav-pills nav-stacked">
+      <li ng-class="{ active:panel.isSelected(1) }" class="expand"><a ng-click="panel.selectTab(1)" class="pointer">Edit Profile</a></li>
+      <li ng-class="{ active:panel.isSelected(2) }" class="expand"><a ng-click="panel.selectTab(2)" class="pointer">Update Password</a></li>
+      <li ng-class="{ active:panel.isSelected(3) }" class="expand"><a ng-click="panel.selectTab(3)" class="pointer">Delete Account</a></li>
     </ul>
+  </nav>
   </div>
 
   <div class="col-sm-9">
@@ -39,7 +41,7 @@
           <p>Upload Avatar Image</p>
           <input type="file" ng-model="user.avatar">
         </md-input-container>
-        <md-button type="submit" class="md-primary md-raised no-margin">Update My Profile</md-button>
+        <md-button type="submit" class="btn btn-block btn-lg btn-primary">Update My Profile</md-button>
       </form>
     </md-content>
 
@@ -55,7 +57,7 @@
             <input type="password" placeholder="Confirm Password" ng-model="user.password_confirmation">
           </md-input-container>
         </div>
-        <md-button type="submit" class="md-primary md-raised no-margin">Update My Password</md-button>
+        <md-button type="submit" class="btn btn-block btn-lg btn-primary">Update My Password</md-button>
       </form>
     </md-content>
 
@@ -63,7 +65,7 @@
       <h3>Delete My Account</h3>
       <p>We never recommend deleting your account, but this is your private information and we respect your choice to delete it if you'd like.
       By deleting your account, everything you've created will be permanently deleted.</p>
-      <md-button type="submit" class="md-primary md-raised no-margin">Delete My Account</md-button>
+      <md-button type="submit" class="btn btn-block btn-lg btn-primary">Delete My Account</md-button>
     </md-content>
 
   </div>
