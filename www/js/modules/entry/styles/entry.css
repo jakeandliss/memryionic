@@ -1,6 +1,7 @@
 /* All the stylesheets for entry module */
 #entries.desktop {
-  margin: 1rem;
+  margin-right: 1rem;
+  margin-left: 1rem;
 }
 
 #entries .item.item-body {
