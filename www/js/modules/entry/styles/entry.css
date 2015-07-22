@@ -1,4 +1,8 @@
 /* All the stylesheets for entry module */
+#entries {
+  margin: 1rem;
+}
+
 #entries .item.item-body {
   padding-top: 0;
 }
@@ -14,12 +18,6 @@
 
 #entries .entry .footer {
   background-color: ;
-}
-
-#entries .tag {
-  border-radius: 0 10px 10px 0;
-  margin-left: 0;
-  margin-top: .5rem;
 }
 
 .md-inline-list-icon-label {
@@ -45,4 +43,13 @@
 
 .mobile .form input[type="textarea"] {
   border: none;
+}
+
+#entries form button.md-fab {
+    float: left;
+}
+
+#entries form p {
+    border: 1px dashed #ccc;
+    padding: 24px !important;
 }

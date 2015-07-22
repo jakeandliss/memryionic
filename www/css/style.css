@@ -2,10 +2,6 @@
 
 
 
-ul {
-	margin-left: 25px;
-}
-
 * {
     font-family: 'Ubuntu', sans-serif;
 }
@@ -34,6 +30,18 @@ body {
 	border:	none;
 }
 
+.margin {
+	margin: 1rem;
+}
+
+.margin-top {
+	margin-top: 1rem;
+}
+
+.margin-bottom {
+	margin-bottom: 1rem;
+}
+
 .no-margin {
   margin: 0;
 }
@@ -56,7 +64,7 @@ body {
 }
 
 .box-shadow {
-	box-shadow: 0 0 8px -4px #000;
+	box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.14), 0px 2px 2px 0px rgba(0, 0, 0, 0.098), 0px 1px 5px 0px rgba(0, 0, 0, 0.084);
 }
 
 .expand {
@@ -71,8 +79,8 @@ md-bottom-sheet {
     position: fixed !important;
 }
 
-md-sidenav {
-	background: none;
+md-card {
+	margin: inherit;
 }
 
 // Rules for sizing the icon.
