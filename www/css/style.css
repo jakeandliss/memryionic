@@ -1,43 +1,101 @@
 /* Empty. Add your own CSS if you like */
 
+
+
 * {
   font-family: 'Ubuntu', sans-serif;
 }
-html, body {
-  height: initial !important;
-  background-color: #ddd !important;
+
+body {
+  display: table;
+  height: 100%;
+  background-color: #eee;
+  width: 100%;
 }
+
 .logo {
-  font-family: 'Lobster Two', cursive;
+	font-family: 'Lobster Two', cursive;
+  font-size: 33px;
 }
+
+.font-white {
+	color: white;
+}
+
 .center {
-  text-align: center;
-}
-.right {
-  float: right;
+	text-align: center;
+
 }
 .no-border {
   border: none;
 }
+
+.margin {
+	margin: 1rem;
+}
+
+.margin-top {
+	margin-top: 1rem;
+}
+
+.margin-bottom {
+	margin-bottom: 1rem;
+}
+
+.no-margin {
+  margin: 0;
+}
+
 .bold {
   font-weight: bold !important;
 }
+
+.padding {
+  padding: 1rem;
+}
+
 .no-padding {
   padding: 0;
 }
+
 .no-padding-top-bottom {
   padding-top: 0;
   padding-bottom: 0;
 }
+
 .box-shadow {
-  box-shadow: 0 0 5px 0px #444;
+	box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.14), 0px 2px 2px 0px rgba(0, 0, 0, 0.098), 0px 1px 5px 0px rgba(0, 0, 0, 0.084);
 }
 .expand {
   width: 100%;
 }
+
+.pointer {
+	cursor: pointer;
+}
+
 md-bottom-sheet {
   position: fixed !important;
 }
+
+md-card {
+	margin: inherit;
+}
+
+// Rules for sizing the icon.
+.material-icons.md-18 { display:inline; font-size: 18px; }
+.material-icons.md-24 { display:inline; font-size: 24px; }
+.material-icons.md-36 { display:inline; font-size: 36px; }
+.material-icons.md-48 { display:inline; font-size: 48px; }
+
+// Rules for using icons as black on a light background.
+.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
+.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
+
+// Rules for using icons as white on a dark background.
+.material-icons.md-light { color: rgba(255, 255, 255, 1); }
+.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
+
 
 /********
 
@@ -45,27 +103,46 @@ Color Styling
 
 ********/
 
-.gray {
-  background-color: #f5f5f5;
+.bg-white {
+	background-color: #fff;
 }
-.greendew {
-  background-color: #A9D5C6;
+
+.bg-gray {
+	background-color: #f5f5f5;
 }
-.salmon {
-  background-color: #FD9781 !important;
+
+.bg-calm {
+  background-color: #C5E0DC;
 }
-.salmon-dark {
-  background-color: #E47E68;
+
+.bg-calm, .bg-calm p, .bg-calm i, .bg-calm, .bg-calm h1, .bg-calm span  {
+  color: #fff;
 }
-.stationary {
-  background-color: #EBE5CD;
+
+.bg-assertive {
+  background-color: #E08E79;
 }
+
+.bg-assertive, .bg-assertive p, .bg-assertive i, .bg-assertive, .bg-assertive h1  {
+  color: #fff;
+}
+
+.bg-cream {
+  background-color: #F1D4AF;
+}
+
+.bg-powderpuff {
+  background-color: #ECE5CE;
+}
+
 .bg-brown {
   background-color: #774F38;
 }
-.font-white {
-  color: white;
+
+.bg-brown, .bg-brown p, .bg-brown i, .bg-brown, .bg-brown h1  {
+  color: #fff;
 }
+
 .dark {
   background-color: #444 !important;
 }

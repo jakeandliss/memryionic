@@ -5,8 +5,8 @@
     Config.$inject = ['$stateProvider'];
     function Config($stateProvider){
       $stateProvider
-        .state('tab.tags', {
-          url: '/tags',
+        .state('app.tags', {
+          url: '/tags/:id',
           views: {
             'tags': {
               templateUrl: function() {

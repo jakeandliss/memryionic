@@ -6,7 +6,7 @@
     function Config($stateProvider){
       $stateProvider
         // Create new entry
-        .state('tab.new', {
+        .state('app.new', {
           url: '/new',
           views: {
             'new': {
@@ -18,7 +18,7 @@
           }
         })
         // Entries index page
-        .state('tab.entries', {
+        .state('app.entries', {
             url: '/entries',
             views: {
               'entries': {

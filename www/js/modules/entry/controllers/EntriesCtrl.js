@@ -2,11 +2,19 @@
   'use strict';
 
   angular.module('memryApp')
-    .controller('EntriesCtrl', EntriesCtrl);
+    .config(function($sceDelegateProvider) {
+      $sceDelegateProvider.resourceUrlWhitelist([
+        // Allow same origin resource loads.
+        'self',
+        // Allow loading from assets domain.  Notice the difference between * and **.
+        'http://static.videogular.com/**'
+      ]);
+    })
+    .controller('EntriesCtrl', EntriesCtrl)
 
-  EntriesCtrl.$inject = ['$scope', 'Entries', '$ionicModal', '$mdBottomSheet'];
+  EntriesCtrl.$inject = ['$scope', 'Entries', '$ionicModal', '$mdBottomSheet', '$sce'];
 
-  function EntriesCtrl($scope, Entries, $ionicModal, $mdBottomSheet) {
+  function EntriesCtrl($scope, Entries, $ionicModal, $mdBottomSheet, $sce) {
     $scope.entry = {};
 
     // Add Entry
@@ -17,6 +25,12 @@
 
     // Edit Entry
     $scope.entries = Entries.all();
+    var config = {
+      sources: Entries.getVideos(),
+      theme: {url: "http://www.videogular.com/styles/themes/default/latest/videogular.css" }
+    };
+    $scope.config = config;
+
     $scope.edit = function(entry) {
       Entries.remove(entry);
     };
@@ -135,6 +149,6 @@
         }
       }
     };
-
+    
   }
 })();

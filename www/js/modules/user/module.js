@@ -12,7 +12,8 @@
           abstract: true,
           templateUrl: function(){
             return 'js/modules/user/views/' + window.templateMode + '/user.html';
-          }
+          },
+          controller: 'UserCtrl'
         })
         // user new state
         .state('user.new', {
@@ -52,7 +53,7 @@
         })
 
         // user profile
-        .state('tab.profile', {
+        .state('app.profile', {
           url: '/profile',
           views: {
             'profile': {

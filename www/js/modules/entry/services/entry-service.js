@@ -1,4 +1,4 @@
-(function(){
+(function() {
   angular.module('memryApp.services', [])
   .directive('dropzone', function() {
     return function(scope, element, attrs) {
@@ -15,7 +15,8 @@
    * templates or simple angular templates
    */
   // Clean the below factories later
-  .factory('Entries', function() {
+
+  .factory('Entries', function($sce) {
     // Might use a resource here that returns a JSON array
 
     // Some fake testing data
@@ -23,51 +24,45 @@
       id: 0,
       title: 'When I was on my way home today this happened. And I wasn\'t expecting it...',
       content: 'You on your way? Because there is a really cool party and I want to go to it really really bad. There is only one way to go. With a friend.',
-      resources: [
-      {
+      resources: [{
         attachment: 'https://pbs.twimg.com/profile_images/514549811765211136/9SgAuHeY.png',
         attachment_content_type: "image"
-      },
-      {
+      }, {
         attachment: 'https://avatars3.githubusercontent.com/u/11214?v=3&s=460',
         attachment_content_type: "image"
-      },
-      {
+      }, {
         attachment: 'http://www.urartuuniversity.com/content_images/pdf-sample.pdf',
         attachment_content_type: "pdf",
         attachment_file_name: "pdf-sample"
-      },
-      {
+      }, {
         attachment: 'http://www.urartuuniversity.com/content_images/pdf-sample.pdf',
         attachment_content_type: "pdf",
         attachment_file_name: "pdf-sample"
-      },
-      {
+      }, {
         attachment: 'http://www.stephaniequinn.com/Music/Canon.mp3',
         attachment_content_type: "audio",
         attachment_file_name: "canon.mp3"
-      },
-      {
+      }, {
         attachment: 'http://www.stephaniequinn.com/Music/Canon.mp3',
         attachment_content_type: "audio",
         attachment_file_name: "canon.mp3"
-      },
-      {
+      }, {
         attachment: 'http://techslides.com/demos/sample-videos/small.mp4',
         attachment_content_type: "video"
       }],
       date: "2012-04-23",
-      tags: [
-        {name: 'tag'},
-        {name: 'important'}
-      ],
+      tags: [{
+        name: 'tag'
+      }, {
+        name: 'important'
+      }],
     }, {
       id: 1,
       title: 'Max Lynx',
       content: 'Hey, it\'s me',
       image: 'https://avatars3.githubusercontent.com/u/11214?v=3&s=460',
       date: "1929-01-05"
-    },{
+    }, {
       id: 2,
       title: 'Adam Bradleyson',
       content: 'I should buy a boat',
@@ -101,6 +96,19 @@
           }
         }
         return null;
+      },
+      getVideos: function() {
+        var resources = entries[0].resources;
+        var video_sources =[];
+        angular.forEach(resources, function(value, key){
+          if(value.attachment_content_type == 'video'){
+            video_sources.push({
+              src: $sce.trustAsResourceUrl(value.attachment),
+              type: "video/mp4"
+            })
+          }
+        });
+        return video_sources;
       }
     };
   })

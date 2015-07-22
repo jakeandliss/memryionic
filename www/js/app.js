@@ -10,8 +10,13 @@ angular.module('memryApp', [
   'memryApp.controllers',
   'memryApp.services',
   'ngMaterial',
-  'reTree',                 // dependency of deviceDetector
+  'reTree', // dependency of deviceDetector
   'ng.deviceDetector',
+  "ngSanitize",
+  "com.2fdevs.videogular",
+  "com.2fdevs.videogular.plugins.controls",
+  "com.2fdevs.videogular.plugins.overlayplay",
+  "com.2fdevs.videogular.plugins.poster",
   'ui.bootstrap']
 )
 
@@ -28,22 +33,22 @@ angular.module('memryApp', [
     }
   });
 
-  if(deviceDetector){
+  if (deviceDetector) {
     var isDesktopOrTablet;
-      /*
-       * detects memry platform is desktop or tablet for loading related templates
-       * rootScope.isDesktopOrTablet object is used for loading desktop view in index.html
-       * window object is used for loaing desktop view templates in modules wise
-       */
-      isDesktopOrTablet = (deviceDetector.isDesktop() || deviceDetector.isTablet());
-      console.log('Browser or tablet', isDesktopOrTablet);
-      if (isDesktopOrTablet) {
-        window.templateMode = "desktop";
-      } else {
-        window.templateMode = "mobile";
-      }
-      window.isDesktopOrTablet = isDesktopOrTablet;
-      $rootScope.isDesktopOrTablet = isDesktopOrTablet;
+    /*
+     * detects memry platform is desktop or tablet for loading related templates
+     * rootScope.isDesktopOrTablet object is used for loading desktop view in index.html
+     * window object is used for loaing desktop view templates in modules wise
+     */
+    isDesktopOrTablet = (deviceDetector.isDesktop() || deviceDetector.isTablet());
+    console.log('Browser or tablet', isDesktopOrTablet);
+    if (isDesktopOrTablet) {
+      window.templateMode = "desktop";
+    } else {
+      window.templateMode = "mobile";
+    }
+    window.isDesktopOrTablet = isDesktopOrTablet;
+    $rootScope.isDesktopOrTablet = isDesktopOrTablet;
   }
 })
 
@@ -53,25 +58,38 @@ angular.module('memryApp', [
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
 
+
+
+  $mdThemingProvider.definePalette('strawberry', {"50":"#fcf4f2","100":"#f6ddd7","200":"#f0c7bc","300":"#eab4a6","400":"#e5a18f","500":"#e08e79","600":"#c47c6a","700":"#a86b5b","800":"#8c594c","900":"#70473d","A100":"#f6ddd7","A200":"#f0c7bc","A400":"#e5a18f","A700":"#a86b5b",
+    'contrastDefaultColor': 'light',    // whether, by default, text (contrast) on this palette should be dark or light
+    'contrastDarkColors': ['50', '100', '200', '300', '400', 'A100'], //hues which contrast should be 'dark' by default
+  });
+  $mdThemingProvider.definePalette('calm', {"50":"#f9fcfc","100":"#eef6f5","200":"#e2f0ee","300":"#d8eae8","400":"#cfe5e2","500":"#c5e0dc","600":"#acc4c1","700":"#94a8a5","800":"#7b8c8a","900":"#63706e","A100":"#eef6f5","A200":"#e2f0ee","A400":"#cfe5e2","A700":"#94a8a5",
+    'contrastDefaultColor': 'light',
+    'contrastDarkColors': ['50', '100', '200', '300', '400', '500', 'A100'],
+  });
+
   $mdThemingProvider.theme('default')
-    .primaryPalette('light-blue')
-    .accentPalette('deep-orange');
+    .primaryPalette('strawberry')
+    .accentPalette('calm', {
+    'default': '500',
+    });
 
   $stateProvider
-    // setup an abstract state for the tabs directive
-    .state('tab', {
-      url: "",
-      abstract: true,
-      // default.html is the file responsible for layout of
-      // ionic or dektop views
-      templateUrl: "default.html"
+  // setup an abstract state for the tabs directive
+    .state('app', {
+    url: "",
+    abstract: true,
+    // default.html is the file responsible for layout of
+    // ionic or desktop views
+    templateUrl: "app.html"
       // Later this state will implement a resolve for AuthService
       // So it is left in the app.js
-    });
+  });
 
   $urlRouterProvider.otherwise('/entries');
 })
 
-.config(function ($ionicConfigProvider) {
+.config(function($ionicConfigProvider) {
   $ionicConfigProvider.tabs.position("bottom");
 });

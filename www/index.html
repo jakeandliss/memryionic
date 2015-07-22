@@ -5,28 +5,26 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <title></title>
 
-    <!-- Complid css output -->
+    <!-- Desktop CSS -->
     <div ng-if="isDesktopOrTablet">
       <link href="lib/angular-material/angular-material.css" rel="stylesheet">
-      <link href="lib/angular-bootstrap/ui-bootstrap-csp.css" rel="stylesheet">
-      <link href="lib/bootstrap/bootstrap.min.css" rel="stylesheet">
+      <link href="lib/flat-ui/dist/css/vendor/bootstrap.min.css" rel="stylesheet">
+      <link href="lib/flat-ui/dist/css/flat-ui.min.css" rel="stylesheet">
     </div>
-    <script src="http://www.dropzonejs.com/new-js/dropzone.js"></script>
 
-    <!-- compiled css output -->
+    <!-- Mobile CSS -->
     <div ng-if="!isDesktopOrTablet">
       <link href="css/ionic.app.css" rel="stylesheet">
     </div>
+
+    <!-- Mobile and Desktop CSS -->
+    <script src="http://www.dropzonejs.com/new-js/dropzone.js"></script>
     <link href="css/style.css" rel="stylesheet">
     <link href="js/modules/entry/styles/entry.css" rel="stylesheet">
     <link href="js/modules/entry/styles/dropzone.css" rel="stylesheet">
     <link href="js/modules/user/styles/user.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700,300italic,400italic,500italic,700italic|Ubuntu+Condensed|Lobster+Two:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-
-
-
 
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
@@ -37,6 +35,15 @@
     <script src="lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 
 
+<<<<<<< HEAD
+=======
+    <script src="lib/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="lib/videogular/videogular.js"></script>
+    <script src="lib/videogular-controls/vg-controls.js"></script>
+    <script src="lib/videogular-overlay-play/vg-overlay-play.js"></script>
+    <script src="lib/videogular-poster/vg-poster.js"></script>
+    <script src="lib/videogular-buffering/vg-buffering.js"></script>
+>>>>>>> develop
 
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
@@ -73,11 +80,11 @@
 
     <!-- Mobile views -->
     <div ng-if="!isDesktopOrTablet">
-      <ion-nav-bar id="ion_nav" class="bar-dark">
+      <ion-nav-bar class="bar-dark">
         <ion-nav-back-button>
         </ion-nav-back-button>
       </ion-nav-bar>
-      <ion-nav-view id="ion_nav_view"></ion-nav-view>
+      <ion-nav-view></ion-nav-view>
     </div>
   </body>
 </html>

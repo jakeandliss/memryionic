@@ -1,19 +1,21 @@
 <ion-view view-title="MemryBook Signup" hide-nav-bar="true">
-  <ion-content ng-controller="UserCtrl as user">
+  <ion-content ng-controller="UserCtrl" ng-model="user">
+
+    <div ng-show="showMessage" class="ng-hide">{{message}}</div>
 
     <form id="registration" ng-submit="user.addUser">
       <div class="list list-inset">
         <label class="item item-input item-icon-left">
-          <input type="text" placeholder="First Name" required>
+          <input type="text" placeholder="First Name" ng-model="user.first_name" required>
         </label>
         <label class="item item-input">
-          <input type="text" placeholder="Last Name" required>
+          <input type="text" placeholder="Last Name" ng-model="user.last_name" required>
         </label>
         <label class="item item-input">
-          <input type="email" placeholder="Email" required>
+          <input type="email" placeholder="Email" ng-model="user.email" required>
         </label>
         <label class="item item-input">
-          <input type="password" placeholder="Password" required>
+          <input type="password" placeholder="Password" ng-model="user.password" required>
         </label>
         <input type="submit" value="Create My Account" class="button button-block button-assertive bold">
       </div>

@@ -1,1 +1,70 @@
-<p> User profile for browser </p>
+<div class="row padding" id="profile" ng-controller="PanelCtrl as panel">
+  <div class="col-sm-3">
+
+    <md-list>
+      <md-list-item class="md-2-line">
+        <img ng-src="{{user.avatar}}" class="md-avatar" alt="" />
+        <div class="md-list-item-text">
+          <h3>{{user.first_name + " " + user.last_name}}</h3>
+          <p></p>
+        </div>
+      </md-list-item>
+    </md-list>
+
+    <ul class="nav nav-pills nav-stacked padding" >
+      <li role="presentation" ng-class="{ active:panel.isSelected(1) }"><a ng-click="panel.selectTab(1)" class="pointer">Edit Profile</a></li>
+      <li role="presentation" ng-class="{ active:panel.isSelected(2) }"><a ng-click="panel.selectTab(2)" class="pointer">Update Password</a></li>
+      <li role="presentation" ng-class="{ active:panel.isSelected(3) }"><a ng-click="panel.selectTab(3)" class="pointer">Delete Account</a></li>
+    </ul>
+  </div>
+
+  <div class="col-sm-9">
+    <md-content id="content" class="bg-white padding" ng-show="panel.isSelected(1)">
+      <form>
+        <div class="row">
+          <md-input-container class="col-sm-6">
+            <label>First Name</label>
+            <input type="text" placeholder="First Name" ng-model="user.first_name">
+          </md-input-container>
+          <md-input-container class="col-sm-6">
+            <label>Last Name</label>
+            <input type="text" placeholder="Last Name" ng-model="user.last_name">
+          </md-input-container>
+        </div>
+        <md-input-container>
+          <label>Email</label>
+          <input type="email" placeholder="Email Address" ng-model="user.email">
+        </md-input-container>
+        <md-input-container>
+          <p>Upload Avatar Image</p>
+          <input type="file" ng-model="user.avatar">
+        </md-input-container>
+        <md-button type="submit" class="md-primary md-raised no-margin">Update My Profile</md-button>
+      </form>
+    </md-content>
+
+    <md-content id="content" class="bg-white padding" ng-show="panel.isSelected(2)">
+      <form>
+        <div class="row">
+          <md-input-container class="col-sm-6">
+            <label>New Password</label>
+            <input type="password" placeholder="New Password" ng-model="user.password">
+          </md-input-container>
+          <md-input-container class="col-sm-6">
+            <label>Confirm Password</label>
+            <input type="password" placeholder="Confirm Password" ng-model="user.password_confirmation">
+          </md-input-container>
+        </div>
+        <md-button type="submit" class="md-primary md-raised no-margin">Update My Password</md-button>
+      </form>
+    </md-content>
+
+    <md-content id="content" class="bg-white padding" ng-show="panel.isSelected(3)">
+      <h3>Delete My Account</h3>
+      <p>We never recommend deleting your account, but this is your private information and we respect your choice to delete it if you'd like.
+      By deleting your account, everything you've created will be permanently deleted.</p>
+      <md-button type="submit" class="md-primary md-raised no-margin">Delete My Account</md-button>
+    </md-content>
+
+  </div>
+</div>

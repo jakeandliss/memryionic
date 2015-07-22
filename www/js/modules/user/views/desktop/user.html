@@ -1,12 +1,36 @@
-<p> Welcome page</p>
-<!-- Default Layout for Login/Logout functionality goes here-->
+<div id="user">
+  <nav class="navbar navbar-default dark font-white box-shadow">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand logo" href="#">MemryBook</a>
+      </div>
 
-<md-button class="md-raised" ui-sref="user.new">Sign up</md-button>
 
-<md-button class="md-raised" ui-sref="user.login">Login</md-button>
+      <ul class="nav navbar-nav navbar-right">
+        <form class="navbar-form navbar-left">
+          <div class="form-group">
+            <input type="email" class="form-control" placeholder="Email" ng-model="user.email">
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control" placeholder="Password" ng-model="user.password">
+          </div>
+          <md-button type="submit" class="md-primary md-raised no-margin">Log In <md-icon class="material-icons">launch</md-icon></md-button>
+        </form>
+        <li><md-button class="button font-white bold" ng-click="showDialog()">Forgot Password?</md-button></li>
+      </ul>
+    </div><!-- /.container-fluid -->
+  </nav>
+</div>
+
 <!-- login/signup pages get rendered below -->
 <div ui-view></div>
-
 <div ui-view="forgot-password"></div>
 <div ui-view="update-password"></div>
 <div ui-view="user-new"></div>
@@ -15,3 +39,28 @@
 <!-- Note: Forgot password should be taken out of this file as
      user is not logged in at this moment it's just a boilerplate code
 -->
+<div class="user footer box-shadow dark font-white">
+  <div class="center">
+    &copy; MemryBook
+  </div>
+</div>
+
+
+<!-- Popover for editing and deleting-->
+<script id="forgot-password-dialog.html" type="text/ng-template">
+  <md-dialog aria-label="Forgot Password">
+    <md-dialog-content>
+    <h2>Forgot Your Password? No Problem...</h2>
+      <form>
+        <div class="form-group">
+          <label>Enter your email and we will send you a new one.</label>
+          <input type="email" class="form-control" placeholder="Email" ng-model="user.email">
+        </div>
+        <div class="form-group">
+          <md-button type="submit" class="md-primary md-raised no-margin">Reset My Password</md-button>
+          <md-button class="md-warn no-margin pull-right" ng-click="closeDialog()">Cancel</md-button>
+        </div>
+      </form>
+    </md-dialog-content>
+  </md-dialog>
+</script>
