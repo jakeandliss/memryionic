@@ -82,7 +82,7 @@ angular.module('memryApp', [
     abstract: true,
     // default.html is the file responsible for layout of
     // ionic or desktop views
-    templateUrl: "default.html"
+    templateUrl: "app.html"
       // Later this state will implement a resolve for AuthService
       // So it is left in the app.js
   });

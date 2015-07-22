@@ -12,7 +12,8 @@
     "videogular-overlay-play": "latest",
     "videogular-poster": "latest",
     "videogular-ima-ads": "latest",
-    "videogular-angulartics": "latest"
+    "videogular-angulartics": "latest",
+    "flat-ui": "2.2.2"
   },
   "dependencies": {
     "ng-device-detector": "~1.1.7"
