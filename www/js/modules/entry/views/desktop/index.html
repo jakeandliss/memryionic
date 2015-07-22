@@ -10,7 +10,7 @@
       </md-list-item>
     </md-list>
       <div ng-repeat="tag in tags">
-          <button ng-class="{'selected' : it === ul.selected }" class="btn btn-block btn-lg btn-primary margin-bottom" ui-sref="app.entries({ tag: tag.name })">
+          <button ng-class="{'selected' : it === ul.selected }" class="btn btn-block btn-primary margin-bottom" ui-sref="app.entries({ tag: tag.name })">
             {{tag.name}}
           </button>
       </div>
@@ -121,7 +121,7 @@
 
       <div class="col-xs-3" style="margin-left:-.9rem;">
         <div ng-repeat="tag in entry.tags" class="margin-bottom">
-          <button class='btn btn-block btn-lg btn-primary'>{{tag.name}}</button>
+          <button class='btn btn-block btn-primary'>{{tag.name}}</button>
         </div>
       </div>
     </div>
