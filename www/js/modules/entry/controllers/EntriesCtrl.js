@@ -66,6 +66,47 @@
       })
     };
 
+    var counter = 0;
+    var insideDropzone = false;
+
+    angular.element(document.querySelector('#entries')).on('dragenter', dragEventHandler)
+    angular.element(document.querySelector('#entries')).on('dragleave', dragLeaveHandler)
+    angular.element(document.querySelector('.dropzone')).on('dragenter', function(event){
+      counter++;
+    })
+    angular.element.bind({
+    		dragenter: function(event){
+    			 event.stopPropagation();
+           event.preventDefault();
+    			 insideDropzone = true;
+    		},
+    		dragleave: function(event){
+    			event.stopPropagation();
+          event.preventDefault();
+    			insideDropzone = false;
+    		}
+  		});
+
+    function dragEventHandler(){
+      angular.element(document.querySelectorAll('.dz-hide')).addClass('hidden')
+      angular.element(document.querySelector('.dropzone')).addClass('dropzone-custom')
+      angular.element(document.querySelector('.dz-drag')).removeClass('hidden')
+      angular.element(document.querySelector('.dz-message')).addClass('hidden')
+      counter++;
+    }
+
+    function dragLeaveHandler(){
+      counter--;
+      if (counter == 0) {
+        if (!insideDropzone) {
+          angular.element(document.querySelectorAll('.dz-hide')).removeClass('hidden')
+          angular.element(document.querySelector('.dropzone')).removeClass('dropzone-custom')
+          angular.element(document.querySelector('.dz-drag')).addClass('hidden')
+          angular.element(document.querySelector('.dz-message')).removeClass('hidden')
+        }
+      }
+    }
+
     $scope.dropzoneConfig = {
       'options': {
         'previewTemplate': document.querySelector('#preview-template').innerHTML,
@@ -81,26 +122,14 @@
         'sending': function(file, xhr, formData) {},
         'success': function(file, response) {},
         'error': function(file, response) {},
-        'dragover': function(event){
-          angular.element(document.querySelector('.dropzone')).addClass('dropzone-custom')
-          angular.element(document.querySelector('.dz-drag')).removeClass('hidden')
-          angular.element(document.querySelector('.dz-message')).addClass('hidden')
-          // angular.element(document.querySelectorAll('.dz-hide')).addClass('hidden')
-        },
-        'dragleave': function(event){
-          angular.element(document.querySelector('.dropzone')).removeClass('dropzone-custom')
-          angular.element(document.querySelector('.dz-drag')).addClass('hidden')
-          angular.element(document.querySelector('.dz-message')).removeClass('hidden')
-          // angular.element(document.querySelectorAll('.dz-hide')).removeClass('hidden')
-        },
-        'drop': function(event){
+        'drop': function(event) {
           angular.element(document.querySelector('.dz-drag')).addClass('hidden')
           angular.element(document.querySelector('.default-message')).removeClass('hidden')
           angular.element(document.querySelector('.dropzone')).removeClass('dropzone-custom')
           angular.element(document.querySelectorAll('.dz-hide')).removeClass('hidden')
         },
-        'uploadprogress': function(file, progress){
-          if (100 == progress){
+        'uploadprogress': function(file, progress) {
+          if (100 == progress) {
             angular.element(document.querySelector('.dz-progress')).remove();
           }
         }

@@ -5,6 +5,7 @@
       var config, dropzone;
       config = scope[attrs.dropzone];
       dropzone = new Dropzone(element[0], config.options);
+      dropzone.autoDiscover = false;
       angular.forEach(config.eventHandlers, function(handler, event) {
         dropzone.on(event, handler);
       });
