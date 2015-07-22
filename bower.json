@@ -13,9 +13,13 @@
     "videogular-poster": "latest",
     "videogular-ima-ads": "latest",
     "videogular-angulartics": "latest",
+    "angular-bootstrap": "latest",
     "flat-ui": "2.2.2"
   },
   "dependencies": {
     "ng-device-detector": "~1.1.7"
+  },
+  "resolutions": {
+    "angular": "1.3.13"
   }
 }
