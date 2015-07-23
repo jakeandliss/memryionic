@@ -10,7 +10,7 @@
         </div>
       </md-list-item>
     </md-list>
-      <div ng-repeat="tag in tags">
+      <div ng-repeat="tag in tags" ng-if="tag.parent_id == ''">
           <button ng-class="{'selected' : it === ul.selected }" class="btn btn-block btn-primary margin-bottom" ui-sref="app.entries({ tag: tag.name })">
             {{tag.name}}
           </button>
