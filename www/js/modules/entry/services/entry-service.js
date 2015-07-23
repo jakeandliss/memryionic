@@ -1,10 +1,19 @@
 (function() {
   angular.module('memryApp.services', [])
-
+  .directive('dropzone', function() {
+    return function(scope, element, attrs) {
+      var config, dropzone;
+      config = scope[attrs.dropzone];
+      dropzone = new Dropzone(element[0], config.options);
+      dropzone.autoDiscover = false;
+      angular.forEach(config.eventHandlers, function(handler, event) {
+        dropzone.on(event, handler);
+      });
+    };
+  })
   /* This will be called in the run method to check if we have to serve ionic
    * templates or simple angular templates
    */
-
   // Clean the below factories later
 
   .factory('Entries', function($sce) {
