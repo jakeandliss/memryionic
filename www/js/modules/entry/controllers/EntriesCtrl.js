@@ -80,5 +80,77 @@
       })
     };
 
+    var counter = 0;
+    var insideDropzone = false;
+
+    angular.element(document.querySelector('#entries')).on('dragenter', dragEventHandler)
+    angular.element(document.querySelector('#entries')).on('dragleave', dragLeaveHandler)
+    angular.element(document.querySelector('.dropzone')).on('dragenter', function(event){
+      counter++;
+    })
+    angular.element.bind({
+    		dragenter: function(event){
+    			 event.stopPropagation();
+           event.preventDefault();
+    			 insideDropzone = true;
+    		},
+    		dragleave: function(event){
+    			event.stopPropagation();
+          event.preventDefault();
+    			insideDropzone = false;
+    		}
+  		});
+
+    function dragEventHandler(){
+      angular.element(document.querySelectorAll('.dz-hide')).addClass('hidden')
+      angular.element(document.querySelector('.dropzone')).addClass('dropzone-custom')
+      angular.element(document.querySelector('.dropzone')).removeClass('hidden')
+      angular.element(document.querySelector('.dz-drag')).removeClass('hidden').parent().parent().addClass('col-sm-12').removeClass('col-sm-8')
+      angular.element(document.querySelector('.dz-message')).addClass('hidden')
+      counter++;
+    }
+
+    function dragLeaveHandler(){
+      counter--;
+      if (counter == 0) {
+        if (!insideDropzone) {
+          angular.element(document.querySelectorAll('.dz-hide')).removeClass('hidden')
+          angular.element(document.querySelector('.dropzone')).removeClass('dropzone-custom')
+          angular.element(document.querySelector('.dz-drag')).addClass('hidden').parent().parent().removeClass('col-sm-12').addClass('col-sm-8')
+          angular.element(document.querySelector('.dz-message')).removeClass('hidden')
+        }
+      }
+    }
+
+    $scope.dropzoneConfig = {
+      'options': {
+        'previewTemplate': document.querySelector('#preview-template').innerHTML,
+        'paramName': "resource[avatar]",
+        'thumbnailHeight': 120,
+        'thumbnailWidth': 120,
+        'url': '/resources',
+        'addRemoveLinks': true,
+        'dictCancelUpload': "Cancel",
+        'dictRemoveFile': "Remove",
+      },
+      'eventHandlers': {
+        'sending': function(file, xhr, formData) {},
+        'success': function(file, response) {},
+        'error': function(file, response) {},
+        'drop': function(event) {
+          angular.element(document.querySelector('.dz-drag')).addClass('hidden').parent().parent().removeClass('col-sm-12').addClass('col-sm-8')
+          angular.element(document.querySelector('.default-message')).removeClass('hidden')
+          angular.element(document.querySelector('.dropzone')).removeClass('dropzone-custom')
+          angular.element(document.querySelectorAll('.dz-hide')).removeClass('hidden')
+        },
+        'uploadprogress': function(file, progress) {
+          angular.element(document.querySelector('.dz-progress')).addClass('progress-bar')
+          if (100 == progress) {
+            angular.element(document.querySelector('.dz-progress')).remove();
+          }
+        }
+      }
+    };
+
   }
 })();
