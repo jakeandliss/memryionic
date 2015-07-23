@@ -20,7 +20,14 @@
                 {
                   name: "test 0 child child",
                   id: "18",
-                  ancestry: "10"
+                  ancestry: "10",
+                  children: [
+                    {
+                      name: "test 0 child child child",
+                      id: "19",
+                      ancestry: "18"
+                    }
+                  ]
                 }
               ]
             }
@@ -29,7 +36,7 @@
         {
           name: "test 1",
           id: "1",
-          ancestry: "0",
+          ancestry: "",
           children: [
             {
               name: "test 1 child",
@@ -41,7 +48,7 @@
         {
           name: "test 2",
           id: "2",
-          ancestry: "0",
+          ancestry: "",
           children: [
             {
               name: "test 2 child",
@@ -53,7 +60,7 @@
         {
           name: "test 3",
           id: "3",
-          ancestry: "0",
+          ancestry: "",
           children: [
             {
               name: "test 3 child",
@@ -65,7 +72,7 @@
         {
           name: "test 4",
           id: "4",
-          ancestry: "1",
+          ancestry: "",
           children: [
             {
               name: "test 4 child",
@@ -89,7 +96,7 @@
         {
           name: "test 6",
           id: "6",
-          ancestry: "5",
+          ancestry: "",
           children: [
             {
               name: "test 6 child",
@@ -101,7 +108,7 @@
         {
           name: "test 7",
           id: "7",
-          ancestry: "5",
+          ancestry: "",
           children: [
             {
               name: "test 7 child",
@@ -113,7 +120,7 @@
         {
           name: "test 8",
           id: "8",
-          ancestry: "4",
+          ancestry: "",
           children: [
             {
               name: "test 8 child",
@@ -125,7 +132,7 @@
         {
           name: "test 9",
           id: "9",
-          ancestry: "8",
+          ancestry: "",
           children: [
             {
               name: "test 9 child",
