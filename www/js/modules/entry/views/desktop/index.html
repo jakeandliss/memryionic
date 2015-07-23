@@ -21,22 +21,16 @@
     <form name="entryForm" class="box-shadow bg-white padding" ng-submit="entry.add()">
       <div class="row dz-hide">
         <div class="col-sm-8">
-          <input type="text" placeholder="Add a title to this Entry" class="form-control flat margin-bottom"  ng-model="entry.title" />
+          <input type="text" placeholder="Title this entry" class="form-control flat margin-bottom"  ng-model="entry.title" />
         </div>
         <div class="col-sm-4">
           <input type="date" class="form-control flat margin-bottom" ng-model="entry.date"/>
         </div>
       </div>
-      <div class="dz-hide">
-        <textarea placeholder="What would you like to remember?" class="form-control flat margin-bottom" ng-model="entry.content"></textarea>
+      <textarea placeholder="What would you like to remember?" rows="4" class="form-control flat margin-bottom dz-hide" ng-model="entry.content"></textarea>
+      <div class="tagsinput-primary dz-hide margin-bottom" ng-controller="TagsCtrl">
+        <input name="tagsinput" class="tagsinput expand" data-role="tagsinput" ng-model="tag.name" typeahead="name for tag in tags | filter:$viewValue |  limitTo:8" />
       </div>
-      <!-- <md-chips
-          ng-model="tags.name"
-          placeholder="Enter a Label"
-          delete-button-label="Remove Tag"
-          delete-hint="Press delete to remove tag"
-          secondary-placeholder="+Label">
-      </md-chips> -->
       <div class="row">
         <div class="col-sm-8">
           <div class="dropzone" dropzone="dropzoneConfig">
