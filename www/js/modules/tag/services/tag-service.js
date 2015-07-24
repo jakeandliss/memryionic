@@ -26,6 +26,21 @@
                       name: "test 0 child child child",
                       id: "19",
                       ancestry: "18"
+                    },
+                    {
+                      name: "test 0 child child child",
+                      id: "20",
+                      ancestry: "18"
+                    },
+                    {
+                      name: "test 0 child child child",
+                      id: "21",
+                      ancestry: "18"
+                    },
+                    {
+                      name: "test 0 child child child",
+                      id: "22",
+                      ancestry: "18"
                     }
                   ]
                 }

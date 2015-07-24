@@ -124,7 +124,7 @@
 
     $scope.dropzoneConfig = {
       'options': {
-        'previewTemplate': document.querySelector('#preview-template').innerHTML,
+        // 'previewTemplate': document.querySelector('#preview-template').innerHTML,
         'paramName': "resource[avatar]",
         'thumbnailHeight': 120,
         'thumbnailWidth': 120,

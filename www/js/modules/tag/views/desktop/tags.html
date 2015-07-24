@@ -11,7 +11,7 @@
               <button ui-sref="app.tags({ id: tag.id })" class="btn btn-primary margin-bottom">
                 <i class="icon ion-ios-pricetag"></i>
                   {{ tag.name }}
-                <span class="badge badge-assertive">2</span>
+                <span class="badge badge-assertive">{{tag.children.length}}</span>
               </button>
             </md-item>
             <ul>
@@ -48,7 +48,7 @@
      <button ui-sref="app.tags({ id: tag.id })" class="btn btn-primary margin-bottom">
        <i class="icon ion-ios-pricetag"></i>
        {{ tag.name }}
-       <span class="badge badge-assertive">2</span>
+       <span class="badge badge-assertive">{{tag.children.length}}</span>
      </button>
    </md-item>
 
