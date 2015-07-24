@@ -48,7 +48,8 @@
         attachment_file_name: "canon.mp3"
       }, {
         attachment: 'http://techslides.com/demos/sample-videos/small.mp4',
-        attachment_content_type: "video"
+        attachment_content_type: "video",
+        attachment_thumbnail: "http://content.jwplatform.com/thumbs/vM7nH0Kl-640.jpg"
       }],
       date: "2012-04-23",
       tags: [{

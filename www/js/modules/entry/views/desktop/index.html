@@ -85,10 +85,17 @@
                 <carousel>
                   <slide ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'image' || resource.attachment_content_type == 'video'">
                     <img ng-src="{{resource.attachment}}" class="md-card-image" ng-if="resource.attachment_content_type == 'image'">
-                    <video class="video-js" preload="auto" data-setup="{}" ng-if="resource.attachment_content_type == 'video'">
-                      <source ng-src="config.sources" type-"video/mp4"</source>
-                    </video>
+                    <div ng-if="resource.attachment_content_type == 'video'" class="video-thumb">
+                      <img ng-src="{{resource.attachment_thumbnail}}" class="vide">
+                      <md-icon class="material-icons">play_circle_filled</md-icon>
+
+                    <!-- <lightbox> -->
+                      <!-- <video class="video-js" preload="auto" data-setup="{}">
+                        <source ng-src="config.sources" type-"video/mp4"</source>
+                      </video> -->
+                    <!-- </lightbox> -->
                   </slide>
+                </div>
                 </carousel>
               </md-content>
             </md-tab>
@@ -99,7 +106,7 @@
                     <md-icon class="material-icons">music_note</md-icon>
                     <div class="md-list-item-text">
                       <audio controls>
-                        <source ng-src="{{ resource.attachment }}">
+                        <!-- <source ng-src="{{ resource.attachment }}"> -->
                       </audio>
                       <p> {{ resource.attachment_file_name }} </p>
                     </div>
