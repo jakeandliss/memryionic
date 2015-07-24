@@ -4,7 +4,7 @@ Each tab's child <ion-nav-view> directive will have its own
 navigation history that also transitions its views in and out.
 -->
 <!-- Ionic view -->
-<div ng-if="!isDesktopOrTablet" class="mobile">
+<div ng-if="!isDesktopOrTablet">
   <ion-tabs class="tabs-icon-top">
 
     <!-- New Entry Tab -->
@@ -31,7 +31,7 @@ navigation history that also transitions its views in and out.
 
 <!-- Desktop views -->
 <!-- Add here which we want in desktop layout when the user is logged in -->
-<div ng-if="isDesktopOrTablet" class="desktop">
+<div ng-if="isDesktopOrTablet">
   <nav class="navbar navbar-inverse navbar-embossed" role="navigation">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">

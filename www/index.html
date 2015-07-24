@@ -18,7 +18,6 @@
     </div>
 
     <!-- Mobile and Desktop CSS -->
-    <script src="http://www.dropzonejs.com/new-js/dropzone.js"></script>
     <link href="css/style.css" rel="stylesheet">
     <link href="js/modules/entry/styles/entry.css" rel="stylesheet">
     <link href="js/modules/entry/styles/dropzone.css" rel="stylesheet">
@@ -41,6 +40,7 @@
     <script src="lib/videogular-overlay-play/vg-overlay-play.js"></script>
     <script src="lib/videogular-poster/vg-poster.js"></script>
     <script src="lib/videogular-buffering/vg-buffering.js"></script>
+    <script src="http://www.dropzonejs.com/new-js/dropzone.js"></script>
 
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
@@ -72,12 +72,12 @@
   <body ng-app="memryApp">
     <!-- Desktop views -->
     <div ng-if="isDesktopOrTablet">
-      <div ui-view></div>
+      <div ui-view class="desktop"></div>
     </div>
 
     <!-- Mobile views -->
     <div ng-if="!isDesktopOrTablet">
-      <ion-nav-bar class="bar-dark">
+      <ion-nav-bar class="bar-dark mobile">
         <ion-nav-back-button>
         </ion-nav-back-button>
       </ion-nav-bar>
