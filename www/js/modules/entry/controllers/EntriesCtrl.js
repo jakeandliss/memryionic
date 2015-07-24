@@ -19,7 +19,7 @@
 
     // Add Entry
     $scope.entry.add = function(entry) {
-      $scope.entries.push($scope.entry);
+      $scope.entries.unshift($scope.entry);
       $scope.entry = '';
     };
 
