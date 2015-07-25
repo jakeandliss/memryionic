@@ -121,10 +121,13 @@
         }
       }
     }
-
+    var previewTemplate = null
+    if(document.querySelector('#preview-template') != null){
+      previewTemplate = document.querySelector('#preview-template').innerHTML
+    }
     $scope.dropzoneConfig = {
       'options': {
-        'previewTemplate': document.querySelector('#preview-template').innerHTML,
+        'previewTemplate': previewTemplate,
         'paramName': "resource[avatar]",
         'thumbnailHeight': 120,
         'thumbnailWidth': 120,
