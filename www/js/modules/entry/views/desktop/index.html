@@ -10,12 +10,13 @@
         </div>
       </md-list-item>
     </md-list>
-      <div ng-repeat="tag in tags" ng-if="tag.ancestry == ''">
-          <button ng-class="{'selected' : it === ul.selected }" class="btn btn-block btn-primary margin-bottom" ui-sref="app.entries({ tag: tag.name })">
-            {{tag.name}}
-            <md-icon class="material-icons pull-right" ng-if="tag.children.length">keyboard_arrow_right</md-icon>
-          </button>
-      </div>
+    <div ng-repeat="tag in tags" ng-if="tag.ancestry == ''" class="margin-bottom tag">
+      <a class="edit"><md-icon class="material-icons  edit hde ">mode_edit</md-icon></a>
+      <button ng-class="{'selected' : it === ul.selected }" class="btn btn-block btn-primary " ui-sref="app.entries({ tag: tag.name })">
+        {{tag.name}}
+        <md-icon class="material-icons pull-right" ng-if="tag.children.length">keyboard_arrow_right</md-icon>
+      </button>
+    </div>
   </div>
 
   <div class="col-xs-9" style="margin-right:-.9rem">
