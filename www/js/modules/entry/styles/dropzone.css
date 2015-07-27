@@ -67,39 +67,43 @@
 .dropzone .dz-preview .dz-error-message:after { content: ''; position: absolute; top: -6px; left: 64px; width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #be2626; }
 
 
-.dropzone-custom {
+.desktop .dropzone-custom {
   border: none !important;
   background: #cccccc;
   opacity: 0.5;
 }
 
-.dropzone-custom .drag{
+.desktop .dropzone-custom .drag{
   font-size: 24px;
   text-align: center;
   color: #000;
 }
 
-.dz-drag {
+.desktop .dz-drag {
     padding: 7em 0;
     text-align: center;
     background-color: #eee;
 }
 
-.dropzone * {
+.desktop .dropzone * {
   pointer-events: none;
 }
 
-.dropzone .dz-preview * {
+.desktop .dropzone .dz-preview * {
   pointer-events: initial;
 }
 
-.dropzone {
+.desktop .dropzone {
   border: 2px dashed #eee;
   padding: 0;
   min-height: 0;
 }
 
-.dropzone .dz-message {
+.desktop .dropzone .dz-message {
     text-align: center;
     margin: .5rem 0;
+}
+
+.mobile .dropzone {
+  border: none;
 }

@@ -20,6 +20,7 @@
     // Add Entry
     $scope.entry.add = function(entry) {
       $scope.entries.unshift($scope.entry);
+      $scope.modal.hide();
       $scope.entry = '';
     };
 
