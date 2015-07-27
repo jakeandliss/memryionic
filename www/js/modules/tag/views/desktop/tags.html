@@ -1,25 +1,22 @@
-<div layout="row" id="labels" layout-margin>
-  <div flex="25">
+<div class="row" id="labels">
+  <div class="col-sm-4">
   </div>
-  <div flex>
-  <md-content>
-    <md-list class="list" show-delete="shouldShowDelete" can-swipe="listCanSwipe">
+  <div class="col-sm-8">
+  <md-content >
       <nav class="navbar navbar-default navbar-inverse navbar-embossed" role="navigation">
         <ul class="nav navbar-nav nav-pills nav-stacked">
           <li ng-repeat="tag in tags" ng-if="tag.ancestry == ''">
-            <md-item>
-              <button ui-sref="app.tags({ id: tag.id })" class="btn btn-primary margin-bottom">
-                  {{ tag.name }}
-                <span class="badge badge-assertive">{{tag.children.length}}</span>
-              </button>
-            </md-item>
+            <button ui-sref="app.tags({ id: tag.id })" class="btn btn-primary margin-bottom expand">
+                {{ tag.name }}
+              <span class="badge badge-assertive">{{tag.children.length}}</span>
+            </button>
             <ul>
               <li ng-repeat="tag in tag.children" ng-include="'nested_tags'" class="nested"></li>
             </ul>
           </li>
         </ul>
       </nav>
-  </md-list>
+
 
   <!-- Partial for editing labels -->
   <form id="edit-tag">
@@ -43,14 +40,11 @@
 </div>
 
 <script type="text/ng-template" id="nested_tags">
-  <md-item>
-     <button ui-sref="app.tags({ id: tag.id })" class="btn btn-primary margin-bottom">
-       {{ tag.name }}
-       <span class="badge badge-assertive">{{tag.children.length}}</span>
-     </button>
-   </md-item>
-
-  <ul>
-    <li ng-repeat="tag in tag.children" ng-include="'nested_tags'" class="nested"></li>
-  </ul>
+<button ui-sref="app.tags({ id: tag.id })" class="btn btn-primary margin-bottom expand">
+    {{ tag.name }}
+  <span class="badge badge-assertive">{{tag.children.length}}</span>
+</button>
+<ul>
+  <li ng-repeat="tag in tag.children" ng-include="'nested_tags'" class="nested"></li>
+</ul>
 </script>

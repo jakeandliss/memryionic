@@ -54,10 +54,8 @@ Desktop CSS
     padding: 10%;
   }
 
-
-
-
 .desktop  #entries .tag .edit {
+
   float: left;
   width: 20%;
   display: inherit;
@@ -78,7 +76,6 @@ Desktop CSS
 .desktop #entries .tag:hover .edit {
   display: inherit;
 }
-
 
 /********************
 
