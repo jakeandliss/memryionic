@@ -1,36 +1,41 @@
-<ion-view view-title="Labels">
+<ion-view view-title="{{label}}">
   <ion-content>
-      <div class="item item-icon-left item-dark" >
+      <div class="item item-icon-left item-dark">
         <i class="icon ion-ios-pricetag"></i>
         {{tag.name}}
-        <span class="item-note" ng-click="">Edit</span>
+        <span class="item-note" ng-click="editLabel()">Edit</span>
       </div>
 
     <ion-list class="list" show-delete="shouldShowDelete" can-swipe="listCanSwipe">
-      <ul>
-        <li ng-repeat="tag in tags" ng-if="tag.ancestry == ''">
+      <ul> 
+        <li ng-repeat="tag in filteredTags">
           <ion-item>
             <a ui-sref="app.tags({ id: tag.id })" class="item-icon-left item-icon-right item-stable">
-              <i class="icon ion-ios-pricetag"></i>
+              <i class="icon ion-ios-pricetag"></i> 
                 {{ tag.name }}
               <span class="badge badge-assertive">{{tag.children.length}}</span>
             </a>
+            <ion-option-button class="button-assertive icon ion-edit" ng-click="edit(tag)"></ion-option-button>
+
             <ion-option-button class="button-assertive icon ion-trash-a" ng-click="remove(tag)"></ion-option-button>
+
           </ion-item>
         </li>
-      </ul>
+      </ul>  
     </ion-list>
 
+
+
     <!-- Partial for editing labels -->
-    <form id="edit-tag">
+    <form id="edit-tag" ng-show="isEditing">
       <label class="item item-input">
         <span class="input-label">Name</span>
-        <input type="text" value="Seleted Tag">
+        <input type="text" ng-model="label">
       </label>
       <label class="item item-input item-select">
-        <div class="input-label">
+        <span class="input-label">
           Parent
-        </div>
+        </span>
         <select name="parent_id">
           <option value="test 0">test 0</option>
           <option value="test 1">test 1</option>
@@ -38,6 +43,8 @@
           <option value="test 3">test 3</option>
         </select>
       </label>
+      <button class="button  button-positive" ng-click="save()">Save</button>
+      <button class="button  button-negative" ng-click="cancel()">Cancel</button>
     </form>
   </ion-content>
 </ion-view>
