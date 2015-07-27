@@ -72,15 +72,24 @@
         </div>
 
         <!-- Audio content -->
-        <div class="item item-body panel" ng-show="panel.isSelected(2)">
-          <p ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'audio'">
-            <i class="icon ion-mic-c"></i>
-            <a href="{{resource.attachment}}">{{resource.attachment_file_name}}</a>
-          </p>
-          <p>
-            Labels: <a href="#" class="subdued" ng-repeat="tag in entry.tags">{{tag.name}}{{$last ? '' : ','}}</a>
-          </p>
-        </div>
+
+
+          <ion-audio-track track="track" ng-show="panel.isSelected(2)">
+            <div class="list">
+            <ion-audio-progress-bar display-time></ion-audio-progress-bar>
+              <div class="item item-thumbnail-left" ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'audio'">
+                <img src="http://komatsushima.main.jp/wp-content/uploads/2013/12/podcast.png">
+                <ion-audio-controls>
+                  <a class="button button-icon icon" ion-audio-play></a>
+                  <ion-spinner icon="ios"></ion-spinner>
+                </ion-audio-controls>
+                <h4>{{resource.attachment_file_name}}</h4>
+              </div>
+            </div>
+            <p class="item-body">
+              Labels: <a href="#" class="subdued" ng-repeat="tag in entry.tags">{{tag.name}}{{$last ? '' : ','}}</a>
+            </p>
+          </ion-audio-track>
 
         <!-- Files content -->
         <div class="item item-body panel" ng-show="panel.isSelected(3)">

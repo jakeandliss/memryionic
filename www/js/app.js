@@ -13,8 +13,10 @@ angular.module('memryApp', [
   'reTree', // dependency of deviceDetector
   'ng.deviceDetector',
   "ngSanitize",
-  'ui.bootstrap']
-)
+  'ui.bootstrap',
+  'ionic-audio',
+  'ngCordova'
+])
 
 .run(function($ionicPlatform, $rootScope, deviceDetector) {
   $ionicPlatform.ready(function() {
