@@ -75,12 +75,19 @@
             <md-tab label="Visual">
               <md-content class="md-padding">
                 <carousel>
-                  <slide ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'image' || resource.attachment_content_type == 'video'" style="width:40%;margin:0 auto;">
+                  <slide ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'image' || resource.attachment_content_type == 'video'">
                     <img ng-src="{{resource.attachment}}" class="md-card-image" ng-if="resource.attachment_content_type == 'image'">
-                    <videogular vg-theme="config.theme.url" ng-if="resource.attachment_content_type == 'video'">
-                      <vg-media vg-src="config.sources" vg-native-controls="true"></vg-media>
-                    </videogular>
+                    <div ng-if="resource.attachment_content_type == 'video'" class="video-thumb">
+                      <img ng-src="{{resource.attachment_thumbnail}}" class="vide">
+                      <md-icon class="material-icons">play_circle_filled</md-icon>
+
+                    <!-- <lightbox> -->
+                      <!-- <video class="video-js" preload="auto" data-setup="{}">
+                        <source ng-src="config.sources" type-"video/mp4"</source>
+                      </video> -->
+                    <!-- </lightbox> -->
                   </slide>
+                </div>
                 </carousel>
               </md-content>
             </md-tab>
@@ -90,7 +97,9 @@
                   <md-list-item class="md-2-line" ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'audio'">
                     <md-icon class="material-icons">music_note</md-icon>
                     <div class="md-list-item-text">
-                      <h3> {{ resource.attachment }} </h3>
+                      <audio controls>
+                        <!-- <source ng-src="{{ resource.attachment }}"> -->
+                      </audio>
                       <p> {{ resource.attachment_file_name }} </p>
                     </div>
                   </md-list-item>

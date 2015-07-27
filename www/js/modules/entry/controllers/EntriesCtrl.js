@@ -19,7 +19,7 @@
 
     // Add Entry
     $scope.entry.add = function(entry) {
-      $scope.entries.push($scope.entry);
+      $scope.entries.unshift($scope.entry);
       $scope.entry = '';
     };
 
@@ -121,10 +121,13 @@
         }
       }
     }
-
+    var previewTemplate = null
+    if(document.querySelector('#preview-template') != null){
+      previewTemplate = document.querySelector('#preview-template').innerHTML
+    }
     $scope.dropzoneConfig = {
       'options': {
-        // 'previewTemplate': document.querySelector('#preview-template').innerHTML,
+        'previewTemplate': previewTemplate,
         'paramName': "resource[avatar]",
         'thumbnailHeight': 120,
         'thumbnailWidth': 120,
