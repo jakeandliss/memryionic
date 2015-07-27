@@ -14,7 +14,8 @@
     "videogular-ima-ads": "latest",
     "videogular-angulartics": "latest",
     "angular-bootstrap": "latest",
-    "flat-ui": "2.2.2"
+    "flat-ui": "2.2.2",
+    "angular-slick": "0.2.1"
   },
   "dependencies": {
     "ng-device-detector": "~1.1.7"
