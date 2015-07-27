@@ -9,7 +9,6 @@
           <li ng-repeat="tag in tags" ng-if="tag.ancestry == ''">
             <md-item>
               <button ui-sref="app.tags({ id: tag.id })" class="btn btn-primary margin-bottom">
-                <i class="icon ion-ios-pricetag"></i>
                   {{ tag.name }}
                 <span class="badge badge-assertive">{{tag.children.length}}</span>
               </button>
@@ -46,7 +45,6 @@
 <script type="text/ng-template" id="nested_tags">
   <md-item>
      <button ui-sref="app.tags({ id: tag.id })" class="btn btn-primary margin-bottom">
-       <i class="icon ion-ios-pricetag"></i>
        {{ tag.name }}
        <span class="badge badge-assertive">{{tag.children.length}}</span>
      </button>
