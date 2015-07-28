@@ -5,27 +5,27 @@ Mobile
 
 *******************/
 
-#welcome h1, #welcome p {
+.mobile #welcome h1, #welcome p {
 	color: #774F38;
 }
 
-#welcome img {
+.mobile #welcome img {
 	width: 30%;
 	border-radius: 100%;
 	background-color: #ECE5CE ;
 	padding: 5%;
 }
 
-#welcome h1 {
+.mobile #welcome h1 {
 	margin-top: 0;
 	margin-bottom: 0;
 }
 
-#welcome .pane, #welcome .list {
+.mobile #welcome .pane, #welcome .list {
 	background-color: #C5E0DC ;
 }
 
-#welcome .item {
+.mobile #welcome .item {
     border: none;
     margin: 5%;
 		background-color: #eee;
@@ -33,21 +33,21 @@ Mobile
   	text-align: right;
 }
 
-#welcome .list {
+.mobile #welcome .list {
     margin: 0 15%;
     border-radius: 5%;
 }
 
-#registration .row {
+.mobile #registration .row {
     padding: 0;
     margin-bottom: 1px;
 }
 
-#registration .row .first {
+.mobile #registration .row .first {
     border-right: none;
 }
 
-#registration .row .last {
+.mobile #registration .row .last {
     border-left: none;
 }
 
@@ -58,7 +58,7 @@ Desktop
 
 *******************/
 
-.user.footer {
+.desktop .user.footer {
 	margin-top: 1rem;
 	padding: 2rem;
 	background-color: #fff;
@@ -67,20 +67,20 @@ Desktop
 	bottom: 0;
 }
 
-#user .navbar-default {
+.desktop #user .navbar-default {
   border-bottom: 0 px solid white;
 }
 
-#user .navbar-default input {
+.desktop #user .navbar-default input {
 	border: none;
 }
 
-#welcome-register span.thin {
+.desktop #welcome-register span.thin {
   font-weight: lighter;
 	font-size: 18px;
 }
 
-#welcome-register .form {
+.desktop #welcome-register .form {
   box-shadow: 0 0 8px -4px;
   border-radius: 5px;
 }

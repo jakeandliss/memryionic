@@ -6,33 +6,30 @@
       $sceDelegateProvider.resourceUrlWhitelist([
         // Allow same origin resource loads.
         'self',
-        // Allow loading from assets domain.  Notice the difference between * and **.
-        'http://static.videogular.com/**'
       ]);
     })
     .controller('EntriesCtrl', EntriesCtrl)
 
-  EntriesCtrl.$inject = ['$scope', 'Entries', '$ionicModal', '$mdBottomSheet', '$sce'];
-
-  function EntriesCtrl($scope, Entries, $ionicModal, $mdBottomSheet, $sce) {
+  EntriesCtrl.$inject = ['$scope', 'Entries', '$ionicModal', '$mdBottomSheet', '$sce', '$ionicPopover'];
+  function EntriesCtrl($scope, Entries, $ionicModal, $mdBottomSheet, $sce, $ionicPopover) {
     $scope.entry = {};
 
     // Add Entry
     $scope.entry.add = function(entry) {
       $scope.entries.unshift($scope.entry);
+      $scope.modal.hide(); // hide mobile form on submit
       $scope.entry = '';
     };
 
     // Edit Entry
     $scope.entries = Entries.all();
     var config = {
-      sources: Entries.getVideos(),
-      theme: {url: "http://www.videogular.com/styles/themes/default/latest/videogular.css" }
+      sources: Entries.getVideos()
     };
     $scope.config = config;
 
     $scope.edit = function(entry) {
-      Entries.remove(entry);
+      $scope.edit(entry);
     };
 
     // Update Entry
@@ -42,10 +39,38 @@
 
     // Remove Entry
     $scope.remove = function(entry) {
-      Entries.remove(entry);
+      $scope.remove(entry);
     };
 
     $scope.entry.date = new Date();
+
+    if (window.templateMode == "mobile") {
+      $ionicPopover.fromTemplateUrl('my-popover.html', {
+        scope: $scope
+      }).then(function(popover) {
+        $scope.popover = popover;
+      });
+
+      $scope.openPopover = function($event) {
+        $scope.popover.show($event);
+      };
+
+      $scope.closePopover = function() {
+        $scope.popover.hide();
+      };
+      //Cleanup the popover when we're done with it!
+      $scope.$on('$destroy', function() {
+        $scope.popover.remove();
+      });
+      // Execute action on hide popover
+      $scope.$on('popover.hidden', function() {
+        // Execute action
+      });
+      // Execute action on remove popover
+      $scope.$on('popover.removed', function() {
+        // Execute action
+      })
+    };
 
     // This modal should only be used for mobile.
     $ionicModal.fromTemplateUrl('/js/modules/entry/views/mobile/new.html', function($ionicModal) {
@@ -57,7 +82,7 @@
       animation: 'slide-in-up'
     });
 
-
+    // items for bottom sheet
     $scope.items = [{
       name: 'Edit',
       icon: 'edit'
@@ -73,13 +98,10 @@
       $scope.alert = '';
       $mdBottomSheet.show({
         templateUrl: '/js/modules/entry/views/desktop/bottom-sheet.html',
-
-        // parent:
-      }).then(function(clickedItem) {
-        $scope.alert = clickedItem.name + ' clicked!';
       })
     };
 
+    // Dropzone
     var counter = 0;
     var insideDropzone = false;
 
@@ -129,8 +151,8 @@
       'options': {
         'previewTemplate': previewTemplate,
         'paramName': "resource[avatar]",
-        'thumbnailHeight': 120,
-        'thumbnailWidth': 120,
+        'thumbnailHeight': 100,
+        'thumbnailWidth': 100,
         'url': '/resources',
         'addRemoveLinks': true,
         'dictCancelUpload': "Cancel",

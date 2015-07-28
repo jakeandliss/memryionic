@@ -25,9 +25,9 @@
 
   <ion-content class="has-subheader" ng-controller="EntriesCtrl as entry">
 
-    <div class="list card" ng-repeat="entry in entries | orderBy:'-date'">
-      <div class="item item-text-wrap gray" ng-controller="PopoverCtrl">
-        <button class="button button-icon icon ion-android-more-horizontal" style="float:right;" ng-click="openPopover($event)"></button>
+    <div class="list card" ng-repeat="entry in entries">
+      <div class="item item-text-wrap gray">
+        <i class="button-icon icon ion-android-more-horizontal" style="float:right;" ng-click="openPopover($event)"></i>
         <h2>{{entry.title}}</h2>
         <p>{{entry.date | date: "longDate"}}</p>
       </div>
@@ -119,10 +119,10 @@
   <ion-popover-view>
     <ion-content>
       <div class="list" ng-controller="EditCtrl">
-        <a class="item" href="#" ng-click="modal.show(entry)">
+        <a class="item" ng-click="modal.show(id)" ng-model="entry.id">
           Edit
         </a>
-        <a class="item" href="#" ng-click="entry.remove()">
+        <a class="item" ng-click="entry.remove()">
           Delete
         </a>
       </div>
