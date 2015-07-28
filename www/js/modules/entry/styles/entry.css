@@ -5,9 +5,16 @@ Desktop CSS
 
 *********************/
 
-.desktop #entries {
-  margin-right: 1rem;
-  margin-left: 1rem;
+.desktop {
+    margin-right: 1rem !important;
+    margin-left: 1rem !important;
+}
+
+.desktop .navbar {
+    margin-bottom: 1rem;
+    /*margin-right: -1rem;
+    margin-left: -1rem;
+    border-radius: 0;*/
 }
 
 .desktop #entries .entry .header {
@@ -75,6 +82,45 @@ Desktop CSS
 
 .desktop #entries .tag:hover .edit {
   display: inherit;
+}
+
+.desktop #entries .header h2 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.desktop #entries .header .date {
+    color: #aaa;
+}
+
+.desktop #entries .content {
+    padding-bottom: 0;
+}
+
+.desktop .fancy {
+  line-height: 0.5;
+  text-align: center;
+}
+.desktop .fancy span {
+  display: inline-block;
+  position: relative;
+}
+.desktop .fancy span:before,
+.desktop .fancy span:after {
+  content: "";
+  position: absolute;
+  height: 5px;
+  border-bottom: 1px solid #ddd;
+  top: 0;
+  width: 100%;
+}
+.desktop .fancy span:before {
+  right: 100%;
+  margin-right: 15px;
+}
+.desktop .fancy span:after {
+  left: 100%;
+  margin-left: 15px;
 }
 
 /********************

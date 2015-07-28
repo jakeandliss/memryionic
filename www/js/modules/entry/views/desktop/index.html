@@ -1,4 +1,4 @@
-<div class="row desktop" id="entries">
+<div class="row" id="entries">
   <div class="col-sm-3" ng-controller="TagsCtrl as tags">
 
     <md-list>
@@ -20,7 +20,7 @@
   </div>
 
   <div class="col-xs-9" style="margin-right:-.9rem">
-    <form name="entryForm" class="box-shadow bg-white padding" ng-submit="entry.add()">
+    <form name="entryForm" class="bg-white padding" ng-submit="entry.add()">
       <div class="row dz-hide">
         <div class="col-sm-8">
           <input type="text" placeholder="Title this entry" class="form-control flat margin-bottom"  ng-model="entry.title" />
@@ -56,14 +56,14 @@
       <div class="col-sm-9">
         <md-card class="entry">
           <md-card-content class="header">
-            <md-button class="pull-right" aria-label="Edit or Delete" class="md-primary md-raised" ng-click="showBottomSheet()">
+            <md-button class="pull-right no-margin" aria-label="Edit or Delete" class="md-primary md-raised" ng-click="showBottomSheet()">
               <md-icon class="material-icons">more_horiz</md-icon>
               <md-tooltip>
                 Edit or Delete
               </md-tooltip>
             </md-button>
+            <p class="date fancy"><span>{{entry.date | date: "longDate"}}</span></p>
             <h2 class="md-title">{{entry.title}}</h2>
-            <p>{{entry.date | date: "longDate"}}</p>
           </md-card-content>
           <md-card-content class="content">
             <p>
@@ -139,7 +139,7 @@
     <div class="dz-details">
       <div class="dz-size"><span data-dz-size=""></span></div>
     </div>
-    <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress=""></span></div>
+    <div class="dz-progress progress"><span class="dz-upload progress-bar" data-dz-uploadprogress=""></span></div>
     <div class="dz-error-message hidden"><span data-dz-errormessage=""></span></div>
     <div class="dz-success-mark">
       <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">

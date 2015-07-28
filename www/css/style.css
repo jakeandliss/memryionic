@@ -79,6 +79,7 @@ md-bottom-sheet {
 
 md-card {
 	margin: inherit;
+  box-shadow: none;
 }
 
 md-content {
