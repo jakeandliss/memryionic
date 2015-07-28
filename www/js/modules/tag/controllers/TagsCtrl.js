@@ -2,15 +2,20 @@
   angular.module('memryApp')
     .controller('TagsCtrl', TagsCtrl);
 
-    TagsCtrl.$inject = ['$state', '$stateParams', '$scope', 'Tags'];
-    function TagsCtrl($state, $stateParams, $scope, Tags){
+    TagsCtrl.$inject = ['$state', '$stateParams','$ionicListDelegate', '$scope', 'Tags'];
+    function TagsCtrl($state, $stateParams,$ionicListDelegate, $scope, Tags){
       $scope.tags = Tags.all();
       $scope.selectedTab = 1;
       $scope.filteredTags;
+      $scope.selectedId=null;
       $scope.label = "Label";
       $scope.labelId = null;
       $scope.edit = false;
+      $scope.showIt=false;
+      if ($stateParams.id){
 
+          $scope.showIt=true;
+        };
       $scope.filterTags = function(){
 
         if($stateParams.id)
@@ -25,6 +30,7 @@
         }
         else
         {
+           
           $scope.filteredTags = $scope.tags;
         }
       };
@@ -35,9 +41,13 @@
         Tags.remove(tag);
       };
 
-      $scope.edit = function(tag)
+      $scope.edit = function($event,tag)
       {
-          $scope.isEditing = true;
+        var test= angular.element($event.target).parent().parent();
+        $scope.selectedId=tag.id;
+        $ionicListDelegate.closeOptionButtons();
+        test.after(document.querySelector("#edit-tag"));
+        $scope.isEditing = true;
       };
 
       $scope.save = function()
@@ -57,7 +67,6 @@
       
       $scope.shouldShowDelete = false;
       $scope.listCanSwipe = true
-      
-      
+     
     };
 })();
