@@ -93,14 +93,13 @@
                     </videogular>
                   </slide>
                 </carousel> -->
-                <div style="width:60%;">
-                <slick dots="true" infinite="true" slides-to-show="3" slides-to-scroll="3">
-                  <div><div class="image"><img data-lazy="https://pbs.twimg.com/profile_images/514549811765211136/9SgAuHeY.png"/></div></div>
-                  <div><div class="image"><img data-lazy="https://pbs.twimg.com/profile_images/514549811765211136/9SgAuHeY.png"/></div></div>
-                  <div><div class="image"><img data-lazy="https://pbs.twimg.com/profile_images/514549811765211136/9SgAuHeY.png"/></div></div>
-                  <div><div class="image"><img data-lazy="https://pbs.twimg.com/profile_images/514549811765211136/9SgAuHeY.png"/></div></div>
+
+                <slick class="slider single-item" init-onload="true" data="entry">
+                  <div ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'image' || resource.attachment_content_type == 'video'">
+                    <img ng-src="{{resource.attachment}}" class="md-card-image" ng-if="resource.attachment_content_type == 'image'">
+                  </div>
                 </slick>
-              </div>
+
               </md-content>
             </md-tab>
             <md-tab label="Audio">
