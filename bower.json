@@ -15,7 +15,7 @@
     "videogular-angulartics": "latest",
     "angular-bootstrap": "latest",
     "flat-ui": "2.2.2",
-    "angular-slick": "0.2.1"
+    "angular-slick-carousel": "3.0.4"
   },
   "dependencies": {
     "ng-device-detector": "~1.1.7"

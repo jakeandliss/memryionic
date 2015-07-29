@@ -30,6 +30,16 @@
       theme: {url: "http://www.videogular.com/styles/themes/default/latest/videogular.css" }
     };
     $scope.config = config;
+    $scope.slickConfig = {
+      initialSlide: 0,
+      autoplay: false,
+  	  slidesToShow: 1,
+  	  centerPadding: "25%",
+  	  focusOnSelect: true,
+  	  arrows: false,
+  	  centerMode: true,
+      infinite: true
+    }
 
     $scope.edit = function(entry) {
       Entries.remove(entry);

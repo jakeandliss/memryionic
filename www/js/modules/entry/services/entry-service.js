@@ -28,15 +28,6 @@
         attachment: 'https://pbs.twimg.com/profile_images/514549811765211136/9SgAuHeY.png',
         attachment_content_type: "image"
       },{
-        attachment: 'http://vasyabigi.github.io/angular-slick/images/lazyfonz1.png',
-        attachment_content_type: "image"
-      },{
-        attachment: 'http://vasyabigi.github.io/angular-slick/images/lazyfonz2.png',
-        attachment_content_type: "image"
-      },{
-        attachment: 'http://vasyabigi.github.io/angular-slick/images/lazyfonz3.png',
-        attachment_content_type: "image"
-      }, {
         attachment: 'https://avatars3.githubusercontent.com/u/11214?v=3&s=460',
         attachment_content_type: "image"
       }, {
