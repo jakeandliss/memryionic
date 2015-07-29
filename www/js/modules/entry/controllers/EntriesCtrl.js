@@ -10,8 +10,8 @@
     })
     .controller('EntriesCtrl', EntriesCtrl)
 
-  EntriesCtrl.$inject = ['$scope', 'Entries', '$ionicModal', '$mdBottomSheet', '$sce', '$ionicPopover'];
-  function EntriesCtrl($scope, Entries, $ionicModal, $mdBottomSheet, $sce, $ionicPopover) {
+  EntriesCtrl.$inject = ['$scope', 'Entries', '$ionicModal', '$mdBottomSheet', '$sce', '$ionicPopover', 'Lightbox'];
+  function EntriesCtrl($scope, Entries, $ionicModal, $mdBottomSheet, $sce, $ionicPopover, Lightbox) {
     $scope.entry = {};
 
     // Add Entry
@@ -175,6 +175,12 @@
           }
         }
       }
+    };
+
+    var images = $scope.entry.resources // images variable should contain the array of images and videos associated with the entry where it is triggered
+
+    $scope.openLightboxModal = function (index) {
+      Lightbox.openModal($scope.images, index);
     };
 
   }

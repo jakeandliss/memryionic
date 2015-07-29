@@ -76,10 +76,13 @@
               <md-content class="md-padding">
                 <carousel>
                   <slide ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'image' || resource.attachment_content_type == 'video'">
-                    <img ng-src="{{resource.attachment}}" class="md-card-image" ng-if="resource.attachment_content_type == 'image'">
+                    <div ng-if="resource.attachment_content_type == 'image'">
+                      <img ng-src="{{resource.attachment}}" class="md-card-image">
+                      <a ng-click="openLightboxModal($index)" class="material-icons pointer pop-out">open_in_new</a>
+                    </div>
                     <div ng-if="resource.attachment_content_type == 'video'" class="video-thumb">
                       <img ng-src="{{resource.attachment_thumbnail}}" class="vide">
-                      <md-icon class="material-icons">play_circle_filled</md-icon>
+                      <a ng-click="openLightboxModal($index)" class="material-icons">play_circle_filled</a>
 
                     <!-- <lightbox> -->
                       <!-- <video class="video-js" preload="auto" data-setup="{}">
