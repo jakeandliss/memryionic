@@ -59,8 +59,14 @@ md-bottom-sheet {
   position: fixed !important;
 }
 md-card {
-  margin: inherit;
+	margin: inherit;
+  box-shadow: none;
 }
+
+md-content {
+  background: none;
+}
+
 // Rules for sizing the icon.
 .material-icons.md-18 {
   display: inline;
