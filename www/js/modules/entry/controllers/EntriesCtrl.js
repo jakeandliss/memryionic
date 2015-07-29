@@ -177,9 +177,8 @@
       }
     };
 
-    var images = $scope.entry.resources // images variable should contain the array of images and videos associated with the entry where it is triggered
-
     $scope.openLightboxModal = function (index) {
+      var images = // images variable should contain the array of images and videos associated with the entry where it is triggered
       Lightbox.openModal($scope.images, index);
     };
 
