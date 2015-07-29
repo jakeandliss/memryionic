@@ -141,22 +141,3 @@ Color Styling
 .dark button, .dark p, .dark i, .dark a, .dark h1 {
   color: #fff !important;
 }
-
-
-.slick-slide {
-  width: 100%;
-  transform: scale(.92);
-  -webkit-transform: scale(.92);
-  -moz-transform: scale(.92);
-  -ms-transform: scale(.92);
-}
-.slick-slide.slick-current.slick-active {
-  transform: scale(1);
-  -webkit-transform: scale(1);
-  -moz-transform: scale(1);
-  -ms-transform: scale(1);
-  -webkit-transition: all .4s ease-in-out;
-  -ms-transition: all .4s ease-in-out;
-  -moz-transition: all .4s ease-in-out;
-  -o-transition: all .4s ease-in-out;
-}

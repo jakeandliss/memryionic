@@ -77,12 +77,12 @@
 
 
               <md-content class="md-padding">
-                <slick settings="slickConfig">
+                <slick settings="slickConfig" class="slick-uninitialized">
                   <div class="slick" ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'image' || resource.attachment_content_type == 'video'">
                      <img ng-src="{{resource.attachment}}" class="md-card-image" ng-if="resource.attachment_content_type == 'image'">
                      <div ng-if="resource.attachment_content_type == 'video'" class="video-thumb">
-                       <img ng-src="{{resource.attachment_thumbnail}}" class="vide">
-                       <md-icon class="material-icons">play_circle_filled</md-icon>
+                       <img ng-src="{{resource.attachment_thumbnail}}" class="video">
+                       <md-icon class="material-icons" ui-sref="user.new">play_circle_filled</md-icon>
                      </div>
                   </div>
                 </slick>
