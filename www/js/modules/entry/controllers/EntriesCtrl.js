@@ -36,7 +36,7 @@
   	  slidesToShow: 1,
   	  centerPadding: "25%",
   	  focusOnSelect: true,
-  	  arrows: false,
+  	  arrows: true,
   	  centerMode: true,
       infinite: true
     }
