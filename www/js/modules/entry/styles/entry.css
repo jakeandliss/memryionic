@@ -123,6 +123,11 @@ Desktop CSS
   margin-left: 15px;
 }
 
+.desktop .dropdown-menu {
+  right: 0px !important;
+  left: initial !important;
+  padding: 5px;
+}
 /********************
 
 Mobile CSS
