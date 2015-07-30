@@ -4,7 +4,7 @@
   font-family: 'Ubuntu', sans-serif;
 }
 body {
-  display: table;
+  position: inherit;
   height: 100%;
   background-color: #eee;
   width: 100%;
