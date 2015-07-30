@@ -38,17 +38,6 @@
       arrows: false,
       centerMode: true,
       infinite: true,
-      responsive: [{
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1
-        }
-      }, {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1
-        }
-      }]
     }
 
     $scope.edit = function(entry) {
