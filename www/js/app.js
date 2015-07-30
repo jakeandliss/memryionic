@@ -13,7 +13,7 @@ angular.module('memryApp', [
   'reTree', // dependency of deviceDetector
   'ng.deviceDetector',
   "ngSanitize",
-  'ui.bootstrap']
+  'ui.bootstrap','ngAnimate','ngTouch']
 )
 
 .run(function($ionicPlatform, $rootScope, deviceDetector) {

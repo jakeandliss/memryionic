@@ -21,17 +21,26 @@
         <label class="item item-input">
           <textarea rows="7" placeholder="What would you like to remember?" ng-model="entry.content"></textarea>
         </label>
-        <label class="item item-input">
-          <i class="icon ion-ios-pricetag placeholder-icon"></i>
-          <input type="text" placeholder="Labels" ng-model="entry.tags">
-        </label>
-        <label class="item item-input">
-          <input type="date" placeholder="date" ng-model="entry.date">
-        </label>
-        <div class="dropzone"></div>
+            <label class="item item-input">
+              <i class="icon ion-ios-pricetag placeholder-icon"></i>
+              <input type="text" placeholder="Labels" ng-model="entry.tags">
+            </label>
+            <label class="item item-input">
+              <input type="date" placeholder="date" ng-model="entry.date">
+            </label>
+            <div class="dropzone" >
+              <div class="dz-drag hidden"><p>Drag files here</p></div>
+              <div class="dz-message default-message">
+                <md-icon class="material-icons md-36 pull-left">attach_file</md-icon>
+                <md-tooltip>
+                  Attach Video, Image, Audio, or PDF
+                </md-tooltip>
+                <p>Drag or click to upload</p>
+              </div>
+            </div>
       </div>
-    </form>
 
+    </form>
     <!-- Dropzone Preview Template -->
     <div id="preview-template" style="display: none;">
         <div class="dz-preview dz-file-preview">

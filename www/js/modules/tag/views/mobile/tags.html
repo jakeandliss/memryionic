@@ -30,13 +30,13 @@
     <form id="edit-tag" ng-show="isEditing">
       <label class="item item-input">
         <span class="input-label">Name</span>
-        <input type="text" ng-model="label">
+        <input type="text" ng-model="selectedTag.name">
       </label>
       <label class="item item-input item-select">
         <span class="input-label">
           Parent
         </span>
-        <select name="parent_id">
+        <select name="parent_id" ng-model="selectedTag.id">
           <option ng-repeat='tag in tags' value='{{tag.id}}'>{{tag.name}}</option>
         </select>
       </label>
