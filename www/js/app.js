@@ -15,7 +15,9 @@ angular.module('memryApp', [
   "ngSanitize",
   'ui.bootstrap',
   'ionic-audio',
-  'ngCordova'
+  'ngCordova',
+  "slickCarousel",
+  'ui.bootstrap'
 ])
 
 .run(function($ionicPlatform, $rootScope, deviceDetector) {

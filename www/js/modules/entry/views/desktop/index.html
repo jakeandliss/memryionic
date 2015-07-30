@@ -26,7 +26,10 @@
           <input type="text" placeholder="Title this entry" class="form-control flat margin-bottom"  ng-model="entry.title" />
         </div>
         <div class="col-sm-4">
-          <input type="date" class="form-control flat margin-bottom" ng-model="entry.date"/>
+          <div class="input-group">
+            <input type="text" class="form-control flat" datepicker-popup="{{format}}" ng-model="entry.date" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+            <span class="input-group-addon flat" ng-click="open($event)"><i class="fui-calendar-solid"></i></span>
+          </div>
         </div>
       </div>
       <textarea placeholder="What would you like to remember?" rows="4" class="form-control flat margin-bottom dz-hide" ng-model="entry.content"></textarea>
@@ -73,22 +76,20 @@
 
           <md-tabs md-dynamic-height md-border-bottom>
             <md-tab label="Visual">
-              <md-content class="md-padding">
-                <carousel>
-                  <slide ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'image' || resource.attachment_content_type == 'video'">
-                    <img ng-src="{{resource.attachment}}" class="md-card-image" ng-if="resource.attachment_content_type == 'image'">
-                    <div ng-if="resource.attachment_content_type == 'video'" class="video-thumb">
-                      <img ng-src="{{resource.attachment_thumbnail}}" class="vide">
-                      <md-icon class="material-icons">play_circle_filled</md-icon>
 
-                    <!-- <lightbox> -->
-                      <!-- <video class="video-js" preload="auto" data-setup="{}">
-                        <source ng-src="config.sources" type-"video/mp4"</source>
-                      </video> -->
-                    <!-- </lightbox> -->
-                    </div>
-                  </slide>
-                </carousel>
+
+
+              <md-content class="md-padding">
+                <slick settings="slickConfig" class="slick-uninitialized">
+                  <div class="slick" ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'image' || resource.attachment_content_type == 'video'">
+                     <img ng-src="{{resource.attachment}}" class="md-card-image" ng-if="resource.attachment_content_type == 'image'">
+                     <div ng-if="resource.attachment_content_type == 'video'" class="video-thumb">
+                       <img ng-src="{{resource.attachment_thumbnail}}" class="video">
+                       <md-icon class="material-icons" ui-sref="user.new">play_circle_filled</md-icon>
+                     </div>
+                  </div>
+                </slick>
+
               </md-content>
             </md-tab>
             <md-tab label="Audio">

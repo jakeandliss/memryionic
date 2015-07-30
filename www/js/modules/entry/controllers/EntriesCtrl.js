@@ -28,6 +28,18 @@
     };
     $scope.config = config;
 
+
+    $scope.slickConfig = {
+      initialSlide: 0,
+      autoplay: false,
+      slidesToShow: 1,
+      centerPadding: "25%",
+      focusOnSelect: true,
+      arrows: false,
+      centerMode: true,
+      infinite: true,
+    }
+
     $scope.edit = function(entry) {
       $scope.edit(entry);
     };
@@ -39,7 +51,9 @@
 
     // Remove Entry
     $scope.remove = function(entry) {
-      $scope.remove(entry);
+      if (confirm('Are you sure you want to delete this?')){
+        Entries.remove(entry);
+      }
     };
 
     $scope.entry.date = new Date();
@@ -107,23 +121,23 @@
 
     angular.element(document.querySelector('#entries')).on('dragenter', dragEventHandler)
     angular.element(document.querySelector('#entries')).on('dragleave', dragLeaveHandler)
-    angular.element(document.querySelector('.dropzone')).on('dragenter', function(event){
+    angular.element(document.querySelector('.dropzone')).on('dragenter', function(event) {
       counter++;
     })
     angular.element.bind({
-    		dragenter: function(event){
-    			 event.stopPropagation();
-           event.preventDefault();
-    			 insideDropzone = true;
-    		},
-    		dragleave: function(event){
-    			event.stopPropagation();
-          event.preventDefault();
-    			insideDropzone = false;
-    		}
-  		});
+      dragenter: function(event) {
+        event.stopPropagation();
+        event.preventDefault();
+        insideDropzone = true;
+      },
+      dragleave: function(event) {
+        event.stopPropagation();
+        event.preventDefault();
+        insideDropzone = false;
+      }
+    });
 
-    function dragEventHandler(){
+    function dragEventHandler() {
       angular.element(document.querySelectorAll('.dz-hide')).addClass('hidden')
       angular.element(document.querySelector('.dropzone')).addClass('dropzone-custom')
       angular.element(document.querySelector('.dropzone')).removeClass('hidden')
@@ -132,7 +146,7 @@
       counter++;
     }
 
-    function dragLeaveHandler(){
+    function dragLeaveHandler() {
       counter--;
       if (counter == 0) {
         if (!insideDropzone) {
@@ -185,15 +199,44 @@
     $scope.play = function(src) {
        var media = new Media(src, null, null, mediaStatusCallback);
        $cordovaMedia.play(media);
-   }
+    }
 
-   var mediaStatusCallback = function(status) {
+    var mediaStatusCallback = function(status) {
        if(status == 1) {
            $ionicLoading.show({template: 'Loading...'});
        } else {
            $ionicLoading.hide();
        }
-   }
+    }
 
-  }
+    $scope.open = function($event) {
+    $event.preventDefault();
+    $event.stopPropagation();
+    $scope.opened = true;
+    };
+
+    // Datepicker
+    $scope.dateOptions = {
+
+    };
+
+    $scope.formats = ['longDate'];
+    $scope.format = $scope.formats[0];
+
+    var tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    var afterTomorrow = new Date();
+    afterTomorrow.setDate(tomorrow.getDate() + 2);
+    $scope.events =
+      [
+        {
+          date: tomorrow,
+          status: 'full'
+        },
+        {
+          date: afterTomorrow,
+          status: 'partially'
+        }
+      ];
+    }
 })();

@@ -27,7 +27,7 @@
       resources: [{
         attachment: 'https://pbs.twimg.com/profile_images/514549811765211136/9SgAuHeY.png',
         attachment_content_type: "image"
-      }, {
+      },{
         attachment: 'https://avatars3.githubusercontent.com/u/11214?v=3&s=460',
         attachment_content_type: "image"
       }, {
@@ -49,7 +49,7 @@
       }, {
         attachment: 'http://techslides.com/demos/sample-videos/small.mp4',
         attachment_content_type: "video",
-        attachment_thumbnail: "http://content.jwplatform.com/thumbs/vM7nH0Kl-640.jpg"
+        attachment_thumbnail: "https://xenforo.com/community/data/xengallery/111/111665-2c14996ac0401ed7ab0dfc762064120e.jpg"
       }],
       date: "2012-04-23",
       tags: [{

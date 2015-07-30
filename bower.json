@@ -7,7 +7,8 @@
     "angular-sanitize": "latest",
     "angular-bootstrap": "latest",
     "flat-ui": "2.2.2",
-    "ionic-audio": "latest"
+    "ionic-audio": "latest",
+    "angular-slick-carousel": "3.0.4"
   },
   "dependencies": {
     "ng-device-detector": "~1.1.7"
