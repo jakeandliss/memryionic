@@ -7,7 +7,8 @@
       $scope.user = {
         first_name: "Jake",
         last_name: "Thompson",
-        email: "test@gmail.com"
+        email: "test@gmail.com",
+        avatar: "https://pbs.twimg.com/profile_images/514549811765211136/9SgAuHeY.png"
       };
 
       $scope.showDialog = function(ev) {

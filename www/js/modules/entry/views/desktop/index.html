@@ -65,8 +65,15 @@
                 Edit or Delete
               </md-tooltip>
             </md-button>
-            <p class="date fancy"><span>{{entry.date | date: "longDate"}}</span></p>
+            <md-list class="no-margin">
+            <md-list-item class="md-2-line no-margin">
+              <img ng-src="{{user.avatar}}" class="md-avatar" ng-controller="UserCtrl">
+              <div class="md-list-item-text">
             <h2 class="md-title">{{entry.title}}</h2>
+            <h4 class="date">Posted by you on {{entry.date | date: "longDate"}} ({{entry.date | timeAgo }}).</h4>
+          </div>
+            </md-list-item>
+          </md-list>
           </md-card-content>
           <md-card-content class="content">
             <p>
@@ -76,9 +83,6 @@
 
           <md-tabs md-dynamic-height md-border-bottom>
             <md-tab label="Visual">
-
-
-
               <md-content class="md-padding">
                 <slick settings="slickConfig" class="slick-uninitialized">
                   <div class="slick" ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'image' || resource.attachment_content_type == 'video'">
