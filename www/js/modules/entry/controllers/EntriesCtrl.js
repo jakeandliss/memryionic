@@ -27,15 +27,28 @@
       sources: Entries.getVideos()
     };
     $scope.config = config;
+
+
     $scope.slickConfig = {
       initialSlide: 0,
       autoplay: false,
-  	  slidesToShow: 1,
-  	  centerPadding: "25%",
-  	  focusOnSelect: true,
-  	  arrows: true,
-  	  centerMode: true,
-      infinite: true
+      slidesToShow: 1,
+      centerPadding: "25%",
+      focusOnSelect: true,
+      arrows: false,
+      centerMode: true,
+      infinite: true,
+      responsive: [{
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1
+        }
+      }, {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1
+        }
+      }]
     }
 
     $scope.edit = function(entry) {
@@ -117,23 +130,23 @@
 
     angular.element(document.querySelector('#entries')).on('dragenter', dragEventHandler)
     angular.element(document.querySelector('#entries')).on('dragleave', dragLeaveHandler)
-    angular.element(document.querySelector('.dropzone')).on('dragenter', function(event){
+    angular.element(document.querySelector('.dropzone')).on('dragenter', function(event) {
       counter++;
     })
     angular.element.bind({
-    		dragenter: function(event){
-    			 event.stopPropagation();
-           event.preventDefault();
-    			 insideDropzone = true;
-    		},
-    		dragleave: function(event){
-    			event.stopPropagation();
-          event.preventDefault();
-    			insideDropzone = false;
-    		}
-  		});
+      dragenter: function(event) {
+        event.stopPropagation();
+        event.preventDefault();
+        insideDropzone = true;
+      },
+      dragleave: function(event) {
+        event.stopPropagation();
+        event.preventDefault();
+        insideDropzone = false;
+      }
+    });
 
-    function dragEventHandler(){
+    function dragEventHandler() {
       angular.element(document.querySelectorAll('.dz-hide')).addClass('hidden')
       angular.element(document.querySelector('.dropzone')).addClass('dropzone-custom')
       angular.element(document.querySelector('.dropzone')).removeClass('hidden')
@@ -142,7 +155,7 @@
       counter++;
     }
 
-    function dragLeaveHandler(){
+    function dragLeaveHandler() {
       counter--;
       if (counter == 0) {
         if (!insideDropzone) {
