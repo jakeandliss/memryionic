@@ -135,8 +135,6 @@ Color Styling
 .dark button, .dark p, .dark i, .dark a, .dark h1 {
   color: #fff !important;
 }
-
-
 .slick-slide {
   width: 100%;
   transform: scale(.92);
