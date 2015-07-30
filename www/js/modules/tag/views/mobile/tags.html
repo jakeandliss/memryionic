@@ -8,20 +8,15 @@
 
     <ion-list class="list" show-delete="shouldShowDelete" can-swipe="listCanSwipe">
       <ul>
-        <li ng-repeat="tag in tags" ng-if="tag.parent_id == ''">
+        <li ng-repeat="tag in tags" ng-if="tag.ancestry == ''">
           <ion-item>
-               <a ui-sref="app.tags({ id: tag.id })" class="item-icon-left item-icon-right item-stable">
-                 <i class="icon ion-ios-pricetag"></i>
-                 {{ tag.name }}
-                 <span class="badge badge-assertive">2</span>
-               </a>
-               <ion-option-button class="button-dark" ng-click="edit(tag)">Edit</ion-option-button>
-               <ion-option-button class="button-assertive icon ion-trash-a" ng-click="remove(tag)"></ion-option-button>
-             </ion-item>
-
-          <ul>
-            <li ng-repeat="nested_tag1 in tags" ng-include="'nested_tag1'" ng-if="tag.id == nested_tag1.parent_id"></li>
-          </ul>
+            <a ui-sref="app.tags({ id: tag.id })" class="item-icon-left item-icon-right item-stable">
+              <i class="icon ion-ios-pricetag"></i>
+                {{ tag.name }}
+              <span class="badge badge-assertive">{{tag.children.length}}</span>
+            </a>
+            <ion-option-button class="button-assertive icon ion-trash-a" ng-click="remove(tag)"></ion-option-button>
+          </ion-item>
         </li>
       </ul>
     </ion-list>
@@ -46,33 +41,3 @@
     </form>
   </ion-content>
 </ion-view>
-
-<script type="text/ng-template" id="nested_tag1">
-    <ion-item>
-      <a ui-sref="app.tags({ id: nested_tag1.id })" class="item-icon-left item-icon-right item-stable">
-        <i class="icon ion-ios-pricetag"></i>
-        {{ nested_tag1.name }}
-        <span class="badge badge-assertive">2</span>
-      </a>
-        <ion-option-button class="button-dark" ng-click="edit(tag)">Edit</ion-option-button>
-        <ion-option-button class="button-assertive icon ion-trash-a" ng-click="remove(tag)"></ion-option-button>
-    </ion-item>
-  <ul>
-   <li ng-repeat="nested_tag2 in tags" ng-include="'nested_tag2'" ng-if="nested_tag1.id == nested_tag2.parent_id"></li>
-  </ul>
-</script>
-
- <script type="text/ng-template" id="nested_tag2">
-    <ion-item>
-      <a ui-sref="app.tags({ id: nested_tag2.id })" class="item-icon-left item-icon-right item-stable">
-        <i class="icon ion-ios-pricetag"></i>
-          {{ nested_tag2.name }}
-        <span class="badge badge-assertive">2</span>
-      </a>
-       <ion-option-button class="button-dark" ng-click="edit(tag)">Edit</ion-option-button>
-       <ion-option-button class="button-assertive icon ion-trash-a" ng-click="remove(tag)"></ion-option-button>
-    </ion-item>
-  <ul>
-    <li ng-repeat="nested_tag1 in tags" ng-include="'nested_tag1'" ng-if="nested_tag2.id == nested_tag1.parent_id"></li>
-  </ul>
-</script>

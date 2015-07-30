@@ -1,4 +1,4 @@
-<div class="row desktop" id="entries">
+<div class="row" id="entries">
   <div class="col-sm-3" ng-controller="TagsCtrl as tags">
 
     <md-list>
@@ -10,36 +10,29 @@
         </div>
       </md-list-item>
     </md-list>
-      <div ng-repeat="tag in tags">
-          <button ng-class="{'selected' : it === ul.selected }" class="btn btn-block btn-primary margin-bottom" ui-sref="app.entries({ tag: tag.name })">
-            {{tag.name}}
-          </button>
-      </div>
+    <div ng-repeat="tag in tags" ng-if="tag.ancestry == ''" class="margin-bottom tag">
+      <a class="edit"><md-icon class="material-icons  edit hde ">mode_edit</md-icon></a>
+      <button ng-class="{'selected' : it === ul.selected }" class="btn btn-block btn-primary " ui-sref="app.entries({ tag: tag.name })">
+        {{tag.name}}
+        <md-icon class="material-icons pull-right" ng-if="tag.children.length">keyboard_arrow_right</md-icon>
+      </button>
+    </div>
   </div>
 
   <div class="col-xs-9" style="margin-right:-.9rem">
-    <form name="entryForm" class="box-shadow bg-white padding" ng-submit="entry.add()">
+    <form name="entryForm" class="bg-white padding" ng-submit="entry.add()">
       <div class="row dz-hide">
-        <md-input-container class="col-sm-8">
-          <label>Entry Title</label>
-          <input type="text" ng-model="entry.title"/>
-        </md-input-container>
-        <md-input-container class="col-sm-4">
-          <label>Entry Date</label>
-          <input type="date" ng-model="entry.date"/>
-        </md-input-container>
+        <div class="col-sm-8">
+          <input type="text" placeholder="Title this entry" class="form-control flat margin-bottom"  ng-model="entry.title" />
+        </div>
+        <div class="col-sm-4">
+          <input type="date" class="form-control flat margin-bottom" ng-model="entry.date"/>
+        </div>
       </div>
-      <md-input-container class="dz-hide">
-        <label>What would you like to remember?</label>
-        <textarea ng-model="entry.content"></textarea>
-      </md-input-container>
-      <!-- <md-chips
-          ng-model="tags.name"
-          placeholder="Enter a Label"
-          delete-button-label="Remove Tag"
-          delete-hint="Press delete to remove tag"
-          secondary-placeholder="+Label">
-      </md-chips> -->
+      <textarea placeholder="What would you like to remember?" rows="4" class="form-control flat margin-bottom dz-hide" ng-model="entry.content"></textarea>
+      <div class="tagsinput-primary dz-hide margin-bottom" ng-controller="TagsCtrl">
+        <input type="text" name="tagsinput" class="form-control tagsinput expand flat" placeholder="Add labels" data-role="tagsinput" ng-model="tag.name" typeahead="name for tag in tags | filter:$viewValue |  limitTo:8" />
+      </div>
       <div class="row">
         <div class="col-sm-8">
           <div class="dropzone" dropzone="dropzoneConfig">
@@ -59,19 +52,18 @@
       </div>
     </form>
 
-
     <div class="row margin-top" ng-repeat="entry in entries">
       <div class="col-sm-9">
         <md-card class="entry">
           <md-card-content class="header">
-            <md-button class="pull-right" aria-label="Edit or Delete" class="md-primary md-raised" ng-click="showBottomSheet()">
+            <md-button class="pull-right no-margin" aria-label="Edit or Delete" class="md-primary md-raised" ng-click="showBottomSheet()">
               <md-icon class="material-icons">more_horiz</md-icon>
               <md-tooltip>
                 Edit or Delete
               </md-tooltip>
             </md-button>
+            <p class="date fancy"><span>{{entry.date | date: "longDate"}}</span></p>
             <h2 class="md-title">{{entry.title}}</h2>
-            <p>{{entry.date | date: "longDate"}}</p>
           </md-card-content>
           <md-card-content class="content">
             <p>
@@ -85,20 +77,13 @@
 
 
               <md-content class="md-padding">
-                <!-- <carousel>
-                  <slide ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'image' || resource.attachment_content_type == 'video'" style="width:40%;margin:0 auto;">
-                    <img ng-src="{{resource.attachment}}" class="md-card-image" ng-if="resource.attachment_content_type == 'image'">
-                    <videogular vg-theme="config.theme.url" ng-if="resource.attachment_content_type == 'video'">
-                      <vg-media vg-src="config.sources" vg-native-controls="true"></vg-media>
-                    </videogular>
-                  </slide>
-                </carousel> -->
-                <slick settings="slickConfig">
-                  <div  ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'image' || resource.attachment_content_type == 'video'">
+                <slick settings="slickConfig" class="slick-uninitialized">
+                  <div class="slick" ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'image' || resource.attachment_content_type == 'video'">
                      <img ng-src="{{resource.attachment}}" class="md-card-image" ng-if="resource.attachment_content_type == 'image'">
-                     <!-- <videogular vg-theme="config.theme.url" ng-if="resource.attachment_content_type == 'video'">
-                       <vg-media vg-src="config.sources" vg-native-controls="true"></vg-media>
-                     </videogular> -->
+                     <div ng-if="resource.attachment_content_type == 'video'" class="video-thumb">
+                       <img ng-src="{{resource.attachment_thumbnail}}" class="video">
+                       <md-icon class="material-icons" ui-sref="user.new">play_circle_filled</md-icon>
+                     </div>
                   </div>
                 </slick>
 
@@ -110,7 +95,9 @@
                   <md-list-item class="md-2-line" ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'audio'">
                     <md-icon class="material-icons">music_note</md-icon>
                     <div class="md-list-item-text">
-                      <h3> {{ resource.attachment }} </h3>
+                      <audio controls>
+                        <!-- <source ng-src="{{ resource.attachment }}"> -->
+                      </audio>
                       <p> {{ resource.attachment_file_name }} </p>
                     </div>
                   </md-list-item>
@@ -140,36 +127,36 @@
         </div>
       </div>
     </div>
-
   </div>
+</div>
 
 
 <div id="preview-template" style="display: none;">
-    <div class="dz-preview dz-file-preview">
-      <div class="dz-image"><img data-dz-thumbnail=""></div>
-      <div class="dz-details">
-        <div class="dz-size"><span data-dz-size=""></span></div>
-        <div class="dz-filename"><span data-dz-name=""></span></div>
-      </div>
-      <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress=""></span></div>
-      <div class="dz-error-message hidden"><span data-dz-errormessage=""></span></div>
-      <div class="dz-success-mark">
-        <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+  <div class="dz-preview dz-file-preview">
+    <div class="dz-image"><img data-dz-thumbnail=""></div>
+    <div class="dz-details">
+      <div class="dz-size"><span data-dz-size=""></span></div>
+    </div>
+    <div class="dz-progress progress"><span class="dz-upload progress-bar" data-dz-uploadprogress=""></span></div>
+    <div class="dz-error-message hidden"><span data-dz-errormessage=""></span></div>
+    <div class="dz-success-mark">
+      <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+        <defs></defs>
+        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+            <path d="M23.5,31.8431458 L17.5852419,25.9283877 C16.0248253,24.3679711 13.4910294,24.366835 11.9289322,25.9289322 C10.3700136,27.4878508 10.3665912,30.0234455 11.9283877,31.5852419 L20.4147581,40.0716123 C20.5133999,40.1702541 20.6159315,40.2626649 20.7218615,40.3488435 C22.2835669,41.8725651 24.794234,41.8626202 26.3461564,40.3106978 L43.3106978,23.3461564 C44.8771021,21.7797521 44.8758057,19.2483887 43.3137085,17.6862915 C41.7547899,16.1273729 39.2176035,16.1255422 37.6538436,17.6893022 L23.5,31.8431458 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z" id="Oval-2" stroke-opacity="0.198794158" stroke="#747474" fill-opacity="0.816519475" fill="#FFFFFF" sketch:type="MSShapeGroup"></path>
+        </g>
+      </svg>
+    </div>
+    <div class="dz-error-mark">
+      <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
           <defs></defs>
           <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
-              <path d="M23.5,31.8431458 L17.5852419,25.9283877 C16.0248253,24.3679711 13.4910294,24.366835 11.9289322,25.9289322 C10.3700136,27.4878508 10.3665912,30.0234455 11.9283877,31.5852419 L20.4147581,40.0716123 C20.5133999,40.1702541 20.6159315,40.2626649 20.7218615,40.3488435 C22.2835669,41.8725651 24.794234,41.8626202 26.3461564,40.3106978 L43.3106978,23.3461564 C44.8771021,21.7797521 44.8758057,19.2483887 43.3137085,17.6862915 C41.7547899,16.1273729 39.2176035,16.1255422 37.6538436,17.6893022 L23.5,31.8431458 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z" id="Oval-2" stroke-opacity="0.198794158" stroke="#747474" fill-opacity="0.816519475" fill="#FFFFFF" sketch:type="MSShapeGroup"></path>
+              <g id="Check-+-Oval-2" sketch:type="MSLayerGroup" stroke="#747474" stroke-opacity="0.198794158" fill="#FFFFFF" fill-opacity="0.816519475">
+                  <path d="M32.6568542,29 L38.3106978,23.3461564 C39.8771021,21.7797521 39.8758057,19.2483887 38.3137085,17.6862915 C36.7547899,16.1273729 34.2176035,16.1255422 32.6538436,17.6893022 L27,23.3431458 L21.3461564,17.6893022 C19.7823965,16.1255422 17.2452101,16.1273729 15.6862915,17.6862915 C14.1241943,19.2483887 14.1228979,21.7797521 15.6893022,23.3461564 L21.3431458,29 L15.6893022,34.6538436 C14.1228979,36.2202479 14.1241943,38.7516113 15.6862915,40.3137085 C17.2452101,41.8726271 19.7823965,41.8744578 21.3461564,40.3106978 L27,34.6568542 L32.6538436,40.3106978 C34.2176035,41.8744578 36.7547899,41.8726271 38.3137085,40.3137085 C39.8758057,38.7516113 39.8771021,36.2202479 38.3106978,34.6538436 L32.6568542,29 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z" id="Oval-2" sketch:type="MSShapeGroup"></path>
+              </g>
           </g>
-        </svg>
-      </div>
-      <div class="dz-error-mark">
-        <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
-            <defs></defs>
-            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
-                <g id="Check-+-Oval-2" sketch:type="MSLayerGroup" stroke="#747474" stroke-opacity="0.198794158" fill="#FFFFFF" fill-opacity="0.816519475">
-                    <path d="M32.6568542,29 L38.3106978,23.3461564 C39.8771021,21.7797521 39.8758057,19.2483887 38.3137085,17.6862915 C36.7547899,16.1273729 34.2176035,16.1255422 32.6538436,17.6893022 L27,23.3431458 L21.3461564,17.6893022 C19.7823965,16.1255422 17.2452101,16.1273729 15.6862915,17.6862915 C14.1241943,19.2483887 14.1228979,21.7797521 15.6893022,23.3461564 L21.3431458,29 L15.6893022,34.6538436 C14.1228979,36.2202479 14.1241943,38.7516113 15.6862915,40.3137085 C17.2452101,41.8726271 19.7823965,41.8744578 21.3461564,40.3106978 L27,34.6568542 L32.6538436,40.3106978 C34.2176035,41.8744578 36.7547899,41.8726271 38.3137085,40.3137085 C39.8758057,38.7516113 39.8771021,36.2202479 38.3106978,34.6538436 L32.6568542,29 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z" id="Oval-2" sketch:type="MSShapeGroup"></path>
-                </g>
-            </g>
-        </svg>
-      </div>
+      </svg>
     </div>
+    <div class="dz-filename"><span data-dz-name=""></span></div>
   </div>
+</div>
