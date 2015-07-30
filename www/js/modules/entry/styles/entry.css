@@ -201,6 +201,40 @@ Desktop CSS
   padding: 5px;
 }
 
+#edit-entry {
+  border-radius: 5px;
+}
+
+.modal {
+  top: inherit;
+  bottom: -5px;
+}
+
+.modal-content {
+  box-shadow: none;
+  border: none;
+  border-radius: 5px;
+}
+
+.modal-dialog {
+  margin-bottom: 0px !important;
+}
+
+.modal-backdrop.in {
+    opacity: .2;
+}
+
+.modal.fade {
+  bottom: -50%;
+  -webkit-transition: bottom 0.3s ease-out;
+     -moz-transition: bottom 0.3s ease-out;
+       -o-transition: bottom 0.3s ease-out;
+          transition: bottom 0.3s ease-out;
+}
+
+.modal.fade.in {
+  bottom: -1%;
+}​
 
 /********************
 
