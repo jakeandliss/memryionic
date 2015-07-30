@@ -51,7 +51,9 @@
 
     // Remove Entry
     $scope.remove = function(entry) {
-      $scope.remove(entry);
+      if (confirm('Are you sure you want to delete this?')){
+        Entries.remove(entry);
+      }
     };
 
     $scope.entry.date = new Date();

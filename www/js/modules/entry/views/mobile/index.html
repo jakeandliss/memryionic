@@ -95,11 +95,11 @@
 <script id="my-popover.html" type="text/ng-template">
   <ion-popover-view>
     <ion-content>
-      <div class="list" ng-controller="EditCtrl">
-        <a class="item" ng-click="modal.show(id)" ng-model="entry.id">
+      <div class="list">
+        <a class="item" ng-click="modal.show()" ng-model="entry.id" ng-controller="EditCtrl">
           Edit
         </a>
-        <a class="item" ng-click="entry.remove()">
+        <a class="item" ng-click="remove(entry)">
           Delete
         </a>
       </div>
