@@ -79,11 +79,6 @@ md-bottom-sheet {
 
 md-card {
 	margin: inherit;
-  box-shadow: none;
-}
-
-md-content {
-  background: none;
 }
 
 // Rules for sizing the icon.

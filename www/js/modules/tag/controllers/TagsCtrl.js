@@ -12,6 +12,7 @@
       $scope.labelId = null;
       $scope.edit = false;
       $scope.showIt=false;
+      $scope.selectedTag={};
       if ($stateParams.id){
 
           $scope.showIt=true;
@@ -43,6 +44,7 @@
 
       $scope.edit = function($event,tag)
       {
+        $scope.selectedTag=tag;
         var test= angular.element($event.target).parent().parent();
         $scope.selectedId=tag.id;
         $ionicListDelegate.closeOptionButtons();
