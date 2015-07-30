@@ -11,19 +11,7 @@
     </div>
   </ion-nav-title>
 
-  <!-- New Entry and Labels Tabs -->
-  <ion-header-bar class="bar bar-subheader tabs tabs-icon-left tabs-top dark" ng-controller="EntriesCtrl">
-    <a class="tab-item" ng-click="modal.show()">
-      <i class="icon ion-compose"></i>
-      New Entry
-    </a>
-    <a class="tab-item">
-      <i class="icon ion-ios-pricetag-outline"></i>
-      Labels
-    </a>
-  </ion-header-bar>
-
-  <ion-content class="has-subheader" ng-controller="EntriesCtrl as entry">
+  <ion-content ng-controller="EntriesCtrl as entry">
 
     <div class="list card" ng-repeat="entry in entries">
       <div class="item item-text-wrap gray">
@@ -57,17 +45,15 @@
 
           <ion-slide-box does-continue="true" >
             <ion-slide ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'image' || resource.attachment_content_type == 'video'">
-
-              <img class="full-image" ng-src="{{resource.attachment}}" ng-if="resource.attachment_content_type == 'image'" />
-
-              <videogular vg-theme="config.theme.url" ng-if="resource.attachment_content_type == 'video'">
-                <vg-media vg-src="config.sources" vg-native-controls="true"></vg-media>
-              </videogular>
-
+              <img ng-src="{{resource.attachment}}" class="full-image" ng-if="resource.attachment_content_type == 'image'">
+              <div ng-if="resource.attachment_content_type == 'video'" class="video-thumb">
+                <img ng-src="{{resource.attachment_thumbnail}}" class="video full-image">
+                <i class="icon ion-play"></i>
+              </div>
             </ion-slide>
           </ion-slide-box>
-          <p>
-            Labels: <a href="#" class="subdued" ng-repeat="tag in entry.tags">{{tag.name}}{{$last ? '' : ','}}</a>
+          <p class="labels" ng-if="entry.tags.length">
+            Labels: <a href="#" class="subdued" ng-repeat="tag in entry.tags">{{tag.name}}{{$last ? '' : ', '}}</a>
           </p>
         </div>
 
@@ -77,19 +63,19 @@
             <i class="icon ion-mic-c"></i>
             <a href="{{resource.attachment}}">{{resource.attachment_file_name}}</a>
           </p>
-          <p>
-            Labels: <a href="#" class="subdued" ng-repeat="tag in entry.tags">{{tag.name}}{{$last ? '' : ','}}</a>
+          <p class="labels" ng-if="entry.tags.length">
+            Labels: <a href="#" class="subdued" ng-repeat="tag in entry.tags">{{tag.name}}{{$last ? '' : ', '}}</a>
           </p>
         </div>
 
         <!-- Files content -->
         <div class="item item-body panel" ng-show="panel.isSelected(3)">
-            <p ng-repeat="resource in entry.resources"  ng-if="resource.attachment_content_type == 'pdf'">
-              <i class="icon ion-document-text"></i>
-              <a href="{{resource.attachment}}">{{resource.attachment_file_name}}</a>
-            </p>
-          <p>
-            Labels: <a href="#" class="subdued" ng-repeat="tag in entry.tags">{{tag.name}}{{$last ? '' : ','}}</a>
+          <p ng-repeat="resource in entry.resources"  ng-if="resource.attachment_content_type == 'pdf'">
+            <i class="icon ion-document-text"></i>
+            <a href="{{resource.attachment}}">{{resource.attachment_file_name}}</a>
+          </p>
+          <p class="labels" ng-if="entry.tags.length">
+            Labels: <a href="#" class="subdued" ng-repeat="tag in entry.tags">{{tag.name}}{{$last ? '' : ', '}}</a>
           </p>
         </div>
       </section>
