@@ -26,7 +26,10 @@
           <input type="text" placeholder="Title this entry" class="form-control flat margin-bottom"  ng-model="entry.title" />
         </div>
         <div class="col-sm-4">
-          <input type="date" class="form-control flat margin-bottom" ng-model="entry.date"/>
+          <div class="input-group">
+            <input type="text" class="form-control flat" datepicker-popup="{{format}}" ng-model="entry.date" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+            <span class="input-group-addon flat" ng-click="open($event)"><i class="fui-calendar-solid"></i></span>
+          </div>
         </div>
       </div>
       <textarea placeholder="What would you like to remember?" rows="4" class="form-control flat margin-bottom dz-hide" ng-model="entry.content"></textarea>
