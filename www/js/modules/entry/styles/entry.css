@@ -5,26 +5,25 @@ Desktop CSS
 
 *********************/
 
-.desktop #entries {
-  margin-right: 1rem;
-  margin-left: 1rem;
+.desktop {
+    margin-right: 1rem !important;
+    margin-left: 1rem !important;
 }
 
-#entries .item.item-body {
-  padding-top: 0;
+.desktop .navbar {
+    margin-bottom: 1rem;
+    /*margin-right: -1rem;
+    margin-left: -1rem;
+    border-radius: 0;*/
 }
 
-#entries .entry .header {
+.desktop #entries .entry .header {
   background-color: ;
   padding-bottom: 0;
 }
 
-#entries .entry .content {
+.desktop #entries .entry .content {
   padding-top: 0;
-}
-
-#entries .entry .footer {
-  background-color: ;
 }
 
 .md-inline-list-icon-label {
@@ -34,32 +33,96 @@ Desktop CSS
   margin-top: -10px;
   height: 24px;
   vertical-align: middle; }
+
 .md-grid-item-content {
   height: 96px; }
-  .md-grid-item-content md-icon {
+
+.md-grid-item-content md-icon {
     font-size: 35px;
     margin-left: 15px;
   }
+
 .md-grid-text {
   padding-bottom: 5px; }
 
-
-  #entries .video-thumb {
+.desktop  #entries .video-thumb {
     position: relative;
   }
 
-  #entries .video-thumb md-icon {
-      position: absolute;
-      font-size: 12rem;
-      color: white;
-      opacity: .93;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      padding: 10%;
+.desktop #entries .video-thumb md-icon {
+    position: absolute;
+    font-size: 12rem;
+    color: white;
+    opacity: .93;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    padding: 10%;
   }
 
+.desktop  #entries .tag .edit {
+
+  float: left;
+  width: 20%;
+  display: inherit;
+  padding: 5px;
+  background-color: #01A383;
+  height: 100%;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  display: none;
+}
+
+.desktop #entries .tag:hover button {
+  width: 80%;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.desktop #entries .tag:hover .edit {
+  display: inherit;
+  cursor: pointer;
+}
+
+.desktop #entries .header h2 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.desktop #entries .header .date {
+    color: #aaa;
+}
+
+.desktop #entries .content {
+    padding-bottom: 0;
+}
+
+.desktop .fancy {
+  line-height: 0.5;
+  text-align: center;
+}
+.desktop .fancy span {
+  display: inline-block;
+  position: relative;
+}
+.desktop .fancy span:before,
+.desktop .fancy span:after {
+  content: "";
+  position: absolute;
+  height: 5px;
+  border-bottom: 1px solid #ddd;
+  top: 0;
+  width: 100%;
+}
+.desktop .fancy span:before {
+  right: 100%;
+  margin-right: 15px;
+}
+.desktop .fancy span:after {
+  left: 100%;
+  margin-left: 15px;
+}
 
 /********************
 
@@ -67,6 +130,10 @@ Mobile CSS
 
 *********************/
 
+
+.mobile #entries .item-body {
+  padding-top: 0;
+}
 
 .mobile .form .row, .form .row .col {
   padding: 0;

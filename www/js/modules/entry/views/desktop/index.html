@@ -1,5 +1,5 @@
 <div class="row desktop" id="entries">
-  <div class="col-sm-3" ng-controller="TagsCtrl as tags">
+  <div class="col-sm-3" ng-controller="TagsCtrl">
 
     <md-list>
       <md-list-item class="md-2-line">
@@ -10,20 +10,20 @@
         </div>
       </md-list-item>
     </md-list>
-      <div ng-repeat="tag in tags" ng-show="showParentTag" ng-if="tag.ancestry == ''">
-          <button ng-class="{'selected' : it === ul.selected }" ng-click="showChild(tag)" class="btn btn-block btn-primary margin-bottom" ui-sref="app.entries({ tag: tag.name })">
-            {{tag.name}}
-            <md-icon class="material-icons pull-right" ng-if="tag.children.length">keyboard_arrow_right</md-icon>
+
+
+    <div ui-fade-toggle="showMenu">
+      <a ng-click="getChildTags()" ng-show="hasParentTag"> &lt;&nbsp;Back</a>
+      <div ng-repeat="tag in filteredTags" class="margin-bottom tag">
+        <a class="edit" ng-click="showEditLabelPopUp(tag)"><md-icon class="material-icons  edit hde ">mode_edit</md-icon></a>
+
+          <button ng-click="getChildTags(tag.id)" ng-animate="'slide'"
+          class="btn btn-block btn-primary margin-bottom" ui-sref="app.entries({ tag: tag.name })">
+              {{tag.name}}
+              <md-icon class="material-icons pull-right" ng-if="tag.children.length">keyboard_arrow_right</md-icon>
           </button>
-      </div>   
-      <div ng-hide="showParentTag">
-        <a ng-click="showParent()"> &lt;&nbsp;Back</a>
-        <div ng-repeat="tag in childTags">
-           <button ng-class="{'selected' : it === ul.selected }" class="btn btn-block btn-primary margin-bottom" ui-sref="app.entries({ tag: tag.name })">
-            {{tag.name}}
-          </button>
-        </div>      
-      </div>
+      </div> 
+    </div>
   </div>
 
   <div class="col-xs-9" style="margin-right:-.9rem">
