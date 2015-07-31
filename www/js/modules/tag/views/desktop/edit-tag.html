@@ -1,0 +1,31 @@
+<div class="modal-header">
+	<h4 class="modal-title">Edit Tag</h3>
+	</div>
+	<div class="modal-body">
+		<form role="form" novalidate name="tagForm">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="form-group" ng-class="{'has-error': tagForm.name.$invalid }">
+						<label for="name">Name:</label>
+						<input type="text" ng-model="selectedTag.name" required class="form-control" name="name" 
+						id="name">
+						<span class="help-block" ng-show="tagForm.name.$error.required">Name is required</span>
+					</div>
+				</div>
+				<div class="col-md-12">
+					<div class="form-group">
+						<label for="parent">Parent:</label>
+
+						<select id="parent" class="form-control" ng-model="selectedTag.id">
+							<option ng-repeat='tag in tags' value='{{tag.id}}'>{{tag.name}}</option>
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="modal-footer">
+	<button class="btn btn-primary" ng-disabled="tagForm.$invalid" ng-click="saveTag()">Save</button>
+	<button class="btn btn-warning" ng-click="closeModal()">Cancel</button>
+</div>

@@ -2,7 +2,7 @@
   <ion-content>
       <div class="item item-icon-left item-dark">
         <i class="icon ion-ios-pricetag"></i>
-        {{tag.name}}
+       <span style="padding-left:65px"> {{childLabel}}</span>
         <span ng-show="showIt" class="item-note" ng-click="editLabel()">Edit</span>
       </div>
 
@@ -10,8 +10,8 @@
       <ul>
         <li ng-repeat="tag in filteredTags" >
           <ion-item ng-class="{'item-positive':tag.id==selectedId}">
-            <a ui-sref="app.tags({ id: tag.id })" class="item-icon-left item-icon-right item-stable">
-              <i class="icon ion-ios-pricetag" ></i>
+            <a ui-sref="app.tags({ id: tag.id })" ng-click="test(tag)" class="item-icon-left item-icon-right item-stable">
+              <i class="icon ion-ios-pricetag"></i>
                 {{ tag.name }}
               <span class="badge badge-assertive">{{tag.children.length}}</span>
             </a>
@@ -34,7 +34,7 @@
         <span class="input-label">
           Parent
         </span>
-        <select name="parent_id" ng-model="selectedTag.id">
+        <select name="parent_id" ng-model="selectedTag.ancestry">
           <option ng-repeat='tag in tags' value='{{tag.id}}'>{{tag.name}}</option>
         </select>
       </label>

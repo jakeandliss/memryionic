@@ -12,9 +12,9 @@
     })
     .controller('EntriesCtrl', EntriesCtrl)
 
-  EntriesCtrl.$inject = ['$scope', 'Entries', '$ionicModal', '$mdBottomSheet', '$sce','Tags'];
+  EntriesCtrl.$inject = ['$scope', 'Entries', '$ionicModal', '$mdBottomSheet', '$sce'];
 
-  function EntriesCtrl($scope, Entries, $ionicModal, $mdBottomSheet, $sce,Tags) {
+  function EntriesCtrl($scope, Entries, $ionicModal, $mdBottomSheet, $sce) {
     $scope.entry = {};
 
     // Add Entry
@@ -155,19 +155,6 @@
       }
     };
 
-    $scope.showParentTag=true;
-    $scope.childTags={};
-    $scope.showChild=function(tag){
-      $scope.showParentTag=false;
-      var tags=Tags.all();
-      var filterResult= tags.filter(function(elem){
-        return elem.id==tag.id;
-      })
-      $scope.childTags=filterResult[0].children;
-    };
-    $scope.showParent=function(){
-      $scope.showParentTag=true;
-      $scope.childTags={};
-    };
+    
   }
 })();
