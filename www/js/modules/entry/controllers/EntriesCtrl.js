@@ -12,9 +12,9 @@
     })
     .controller('EntriesCtrl', EntriesCtrl)
 
-  EntriesCtrl.$inject = ['$scope', 'Entries', '$ionicModal', '$mdBottomSheet', '$sce'];
+  EntriesCtrl.$inject = ['$scope','$window','$stateParams', 'Entries', '$ionicModal', '$mdBottomSheet', '$sce'];
 
-  function EntriesCtrl($scope, Entries, $ionicModal, $mdBottomSheet, $sce) {
+  function EntriesCtrl($scope,$window,$stateParams, Entries, $ionicModal, $mdBottomSheet, $sce) {
     $scope.entry = {};
 
     // Add Entry
@@ -154,7 +154,25 @@
         }
       }
     };
-
-    
+   
+      $scope.filterEntites=function(){
+         if($stateParams.id){
+          var filterResult=$scope.entries.filter(function(elem){
+              return elem.tagID==$stateParams.id;
+          });
+          $scope.entries=filterResult;
+          console.log($scope.entries.length);
+          $scope.showBackButton=true;
+      }
+      else{
+        
+      }
+    }
+    $scope.filterEntites();
+    $scope.goBack=function(){
+      $scope.showBackButton=false;
+       $window.history.back();
+    };
   }
 })();
+ 

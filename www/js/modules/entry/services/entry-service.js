@@ -22,6 +22,7 @@
     // Some fake testing data
     var entries = [{
       id: 0,
+      tagID:0,
       title: 'When I was on my way home today this happened. And I wasn\'t expecting it...',
       content: 'You on your way? Because there is a really cool party and I want to go to it really really bad. There is only one way to go. With a friend.',
       resources: [{
@@ -51,36 +52,55 @@
         attachment_content_type: "video",
         attachment_thumbnail: "http://content.jwplatform.com/thumbs/vM7nH0Kl-640.jpg"
       }],
-      date: "2012-04-23",
-      tags: [{
-        name: 'tag'
-      }, {
-        name: 'important'
-      }],
+        date: "2012-04-23",
+        tags: [{
+          id:0,
+          name: 'test 0'
+        }],
     }, {
       id: 1,
+      tagID:0,
       title: 'Max Lynx',
       content: 'Hey, it\'s me',
       image: 'https://avatars3.githubusercontent.com/u/11214?v=3&s=460',
-      date: "1929-01-05"
+      date: "1929-01-05",
+       tags: [{
+          id:0,
+          name: 'test 0'
+        }],
     }, {
       id: 2,
+      tagID:1,
       title: 'Adam Bradleyson',
       content: 'I should buy a boat',
       image: 'https://pbs.twimg.com/profile_images/479090794058379264/84TKj_qa.jpeg',
-      date: "1989-01-05"
+      date: "1989-01-05",
+        tags: [{
+          id:1,
+          name: 'test 1'
+        }],
     }, {
       id: 3,
+      tagID:1,
       title: 'Perry Governor',
       content: 'Look at my mukluks!',
       image: 'https://pbs.twimg.com/profile_images/598205061232103424/3j5HUXMY.png',
-      date: "1995-12-05"
+      date: "1995-12-05",
+       tags: [{
+          id:1,
+          name: 'test 1'
+        }],
     }, {
       id: 4,
+      tagID:1,
       title: 'Mike Harrington',
       content: 'This is wicked good ice cream.',
       image: 'https://pbs.twimg.com/profile_images/578237281384841216/R3ae1n61.png',
-      date: "1992-11-05"
+      date: "1992-11-05",
+        tags: [{
+          id:1,
+          name: 'test 1'
+        }],
     }];
 
     return {

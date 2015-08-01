@@ -25,11 +25,14 @@
 
 
     <!-- Partial for editing labels -->
-    <form id="edit-tag" ng-show="isEditing">
-      <label class="item item-input">
+    <form id="edit-tag" name="tagForm" novalidate ng-show="isEditing">
+      <label class="item item-input" ng-class="{'has-error': tagForm.name.$invalid }">
         <span class="input-label">Name</span>
-        <input type="text" ng-model="selectedTag.name">
+        <input type="text" name="name" id='name' required ng-model="selectedTag.name">
       </label>
+        <div class="form-error" ng-show="tagForm.name.$error.required">Name is required
+      </div>
+    
       <label class="item item-input item-select">
         <span class="input-label">
           Parent
@@ -42,7 +45,7 @@
           <div class='col'></div>
         <div class='col'><a style="float:right;" class="padding-top" ng-click="cancel()">Cancel</a></div>
         <div class='col'>
-        <button class="button button-small button-outline button-assertive expand" ng-click="save()">Save</button>
+        <button class="button button-small button-outline button-assertive expand" ng-disabled="tagForm.$invalid" ng-click="save()">Save</button>
     </div>
 
     </div>

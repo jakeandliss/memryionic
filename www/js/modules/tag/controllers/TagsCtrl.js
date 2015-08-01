@@ -15,8 +15,8 @@
   .directive('uiFadeToggle', fadeToggleDirective)
   .controller('TagsCtrl', TagsCtrl);
 
-  TagsCtrl.$inject = ['$state', '$stateParams','$ionicListDelegate', '$scope', '$timeout', '$modal', 'Tags'];
-  function TagsCtrl($state, $stateParams,$ionicListDelegate, $scope,$timeout, $modal, Tags){
+  TagsCtrl.$inject = ['$state', '$stateParams','$ionicHistory','$ionicListDelegate', '$scope', '$timeout', '$modal', 'Tags'];
+  function TagsCtrl($state, $stateParams,$ionicHistory,$ionicListDelegate, $scope,$timeout, $modal, Tags){
     $scope.tags = Tags.all();
     $scope.selectedTab = 1;
     $scope.filteredTags;
@@ -58,7 +58,7 @@
     };
     $scope.filterTags();
 
-
+    
 
     $scope.getChildTags = function(id){
      $scope.showMenu = !$scope.showMenu;
@@ -94,7 +94,10 @@
 
   $scope.edit = function($event,tag)
   {
-    $scope.selectedTag=tag;
+    $scope.selectedTag = {};
+    $scope.selectedTag.name = tag.name;
+    $scope.selectedTag.id = tag.id;
+    $scope.selectedTag.ancestry = tag.ancestry;
     var test= angular.element($event.target).parent().parent();
     $scope.selectedId=tag.id;
     $ionicListDelegate.closeOptionButtons();
@@ -109,12 +112,17 @@
 
   $scope.cancel = function()
   {
-   $scope.isEditing = false;
+    $scope.selectedId=null;
+    $scope.isEditing = false;
  };
 
  $scope.editLabel =  function()
  {
-    $scope.selectedTag=$scope.parentTag;
+    $scope.selectedTag = {};
+    $scope.selectedTag.name = $scope.parentTag.name;
+    $scope.selectedTag.id = $scope.parentTag.id;
+    $scope.selectedTag.ancestry = $scope.parentTag.ancestry;
+    //$scope.selectedTag=$scope.parentTag;
     $scope.selectedId="";
     $scope.isEditing = true;
 }
