@@ -178,7 +178,7 @@ Desktop CSS
     to   { opacity: 1; }
 }
 
-.desktop .dropdown-menu {
+.desktop .date .dropdown-menu {
   right: 0px !important;
   left: initial !important;
   padding: 5px;
