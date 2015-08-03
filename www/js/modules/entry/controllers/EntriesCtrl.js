@@ -10,8 +10,8 @@
     })
     .controller('EntriesCtrl', EntriesCtrl)
 
-  EntriesCtrl.$inject = ['$scope', 'Entries', '$ionicModal', '$mdBottomSheet', '$sce', '$ionicPopover', '$modal'];
-  function EntriesCtrl($scope, Entries, $ionicModal, $mdBottomSheet, $sce, $ionicPopover, $modal) {
+  EntriesCtrl.$inject = ['$scope', 'Entries', '$ionicModal', '$mdBottomSheet', '$sce', '$ionicPopover', '$modal', 'ngAudio'];
+  function EntriesCtrl($scope, Entries, $ionicModal, $mdBottomSheet, $sce, $ionicPopover, $modal, ngAudio) {
     $scope.entry = {};
 
     // Add Entry
@@ -57,6 +57,9 @@
     };
 
     $scope.entry.date = new Date();
+
+    $scope.audio = ngAudio.load("http://www.stephaniequinn.com/Music/Canon.mp3");
+
 
     if (window.templateMode == "mobile") {
       $ionicPopover.fromTemplateUrl('my-popover.html', {
@@ -226,4 +229,7 @@
       }
     ];
   }
+
+
+
 })();

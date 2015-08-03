@@ -97,17 +97,24 @@
               </md-content>
             </md-tab>
             <md-tab label="Audio">
-              <md-content class="md-padding">
-                <md-list>
-                  <md-list-item class="md-2-line" ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'audio'">
-                    <md-icon class="material-icons">music_note</md-icon>
-                    <div class="md-list-item-text">
-                      <audio controls>
-                        <!-- <source ng-src="{{ resource.attachment }}"> -->
-                      </audio>
-                      <p> {{ resource.attachment_file_name }} </p>
-                    </div>
-                  </md-list-item>
+              <md-content class="md-padding audio">
+                  <div class="input-group margin">
+                    <label class="input-group-addon">Time</label>
+                    <input class="form-control" type=range min=0 max=1 step=0.01 ng-model='audio.progress'>
+                  </div>
+                  <div class="input-group margin">
+                    <label class="input-group-addon">Volume</label>
+                    <input class="form-control" type=range min=0 max=1 step=0.01 ng-model='audio.volume'>
+                  </div>
+                  <md-list>
+                    <md-list-item class="md-2-line" ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'audio'">
+                      <div class="md-list-item-text">
+                        <button ng-click='audio.paused ? audio.play() : audio.pause()' class="btn btn-primary">Play</button>
+                         <button ng-click='audio.restart()' class="btn btn-danger">Stop</button>
+                         <button ng-click='audio.muting = !audio.muting' class="btn btn-default">Mute</button>
+                         {{ resource.attachment_file_name}}
+                      </div>
+                    </md-list-item>
                 </md-list>
               </md-content>
             </md-tab>

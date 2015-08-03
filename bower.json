@@ -8,7 +8,8 @@
     "angular-bootstrap": "latest",
     "flat-ui": "2.2.2",
     "angular-slick-carousel": "3.0.4",
-    "angular-timeago": "0.2.0"
+    "angular-timeago": "0.2.0",
+    "angular-audio": "1.7.0"
   },
   "dependencies": {
     "ng-device-detector": "~1.1.7"

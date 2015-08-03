@@ -15,7 +15,8 @@ angular.module('memryApp', [
   "ngSanitize",
   "slickCarousel",
   'ui.bootstrap',
-  'yaru22.angular-timeago']
+  'yaru22.angular-timeago',
+  'ngAudio']
 )
 
 .run(function($ionicPlatform, $rootScope, deviceDetector) {
