@@ -13,7 +13,7 @@ angular.module('memryApp', [
   'reTree', // dependency of deviceDetector
   'ng.deviceDetector',
   "ngSanitize",
-  'ui.bootstrap','ngAnimate','ngTouch']
+ 'ngAnimate','ngTouch',
   "slickCarousel",
   'ui.bootstrap']
 )

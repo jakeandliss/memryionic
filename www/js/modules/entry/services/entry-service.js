@@ -52,7 +52,7 @@
         attachment_content_type: "video",
         attachment_thumbnail: "https://xenforo.com/community/data/xengallery/111/111665-2c14996ac0401ed7ab0dfc762064120e.jpg"
       }],
-        date: "2012-04-23",
+      date: "2012-04-23",
         tags: [{
           id:0,
           name: 'test 0'
