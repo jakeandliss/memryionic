@@ -31,6 +31,20 @@
     <div class="row dz-hide">
       <div class="col-sm-8">
         <input type="text" placeholder="Title this entry" class="form-control flat margin-bottom"  ng-model="entry.title" />
+
+  <div class="col-xs-9" style="margin-right:-.9rem">
+    <form name="entryForm" class="bg-white padding" ng-submit="entry.add()">
+      <div class="row dz-hide">
+        <div class="col-sm-8">
+          <input type="text" placeholder="Title this entry" class="form-control flat margin-bottom"  ng-model="entry.title" />
+        </div>
+        <div class="col-sm-4">
+          <div class="input-group">
+            <input type="text" class="form-control flat" datepicker-popup="{{format}}" ng-model="entry.date" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+            <span class="input-group-addon flat" ng-click="open($event)"><i class="fui-calendar-solid"></i></span>
+          </div>
+        </div>
+
       </div>
       <div class="col-sm-4">
         <input type="date" class="form-control flat margin-bottom" ng-model="entry.date"/>
@@ -58,6 +72,7 @@
     </div>
   </div>
 </form>
+
 
 
 <div class="row margin-top" ng-repeat="entry in entries">
@@ -95,6 +110,35 @@
                         </video> -->
                         <!-- </lightbox> -->
                       </slide>
+          <md-tabs md-dynamic-height md-border-bottom>
+            <md-tab label="Visual">
+
+
+
+              <md-content class="md-padding">
+                <slick settings="slickConfig" class="slick-uninitialized">
+                  <div class="slick" ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'image' || resource.attachment_content_type == 'video'">
+                     <img ng-src="{{resource.attachment}}" class="md-card-image" ng-if="resource.attachment_content_type == 'image'">
+                     <div ng-if="resource.attachment_content_type == 'video'" class="video-thumb">
+                       <img ng-src="{{resource.attachment_thumbnail}}" class="video">
+                       <md-icon class="material-icons" ui-sref="user.new">play_circle_filled</md-icon>
+                     </div>
+                  </div>
+                </slick>
+
+              </md-content>
+            </md-tab>
+            <md-tab label="Audio">
+              <md-content class="md-padding">
+                <md-list>
+                  <md-list-item class="md-2-line" ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'audio'">
+                    <md-icon class="material-icons">music_note</md-icon>
+                    <div class="md-list-item-text">
+                      <audio controls>
+                        <!-- <source ng-src="{{ resource.attachment }}"> -->
+                      </audio>
+                      <p> {{ resource.attachment_file_name }} </p>
+
                     </div>
                   </carousel>
                 </md-content>

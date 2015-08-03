@@ -14,6 +14,8 @@ angular.module('memryApp', [
   'ng.deviceDetector',
   "ngSanitize",
   'ui.bootstrap','ngAnimate','ngTouch']
+  "slickCarousel",
+  'ui.bootstrap']
 )
 
 .run(function($ionicPlatform, $rootScope, deviceDetector) {
