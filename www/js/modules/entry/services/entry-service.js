@@ -53,10 +53,10 @@
         attachment_thumbnail: "https://xenforo.com/community/data/xengallery/111/111665-2c14996ac0401ed7ab0dfc762064120e.jpg"
       }],
       date: "2012-04-23",
-        tags: [{
-          id:0,
-          name: 'test 0'
-        }],
+      tags: [{
+        id:0,
+        name: 'test 0'
+      }]
     }, {
       id: 1,
       tagID:0,
@@ -65,9 +65,9 @@
       image: 'https://avatars3.githubusercontent.com/u/11214?v=3&s=460',
       date: "1929-01-05",
        tags: [{
-          id:0,
-          name: 'test 0'
-        }],
+        id:0,
+        name: 'test 0'
+      }]
     }, {
       id: 2,
       tagID:1,
@@ -75,10 +75,10 @@
       content: 'I should buy a boat',
       image: 'https://pbs.twimg.com/profile_images/479090794058379264/84TKj_qa.jpeg',
       date: "1989-01-05",
-        tags: [{
-          id:1,
-          name: 'test 1'
-        }],
+       tags: [{
+        id:1,
+        name: 'test 1'
+      }]
     }, {
       id: 3,
       tagID:1,
@@ -87,20 +87,20 @@
       image: 'https://pbs.twimg.com/profile_images/598205061232103424/3j5HUXMY.png',
       date: "1995-12-05",
        tags: [{
-          id:1,
-          name: 'test 1'
-        }],
+        id:1,
+        name: 'test 1'
+      }]
     }, {
       id: 4,
-      tagID:1,
+      tagID:2,
       title: 'Mike Harrington',
       content: 'This is wicked good ice cream.',
       image: 'https://pbs.twimg.com/profile_images/578237281384841216/R3ae1n61.png',
       date: "1992-11-05",
-        tags: [{
-          id:1,
-          name: 'test 1'
-        }],
+       tags: [{
+        id:2,
+        name: 'test 2'
+      }]
     }];
 
     return {

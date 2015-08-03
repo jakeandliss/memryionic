@@ -80,7 +80,6 @@ Desktop CSS
 
 .desktop #entries .tag:hover .edit {
   display: inherit;
-  cursor: pointer;
 }
 
 .desktop #entries .header h2 {

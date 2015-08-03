@@ -7,7 +7,7 @@
       $stateProvider
         .state('app.tags', {
           url: '/tags/:id',
-          views: {        
+          views: {
             'tags': {
               templateUrl: function() {
                 return 'js/modules/tag/views/' + window.templateMode + '/tags.html';
@@ -15,6 +15,6 @@
               controller: 'TagsCtrl'
             }
           }
-        }) 
+        })
     }
 })();

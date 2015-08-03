@@ -6,28 +6,25 @@
       $sceDelegateProvider.resourceUrlWhitelist([
         // Allow same origin resource loads.
         'self',
-        // Allow loading from assets domain.  Notice the difference between * and **.
-        'http://static.videogular.com/**'
       ]);
     })
     .controller('EntriesCtrl', EntriesCtrl)
 
-  EntriesCtrl.$inject = ['$scope','$window','$stateParams', 'Entries', '$ionicModal', '$mdBottomSheet', '$sce'];
-
-  function EntriesCtrl($scope,$window,$stateParams, Entries, $ionicModal, $mdBottomSheet, $sce) {
+  EntriesCtrl.$inject = ['$scope','$stateParams', 'Entries', '$ionicModal', '$mdBottomSheet', '$sce', '$ionicPopover'];
+  function EntriesCtrl($scope,$stateParams, Entries, $ionicModal, $mdBottomSheet, $sce, $ionicPopover) {
     $scope.entry = {};
 
     // Add Entry
     $scope.entry.add = function(entry) {
       $scope.entries.unshift($scope.entry);
+      $scope.modal.hide(); // hide mobile form on submit
       $scope.entry = '';
     };
 
     // Edit Entry
     $scope.entries = Entries.all();
     var config = {
-      sources: Entries.getVideos(),
-      theme: {url: "http://www.videogular.com/styles/themes/default/latest/videogular.css" }
+      sources: Entries.getVideos()
     };
     $scope.config = config;
 
@@ -44,7 +41,7 @@
     }
 
     $scope.edit = function(entry) {
-      Entries.remove(entry);
+      $scope.edit(entry);
     };
 
     // Update Entry
@@ -61,6 +58,34 @@
 
     $scope.entry.date = new Date();
 
+    if (window.templateMode == "mobile") {
+      $ionicPopover.fromTemplateUrl('my-popover.html', {
+        scope: $scope
+      }).then(function(popover) {
+        $scope.popover = popover;
+      });
+
+      $scope.openPopover = function($event) {
+        $scope.popover.show($event);
+      };
+
+      $scope.closePopover = function() {
+        $scope.popover.hide();
+      };
+      //Cleanup the popover when we're done with it!
+      $scope.$on('$destroy', function() {
+        $scope.popover.remove();
+      });
+      // Execute action on hide popover
+      $scope.$on('popover.hidden', function() {
+        // Execute action
+      });
+      // Execute action on remove popover
+      $scope.$on('popover.removed', function() {
+        // Execute action
+      })
+    };
+
     // This modal should only be used for mobile.
     $ionicModal.fromTemplateUrl('/js/modules/entry/views/mobile/new.html', function($ionicModal) {
       $scope.modal = $ionicModal;
@@ -71,7 +96,7 @@
       animation: 'slide-in-up'
     });
 
-
+    // items for bottom sheet
     $scope.items = [{
       name: 'Edit',
       icon: 'edit'
@@ -87,13 +112,10 @@
       $scope.alert = '';
       $mdBottomSheet.show({
         templateUrl: '/js/modules/entry/views/desktop/bottom-sheet.html',
-
-        // parent:
-      }).then(function(clickedItem) {
-        $scope.alert = clickedItem.name + ' clicked!';
       })
     };
 
+    // Dropzone
     var counter = 0;
     var insideDropzone = false;
 
@@ -143,8 +165,8 @@
       'options': {
         'previewTemplate': previewTemplate,
         'paramName': "resource[avatar]",
-        'thumbnailHeight': 120,
-        'thumbnailWidth': 120,
+        'thumbnailHeight': 100,
+        'thumbnailWidth': 100,
         'url': '/resources',
         'addRemoveLinks': true,
         'dictCancelUpload': "Cancel",
@@ -168,14 +190,43 @@
         }
       }
     };
-   
+
+    $scope.open = function($event) {
+    $event.preventDefault();
+    $event.stopPropagation();
+
+    $scope.opened = true;
+  };
+
+  // Datepicker
+  $scope.dateOptions = {
+
+  };
+
+  $scope.formats = ['longDate'];
+  $scope.format = $scope.formats[0];
+
+  var tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  var afterTomorrow = new Date();
+  afterTomorrow.setDate(tomorrow.getDate() + 2);
+  $scope.events =
+    [
+      {
+        date: tomorrow,
+        status: 'full'
+      },
+      {
+        date: afterTomorrow,
+        status: 'partially'
+      }
+    ];
       $scope.filterEntites=function(){
          if($stateParams.id){
           var filterResult=$scope.entries.filter(function(elem){
               return elem.tagID==$stateParams.id;
           });
           $scope.entries=filterResult;
-          console.log($scope.entries.length);
           $scope.showBackButton=true;
       }
       else{
@@ -183,73 +234,5 @@
       }
     }
     $scope.filterEntites();
-    $scope.goBack=function(){
-      $scope.showBackButton=false;
-       $window.history.back();
-    };
-
-
-    $scope.open = function($event) {
-    $event.preventDefault();
-    $event.stopPropagation();
-
-    $scope.opened = true;
-  };
-
-  // Datepicker
-  $scope.dateOptions = {
-
-  };
-
-  $scope.formats = ['longDate'];
-  $scope.format = $scope.formats[0];
-
-  var tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  var afterTomorrow = new Date();
-  afterTomorrow.setDate(tomorrow.getDate() + 2);
-  $scope.events =
-    [
-      {
-        date: tomorrow,
-        status: 'full'
-      },
-      {
-        date: afterTomorrow,
-        status: 'partially'
-      }
-    ];
-
-    $scope.open = function($event) {
-    $event.preventDefault();
-    $event.stopPropagation();
-
-    $scope.opened = true;
-  };
-
-  // Datepicker
-  $scope.dateOptions = {
-
-  };
-
-  $scope.formats = ['longDate'];
-  $scope.format = $scope.formats[0];
-
-  var tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  var afterTomorrow = new Date();
-  afterTomorrow.setDate(tomorrow.getDate() + 2);
-  $scope.events =
-    [
-      {
-        date: tomorrow,
-        status: 'full'
-      },
-      {
-        date: afterTomorrow,
-        status: 'partially'
-      }
-    ];
   }
 })();
- 

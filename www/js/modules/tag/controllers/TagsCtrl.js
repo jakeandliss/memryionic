@@ -49,6 +49,7 @@
         $scope.childLabel = filterResult[0].name;
         $scope.label = "";
         $scope.labelId = filterResult[0].id;
+        $scope.showBackButton=true;
       }
       else
       {
@@ -153,7 +154,10 @@ $scope.saveTag = function(){
   //Todo :: add code for saving the data
   $scope.modalInstance.dismiss('cancel');
 };
-
+ $scope.goBack=function(){
+      $scope.showBackButton=false;
+       window.history.back();
+    };
 };
 })();
 

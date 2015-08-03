@@ -13,9 +13,9 @@
 
   <ion-content ng-controller="EntriesCtrl as entry">
 
-    <div class="list card" ng-repeat="entry in entries | orderBy:'-date'">
-      <div class="item item-text-wrap gray" ng-controller="PopoverCtrl">
-        <button class="button button-icon icon ion-android-more-horizontal" style="float:right;" ng-click="openPopover($event)"></button>
+    <div class="list card" ng-repeat="entry in entries">
+      <div class="item item-text-wrap gray">
+        <i class="button-icon icon ion-android-more-horizontal" style="float:right;" ng-click="openPopover($event)"></i>
         <h2>{{entry.title}}</h2>
         <p>{{entry.date | date: "longDate"}}</p>
       </div>

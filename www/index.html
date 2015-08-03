@@ -30,20 +30,14 @@
     <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700,300italic,400italic,500italic,700italic|Ubuntu+Condensed|Lobster+Two:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+    <!-- ionic/angularjs/vendor js -->
+    <script src="lib/jquery/dist/jquery.min.js"></script>
     <script src="lib/ionic/js/ionic.bundle.js"></script>
     <script src="lib/angular-material/angular-material.js"></script>
     <script src="lib/angular-aria/angular-aria.js"></script>
     <script src="lib/ng-device-detector/ng-device-detector.js"></script>
     <script src="lib/re-tree/re-tree.js"></script>
     <script src="lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-
-    <script src="lib/angular-animate/angular-animate.min.js"></script>
-    <script src="lib/angular-touch/angular-touch.min.js"></script>
-    <script src="lib/angular-sanitize/angular-sanitize.min.js"></script>
-    <script src="http://www.dropzonejs.com/new-js/dropzone.js"></script>
-    <script src="lib/flat-ui/dist/js/vendor/video.js"></script>
-    <script src="lib/jquery/dist/jquery.min.js"></script>
-
     <script src="lib/angular-sanitize/angular-sanitize.min.js"></script>
     <script src="http://www.dropzonejs.com/new-js/dropzone.js"></script>
     <script src="lib/flat-ui/dist/js/vendor/video.js"></script>
@@ -65,9 +59,6 @@
     <script src="js/modules/entry/controllers/EntriesCtrl.js"></script>
     <script src="js/modules/entry/controllers/ShareCtrl.js"></script>
     <script src="js/modules/entry/controllers/EditCtrl.js"></script>
-    <script src="js/modules/entry/controllers/PopoverCtrl.js"></script>
-    <script src="js/modules/entry/controllers/PanelCtrl.js"></script>
-
     <script src="js/modules/tag/controllers/TagsCtrl.js"></script>
     <script src="js/modules/user/controllers/UserCtrl.js"></script>
 
@@ -76,7 +67,7 @@
     <script src="js/modules/entry/services/entry-service.js"></script>
     <script src="js/modules/tag/services/tag-service.js"></script>
     <script src="js/modules/user/services/user-service.js"></script>
-    
+
   </head>
   <body ng-app="memryApp">
     <!-- Desktop views -->
@@ -86,11 +77,11 @@
 
     <!-- Mobile views -->
     <div ng-if="!isDesktopOrTablet">
-      <ion-nav-bar class="bar-dark mobile">
+      <ion-nav-bar class="bar-dark">
         <ion-nav-back-button>
         </ion-nav-back-button>
       </ion-nav-bar>
-      <ion-nav-view></ion-nav-view>
+      <ion-nav-view class="mobile"></ion-nav-view>
     </div>
   </body>
 </html>
