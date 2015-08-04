@@ -135,12 +135,12 @@ Desktop CSS
 }
 
 .desktop .slick-uninitialized {
-  visibility: hidden;
+  display: none;
   opacity: 0;
 }
 
 .desktop .slick-initialized {
-  visibility: visible;
+  display: inherit;
   opacity: 1;
     -webkit-animation: fadein 3s;
        -moz-animation: fadein 3s;
