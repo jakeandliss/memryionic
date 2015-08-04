@@ -77,11 +77,15 @@
                 <carousel>
                   <slide ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'image' || resource.attachment_content_type == 'video'">
                     <div ng-if="resource.attachment_content_type == 'image'">
+                      <a ng-click="openLightboxModal($index,entry.resources)">
                       <img ng-src="{{resource.attachment}}" class="md-card-image">
-                      <a ng-click="openLightboxModal($index)" class="material-icons pointer pop-out">open_in_new</a>
+                    </a>
+                      <a ng-click="openLightboxModal($index,entry.resources)" class="material-icons pointer pop-out"></a>
                     </div>
                     <div ng-if="resource.attachment_content_type == 'video'" class="video-thumb">
+                   
                       <img ng-src="{{resource.attachment_thumbnail}}" class="vide">
+
                       <a ng-click="openLightboxModal($index)" class="material-icons">play_circle_filled</a>
 
                     <!-- <lightbox> -->

@@ -176,9 +176,20 @@
         }
       }
     };
-
-    $scope.openLightboxModal = function (index) {
-      var images = // images variable should contain the array of images and videos associated with the entry where it is triggered
+    $scope.images=[];
+    $scope.openLightboxModal = function (index,resource) {
+     // var images =""; // images variable should contain the array of images and videos associated with the entry where it is triggered
+      if(resource.length>0)
+      {
+      var filterResultImages=resource.filter(function(elem){
+          return elem.attachment_content_type=="image";
+      });
+      if(filterResultImages.length>0){
+          angular.forEach(filterResultImages,function(obj){
+          $scope.images.push({'url':obj.attachment});
+        }) 
+      }
+    }
       Lightbox.openModal($scope.images, index);
     };
 
