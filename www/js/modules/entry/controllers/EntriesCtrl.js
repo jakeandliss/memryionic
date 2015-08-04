@@ -10,8 +10,8 @@
     })
     .controller('EntriesCtrl', EntriesCtrl)
 
-  EntriesCtrl.$inject = ['$scope','$stateParams', 'Entries', '$ionicModal', '$mdBottomSheet', '$sce', '$ionicPopover'];
-  function EntriesCtrl($scope,$stateParams, Entries, $ionicModal, $mdBottomSheet, $sce, $ionicPopover) {
+  EntriesCtrl.$inject = ['$scope', '$stateParams', 'Entries', '$ionicModal', '$mdBottomSheet', '$sce', '$ionicPopover', '$modal'];
+  function EntriesCtrl($scope, $stateParams, Entries, $ionicModal, $mdBottomSheet, $sce, $ionicPopover, $modal) {
     $scope.entry = {};
 
     // Add Entry
@@ -96,17 +96,21 @@
       animation: 'slide-in-up'
     });
 
-    // items for bottom sheet
-    $scope.items = [{
-      name: 'Edit',
-      icon: 'edit'
-    }, {
-      name: 'Share',
-      icon: 'share'
-    }, {
-      name: 'Delete',
-      icon: 'delete'
-    }, ];
+    $scope.openModal = function () {
+      $mdBottomSheet.cancel();
+      var modalInstance = $modal.open({
+        animation: $scope.animationsEnabled,
+        templateUrl: '/js/modules/entry/views/desktop/edit.html',
+        controller: 'EntriesCtrl',
+        size: 'lg',
+        animation: true
+      });
+    };
+
+    $scope.closeModal = function () {
+      $modalInstance.dismiss('cancel');
+    };
+
 
     $scope.showBottomSheet = function() {
       $scope.alert = '';
@@ -230,7 +234,7 @@
           $scope.showBackButton=true;
       }
       else{
-        
+
       }
     }
     $scope.filterEntites();
