@@ -219,6 +219,30 @@ Desktop CSS
   bottom: -1%;
 }
 
+.desktop #entries .search {
+  position: fixed;
+  z-index: 10;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  text-align: center;
+  border-top: 2px solid #ccc;
+  }
+
+.desktop #entries .search-icon:before {
+  background-color: #fff;
+  padding: 7px;
+  border-radius: 100%;
+  border: 2px solid #444;
+}
+
+.desktop #entries .search-icon {
+  position: fixed;
+  z-index: 10;
+  right: 1%;
+  bottom: 1%;;
+}
+
 
 
 /********************

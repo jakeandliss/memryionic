@@ -19,7 +19,8 @@
     </div>
   </div>
 
-  <div class="col-xs-9" style="margin-right:-.9rem">
+  <div class="col-sm-9">
+
     <form name="entryForm" class="bg-white padding" ng-submit="entry.add()">
       <div class="row dz-hide">
         <div class="col-sm-8">
@@ -28,7 +29,7 @@
         <div class="col-sm-4 date">
           <div class="input-group">
             <input type="text" class="form-control flat" datepicker-popup="{{format}}" ng-model="entry.date" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" style="text-align:right;" />
-            <span class="input-group-addon flat" ng-click="open($event)"><i class="fui-calendar-solid"></i></span>
+            <span class="input-group-addon flat" ng-click="open($event)"><i class="fui-calendar"></i></span>
           </div>
         </div>
       </div>
@@ -55,8 +56,32 @@
       </div>
     </form>
 
+    <i class="fui-search search-icon pointer" ng-click="searchToggle = !searchToggle" ng-show="!searchToggle"></i>
+
+    <div class="row no-gutters margin-top bg-white search" ng-show="searchToggle">
+      <form class="navbar-form" action="#" role="search" name="entrySearch">
+        <div class="form-group">
+          <div class="input-group has-feedback">
+            <input class="form-control" id="navbarInput-01" type="search" placeholder="Search">
+            <span class="form-control-feedback fui-search"></span>
+          </div>
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Beginning Date"  is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" style="text-align:right;" />
+            <span class="input-group-addon flat" ng-click="open($event)"><i class="fui-calendar-solid"></i></span>
+          </div>
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="End Date" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" style="text-align:right;" />
+            <span class="input-group-addon flat" ng-click="open($event)"><i class="fui-calendar-solid"></i></span>
+          </div>
+          <button class="btn btn-primary btn-wide">Search</button>
+        </div>
+          <i class="fui-cross-circle pull-right pointer" ng-click="searchToggle = !searchToggle"></i>
+      </form>
+    </div>
+
+
     <div class="row margin-top" ng-repeat="entry in entries">
-      <div class="col-sm-9">
+      <div class="col-xs-9" style="margin-right:-.5rem">
         <md-card class="entry">
           <md-card-content class="header">
             <md-button class="pull-right no-margin" aria-label="Edit or Delete" class="md-primary md-raised" ng-click="showBottomSheet()">
