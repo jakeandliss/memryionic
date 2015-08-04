@@ -243,6 +243,13 @@ Desktop CSS
   bottom: 1%;;
 }
 
+.desktop #entries .content p {
+  white-space: pre-line;
+}
+
+.desktop #entries .content a {
+  cursor: pointer;
+}
 
 
 /********************
