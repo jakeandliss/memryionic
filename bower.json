@@ -8,7 +8,8 @@
     "angular-bootstrap": "latest",
     "flat-ui": "2.2.2",
     "ionic-audio": "latest",
-    "angular-slick-carousel": "3.0.4"
+    "angular-slick-carousel": "3.0.4",
+    "ngCordova": "latest"
   },
   "dependencies": {
     "ng-device-detector": "~1.1.7"
