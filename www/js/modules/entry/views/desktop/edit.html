@@ -4,18 +4,19 @@
       <form name="entryForm" id="edit-entry" class="bg-white padding" ng-submit="entry.update(entry)">
         <div class="row dz-hide">
           <div class="col-sm-8">
-            <input type="text" placeholder="Title this entry" class="form-control flat margin-bottom"  ng-model="entry.title" />
+            <input type="text" placeholder="Title this entry" class="form-control flat margin-bottom"  ng-model="selectedEntry.title" />
           </div>
           <div class="col-sm-4">
             <div class="input-group">
-              <input type="text" class="form-control flat" datepicker-popup="{{format}}" ng-model="entry.date" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+              <input type="text" class="form-control flat" datepicker-popup="{{format}}" ng-model="selectedEntry.date" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
               <span class="input-group-addon flat" ng-click="open($event)"><i class="fui-calendar-solid"></i></span>
             </div>
           </div>
         </div>
-        <textarea placeholder="What would you like to remember?" rows="4" class="form-control flat margin-bottom dz-hide" ng-model="entry.content"></textarea>
-        <div class="tagsinput-primary dz-hide margin-bottom" ng-controller="TagsCtrl">
-          <input type="text" name="tagsinput" class="form-control tagsinput expand flat" placeholder="Add labels" data-role="tagsinput" ng-model="tag.name" typeahead="name for tag in tags | filter:$viewValue |  limitTo:8" />
+        <textarea placeholder="What would you like to remember?" rows="4" class="form-control flat margin-bottom dz-hide" ng-model="selectedEntry.content"></textarea>
+        <div class="tagsinput-primary dz-hide margin-bottom">
+          <!-- <input type="text" name="tagsinput" class="form-control tagsinput expand flat" placeholder="Add labels" data-role="tagsinput" ng-model="tag.name" typeahead="name for tag in selectedEntry.tags | filter:$viewValue |  limitTo:8" /> -->
+          
         </div>
         <div class="row">
           <div class="col-sm-8">
@@ -32,7 +33,7 @@
           </div>
           <div class="col-sm-4 dz-hide">
             <button class="btn btn-block btn-lg btn-primary" type="submit">Update Entry</button>
-            <a ng-click="closeModal()">Cancel</a>
+            <a class="btn btn-block btn-lg btn-primary" data-dismiss="modal" ng-click="closeModal()">Cancel</a>
           </div>
         </div>
       </form>

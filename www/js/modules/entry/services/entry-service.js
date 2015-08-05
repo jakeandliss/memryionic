@@ -130,7 +130,9 @@
           }
         });
         return video_sources;
-      }
+      },
+      selectedEntry:{},
+      modalInstance:{}
     };
   })
 })();

@@ -15,7 +15,8 @@ angular.module('memryApp', [
   "ngSanitize",
   "slickCarousel",
   'ui.bootstrap',
-  'yaru22.angular-timeago']
+  'yaru22.angular-timeago',
+  'bootstrapLightbox','ngTouch']
 )
 
 .run(function($ionicPlatform, $rootScope, deviceDetector) {
@@ -87,7 +88,12 @@ angular.module('memryApp', [
 
   $urlRouterProvider.otherwise('/entries');
 })
-
+.config(function(LightboxProvider){
+  LightboxProvider.templateUrl='js/modules/entry/views/desktop/lightBox-image.html';
+  LightboxProvider.getImageUrl=function(imageUrl){
+      return imageUrl;
+  };
+})
 .config(function($ionicConfigProvider) {
   $ionicConfigProvider.tabs.position("bottom");
 });

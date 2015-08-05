@@ -10,8 +10,8 @@
     })
     .controller('EntriesCtrl', EntriesCtrl)
 
-  EntriesCtrl.$inject = ['$scope', '$stateParams', 'Entries', '$ionicModal', '$mdBottomSheet', '$sce', '$ionicPopover', '$modal'];
-  function EntriesCtrl($scope, $stateParams, Entries, $ionicModal, $mdBottomSheet, $sce, $ionicPopover, $modal) {
+  EntriesCtrl.$inject = ['$scope', '$stateParams', 'Entries', '$ionicModal', '$mdBottomSheet', '$sce', '$ionicPopover', '$modal','Lightbox'];
+  function EntriesCtrl($scope, $stateParams, Entries, $ionicModal, $mdBottomSheet, $sce, $ionicPopover, $modal,Lightbox) {
     $scope.entry = {};
 
     // Add Entry
@@ -95,9 +95,10 @@
       // The animation we want to use for the modal entrance
       animation: 'slide-in-up'
     });
-
     $scope.openModal = function () {
       $mdBottomSheet.cancel();
+      $scope.selectedEntry=Entries.selectedEntry;
+      $scope.selectedTags=$scope.selectedEntry.tags;
       var modalInstance = $modal.open({
         animation: $scope.animationsEnabled,
         templateUrl: '/js/modules/entry/views/desktop/edit.html',
@@ -105,14 +106,18 @@
         size: 'lg',
         animation: true
       });
+      Entries.modalInstance=modalInstance;
     };
 
     $scope.closeModal = function () {
-      $modalInstance.dismiss('cancel');
+      //$modal.dismiss('cancel');
+      Entries.modalInstance.dismiss('cancel');
+      //$scope.modalInstance.dismiss('cancel');
     };
 
-
-    $scope.showBottomSheet = function() {
+    $scope.selectedEntry=Entries.selectedEntry;
+    $scope.showBottomSheet = function(entry) {
+      Entries.selectedEntry=entry;
       $scope.alert = '';
       $mdBottomSheet.show({
         templateUrl: '/js/modules/entry/views/desktop/bottom-sheet.html',
@@ -238,5 +243,17 @@
       }
     }
     $scope.filterEntites();
+    $scope.Lightbox=Lightbox;
+    $scope.images=[];
+    $scope.openLightBoxModel=function(index,resource){
+      var filterImagesResult=resource.filter(function(elem){
+           return elem.attachment_content_type== "image";
+      });
+      angular.forEach(filterImagesResult,function(obj){
+        $scope.images.push(obj.attachment);
+      });
+      Lightbox.openModal($scope.images,index);
+    };
+
   }
 })();

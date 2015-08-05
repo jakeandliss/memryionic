@@ -60,7 +60,7 @@
       <div class="col-sm-9">
         <md-card class="entry">
           <md-card-content class="header">
-            <md-button class="pull-right no-margin" aria-label="Edit or Delete" class="md-primary md-raised" ng-click="showBottomSheet()">
+            <md-button class="pull-right no-margin" aria-label="Edit or Delete" class="md-primary md-raised" ng-click="showBottomSheet(entry)">
               <md-icon class="material-icons">more_horiz</md-icon>
               <md-tooltip>
                 Edit or Delete
@@ -87,7 +87,9 @@
               <md-content class="md-padding">
                 <slick settings="slickConfig" class="slick-uninitialized">
                   <div class="slick" ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'image' || resource.attachment_content_type == 'video'">
+                    <a ng-click='openLightBoxModel($index,entry.resources)' >
                      <img ng-src="{{resource.attachment}}" class="md-card-image" ng-if="resource.attachment_content_type == 'image'">
+                   </a>
                      <div ng-if="resource.attachment_content_type == 'video'" class="video-thumb">
                        <img ng-src="{{resource.attachment_thumbnail}}" class="video">
                        <md-icon class="material-icons" ui-sref="user.new">play_circle_filled</md-icon>
