@@ -102,8 +102,8 @@ angular.module('memryApp', [
 .config(function($ionicConfigProvider) {
   $ionicConfigProvider.tabs.position("bottom");
 })
-.filter('hashtags',['$filter',
-    function($filter) {
+.filter('hashtags',['$filter', '$sce',
+    function($filter, $sce) {
         return function(text, target) {
             if (!text) return text;
 
@@ -114,10 +114,11 @@ angular.module('memryApp', [
             }
             // replace #hashtags and send them to twitter
             var replacePattern1 = /(^|\s)#(\w*[a-zA-Z_]+\w*)/gim;
-            replacedText = text.replace(replacePattern1, '$1<a href="http://localhost:8100/#/entries/search?q=%23$2"' + targetAttr + '>#$2</a>');
+            replacedText = text.replace(replacePattern1, '$1<a href="/entries/search?q=%23$2"' + targetAttr + '>#$2</a>');
             // replace @mentions but keep them to our site
             // var replacePattern2 = /(^|\s)\@(\w*[a-zA-Z_]+\w*)/gim;
-            // replacedText = replacedText.replace(replacePattern2, '$1<a href="http://localhost:8100/#/entries/$2"' + targetAttr + '>@$2</a>');
+            // replacedText = replacedText.replace(replacePattern2, '$1<a href="/entries/$2"' + targetAttr + '>@$2</a>');
+            $sce.trustAsHtml(replacedText);
             return replacedText;
         };
     }

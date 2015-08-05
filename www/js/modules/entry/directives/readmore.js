@@ -16,7 +16,7 @@ readMore.directive('readMore', function() {
         restrict: 'AE',
         replace: true,
         scope: {
-            text: '=ngModel'
+            text: '=ngBindHtml'
         },
         template:  "<p> {{text | readMoreFilter:[text, countingWords, textLength] }}" +
             "<a ng-show='showLinks' ng-click='changeLength()' class='color3'>" +

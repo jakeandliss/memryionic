@@ -24,7 +24,7 @@
       id: 0,
       tagID:0,
       title: 'When I was on my way home today this happened. And I wasn\'t expecting it...',
-      content: 'You on your way? Because there is a really cool party and I want to go to it really really bad. There is only one way to go. With a #friend.',
+      content: 'You on your way? Because there is a really cool party and I want to go to it really really bad. There is only one way to go. With a #friend. You on your way? Because there is a really cool party and I want to go to it really really bad. There is only one way to go. With a #friend. You on your way? Because there is a really cool party and I want to go to it really really bad. There is only one way to go. With a #friend. There is only one way to go. With a #friend. You on your way? Because there is a really cool party and I want to go to it really really bad. There is only one way to go. With a #friend. You on your way? Because there is a really cool party and I want to go to it really really bad.',
       resources: [{
         attachment: 'https://pbs.twimg.com/profile_images/514549811765211136/9SgAuHeY.png',
         attachment_content_type: "image",
