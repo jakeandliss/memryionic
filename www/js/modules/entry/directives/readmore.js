@@ -16,9 +16,9 @@ readMore.directive('readMore', function() {
         restrict: 'AE',
         replace: true,
         scope: {
-            text: '=ngBindHtml'
+            text: '=ngModel'
         },
-        template:  "<p> {{text | readMoreFilter:[text, countingWords, textLength] }}" +
+        template:  "<p> {{text | readMoreFilter:[text, countingWords, textLength] | hashtags }}" +
             "<a ng-show='showLinks' ng-click='changeLength()' class='color3'>" +
             "<span ng-show='isExpanded'>  Show Less</span>" +
             "<span ng-show='!isExpanded'>  Show More</span>" +
