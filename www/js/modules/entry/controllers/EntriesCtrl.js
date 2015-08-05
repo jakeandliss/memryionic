@@ -10,8 +10,8 @@
     })
     .controller('EntriesCtrl', EntriesCtrl)
 
-  EntriesCtrl.$inject = ['$scope', 'Entries', '$ionicModal', '$mdBottomSheet', '$sce', '$ionicPopover', 'Lightbox'];
-  function EntriesCtrl($scope, Entries, $ionicModal, $mdBottomSheet, $sce, $ionicPopover, Lightbox) {
+  EntriesCtrl.$inject = ['$scope', '$stateParams', 'Entries', '$ionicModal', '$mdBottomSheet', '$sce', '$ionicPopover', '$modal','Lightbox', 'ngAudio'];
+  function EntriesCtrl($scope, $stateParams, Entries, $ionicModal, $mdBottomSheet, $sce, $ionicPopover, $modal, Lightbox, ngAudio) {
     $scope.entry = {};
 
     // Add Entry
@@ -28,6 +28,18 @@
     };
     $scope.config = config;
 
+
+    $scope.slickConfig = {
+      initialSlide: 0,
+      autoplay: false,
+      slidesToShow: 1,
+      centerPadding: "25%",
+      focusOnSelect: true,
+      arrows: false,
+      centerMode: true,
+      infinite: true,
+    }
+
     $scope.edit = function(entry) {
       $scope.edit(entry);
     };
@@ -39,10 +51,15 @@
 
     // Remove Entry
     $scope.remove = function(entry) {
-      $scope.remove(entry);
+      if (confirm('Are you sure you want to delete this?')){
+        Entries.remove(entry);
+      }
     };
 
     $scope.entry.date = new Date();
+
+    $scope.audio = ngAudio.load("http://www.stephaniequinn.com/Music/Canon.mp3");
+
 
     if (window.templateMode == "mobile") {
       $ionicPopover.fromTemplateUrl('my-popover.html', {
@@ -81,20 +98,29 @@
       // The animation we want to use for the modal entrance
       animation: 'slide-in-up'
     });
+    $scope.openModal = function () {
+      $mdBottomSheet.cancel();
+      $scope.selectedEntry=Entries.selectedEntry;
+      $scope.selectedTags=$scope.selectedEntry.tags;
+      var modalInstance = $modal.open({
+        animation: $scope.animationsEnabled,
+        templateUrl: '/js/modules/entry/views/desktop/edit.html',
+        controller: 'EntriesCtrl',
+        size: 'lg',
+        animation: true
+      });
+      Entries.modalInstance=modalInstance;
+    };
 
-    // items for bottom sheet
-    $scope.items = [{
-      name: 'Edit',
-      icon: 'edit'
-    }, {
-      name: 'Share',
-      icon: 'share'
-    }, {
-      name: 'Delete',
-      icon: 'delete'
-    }, ];
+    $scope.closeModal = function () {
+      //$modal.dismiss('cancel');
+      Entries.modalInstance.dismiss('cancel');
+      //$scope.modalInstance.dismiss('cancel');
+    };
 
-    $scope.showBottomSheet = function() {
+    $scope.selectedEntry=Entries.selectedEntry;
+    $scope.showBottomSheet = function(entry) {
+      Entries.selectedEntry=entry;
       $scope.alert = '';
       $mdBottomSheet.show({
         templateUrl: '/js/modules/entry/views/desktop/bottom-sheet.html',
@@ -107,23 +133,23 @@
 
     angular.element(document.querySelector('#entries')).on('dragenter', dragEventHandler)
     angular.element(document.querySelector('#entries')).on('dragleave', dragLeaveHandler)
-    angular.element(document.querySelector('.dropzone')).on('dragenter', function(event){
+    angular.element(document.querySelector('.dropzone')).on('dragenter', function(event) {
       counter++;
     })
     angular.element.bind({
-    		dragenter: function(event){
-    			 event.stopPropagation();
-           event.preventDefault();
-    			 insideDropzone = true;
-    		},
-    		dragleave: function(event){
-    			event.stopPropagation();
-          event.preventDefault();
-    			insideDropzone = false;
-    		}
-  		});
+      dragenter: function(event) {
+        event.stopPropagation();
+        event.preventDefault();
+        insideDropzone = true;
+      },
+      dragleave: function(event) {
+        event.stopPropagation();
+        event.preventDefault();
+        insideDropzone = false;
+      }
+    });
 
-    function dragEventHandler(){
+    function dragEventHandler() {
       angular.element(document.querySelectorAll('.dz-hide')).addClass('hidden')
       angular.element(document.querySelector('.dropzone')).addClass('dropzone-custom')
       angular.element(document.querySelector('.dropzone')).removeClass('hidden')
@@ -132,7 +158,7 @@
       counter++;
     }
 
-    function dragLeaveHandler(){
+    function dragLeaveHandler() {
       counter--;
       if (counter == 0) {
         if (!insideDropzone) {
@@ -187,11 +213,86 @@
       if(filterResultImages.length>0){
           angular.forEach(filterResultImages,function(obj){
           $scope.images.push({'url':obj.attachment});
-        }) 
+        })
       }
     }
       Lightbox.openModal($scope.images, index);
     };
 
+    $scope.track = {
+      url: 'http://www.stephaniequinn.com/Music/Canon.mp3',
+    };
+
+
+    $scope.play = function(src) {
+       var media = new Media(src, null, null, mediaStatusCallback);
+       $cordovaMedia.play(media);
+    }
+
+    var mediaStatusCallback = function(status) {
+       if(status == 1) {
+           $ionicLoading.show({template: 'Loading...'});
+       } else {
+           $ionicLoading.hide();
+       }
+    }
+
+    $scope.open = function($event) {
+    $event.preventDefault();
+    $event.stopPropagation();
+    $scope.opened = true;
+    };
+
+    // Datepicker
+    $scope.dateOptions = {
+
+    };
+
+
+  $scope.formats = ['longDate'];
+  $scope.format = $scope.formats[0];
+
+
+  var tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  var afterTomorrow = new Date();
+  afterTomorrow.setDate(tomorrow.getDate() + 2);
+  $scope.events =
+    [
+      {
+        date: tomorrow,
+        status: 'full'
+      },
+      {
+        date: afterTomorrow,
+        status: 'partially'
+      }
+    ];
+      $scope.filterEntites=function(){
+         if($stateParams.id){
+          var filterResult=$scope.entries.filter(function(elem){
+              return elem.tagID==$stateParams.id;
+          });
+          $scope.entries=filterResult;
+          $scope.showBackButton=true;
+      }
+      else{
+
+      }
+    }
+    $scope.filterEntites();
+    $scope.Lightbox=Lightbox;
+    $scope.images=[];
+    $scope.openLightBoxModel=function(index,resource){
+      var filterImagesResult=resource.filter(function(elem){
+           return elem.attachment_content_type== "image";
+      });
+      angular.forEach(filterImagesResult,function(obj){
+        $scope.images.push(obj.attachment);
+      });
+      Lightbox.openModal($scope.images,index);
+    };
+
   }
+
 })();

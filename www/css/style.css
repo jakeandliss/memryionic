@@ -1,82 +1,62 @@
 /* Empty. Add your own CSS if you like */
 
-
-
 * {
   font-family: 'Ubuntu', sans-serif;
 }
 
-body {
-  display: table;
-  height: 100%;
-  background-color: #eee;
-  width: 100%;
-}
-
 .logo {
-	font-family: 'Lobster Two', cursive;
+  font-family: 'Lobster Two', cursive;
 }
-
 .font-white {
-	color: white;
+  color: white;
 }
-
 .center {
-	text-align: center;
-
+  text-align: center;
 }
 .no-border {
   border: none;
 }
-
 .margin {
-	margin: 1rem;
+  margin: 1rem;
 }
-
 .margin-top {
-	margin-top: 1rem;
+  margin-top: 1rem;
 }
-
 .margin-bottom {
-	margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
-
 .no-margin {
   margin: 0;
 }
-
 .bold {
   font-weight: bold !important;
 }
-
 .padding {
   padding: 1rem;
 }
-
 .no-padding {
   padding: 0;
 }
-
 .no-padding-top-bottom {
   padding-top: 0;
   padding-bottom: 0;
 }
-
+.row.no-gutters {
+  margin-right: 0;
+  margin-left: 0;
+}
 .box-shadow {
-	box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.14), 0px 2px 2px 0px rgba(0, 0, 0, 0.098), 0px 1px 5px 0px rgba(0, 0, 0, 0.084);
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.14), 0px 2px 2px 0px rgba(0, 0, 0, 0.098), 0px 1px 5px 0px rgba(0, 0, 0, 0.084);
 }
 .expand {
   width: 100%;
 }
-
 .pointer {
-	cursor: pointer;
+  cursor: pointer;
 }
-
 md-bottom-sheet {
   position: fixed !important;
 }
-
 md-card {
 	margin: inherit;
   box-shadow: none;
@@ -87,19 +67,36 @@ md-content {
 }
 
 // Rules for sizing the icon.
-.material-icons.md-18 { display:inline; font-size: 18px; }
-.material-icons.md-24 { display:inline; font-size: 24px; }
-.material-icons.md-36 { display:inline; font-size: 36px; }
-.material-icons.md-48 { display:inline; font-size: 48px; }
-
+.material-icons.md-18 {
+  display: inline;
+  font-size: 18px;
+}
+.material-icons.md-24 {
+  display: inline;
+  font-size: 24px;
+}
+.material-icons.md-36 {
+  display: inline;
+  font-size: 36px;
+}
+.material-icons.md-48 {
+  display: inline;
+  font-size: 48px;
+}
 // Rules for using icons as black on a light background.
-.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
-.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
-
+.material-icons.md-dark {
+  color: rgba(0, 0, 0, 0.54);
+}
+.material-icons.md-dark.md-inactive {
+  color: rgba(0, 0, 0, 0.26);
+}
 // Rules for using icons as white on a dark background.
-.material-icons.md-light { color: rgba(255, 255, 255, 1); }
-.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
-
+.material-icons.md-light {
+  color: rgba(255, 255, 255, 1);
+}
+.material-icons.md-light.md-inactive {
+  color: rgba(255, 255, 255, 0.3);
+}
 
 /********
 
@@ -108,48 +105,56 @@ Color Styling
 ********/
 
 .bg-white {
-	background-color: #fff;
+  background-color: #fff;
 }
-
 .bg-gray {
-	background-color: #f5f5f5;
+  background-color: #f5f5f5;
 }
-
 .bg-calm {
   background-color: #C5E0DC;
 }
-
-.bg-calm, .bg-calm p, .bg-calm i, .bg-calm, .bg-calm h1, .bg-calm span  {
+.bg-calm, .bg-calm p, .bg-calm i, .bg-calm, .bg-calm h1, .bg-calm span {
   color: #fff;
 }
-
 .bg-assertive {
   background-color: #E08E79;
 }
-
-.bg-assertive, .bg-assertive p, .bg-assertive i, .bg-assertive, .bg-assertive h1  {
+.bg-assertive, .bg-assertive p, .bg-assertive i, .bg-assertive, .bg-assertive h1 {
   color: #fff;
 }
-
 .bg-cream {
   background-color: #F1D4AF;
 }
-
 .bg-powderpuff {
   background-color: #ECE5CE;
 }
-
 .bg-brown {
   background-color: #774F38;
 }
-
-.bg-brown, .bg-brown p, .bg-brown i, .bg-brown, .bg-brown h1  {
+.bg-brown, .bg-brown p, .bg-brown i, .bg-brown, .bg-brown h1 {
   color: #fff;
 }
-
 .dark {
   background-color: #444 !important;
 }
 .dark button, .dark p, .dark i, .dark a, .dark h1 {
   color: #fff !important;
+}
+
+.slick-slide {
+  width: 100%;
+  transform: scale(.92);
+  -webkit-transform: scale(.92);
+  -moz-transform: scale(.92);
+  -ms-transform: scale(.92);
+}
+.slick-slide.slick-current.slick-active {
+  transform: scale(1);
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -webkit-transition: all .4s ease-in-out;
+  -ms-transition: all .4s ease-in-out;
+  -moz-transition: all .4s ease-in-out;
+  -o-transition: all .4s ease-in-out;
 }

@@ -7,7 +7,12 @@
     "angular-sanitize": "latest",
     "angular-bootstrap": "latest",
     "flat-ui": "2.2.2",
-    "angular-bootstrap-lightbox": "0.6.1"
+    "angular-bootstrap-lightbox": "0.6.1",
+    "ionic-audio": "latest",
+    "angular-slick-carousel": "3.0.4",
+    "angular-timeago": "0.2.0",
+    "angular-audio": "1.7.0",
+    "ngCordova": "latest"
   },
   "dependencies": {
     "ng-device-detector": "~1.1.7"

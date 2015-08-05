@@ -10,28 +10,33 @@
         </div>
       </md-list-item>
     </md-list>
+    <a class="pointer" ng-click="goBack()" ng-show="showBackButton"><md-icon class="material-icons">keyboard_backspace</md-icon> {{childLabel}}</a>
     <div ng-repeat="tag in tags" ng-if="tag.ancestry == ''" class="margin-bottom tag">
-      <a class="edit"><md-icon class="material-icons  edit hde ">mode_edit</md-icon></a>
-      <button ng-class="{'selected' : it === ul.selected }" class="btn btn-block btn-primary " ui-sref="app.entries({ tag: tag.name })">
+      <a class="edit" ng-click="showEditLabelPopUp(tag)"><md-icon class="material-icons  edit hde ">mode_edit</md-icon></a>
+      <button ng-class="{'selected' : it === ul.selected }" class="btn btn-block btn-primary " ui-sref="app.tagEntries({ id: tag.id })">
         {{tag.name}}
         <md-icon class="material-icons pull-right" ng-if="tag.children.length">keyboard_arrow_right</md-icon>
       </button>
     </div>
   </div>
 
-  <div class="col-xs-9" style="margin-right:-.9rem">
+  <div class="col-sm-9">
+
     <form name="entryForm" class="bg-white padding" ng-submit="entry.add()">
       <div class="row dz-hide">
         <div class="col-sm-8">
-          <input type="text" placeholder="Title this entry" class="form-control flat margin-bottom"  ng-model="entry.title" />
+          <input type="text" placeholder="Title this entry" class="form-control flat bg-gray margin-bottom"  ng-model="entry.title" />
         </div>
-        <div class="col-sm-4">
-          <input type="date" class="form-control flat margin-bottom" ng-model="entry.date"/>
+        <div class="col-sm-4 date">
+          <div class="input-group">
+            <input type="text" class="form-control flat" datepicker-popup="{{format}}" ng-model="entry.date" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" style="text-align:right;" />
+            <span class="input-group-addon flat" ng-click="open($event)"><i class="fui-calendar"></i></span>
+          </div>
         </div>
       </div>
-      <textarea placeholder="What would you like to remember?" rows="4" class="form-control flat margin-bottom dz-hide" ng-model="entry.content"></textarea>
+      <textarea placeholder="What would you like to remember?" rows="4" class="form-control flat bg-gray margin-bottom dz-hide" ng-model="entry.content"></textarea>
       <div class="tagsinput-primary dz-hide margin-bottom" ng-controller="TagsCtrl">
-        <input type="text" name="tagsinput" class="form-control tagsinput expand flat" placeholder="Add labels" data-role="tagsinput" ng-model="tag.name" typeahead="name for tag in tags | filter:$viewValue |  limitTo:8" />
+        <input type="text" name="tagsinput" class="form-control tagsinput expand flat bg-gray" placeholder="Add labels" data-role="tagsinput" ng-model="tag.name" typeahead="name for tag in tags |  limitTo:8" />
       </div>
       <div class="row">
         <div class="col-sm-8">
@@ -52,64 +57,90 @@
       </div>
     </form>
 
+    <i class="fui-search search-icon pointer" ng-click="searchToggle = !searchToggle" ng-show="!searchToggle"></i>
+
+    <div class="row no-gutters margin-top bg-white search" ng-show="searchToggle">
+      <form class="navbar-form" action="#" role="search" name="entrySearch">
+        <div class="form-group">
+          <div class="input-group has-feedback">
+            <input class="form-control" id="navbarInput-01" type="search" placeholder="Search">
+            <span class="form-control-feedback fui-search"></span>
+          </div>
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Beginning Date"  is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" style="text-align:right;" />
+            <span class="input-group-addon flat" ng-click="open($event)"><i class="fui-calendar-solid"></i></span>
+          </div>
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="End Date" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" style="text-align:right;" />
+            <span class="input-group-addon flat" ng-click="open($event)"><i class="fui-calendar-solid"></i></span>
+          </div>
+          <button class="btn btn-primary btn-wide">Search</button>
+        </div>
+          <i class="fui-cross-circle pull-right pointer" ng-click="searchToggle = !searchToggle"></i>
+      </form>
+    </div>
+
+
     <div class="row margin-top" ng-repeat="entry in entries">
-      <div class="col-sm-9">
+      <div class="col-xs-9" style="margin-right:-.5rem">
         <md-card class="entry">
           <md-card-content class="header">
-            <md-button class="pull-right no-margin" aria-label="Edit or Delete" class="md-primary md-raised" ng-click="showBottomSheet()">
+            <md-button class="pull-right no-margin" aria-label="Edit or Delete" class="md-primary md-raised" ng-click="showBottomSheet(entry)">
               <md-icon class="material-icons">more_horiz</md-icon>
               <md-tooltip>
                 Edit or Delete
               </md-tooltip>
             </md-button>
-            <p class="date fancy"><span>{{entry.date | date: "longDate"}}</span></p>
+            <md-list class="no-margin">
+            <md-list-item class="md-2-line no-margin">
+              <img ng-src="{{user.avatar}}" class="md-avatar" ng-controller="UserCtrl">
+              <div class="md-list-item-text">
             <h2 class="md-title">{{entry.title}}</h2>
+            <h4 class="date">Posted by you on {{entry.date | date: "longDate"}} ({{entry.date | timeAgo }}).</h4>
+          </div>
+            </md-list-item>
+          </md-list>
           </md-card-content>
           <md-card-content class="content">
-            <p>
-              {{entry.content}}
-            </p>
+              <p read-more ng-model="entry.content" words="true" length="50"></p>
           </md-card-content>
 
-          <md-tabs md-dynamic-height md-border-bottom>
+          <md-tabs md-dynamic-height md-border-bottom md-center-tabs md-stretch-tabs="always">
             <md-tab label="Visual">
               <md-content class="md-padding">
-                <carousel>
-                  <slide ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'image' || resource.attachment_content_type == 'video'">
-                    <div ng-if="resource.attachment_content_type == 'image'">
-                      <a ng-click="openLightboxModal($index,entry.resources)">
-                      <img ng-src="{{resource.attachment}}" class="md-card-image">
-                    </a>
-                      <a ng-click="openLightboxModal($index,entry.resources)" class="material-icons pointer pop-out"></a>
-                    </div>
-                    <div ng-if="resource.attachment_content_type == 'video'" class="video-thumb">
-                   
-                      <img ng-src="{{resource.attachment_thumbnail}}" class="vide">
+                <slick settings="slickConfig" class="slick-uninitialized">
+                  <div class="slick" ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'image' || resource.attachment_content_type == 'video'">
+                    <a ng-click='openLightBoxModel($index,entry.resources)' >
+                     <img ng-src="{{resource.attachment}}" class="md-card-image" ng-if="resource.attachment_content_type == 'image'">
+                   </a>
+                     <div ng-if="resource.attachment_content_type == 'video'" class="video-thumb">
+                       <img ng-src="{{resource.attachment_thumbnail}}" class="video">
+                       <md-icon class="material-icons" ui-sref="user.new">play_circle_filled</md-icon>
+                     </div>
+                  </div>
+                </slick>
 
-                      <a ng-click="openLightboxModal($index)" class="material-icons">play_circle_filled</a>
-
-                    <!-- <lightbox> -->
-                      <!-- <video class="video-js" preload="auto" data-setup="{}">
-                        <source ng-src="config.sources" type-"video/mp4"</source>
-                      </video> -->
-                    <!-- </lightbox> -->
-                    </div>
-                  </slide>
-                </carousel>
               </md-content>
             </md-tab>
             <md-tab label="Audio">
-              <md-content class="md-padding">
-                <md-list>
-                  <md-list-item class="md-2-line" ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'audio'">
-                    <md-icon class="material-icons">music_note</md-icon>
-                    <div class="md-list-item-text">
-                      <audio controls>
-                        <!-- <source ng-src="{{ resource.attachment }}"> -->
-                      </audio>
-                      <p> {{ resource.attachment_file_name }} </p>
-                    </div>
-                  </md-list-item>
+              <md-content class="md-padding audio">
+                  <div class="input-group margin">
+                    <label class="input-group-addon">Time</label>
+                    <input class="form-control" type=range min=0 max=1 step=0.01 ng-model='audio.progress'>
+                  </div>
+                  <div class="input-group margin">
+                    <label class="input-group-addon">Volume</label>
+                    <input class="form-control" type=range min=0 max=1 step=0.01 ng-model='audio.volume'>
+                  </div>
+                  <md-list>
+                    <md-list-item class="md-2-line" ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'audio'">
+                      <div class="md-list-item-text">
+                        <button ng-click='audio.paused ? audio.play() : audio.pause()' class="btn btn-primary">Play</button>
+                         <button ng-click='audio.restart()' class="btn btn-danger">Stop</button>
+                         <button ng-click='audio.muting = !audio.muting' class="btn btn-default">Mute</button>
+                         {{ resource.attachment_file_name}}
+                      </div>
+                    </md-list-item>
                 </md-list>
               </md-content>
             </md-tab>
@@ -136,9 +167,22 @@
         </div>
       </div>
     </div>
-  </div>
-</div>
 
+
+
+<div class="row margin-top" ng-show="entries.length==0">
+  <div class="col-sm-9">
+    <md-card class="entry">
+    <md-card-content class="content">
+    <p class="md-title">
+      No Content Found
+    </p>
+  </md-card-content>
+</md-card>
+</div>
+</div>
+</div>
+</div>
 
 <div id="preview-template" style="display: none;">
   <div class="dz-preview dz-file-preview">

@@ -11,11 +11,16 @@
       <link href="lib/flat-ui/dist/css/vendor/bootstrap.min.css" rel="stylesheet">
       <link href="lib/angular-bootstrap-lightbox/dist/angular-bootstrap-lightbox.css" rel="stylesheet">
       <link href="lib/flat-ui/dist/css/flat-ui.min.css" rel="stylesheet">
+      <link href="css/desktop.css" rel="stylesheet">
+      <link href="lib/slick-carousel/slick/slick.css" rel="stylesheet">
+      <link href="lib/slick-carousel/slick/slick-theme.css" rel="stylesheet">
+      <link href="lib/angular-audio/css/shCore.css" rel="stylesheet">
     </div>
 
     <!-- Mobile CSS -->
     <div ng-if="!isDesktopOrTablet">
       <link href="css/ionic.app.css" rel="stylesheet">
+      <link href="css/mobile.css" rel="stylesheet">
     </div>
 
     <!-- Mobile and Desktop CSS -->
@@ -27,19 +32,26 @@
     <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700,300italic,400italic,500italic,700italic|Ubuntu+Condensed|Lobster+Two:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <!-- ionic/angularjs js -->
+    <!-- ionic/angularjs/vendor js -->
+    <script src="lib/jquery/dist/jquery.min.js"></script>
     <script src="lib/ionic/js/ionic.bundle.js"></script>
     <script src="lib/angular-material/angular-material.js"></script>
     <script src="lib/angular-aria/angular-aria.js"></script>
     <script src="lib/ng-device-detector/ng-device-detector.js"></script>
     <script src="lib/re-tree/re-tree.js"></script>
     <script src="lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-
     <script src="lib/angular-sanitize/angular-sanitize.min.js"></script>
     <script src="http://www.dropzonejs.com/new-js/dropzone.js"></script>
     <script src="lib/flat-ui/dist/js/vendor/video.js"></script>
+    <script src="lib/ionic-audio/dist/ion-audio.js"></script>
+    <script src="lib/ngCordova/dist/ng-cordova-mocks.min.js"></script>
+    <script src="lib/ngCordova/dist/ng-cordova.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
+    <script src="lib/slick-carousel/slick/slick.min.js"></script>
+    <script src="lib/angular-slick-carousel/dist/angular-slick.min.js"></script>
+    <script src="lib/angular-timeago/dist/angular-timeago.js"></script>
+    <script src="lib/angular-audio/app/angular.audio.js"></script>
     <script src="lib/angular-bootstrap-lightbox/dist/angular-bootstrap-lightbox.js"></script>
-
 
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
@@ -63,6 +75,9 @@
     <script src="js/modules/entry/services/entry-service.js"></script>
     <script src="js/modules/tag/services/tag-service.js"></script>
     <script src="js/modules/user/services/user-service.js"></script>
+
+    <!--Directives-->
+    <script src="js/modules/entry/directives/readmore.js"></script>
 
   </head>
   <body ng-app="memryApp">

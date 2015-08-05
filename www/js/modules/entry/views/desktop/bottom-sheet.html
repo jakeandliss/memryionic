@@ -1,9 +1,21 @@
 <md-bottom-sheet class="md-grid" ng-controller="EntriesCtrl">
   <md-list layout-align="center center">
-    <md-list-item ng-repeat="item in items">
-      <md-button class="md-grid-item-content" ng-click="listItemClick($index)">
-        <md-icon class="material-icons">{{item.icon}}</md-icon>
-        <div class="md-grid-text"> {{ item.name }} </div>
+    <md-list-item>
+      <md-button class="md-grid-item-content" ng-click="openModal($index)">
+        <md-icon class="material-icons">edit</md-icon>
+        <div class="md-grid-text">Edit</div>
+      </md-button>
+    </md-list-item>
+    <md-list-item>
+      <md-button class="md-grid-item-content" ng-click="share()">
+        <md-icon class="material-icons">share</md-icon>
+        <div class="md-grid-text">Share</div>
+      </md-button>
+    </md-list-item>
+    <md-list-item>
+      <md-button class="md-grid-item-content" ng-click="remove()">
+        <md-icon class="material-icons">delete</md-icon>
+        <div class="md-grid-text">Delete</div>
       </md-button>
     </md-list-item>
   </md-list>
