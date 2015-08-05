@@ -1,6 +1,6 @@
 body {
   position: relative;
-  height: 100%;
+  height: initial;
   background-color: #eee;
   width: 100%;
 }

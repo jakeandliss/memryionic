@@ -1,43 +1,54 @@
-<ion-view view-title="Labels">
+<ion-view view-title="{{label}}">
   <ion-content>
-      <div class="item item-icon-left item-dark" >
+      <div class="item item-icon-left item-dark">
         <i class="icon ion-ios-pricetag"></i>
-        {{tag.name}}
-        <span class="item-note" ng-click="">Edit</span>
+       <span style="padding-left:65px"> {{childLabel}}</span>
+        <span ng-show="showIt" class="item-note" ng-click="editLabel()">Edit</span>
       </div>
 
     <ion-list class="list" show-delete="shouldShowDelete" can-swipe="listCanSwipe">
       <ul>
-        <li ng-repeat="tag in tags" ng-if="tag.ancestry == ''">
-          <ion-item>
-            <a ui-sref="app.tags({ id: tag.id })" class="item-icon-left item-icon-right item-stable">
+        <li ng-repeat="tag in filteredTags" >
+          <ion-item ng-class="{'item-positive':tag.id==selectedId}">
+            <a ui-sref="app.tags({ id: tag.id })" ng-click="test(tag)" class="item-icon-left item-icon-right item-stable">
               <i class="icon ion-ios-pricetag"></i>
                 {{ tag.name }}
               <span class="badge badge-assertive">{{tag.children.length}}</span>
             </a>
+            <ion-option-button class="button-energized icon ion-edit" ng-click="edit($event,tag)"></ion-option-button>
             <ion-option-button class="button-assertive icon ion-trash-a" ng-click="remove(tag)"></ion-option-button>
           </ion-item>
         </li>
       </ul>
     </ion-list>
 
+
+
     <!-- Partial for editing labels -->
-    <form id="edit-tag">
-      <label class="item item-input">
+    <form id="edit-tag" name="tagForm" novalidate ng-show="isEditing">
+      <label class="item item-input" ng-class="{'has-error': tagForm.name.$invalid }">
         <span class="input-label">Name</span>
-        <input type="text" value="Seleted Tag">
+        <input type="text" name="name" id='name' required ng-model="selectedTag.name">
       </label>
+        <div class="form-error" ng-show="tagForm.name.$error.required">Name is required
+      </div>
+    
       <label class="item item-input item-select">
-        <div class="input-label">
+        <span class="input-label">
           Parent
-        </div>
-        <select name="parent_id">
-          <option value="test 0">test 0</option>
-          <option value="test 1">test 1</option>
-          <option value="test 2">test 2</option>
-          <option value="test 3">test 3</option>
+        </span>
+        <select name="parent_id" ng-model="selectedTag.ancestry">
+          <option ng-repeat='tag in tags' value='{{tag.id}}'>{{tag.name}}</option>
         </select>
       </label>
+      <div class='row'>
+          <div class='col'></div>
+        <div class='col'><a style="float:right;" class="padding-top" ng-click="cancel()">Cancel</a></div>
+        <div class='col'>
+        <button class="button button-small button-outline button-assertive expand" ng-disabled="tagForm.$invalid" ng-click="save()">Save</button>
+    </div>
+
+    </div>
     </form>
   </ion-content>
 </ion-view>

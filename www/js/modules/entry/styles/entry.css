@@ -87,38 +87,21 @@ Desktop CSS
     margin-bottom: 0;
 }
 
-.desktop #entries .header .date {
-    color: #aaa;
+.desktop #entries .header .md-list-item-text {
+  padding: 0;
 }
+
+.desktop #entries .header md-list-item {
+  padding: 0;
+}
+
+.desktop #entries .header img.md-avatar {
+    margin-top: 0;
+}
+
 
 .desktop #entries .content {
     padding-bottom: 0;
-}
-
-.desktop .fancy {
-  line-height: 0.5;
-  text-align: center;
-}
-.desktop .fancy span {
-  display: inline-block;
-  position: relative;
-}
-.desktop .fancy span:before,
-.desktop .fancy span:after {
-  content: "";
-  position: absolute;
-  height: 5px;
-  border-bottom: 1px solid #ddd;
-  top: 0;
-  width: 100%;
-}
-.desktop .fancy span:before {
-  right: 100%;
-  margin-right: 15px;
-}
-.desktop .fancy span:after {
-  left: 100%;
-  margin-left: 15px;
 }
 
 .desktop .slick-slide {
@@ -152,12 +135,12 @@ Desktop CSS
 }
 
 .desktop .slick-uninitialized {
-  visibility: hidden;
+  display: none;
   opacity: 0;
 }
 
 .desktop .slick-initialized {
-  visibility: visible;
+  display: inherit;
   opacity: 1;
     -webkit-animation: fadein 3s;
        -moz-animation: fadein 3s;
@@ -195,10 +178,77 @@ Desktop CSS
     to   { opacity: 1; }
 }
 
-.desktop .dropdown-menu {
+.desktop .date .dropdown-menu {
   right: 0px !important;
   left: initial !important;
   padding: 5px;
+}
+
+#edit-entry {
+  border-radius: 5px;
+}
+
+.modal {
+  top: inherit;
+  bottom: -5px;
+}
+
+.modal-content {
+  box-shadow: none;
+  border: none;
+  border-radius: 5px;
+}
+
+.modal-dialog {
+  margin-bottom: 0px !important;
+}
+
+.modal-backdrop.in {
+    opacity: .2;
+}
+
+.modal.fade {
+  bottom: -50%;
+  -webkit-transition: bottom 0.3s ease-out;
+     -moz-transition: bottom 0.3s ease-out;
+       -o-transition: bottom 0.3s ease-out;
+          transition: bottom 0.3s ease-out;
+}
+
+.modal.fade.in {
+  bottom: -1%;
+}
+
+.desktop #entries .search {
+  position: fixed;
+  z-index: 10;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  text-align: center;
+  border-top: 2px solid #ccc;
+  }
+
+.desktop #entries .search-icon:before {
+  background-color: #fff;
+  padding: 7px;
+  border-radius: 100%;
+  border: 2px solid #444;
+}
+
+.desktop #entries .search-icon {
+  position: fixed;
+  z-index: 10;
+  right: 1%;
+  bottom: 1%;;
+}
+
+.desktop #entries .content p {
+  white-space: pre-line;
+}
+
+.desktop #entries .content a {
+  cursor: pointer;
 }
 
 
@@ -247,4 +297,11 @@ Mobile CSS
 
 .mobile #entries .item .labels a.subdued {
   padding-right:0;
+}
+.pull-right{
+  float: right;
+  margin-right: 7px;
+}
+.pull-left{
+  float: left;
 }
