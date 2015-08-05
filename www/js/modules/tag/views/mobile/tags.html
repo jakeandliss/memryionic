@@ -9,14 +9,14 @@
     <ion-list class="list" show-delete="shouldShowDelete" can-swipe="listCanSwipe">
       <ul>
         <li ng-repeat="tag in filteredTags" >
-          <ion-item ng-class="{'item-positive':tag.id==selectedId}">
-            <a ui-sref="app.tags({ id: tag.id })" ng-click="test(tag)" class="item-icon-left item-icon-right item-stable">
+          <ion-item>
+            <div ng-class="{'item-positive':tag.id==selectedId}" ui-sref="app.tags({ id: tag.id })" ng-click="test(tag)" class="item-icon-left item-icon-right item-stable">
               <i class="icon ion-ios-pricetag"></i>
                 {{ tag.name }}
               <span class="badge badge-assertive">{{tag.children.length}}</span>
-            </a>
             <ion-option-button class="button-energized icon ion-edit" ng-click="edit($event,tag)"></ion-option-button>
             <ion-option-button class="button-assertive icon ion-trash-a" ng-click="remove(tag)"></ion-option-button>
+          </div>
           </ion-item>
         </li>
       </ul>
@@ -32,7 +32,7 @@
       </label>
         <div class="form-error" ng-show="tagForm.name.$error.required">Name is required
       </div>
-    
+
       <label class="item item-input item-select">
         <span class="input-label">
           Parent
