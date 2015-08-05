@@ -7,7 +7,7 @@
             <input type="text" placeholder="Title this entry" class="form-control flat margin-bottom bg-gray"  ng-model="selectedEntry.title" />
           </div>
           <div class="col-sm-4">
-            <div class="input-group">
+            <div class="input-group date">
               <input type="text" class="form-control flat" datepicker-popup="{{format}}" ng-model="selectedEntry.date" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
               <span class="input-group-addon flat" ng-click="open($event)"><i class="fui-calendar-solid"></i></span>
             </div>

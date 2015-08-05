@@ -4,6 +4,9 @@
 Desktop CSS
 
 *********************/
+.body {
+  height: initial !important;
+}
 
 .desktop {
     margin-right: 1rem !important;
@@ -188,36 +191,16 @@ Desktop CSS
   border-radius: 5px;
 }
 
-.modal {
-  top: inherit;
-  bottom: -5px;
-}
-
 .modal-content {
   box-shadow: none;
   border: none;
   border-radius: 5px;
 }
 
-.modal-dialog {
-  margin-bottom: 0px !important;
-}
-
 .modal-backdrop.in {
-    opacity: .2;
+    opacity: .5;
 }
 
-.modal.fade {
-  bottom: -50%;
-  -webkit-transition: bottom 0.3s ease-out;
-     -moz-transition: bottom 0.3s ease-out;
-       -o-transition: bottom 0.3s ease-out;
-          transition: bottom 0.3s ease-out;
-}
-
-.modal.fade.in {
-  bottom: -1%;
-}
 
 /* Audio */
 
@@ -264,7 +247,6 @@ Desktop CSS
   background-color: #fff;
   padding: 7px;
   border-radius: 100%;
-  border: 2px solid #444;
 }
 
 .desktop #entries .search-icon {
