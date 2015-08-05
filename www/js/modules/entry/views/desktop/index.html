@@ -102,7 +102,7 @@
           </md-list>
           </md-card-content>
           <md-card-content class="content">
-              <p read-more ng-model="entry.content" words="true" length="50"></p>
+              <p ng-bind-html="entry.content | hashtags"></p>
           </md-card-content>
 
           <md-tabs md-dynamic-height md-border-bottom md-center-tabs md-stretch-tabs="always">

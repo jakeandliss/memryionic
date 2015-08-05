@@ -227,7 +227,7 @@ Desktop CSS
 
 .desktop #entries .audio input[type=range]::-webkit-slider-runnable-track {
     height: 5px;
-    background: #ddd;
+    background: none;
     border: none;
     border-radius: 3px;
 }
