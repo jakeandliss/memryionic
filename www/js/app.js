@@ -16,8 +16,9 @@ angular.module('memryApp', [
   "slickCarousel",
   'ui.bootstrap',
   'yaru22.angular-timeago',
-  'bootstrapLightbox']
-)
+  'bootstrapLightbox',
+  'readMore'
+])
 
 .run(function($ionicPlatform, $rootScope, deviceDetector) {
   $ionicPlatform.ready(function() {
