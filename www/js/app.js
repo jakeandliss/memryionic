@@ -13,11 +13,16 @@ angular.module('memryApp', [
   'reTree', // dependency of deviceDetector
   'ng.deviceDetector',
   "ngSanitize",
+  'ui.bootstrap',
+  'ionic-audio',
+  'ngCordova',
   "slickCarousel",
   'ui.bootstrap',
   'yaru22.angular-timeago',
-  'ngAudio']
-)
+  'ngAudio',
+  'bootstrapLightbox',
+  'readMore'
+])
 
 .run(function($ionicPlatform, $rootScope, deviceDetector) {
   $ionicPlatform.ready(function() {
@@ -88,7 +93,12 @@ angular.module('memryApp', [
 
   $urlRouterProvider.otherwise('/entries');
 })
-
+.config(function(LightboxProvider){
+  LightboxProvider.templateUrl='js/modules/entry/views/desktop/lightBox-image.html';
+  LightboxProvider.getImageUrl=function(imageUrl){
+      return imageUrl;
+  };
+})
 .config(function($ionicConfigProvider) {
   $ionicConfigProvider.tabs.position("bottom");
 });

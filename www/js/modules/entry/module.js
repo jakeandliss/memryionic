@@ -29,6 +29,17 @@
               }
             }
           })
+        .state('app.tagEntries', {
+            url: '/entries/tag/:id',
+            views: {
+              'entries': {
+                templateUrl: function(){
+                  return 'js/modules/entry/views/' + window.templateMode + '/index.html';
+                },
+                controller: 'EntriesCtrl'
+              }
+            }
+          })
     };
 
 })();

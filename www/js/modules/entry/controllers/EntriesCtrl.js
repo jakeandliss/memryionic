@@ -10,8 +10,8 @@
     })
     .controller('EntriesCtrl', EntriesCtrl)
 
-  EntriesCtrl.$inject = ['$scope', 'Entries', '$ionicModal', '$mdBottomSheet', '$sce', '$ionicPopover', '$modal', 'ngAudio'];
-  function EntriesCtrl($scope, Entries, $ionicModal, $mdBottomSheet, $sce, $ionicPopover, $modal, ngAudio) {
+  EntriesCtrl.$inject = ['$scope', '$stateParams', 'Entries', '$ionicModal', '$mdBottomSheet', '$sce', '$ionicPopover', '$modal','Lightbox', 'ngAudio'];
+  function EntriesCtrl($scope, $stateParams, Entries, $ionicModal, $mdBottomSheet, $sce, $ionicPopover, $modal, Lightbox, ngAudio) {
     $scope.entry = {};
 
     // Add Entry
@@ -98,9 +98,10 @@
       // The animation we want to use for the modal entrance
       animation: 'slide-in-up'
     });
-
     $scope.openModal = function () {
       $mdBottomSheet.cancel();
+      $scope.selectedEntry=Entries.selectedEntry;
+      $scope.selectedTags=$scope.selectedEntry.tags;
       var modalInstance = $modal.open({
         animation: $scope.animationsEnabled,
         templateUrl: '/js/modules/entry/views/desktop/edit.html',
@@ -108,14 +109,18 @@
         size: 'lg',
         animation: true
       });
+      Entries.modalInstance=modalInstance;
     };
 
     $scope.closeModal = function () {
-      $modalInstance.dismiss('cancel');
+      //$modal.dismiss('cancel');
+      Entries.modalInstance.dismiss('cancel');
+      //$scope.modalInstance.dismiss('cancel');
     };
 
-
-    $scope.showBottomSheet = function() {
+    $scope.selectedEntry=Entries.selectedEntry;
+    $scope.showBottomSheet = function(entry) {
+      Entries.selectedEntry=entry;
       $scope.alert = '';
       $mdBottomSheet.show({
         templateUrl: '/js/modules/entry/views/desktop/bottom-sheet.html',
@@ -198,20 +203,39 @@
       }
     };
 
+    $scope.track = {
+      url: 'http://www.stephaniequinn.com/Music/Canon.mp3',
+    };
+
+
+    $scope.play = function(src) {
+       var media = new Media(src, null, null, mediaStatusCallback);
+       $cordovaMedia.play(media);
+    }
+
+    var mediaStatusCallback = function(status) {
+       if(status == 1) {
+           $ionicLoading.show({template: 'Loading...'});
+       } else {
+           $ionicLoading.hide();
+       }
+    }
+
     $scope.open = function($event) {
     $event.preventDefault();
     $event.stopPropagation();
-
     $scope.opened = true;
-  };
+    };
 
-  // Datepicker
-  $scope.dateOptions = {
+    // Datepicker
+    $scope.dateOptions = {
 
-  };
+    };
+
 
   $scope.formats = ['longDate'];
   $scope.format = $scope.formats[0];
+
 
   var tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
@@ -228,8 +252,31 @@
         status: 'partially'
       }
     ];
+      $scope.filterEntites=function(){
+         if($stateParams.id){
+          var filterResult=$scope.entries.filter(function(elem){
+              return elem.tagID==$stateParams.id;
+          });
+          $scope.entries=filterResult;
+          $scope.showBackButton=true;
+      }
+      else{
+
+      }
+    }
+    $scope.filterEntites();
+    $scope.Lightbox=Lightbox;
+    $scope.images=[];
+    $scope.openLightBoxModel=function(index,resource){
+      var filterImagesResult=resource.filter(function(elem){
+           return elem.attachment_content_type== "image";
+      });
+      angular.forEach(filterImagesResult,function(obj){
+        $scope.images.push(obj.attachment);
+      });
+      Lightbox.openModal($scope.images,index);
+    };
+
   }
-
-
 
 })();
