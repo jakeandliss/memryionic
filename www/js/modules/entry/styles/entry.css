@@ -187,6 +187,17 @@ Desktop CSS
   padding: 5px;
 }
 
+.desktop .date .form-control[disabled] {
+  color: #444;
+  background-color: #fff;
+  border-color: #fff;
+  opacity: .7;
+}
+
+.desktop .date .input-group-addon:last-child {
+  border-radius: 6px;
+}
+
 #edit-entry {
   border-radius: 5px;
 }

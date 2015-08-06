@@ -104,6 +104,10 @@ md-content {
   color: rgba(255, 255, 255, 0.3);
 }
 
+.rounded {
+  border-radius: 5px;
+}
+
 /********
 
 Color Styling

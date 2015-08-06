@@ -10,8 +10,8 @@
     })
     .controller('EntriesCtrl', EntriesCtrl)
 
-  EntriesCtrl.$inject = ['$scope', '$stateParams', 'Entries', '$ionicModal', '$mdBottomSheet', '$sce', '$ionicPopover', '$modal','Lightbox', 'ngAudio'];
-  function EntriesCtrl($scope, $stateParams, Entries, $ionicModal, $mdBottomSheet, $sce, $ionicPopover, $modal, Lightbox, ngAudio) {
+  EntriesCtrl.$inject = ['$scope', '$stateParams', 'Entries', '$ionicModal', '$mdBottomSheet', '$sce', '$ionicPopover', '$modal','Lightbox', 'ngAudio', 'timeAgo'];
+  function EntriesCtrl($scope, $stateParams, Entries, $ionicModal, $mdBottomSheet, $sce, $ionicPopover, $modal, Lightbox, ngAudio, timeAgo) {
     $scope.entry = {};
 
     // Add Entry
@@ -243,31 +243,29 @@
     $scope.opened = true;
     };
 
-    // Datepicker
+    // Date Options
     $scope.dateOptions = {
-
     };
 
+    $scope.formats = ['longDate'];
+    $scope.format = $scope.formats[0];
+    timeAgo.settings.allowFuture = true;
 
-  $scope.formats = ['longDate'];
-  $scope.format = $scope.formats[0];
-
-
-  var tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  var afterTomorrow = new Date();
-  afterTomorrow.setDate(tomorrow.getDate() + 2);
-  $scope.events =
-    [
-      {
-        date: tomorrow,
-        status: 'full'
-      },
-      {
-        date: afterTomorrow,
-        status: 'partially'
-      }
-    ];
+    var tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    var afterTomorrow = new Date();
+    afterTomorrow.setDate(tomorrow.getDate() + 2);
+    $scope.events =
+      [
+        {
+          date: tomorrow,
+          status: 'full'
+        },
+        {
+          date: afterTomorrow,
+          status: 'partially'
+        }
+      ];
       $scope.filterEntites=function(){
          if($stateParams.id){
           var filterResult=$scope.entries.filter(function(elem){
