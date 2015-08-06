@@ -244,6 +244,55 @@ Desktop CSS
     opacity: .5;
 }
 
+/* Lightbox */
+
+.lightbox-image-container .prev-image {
+    position: absolute;
+    height: 100%;
+    width: 25%;
+    left: 0;
+    display: none;
+    background: none;
+    padding-top: 45%;
+    z-index: 1;
+}
+
+.lightbox-image-container .prev-image md-icon {
+    background-color: #fff;
+    border-radius: 100%;
+    opacity: .5;
+}
+
+.lightbox-image-container:hover .prev-image {
+    display: inherit;
+}
+
+.lightbox-image-container .next-image {
+    position: absolute;
+    height: 100%;
+    width: 25%;
+    right: 0;
+    display: none;
+    background: none;
+    padding-top: 45%;
+    z-index: 1;
+}
+
+.lightbox-image-container .next-image md-icon {
+    background-color: #fff;
+    border-radius: 100%;
+    opacity: .5;
+}
+
+.lightbox-image-container:hover .next-image {
+    display: inherit;
+}
+
+.lightbox-video-container .video-js {
+  padding-bottom: 0;
+  margin-bottom: 47px;
+  background-color: black;
+}
 
 /* Audio */
 

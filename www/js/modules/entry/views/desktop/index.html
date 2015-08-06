@@ -115,7 +115,7 @@
                 <slick settings="slickConfig" class="slick-uninitialized">
                   <div class="slick" ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'image' || resource.attachment_content_type == 'video'">
                     <img ng-src="{{resource.attachment}}" class="md-card-image" ng-if="resource.attachment_content_type == 'image'">
-                    <md-icon class="material-icons lightbox-button" ng-click='openLightBoxModel($index,entry.resources)'>open_in_new</md-icon>
+                    <md-icon class="material-icons lightbox-button" ng-click='openLightBoxModel($index,entry.resources)' ng-if="resource.attachment_content_type == 'image'">open_in_new</md-icon>
                     <div ng-if="resource.attachment_content_type == 'video'" class="video-thumb">
                      <img ng-src="{{resource.attachment_thumbnail}}" class="video">
                      <md-icon class="material-icons" ng-click='openLightBoxModel($index,entry.resources)'>play_circle_filled</md-icon>
