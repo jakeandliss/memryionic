@@ -2,11 +2,11 @@
   'use strict';
 
   angular.module('memryApp')
-    
+
     .controller('EntriesCtrl', EntriesCtrl)
 
-  EntriesCtrl.$inject = ['$scope', '$stateParams', 'Entries', '$ionicModal', '$mdBottomSheet', '$sce', '$ionicPopover', '$modal','Lightbox'];
-  function EntriesCtrl($scope, $stateParams, Entries, $ionicModal, $mdBottomSheet, $sce, $ionicPopover, $modal,Lightbox) {
+  EntriesCtrl.$inject = ['$scope', '$stateParams', 'Entries', '$ionicModal', '$mdBottomSheet', '$sce', '$ionicPopover', '$modal', 'Lightbox', 'ngAudio', 'timeAgo'];
+  function EntriesCtrl($scope, $stateParams, Entries, $ionicModal, $mdBottomSheet, $sce, $ionicPopover, $modal, Lightbox, ngAudio, timeAgo) {
     $scope.entry = {};
 
     // Add Entry
@@ -54,6 +54,9 @@
 
     $scope.entry.date = new Date();
 
+    $scope.audio = ngAudio.load("http://www.stephaniequinn.com/Music/Canon.mp3");
+
+
     if (window.templateMode == "mobile") {
       $ionicPopover.fromTemplateUrl('my-popover.html', {
         scope: $scope
@@ -91,9 +94,10 @@
       // The animation we want to use for the modal entrance
       animation: 'slide-in-up'
     });
-
     $scope.openModal = function () {
       $mdBottomSheet.cancel();
+      $scope.selectedEntry=Entries.selectedEntry;
+      $scope.selectedTags=$scope.selectedEntry.tags;
       var modalInstance = $modal.open({
         animation: $scope.animationsEnabled,
         templateUrl: '/js/modules/entry/views/desktop/edit.html',
@@ -109,6 +113,7 @@
     };
 
       $scope.selectedEntry=angular.copy(Entries.selectedEntry);
+
     $scope.showBottomSheet = function(entry) {
       Entries.selectedEntry=entry;
       $scope.alert = '';
@@ -192,37 +197,82 @@
         }
       }
     };
+    $scope.images=[];
+    $scope.openLightboxModal = function (index,resource) {
+     // var images =""; // images variable should contain the array of images and videos associated with the entry where it is triggered
+      if(resource.length>0)
+      {
+      var filterResultImages=resource.filter(function(elem){
+          return elem.attachment_content_type=="image";
+      });
+      if(filterResultImages.length>0){
+          angular.forEach(filterResultImages,function(obj){
+          $scope.images.push({'url':obj.attachment});
+        })
+      }
+    }
+      Lightbox.openModal($scope.images, index);
+    };
+
+    $scope.track = {
+      url: 'http://www.stephaniequinn.com/Music/Canon.mp3',
+    };
+
+
+    $scope.play = function(src) {
+       var media = new Media(src, null, null, mediaStatusCallback);
+       $cordovaMedia.play(media);
+    }
+
+    var mediaStatusCallback = function(status) {
+       if(status == 1) {
+           $ionicLoading.show({template: 'Loading...'});
+       } else {
+           $ionicLoading.hide();
+       }
+    }
 
     $scope.open = function($event) {
     $event.preventDefault();
     $event.stopPropagation();
-
     $scope.opened = true;
-  };
+    };
 
-  // Datepicker
-  $scope.dateOptions = {
+    // Date Options
+    $scope.dateOptions = {
+    };
 
-  };
+    $scope.formats = ['longDate'];
+    $scope.format = $scope.formats[0];
+    timeAgo.settings.allowFuture = true;
 
-  $scope.formats = ['longDate'];
-  $scope.format = $scope.formats[0];
-
-  var tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  var afterTomorrow = new Date();
-  afterTomorrow.setDate(tomorrow.getDate() + 2);
-  $scope.events =
-    [
-      {
-        date: tomorrow,
-        status: 'full'
-      },
-      {
-        date: afterTomorrow,
-        status: 'partially'
+    var tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    var afterTomorrow = new Date();
+    afterTomorrow.setDate(tomorrow.getDate() + 2);
+    $scope.events =
+      [
+        {
+          date: tomorrow,
+          status: 'full'
+        },
+        {
+          date: afterTomorrow,
+          status: 'partially'
+        }
+      ];
+      $scope.filterEntites=function(){
+         if($stateParams.id){
+          var filterResult=$scope.entries.filter(function(elem){
+              return elem.tagID==$stateParams.id;
+          });
+          $scope.entries=filterResult;
+          $scope.showBackButton=true;
       }
-    ];
+      else{
+
+      }
+    };
       $scope.filterEntites=function(){
          if($stateParams.id){
           var filterResult=$scope.entries.filter(function(elem){

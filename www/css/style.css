@@ -41,6 +41,10 @@
   padding-top: 0;
   padding-bottom: 0;
 }
+.row.no-gutters {
+  margin-right: 0;
+  margin-left: 0;
+}
 .box-shadow {
   box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.14), 0px 2px 2px 0px rgba(0, 0, 0, 0.098), 0px 1px 5px 0px rgba(0, 0, 0, 0.084);
 }
@@ -49,6 +53,12 @@
 }
 .pointer {
   cursor: pointer;
+}
+.pull-right{
+  float: right;
+}
+.pull-left{
+  float: left;
 }
 md-bottom-sheet {
   position: fixed !important;
@@ -92,6 +102,10 @@ md-content {
 }
 .material-icons.md-light.md-inactive {
   color: rgba(255, 255, 255, 0.3);
+}
+
+.rounded {
+  border-radius: 5px;
 }
 
 /********
