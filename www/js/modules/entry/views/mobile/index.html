@@ -39,7 +39,7 @@
 
         <!-- Video/Images content -->
         <div class="item item-body panel" ng-show="panel.isSelected(1)">
-          <p read-more ng-bind-html="entry.content | hashtags" words="true" length="50"></p>
+          <p read-more ng-model="entry.content" words="true" length="50"></p>
 
           <ion-slide-box does-continue="true" >
             <ion-slide ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'image' || resource.attachment_content_type == 'video'">
