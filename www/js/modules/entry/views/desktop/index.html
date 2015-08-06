@@ -10,9 +10,10 @@
         </div>
       </md-list-item>
     </md-list>
+    <a class="pointer" ng-click="goBack()" ng-show="showBackButton"><md-icon class="material-icons">keyboard_backspace</md-icon> {{childLabel}}</a>
     <div ng-repeat="tag in tags" ng-if="tag.ancestry == ''" class="margin-bottom tag">
-      <a class="edit"><md-icon class="material-icons  edit hde ">mode_edit</md-icon></a>
-      <button ng-class="{'selected' : it === ul.selected }" class="btn btn-block btn-primary " ui-sref="app.entries({ tag: tag.name })">
+      <a class="edit" ng-click="showEditLabelPopUp(tag)"><md-icon class="material-icons  edit hde ">mode_edit</md-icon></a>
+      <button ng-class="{'selected' : it === ul.selected }" class="btn btn-block btn-primary " ui-sref="app.tagEntries({ id: tag.id })">
         {{tag.name}}
         <md-icon class="material-icons pull-right" ng-if="tag.children.length">keyboard_arrow_right</md-icon>
       </button>
@@ -59,7 +60,7 @@
       <div class="col-sm-9">
         <md-card class="entry">
           <md-card-content class="header">
-            <md-button class="pull-right no-margin" aria-label="Edit or Delete" class="md-primary md-raised" ng-click="showBottomSheet()">
+            <md-button class="pull-right no-margin" aria-label="Edit or Delete" class="md-primary md-raised" ng-click="showBottomSheet(entry)">
               <md-icon class="material-icons">more_horiz</md-icon>
               <md-tooltip>
                 Edit or Delete
@@ -86,10 +87,14 @@
               <md-content class="md-padding">
                 <slick settings="slickConfig" class="slick-uninitialized">
                   <div class="slick" ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'image' || resource.attachment_content_type == 'video'">
+                    <a ng-click='openLightBoxModel($index,entry.resources)' >
                      <img ng-src="{{resource.attachment}}" class="md-card-image" ng-if="resource.attachment_content_type == 'image'">
+                   </a>
                      <div ng-if="resource.attachment_content_type == 'video'" class="video-thumb">
+                      <a ng-click='openLightBoxModel($index,entry.resources)' >
                        <img ng-src="{{resource.attachment_thumbnail}}" class="video">
                        <md-icon class="material-icons" ui-sref="user.new">play_circle_filled</md-icon>
+                     </a>
                      </div>
                   </div>
                 </slick>
@@ -134,9 +139,22 @@
         </div>
       </div>
     </div>
-  </div>
-</div>
+  
 
+
+<div class="row margin-top" ng-show="entries.length==0">
+  <div class="col-sm-9">
+    <md-card class="entry">
+    <md-card-content class="content">
+    <p class="md-title">
+      No Content Found
+    </p>
+  </md-card-content>
+</md-card>
+</div>
+</div>
+</div>
+</div>
 
 <div id="preview-template" style="display: none;">
   <div class="dz-preview dz-file-preview">

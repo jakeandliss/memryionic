@@ -2,16 +2,11 @@
   'use strict';
 
   angular.module('memryApp')
-    .config(function($sceDelegateProvider) {
-      $sceDelegateProvider.resourceUrlWhitelist([
-        // Allow same origin resource loads.
-        'self',
-      ]);
-    })
+    
     .controller('EntriesCtrl', EntriesCtrl)
 
-  EntriesCtrl.$inject = ['$scope', 'Entries', '$ionicModal', '$mdBottomSheet', '$sce', '$ionicPopover', '$modal'];
-  function EntriesCtrl($scope, Entries, $ionicModal, $mdBottomSheet, $sce, $ionicPopover, $modal) {
+  EntriesCtrl.$inject = ['$scope', '$stateParams', 'Entries', '$ionicModal', '$mdBottomSheet', '$sce', '$ionicPopover', '$modal','Lightbox'];
+  function EntriesCtrl($scope, $stateParams, Entries, $ionicModal, $mdBottomSheet, $sce, $ionicPopover, $modal,Lightbox) {
     $scope.entry = {};
 
     // Add Entry
@@ -52,7 +47,8 @@
     // Remove Entry
     $scope.remove = function(entry) {
       if (confirm('Are you sure you want to delete this?')){
-        Entries.remove(entry);
+        Entries.remove(Entries.selectedEntry);
+        $mdBottomSheet.cancel();
       }
     };
 
@@ -105,14 +101,16 @@
         size: 'lg',
         animation: true
       });
+      Entries.modalInstance=modalInstance;
     };
 
     $scope.closeModal = function () {
-      $modalInstance.dismiss('cancel');
+      Entries.modalInstance.dismiss('cancel');
     };
 
-
-    $scope.showBottomSheet = function() {
+      $scope.selectedEntry=angular.copy(Entries.selectedEntry);
+    $scope.showBottomSheet = function(entry) {
+      Entries.selectedEntry=entry;
       $scope.alert = '';
       $mdBottomSheet.show({
         templateUrl: '/js/modules/entry/views/desktop/bottom-sheet.html',
@@ -225,5 +223,36 @@
         status: 'partially'
       }
     ];
+      $scope.filterEntites=function(){
+         if($stateParams.id){
+          var filterResult=$scope.entries.filter(function(elem){
+              return elem.tagID==$stateParams.id;
+          });
+          $scope.entries=filterResult;
+          $scope.showBackButton=true;
+      }
+      else{
+
+      }
+    }
+    $scope.filterEntites();
+    $scope.Lightbox=Lightbox;
+    $scope.images=[];
+    $scope.openLightBoxModel=function(index,resource){
+      var filterImagesResult=resource.filter(function(elem){
+           return elem.attachment_content_type== "image"||elem.attachment_content_type=="video";
+      });
+      angular.forEach(filterImagesResult,function(obj){
+          if(obj.attachment_content_type=="video")
+          {
+              $scope.images.push({'url':obj.attachment,'type':obj.attachment_content_type});
+         }
+         else{
+          $scope.images.push({'url':obj.attachment,'type':obj.attachment_content_type});
+         }
+      });
+      Lightbox.openModal($scope.images,index);
+    };
+
   }
 })();

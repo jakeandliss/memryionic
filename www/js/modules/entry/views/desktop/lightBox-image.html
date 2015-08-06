@@ -1,0 +1,19 @@
+<div class="modal-body"
+    ng-swipe-left="Lightbox.nextImage()"
+    ng-swipe-right="Lightbox.prevImage()">
+
+    <!-- image -->
+    <div class="lightbox-image-container">
+        <a class="btn btn-xs btn-default pull-left" ng-click="Lightbox.prevImage()">Prev</a>
+        <a class="btn btn-xs btn-default pull-right" ng-click="Lightbox.nextImage()">Next</a>
+        <img ng-if="!Lightbox.showVideo" lightbox-src="{{Lightbox.imageUrl}}">
+       <!--  <video ng-if="Lightbox.showVideo"  width="320" height="240" controls>
+            <source src="{{Lightbox.imageUrl}}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video> -->
+        <video ng-if="Lightbox.showVideo"  width="320" height="240" class="video-js" preload="auto" poster="" data-setup="{}" controls autoplay>
+            <source src="{{Lightbox.imageUrl}}" type="video/mp4">
+        </video>
+    </div>
+
+</div>
