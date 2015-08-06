@@ -40,7 +40,7 @@
       }, {
         attachment: 'http://www.urartuuniversity.com/content_images/pdf-sample.pdf',
         attachment_content_type: "pdf",
-        attachment_file_name: "pdf-sample"
+        attachment_file_name: "pdf sample file number 2"
       }, {
         attachment: 'http://www.stephaniequinn.com/Music/Canon.mp3',
         attachment_content_type: "audio",

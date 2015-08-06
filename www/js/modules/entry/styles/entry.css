@@ -275,6 +275,14 @@ Desktop CSS
   cursor: pointer;
 }
 
+.tag md-icon {
+    color: #fff;
+}
+
+.desktop #entries .entry .files md-list-item, .desktop #entries .entry .audio md-list-item {
+    border-bottom: 2px solid #eee;
+}
+
 /********************
 
 Mobile CSS
