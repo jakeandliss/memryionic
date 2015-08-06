@@ -16,7 +16,7 @@ angular.module('memryApp', [
   "slickCarousel",
   'ui.bootstrap',
   'yaru22.angular-timeago',
-  'bootstrapLightbox', 'ngTouch']
+  'bootstrapLightbox']
 )
 
 .run(function ($ionicPlatform, $rootScope, deviceDetector) {
@@ -101,7 +101,7 @@ angular.module('memryApp', [
     LightboxProvider.getImageUrl = function (image) {
         return image.url;
     };
-    
+
 
 })
 .config(function($sceDelegateProvider) {

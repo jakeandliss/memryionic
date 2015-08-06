@@ -6,6 +6,7 @@
     "angular-material": "latest",
     "angular-sanitize": "latest",
     "angular-bootstrap": "latest",
+    "angular-bootstrap-lightbox": "latest",
     "flat-ui": "2.2.2",
     "angular-slick-carousel": "3.0.4",
     "angular-timeago": "0.2.0"

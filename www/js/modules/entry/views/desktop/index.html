@@ -87,15 +87,12 @@
               <md-content class="md-padding">
                 <slick settings="slickConfig" class="slick-uninitialized">
                   <div class="slick" ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'image' || resource.attachment_content_type == 'video'">
-                    <a ng-click='openLightBoxModel($index,entry.resources)' >
-                     <img ng-src="{{resource.attachment}}" class="md-card-image" ng-if="resource.attachment_content_type == 'image'">
-                   </a>
-                     <div ng-if="resource.attachment_content_type == 'video'" class="video-thumb">
-                      <a ng-click='openLightBoxModel($index,entry.resources)' >
-                       <img ng-src="{{resource.attachment_thumbnail}}" class="video">
-                       <md-icon class="material-icons" ui-sref="user.new">play_circle_filled</md-icon>
-                     </a>
-                     </div>
+                    <img ng-src="{{resource.attachment}}" class="md-card-image" ng-if="resource.attachment_content_type == 'image'">
+                    <md-icon class="material-icons lightbox-button" ng-click='openLightBoxModel($index,entry.resources)'>open_in_new</md-icon>
+                    <div ng-if="resource.attachment_content_type == 'video'" class="video-thumb">
+                     <img ng-src="{{resource.attachment_thumbnail}}" class="video">
+                     <md-icon class="material-icons" ng-click='openLightBoxModel($index,entry.resources)'>play_circle_filled</md-icon>
+                    </div>
                   </div>
                 </slick>
 
@@ -139,22 +136,22 @@
         </div>
       </div>
     </div>
-  
 
 
-<div class="row margin-top" ng-show="entries.length==0">
-  <div class="col-sm-9">
-    <md-card class="entry">
-    <md-card-content class="content">
-    <p class="md-title">
-      No Content Found
-    </p>
-  </md-card-content>
-</md-card>
+
+    <div class="row margin-top" ng-show="entries.length==0">
+      <div class="col-sm-9">
+        <md-card class="entry">
+          <md-card-content class="content">
+          <p class="md-title">
+            No Content Found
+          </p>
+        </md-card-content>
+      </md-card>
+    </div>
+  </div>
 </div>
-</div>
-</div>
-</div>
+
 
 <div id="preview-template" style="display: none;">
   <div class="dz-preview dz-file-preview">
