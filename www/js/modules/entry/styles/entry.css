@@ -230,6 +230,14 @@ Desktop CSS
   border-radius: 6px;
 }
 
+.desktop .search .dropdown-menu {
+    display: block;
+    bottom: 35px !important;
+    right: 0px !important;
+    top: initial !important;
+    left: initial !important;
+}
+
 #edit-entry {
   border-radius: 5px;
 }

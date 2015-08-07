@@ -29,7 +29,7 @@ readMore.directive('readMore', function() {
                 $scope.textLength = $attrs.length;
                 $scope.isExpanded = false; // initialise extended status
                 $scope.countingWords = $attrs.words !== undefined ? ($attrs.words === 'true') : true; //if this attr is not defined the we are counting words not characters
-
+                
                 if (!$scope.countingWords && $scope.text.length > $attrs.length) {
                     $scope.showLinks = true;
                 } else if ($scope.countingWords && $scope.text.split(" ").length > $attrs.length) {
@@ -39,6 +39,7 @@ readMore.directive('readMore', function() {
                 }
 
                 $scope.changeLength = function (card) {
+                    console.log("Function colled");
                     $scope.isExpanded = !$scope.isExpanded;
                     $scope.textLength = $scope.textLength !== $attrs.length ?  $attrs.length : $scope.text.length;
                 };

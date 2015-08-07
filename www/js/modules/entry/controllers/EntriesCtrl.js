@@ -241,7 +241,16 @@
     $event.stopPropagation();
     $scope.opened = true;
     };
-
+     $scope.openBeginning = function($event) {
+    $event.preventDefault();
+    $event.stopPropagation();
+    $scope.openedBeginning = true;
+    };
+    $scope.openEnd = function($event) {
+    $event.preventDefault();
+    $event.stopPropagation();
+    $scope.openedEnd = true;
+    };
     // Date Options
     $scope.dateOptions = {
     };
@@ -307,6 +316,12 @@
       });
       Lightbox.openModal($scope.images,index);
     };
-
+    $scope.searchToggle=false;
+    $scope.closeSearch=function(){
+      $scope.SearchText=null;
+      $scope.SearchBeginningDate=null;
+      $scope.SearchEndDate=null;
+      $scope.searchToggle=false;
+    }
   }
 })();

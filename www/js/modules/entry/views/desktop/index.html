@@ -64,20 +64,23 @@
       <form class="navbar-form" action="#" role="search" name="entrySearch">
         <div class="form-group">
           <div class="input-group has-feedback">
-            <input class="form-control" id="navbarInput-01" type="search" placeholder="Search">
+            <input class="form-control" id="navbarInput-01" type="search" placeholder="Search" ng-model="SearchText">
             <span class="form-control-feedback fui-search"></span>
           </div>
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="Beginning Date"  is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" style="text-align:right;" />
-            <span class="input-group-addon flat" ng-click="open($event)"><i class="fui-calendar-solid"></i></span>
+
+            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="SearchBeginningDate" is-open="openedBeginning" datepicker-options="dateOptions" ng-required="true" close-text="Close" style="text-align:right;" placeholder="Beginning Date" />
+            <span class="input-group-addon flat" ng-click="openBeginning($event)"><i class="fui-calendar"></i></span>
           </div>
+
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="End Date" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" style="text-align:right;" />
-            <span class="input-group-addon flat" ng-click="open($event)"><i class="fui-calendar-solid"></i></span>
+            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="SearchEndDate" is-open="openedEnd" datepicker-options="dateOptions" ng-required="true" close-text="Close" style="text-align:right;" placeholder="End Date" />
+            <span class="input-group-addon flat" ng-click="openEnd($event)"><i class="fui-calendar" ></i></span>
           </div>
-          <button class="btn btn-primary btn-wide">Search</button>
+          <button class="btn btn-primary btn-wide" >Search</button>
         </div>
-          <i class="fui-cross-circle pull-right pointer" ng-click="searchToggle = !searchToggle"></i>
+          <i class="fui-cross-circle pull-right pointer" ng-click="
+          closeSearch()"></i>
       </form>
     </div>
 
@@ -113,8 +116,7 @@
                 <slick settings="slickConfig" class="slick-uninitialized">
                   <div class="slick" ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'image' || resource.attachment_content_type == 'video'">
                     <img ng-src="{{resource.attachment}}" class="md-card-image" ng-if="resource.attachment_content_type == 'image'">
-                    <md-icon class="material-icons lightbox-button" ng-click='openLightBoxModel($index,entry.resources)' ng-if="resource.attachment_content_type == 'image' || resource.attachment_content_type == 'video'">open_in_new</md-icon>
-                    <!-- <div ng-if="resource.attachment_content_type == 'video'" class="video-thumb"> -->
+                    <md-icon class="material-icons lightbox-button" ng-click='openLightBoxModel($index,entry.resources)' ng-if="resource.attachment_content_type == 'image'">open_in_new</md-icon>
                     <div ng-click='openLightBoxModel($index,entry.resources)' ng-if="resource.attachment_content_type == 'video'" class="video-thumb">
                      <img ng-src="{{resource.attachment_thumbnail}}" class="video">
                      <md-icon class="material-icons" ng-click='openLightBoxModel($index,entry.resources)'>play_circle_filled</md-icon>
