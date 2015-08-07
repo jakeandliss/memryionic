@@ -63,20 +63,20 @@
     <i class="fui-search search-icon pointer" ng-click="searchToggle = !searchToggle" ng-show="!searchToggle"></i>
 
     <div class="row no-gutters margin-top bg-white search" ng-show="searchToggle">
-      <form class="navbar-form" ng-class="{BottomHeight:bottomHeight}" action="#" ng-click="bottomHeight=false" role="search" name="entrySearch">
+      <form class="navbar-form" action="#" role="search" name="entrySearch">
         <div class="form-group">
           <div class="input-group has-feedback">
             <input class="form-control" id="navbarInput-01" type="search" placeholder="Search" ng-model="SearchText">
             <span class="form-control-feedback fui-search"></span>
           </div>
           <div class="input-group">
-           
+
             <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="SearchBeginningDate" is-open="openedBeginning" datepicker-options="dateOptions" ng-required="true" close-text="Close" style="text-align:right;" placeholder="Beginning Date" />
             <span class="input-group-addon flat" ng-click="openBeginning($event)"><i class="fui-calendar"></i></span>
           </div>
-        
+
           <div class="input-group">
-            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="SearchEndDate" is-open="openedEnd" datepicker-options="dateOptions" ng-required="true" close-text="Close" style="text-align:right;" ng-click="bottomHeight=false" placeholder="End Date" />
+            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="SearchEndDate" is-open="openedEnd" datepicker-options="dateOptions" ng-required="true" close-text="Close" style="text-align:right;" placeholder="End Date" />
             <span class="input-group-addon flat" ng-click="openEnd($event)"><i class="fui-calendar" ></i></span>
           </div>
           <button class="btn btn-primary btn-wide" >Search</button>

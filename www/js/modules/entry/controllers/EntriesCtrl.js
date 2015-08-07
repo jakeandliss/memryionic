@@ -239,7 +239,6 @@
     };
      $scope.openBeginning = function($event) {
     $event.preventDefault();
-    $scope.bottomHeight=true;
     $event.stopPropagation();
     $scope.openedBeginning = true;
     };
@@ -247,7 +246,6 @@
     $event.preventDefault();
     $event.stopPropagation();
     $scope.openedEnd = true;
-    $scope.bottomHeight=true;
     };
     // Date Options
     $scope.dateOptions = {
