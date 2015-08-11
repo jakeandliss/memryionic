@@ -8,9 +8,15 @@
         'self',
       ]);
     })
+    .filter('trustUrl', function($sce) {
+      return function(url) {
+        return $sce.trustAsResourceUrl(url);
+      }
+    })
     .controller('EntriesCtrl', EntriesCtrl)
 
   EntriesCtrl.$inject = ['$scope', 'Entries', '$ionicModal', '$mdBottomSheet', '$sce', '$ionicPopover', '$modal'];
+
   function EntriesCtrl($scope, Entries, $ionicModal, $mdBottomSheet, $sce, $ionicPopover, $modal) {
     $scope.entry = {};
 
@@ -51,7 +57,7 @@
 
     // Remove Entry
     $scope.remove = function(entry) {
-      if (confirm('Are you sure you want to delete this?')){
+      if (confirm('Are you sure you want to delete this?')) {
         Entries.remove(entry);
       }
     };
@@ -96,7 +102,7 @@
       animation: 'slide-in-up'
     });
 
-    $scope.openModal = function () {
+    $scope.openModal = function() {
       $mdBottomSheet.cancel();
       var modalInstance = $modal.open({
         animation: $scope.animationsEnabled,
@@ -107,7 +113,7 @@
       });
     };
 
-    $scope.closeModal = function () {
+    $scope.closeModal = function() {
       $modalInstance.dismiss('cancel');
     };
 
@@ -162,7 +168,7 @@
       }
     }
     var previewTemplate = null
-    if(document.querySelector('#preview-template') != null){
+    if (document.querySelector('#preview-template') != null) {
       previewTemplate = document.querySelector('#preview-template').innerHTML
     }
     $scope.dropzoneConfig = {
@@ -196,34 +202,30 @@
     };
 
     $scope.open = function($event) {
-    $event.preventDefault();
-    $event.stopPropagation();
+      $event.preventDefault();
+      $event.stopPropagation();
 
-    $scope.opened = true;
-  };
+      $scope.opened = true;
+    };
 
-  // Datepicker
-  $scope.dateOptions = {
+    // Datepicker
+    $scope.dateOptions = {
 
-  };
+    };
 
-  $scope.formats = ['longDate'];
-  $scope.format = $scope.formats[0];
+    $scope.formats = ['longDate'];
+    $scope.format = $scope.formats[0];
 
-  var tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  var afterTomorrow = new Date();
-  afterTomorrow.setDate(tomorrow.getDate() + 2);
-  $scope.events =
-    [
-      {
-        date: tomorrow,
-        status: 'full'
-      },
-      {
-        date: afterTomorrow,
-        status: 'partially'
-      }
-    ];
+    var tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    var afterTomorrow = new Date();
+    afterTomorrow.setDate(tomorrow.getDate() + 2);
+    $scope.events = [{
+      date: tomorrow,
+      status: 'full'
+    }, {
+      date: afterTomorrow,
+      status: 'partially'
+    }];
   }
 })();

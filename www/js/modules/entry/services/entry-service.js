@@ -43,10 +43,6 @@
         attachment_content_type: "audio",
         attachment_file_name: "canon.mp3"
       }, {
-        attachment: 'http://www.stephaniequinn.com/Music/Canon.mp3',
-        attachment_content_type: "audio",
-        attachment_file_name: "canon.mp3"
-      }, {
         attachment: 'http://techslides.com/demos/sample-videos/small.mp4',
         attachment_content_type: "video",
         attachment_thumbnail: "https://xenforo.com/community/data/xengallery/111/111665-2c14996ac0401ed7ab0dfc762064120e.jpg"

@@ -103,7 +103,7 @@
                     <md-icon class="material-icons">music_note</md-icon>
                     <div class="md-list-item-text">
                       <audio controls>
-                        <!-- <source ng-src="{{ resource.attachment }}"> -->
+                        <source ng-src="{{ resource.attachment|trustUrl }}">
                       </audio>
                       <p> {{ resource.attachment_file_name }} </p>
                     </div>
