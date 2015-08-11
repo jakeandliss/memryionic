@@ -364,7 +364,7 @@ Desktop CSS
   cursor: pointer;
 }
 
-.tag md-icon {
+.desktop .tag md-icon {
     color: #fff;
 }
 
@@ -372,11 +372,11 @@ Desktop CSS
     border-bottom: 2px solid #eee;
 }
 
-.error{
+.desktop .error{
   border-color: red !important;
   margin-bottom: 0;
 }
-.error-message {
+.desktop .error-message {
     padding: 5px;
     margin-top: 0;
     border-radius: 5px;
@@ -432,28 +432,6 @@ Mobile CSS
 
 .mobile #entries .item-body a {
     text-decoration: none;
-}
-.black-color{
-  color: Black !important;
-}
-.error{
-  border-color: red !important;
-  margin-bottom: 0;
-}
-.error-message {
-    padding: 5px;
-    margin-top: 0;
-    border-radius: 5px;
-    color: red;
-}
-.transparent {
-    background: transparent !important;
-
-}
-.centerme {
-    margin: 0 auto;
-    width: 100%;
-    height:100%;
 }
 
 .fullscreen-player {
