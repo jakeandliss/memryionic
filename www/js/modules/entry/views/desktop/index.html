@@ -28,7 +28,7 @@
           <input type="text" placeholder="Title this entry"  name="title" class="form-control flat bg-gray margin-bottom" required  ng-model="entry.title" ng-class="{error:entryForm.title.$dirty&& entryForm.title.$invalid}" />
           <span ng-show="entryForm.title.$dirty && entryForm.title.$invalid">
             <span ng-show="entryForm.title.$error.required" class="error-message">
-              This title needs an entry.
+              This title can't be blank.
             </span>
           </span>
         </div>
