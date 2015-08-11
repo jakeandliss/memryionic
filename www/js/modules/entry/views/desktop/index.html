@@ -22,18 +22,28 @@
 
   <div class="col-sm-9">
 
-    <form name="entryForm" class="bg-white padding rounded" ng-submit="entry.add()">
+    <form name="entryForm" class="bg-white padding rounded" novalidate ng-submit="entryAdd()">
       <div class="row dz-hide">
         <div class="col-sm-8">
-          <input type="text" placeholder="Title this entry" class="form-control flat bg-gray margin-bottom"  ng-model="entry.title" />
+          <input type="text" placeholder="Title this entry"  name="title" class="form-control flat bg-gray margin-bottom" required  ng-model="entry.title" ng-class="{error:entryForm.title.$dirty&& entryForm.title.$invalid}" />
+          <span ng-show="entryForm.title.$dirty && entryForm.title.$invalid">
+            <span ng-show="entryForm.title.$error.required">
+              Title is required
+            </span>
+          </span>
         </div>
-        <div class="col-sm-4 date">
+        <div class="col-sm-4 ">
           <div class="input-group">
-            <input type="text" class="form-control flat" datepicker-popup="{{format}}" ng-model="entry.date" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" style="text-align:right;" ng-disabled="true" />
+            <input type="text" class="form-control flat black-color" datepicker-popup="{{format}}" name="date" ng-model="entry.date" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" style="text-align:right;" ng-disabled="true" />
             <md-tooltip>
               Click calendar icon to change date
             </md-tooltip>
             <span class="input-group-addon flat" ng-click="open($event)"><i class="fui-calendar"></i></span>
+             <span ng-show="entryForm.date.$dirty && entryForm.date.$invalid">
+            <span ng-show="entryForm.date.$error.required">
+              Date is required
+            </span>
+          </span>
           </div>
         </div>
       </div>
@@ -55,7 +65,7 @@
           </div>
         </div>
         <div class="col-sm-4 dz-hide">
-          <button class="btn btn-block btn-lg btn-primary" type="submit">Save Entry</button>
+          <button class="btn btn-block btn-lg btn-primary" ng-disabled="entryForm.$invalid" type="submit">Save Entry</button>
         </div>
       </div>
     </form>
@@ -108,7 +118,7 @@
           </md-list>
           </md-card-content>
           <md-card-content class="content">
-            <p read-more ng-model="entry.content" words="true" length="50"></p>
+            <p read-more ng-if="entry.content" ng-model="entry.content" words="true" length="50"></p>
 
           </md-card-content>
 

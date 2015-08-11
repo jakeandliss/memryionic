@@ -10,10 +10,19 @@
     $scope.entry = {};
 
     // Add Entry
-    $scope.entry.add = function(entry) {
+    $scope.MobileEntryAdd=function(entry){
+      if($scope.entry.title)
+      {
+        $scope.entries.unshift($scope.entry);
+        $scope.modal.hide(); // hide mobile form on submit
+        $scope.entry = {};
+        $scope.entry.date = new Date();
+      }
+    }
+    $scope.entryAdd = function(entry) {
       $scope.entries.unshift($scope.entry);
-      $scope.modal.hide(); // hide mobile form on submit
-      $scope.entry = '';
+      $scope.entry = {};
+      $scope.entry.date = new Date();
     };
 
     // Edit Entry
@@ -319,5 +328,31 @@
       $scope.SearchEndDate=null;
       $scope.searchToggle=false;
     }
+
+
+    $scope.mobileImageSlide=[];
+    $scope.showModal = function(index,resource) {
+      $scope.currentIndex=index;
+       if(resource.length>0)
+      {
+      var filterResultImages=resource.filter(function(elem){
+          return elem.attachment_content_type=="image" || elem.attachment_content_type=="video";
+      });
+    }
+      $scope.mobileImageSlide=filterResultImages;
+      $ionicModal.fromTemplateUrl("js/modules/entry/views/mobile/video-popover.html", {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modal = modal;
+       $scope.modal.show();
+      });
+    }
+ 
+     // Close the modal
+     $scope.closeModal = function() {
+        $scope.modal.hide();
+        $scope.modal.remove()
+     };
   }
 })();
