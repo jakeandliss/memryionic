@@ -16,13 +16,16 @@
         $scope.entries.unshift($scope.entry);
         $scope.modal.hide(); // hide mobile form on submit
         $scope.entry = {};
+        $scope.entryForm.$setPristine();
         $scope.entry.date = new Date();
       }
     }
     $scope.entryAdd = function(entry) {
       $scope.entries.unshift($scope.entry);
       $scope.entry = {};
+      $scope.entryForm.$setPristine();
       $scope.entry.date = new Date();
+
     };
 
     // Edit Entry
@@ -348,7 +351,7 @@
        $scope.modal.show();
       });
     }
- 
+
      // Close the modal
      $scope.closeModal = function() {
         $scope.modal.hide();

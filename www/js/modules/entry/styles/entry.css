@@ -426,20 +426,25 @@ Mobile CSS
   color: Black !important;
 }
 .error{
-      border-color: red !important;
+  border-color: red !important;
+  margin-bottom: 0;
 }
-
-
+.error-message {
+    padding: 5px;
+    margin-top: 0;
+    border-radius: 5px;
+    color: red;
+}
 .transparent {
     background: transparent !important;
-    
+
 }
 .centerme {
     margin: 0 auto;
     width: 100%;
     height:100%;
 }
- 
+
 .fullscreen-player {
     max-width: 100%;
     max-height: 100%;
@@ -451,7 +456,7 @@ Mobile CSS
     right: 0;
     top: 0;
 }
- 
+
 .slider {
     width: 100%;
     height: 100%;
