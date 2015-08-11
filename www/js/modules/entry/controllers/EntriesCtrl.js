@@ -8,6 +8,10 @@
   EntriesCtrl.$inject = ['$scope', '$stateParams', 'Entries', '$ionicModal', '$mdBottomSheet', '$sce', '$ionicPopover', '$modal', 'Lightbox', 'ngAudio', 'timeAgo'];
   function EntriesCtrl($scope, $stateParams, Entries, $ionicModal, $mdBottomSheet, $sce, $ionicPopover, $modal, Lightbox, ngAudio, timeAgo) {
     $scope.entry = {};
+    $scope.tags = [
+      {name: "tag 1"},
+      {name: "tag 2"}
+    ];
 
     // Add Entry
     $scope.MobileEntryAdd=function(entry){
