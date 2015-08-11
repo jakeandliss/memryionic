@@ -39,12 +39,12 @@
 
         <!-- Video/Images content -->
         <div class="item item-body panel" ng-show="panel.isSelected(1)">
-          <p read-more ng-model="entry.content" words="true" length="50"></p>
+          <p read-more ng-if="entry.content" ng-model="entry.content" words="true" length="50"></p>
 
           <ion-slide-box does-continue="true" >
             <ion-slide ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'image' || resource.attachment_content_type == 'video'">
-              <img ng-src="{{resource.attachment}}" class="full-image" ng-if="resource.attachment_content_type == 'image'">
-              <div ng-if="resource.attachment_content_type == 'video'" class="video-thumb">
+              <img ng-src="{{resource.attachment}}" ng-click='showModal($index,entry.resources)' class="full-image" ng-if="resource.attachment_content_type == 'image'">
+              <div ng-if="resource.attachment_content_type == 'video'" class="video-thumb" ng-click='showModal($index,entry.resources)'>
                 <img ng-src="{{resource.attachment_thumbnail}}" class="video full-image">
                 <i class="icon ion-play"></i>
               </div>

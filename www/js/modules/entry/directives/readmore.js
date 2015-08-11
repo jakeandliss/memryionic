@@ -26,6 +26,7 @@ readMore.directive('readMore', function() {
             "</p>",
         controller: ['$scope', '$attrs', '$element',
             function($scope, $attrs) {
+                
                 $scope.textLength = $attrs.length;
                 $scope.isExpanded = false; // initialise extended status
                 $scope.countingWords = $attrs.words !== undefined ? ($attrs.words === 'true') : true; //if this attr is not defined the we are counting words not characters
