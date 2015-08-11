@@ -28,13 +28,13 @@
           <input type="text" placeholder="Title this entry"  name="title" class="form-control flat bg-gray margin-bottom" required  ng-model="entry.title" ng-class="{error:entryForm.title.$dirty&& entryForm.title.$invalid}" />
           <span ng-show="entryForm.title.$dirty && entryForm.title.$invalid">
             <span ng-show="entryForm.title.$error.required" class="error-message">
-              Make sure you add a title to this entry.
+              This title needs an entry.
             </span>
           </span>
         </div>
         <div class="col-sm-4 ">
-          <div class="input-group">
-            <input type="text" class="form-control flat black-color" datepicker-popup="{{format}}" name="date" ng-model="entry.date" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" style="text-align:right;" ng-disabled="true" />
+          <div class="input-group date">
+            <input type="text" class="form-control flat" datepicker-popup="{{format}}" name="date" ng-model="entry.date" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" style="text-align:right;" ng-disabled="true" />
             <md-tooltip>
               Click calendar icon to change date
             </md-tooltip>

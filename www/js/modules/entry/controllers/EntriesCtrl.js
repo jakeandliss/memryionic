@@ -18,8 +18,8 @@
       if($scope.entry.title)
       {
         $scope.entries.unshift($scope.entry);
-        $scope.modal.hide(); // hide mobile form on submit
         $scope.entry = {};
+        $scope.modal.hide(); // hide mobile form on submit
         $scope.entryForm.$setPristine();
         $scope.entry.date = new Date();
       }

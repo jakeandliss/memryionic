@@ -220,10 +220,10 @@ Desktop CSS
 }
 
 .desktop .date .form-control[disabled] {
-  color: #444;
-  background-color: #fff;
-  border-color: #fff;
-  opacity: .7;
+  color: #444 !important;
+  background-color: #fff !important;
+  border-color: #fff !important;
+  opacity: .7 !important;
 }
 
 .desktop .date .input-group-addon:last-child {
@@ -299,7 +299,7 @@ Desktop CSS
 .lightbox-video-container .video-js {
   padding-bottom: 0;
   margin-bottom: 47px;
-  background-color: black;
+  background-color: #000;
 }
 
 /* Audio */
@@ -381,6 +381,10 @@ Desktop CSS
     margin-top: 0;
     border-radius: 5px;
     color: red;
+}
+
+.desktop #entries .date .input-group-addon {
+    border-radius: 5px;
 }
 
 /********************
