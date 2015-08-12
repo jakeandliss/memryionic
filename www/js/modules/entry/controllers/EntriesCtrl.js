@@ -25,6 +25,10 @@
       }
     }
     $scope.entryAdd = function(entry) {
+      console.log(fileDropzone);
+      if(fileDropzone.files.length>0){
+        fileDropzone.processQueue();
+      };
       $scope.entries.unshift($scope.entry);
       $scope.entry = {};
       $scope.entryForm.$setPristine();
@@ -70,8 +74,32 @@
 
     $scope.entry.date = new Date();
 
-    $scope.audio = ngAudio.load("http://www.stephaniequinn.com/Music/Canon.mp3");
+    //$scope.audio = ngAudio.load("http://www.stephaniequinn.com/Music/Canon.mp3");
+    $scope.audioPlay=function(src){
+      if($scope.audio)
+      {
+        if($scope.audio.src==src){
+          if($scope.audio.paused){
+            if($scope.audio.currentTime==0||$scope.audio.currentTime==$scope.audio.duration){
+              $scope.audio = ngAudio.load(src);
 
+                } else{
+        
+                }
+                $scope.audio.play();
+                document.querySelector("#playButton").innerHTML="Pause";
+                }
+                else{
+                  $scope.audio.pause();
+                  document.querySelector("#playButton").innerHTML="Play";
+                }
+              }else{
+                $scope.audio=ngAudio.load(src);
+              }
+      }else{
+        $scope.audio=ngAudio.load(src);
+      }
+    }
 
     if (window.templateMode == "mobile") {
       $ionicPopover.fromTemplateUrl('my-popover.html', {
@@ -184,6 +212,7 @@
     if(document.querySelector('#preview-template') != null){
       previewTemplate = document.querySelector('#preview-template').innerHTML
     }
+    var fileDropzone=[];
     $scope.dropzoneConfig = {
       'options': {
         'previewTemplate': previewTemplate,
@@ -192,13 +221,54 @@
         'thumbnailWidth': 100,
         'url': '/resources',
         'addRemoveLinks': true,
+        "autoProcessQueue": false,
         'dictCancelUpload': "Cancel",
         'dictRemoveFile': "Remove",
+        'init':function(){
+            fileDropzone=this;
+        },
       },
       'eventHandlers': {
         'sending': function(file, xhr, formData) {},
         'success': function(file, response) {},
         'error': function(file, response) {},
+        'addedfile': function(file){
+          var removeLink = $(file.previewElement).find('.dz-remove').first();
+          var $a = $("<a>",{text:"Rename",class:"dz-remove rename"});
+          $a.click(function(){ 
+           var element = $(file.previewElement).find('.fileName').first();
+           var spanText = element.prev();
+           var rename=$(file.previewElement).find('.rename').first();
+           rename.hide();
+           var Ok=$(file.previewElement).find('.ok').first();
+           Ok.show();
+           Ok.click(function(){
+              file.Name=element.val()+fileExtention;
+              spanText.text(element.val()+fileExtention);
+               element.hide();
+               spanText.show();
+               rename.show();
+               Ok.hide();
+               cancel.hide();
+           });
+           var cancel=$(file.previewElement).find('.cancel').first();
+           cancel.show();
+           cancel.click(function(){
+               element.hide();
+               spanText.show();
+               rename.show();
+               Ok.hide();
+               cancel.hide();
+           });
+           var fileName=spanText.text();
+           var fileExtention=fileName.slice(fileName.lastIndexOf("."));
+           fileName=fileName.slice(0,fileName.lastIndexOf("."));
+           element.val(fileName).show();
+           spanText.hide();
+         });
+        $a.insertBefore(removeLink);
+          
+        },
         'drop': function(event) {
           angular.element(document.querySelector('.dz-drag')).addClass('hidden').parent().parent().removeClass('col-sm-12').addClass('col-sm-8')
           angular.element(document.querySelector('.default-message')).removeClass('hidden')
@@ -213,6 +283,7 @@
         }
       }
     };
+
     $scope.images=[];
     $scope.openLightboxModal = function (index,resource) {
      // var images =""; // images variable should contain the array of images and videos associated with the entry where it is triggered
@@ -363,3 +434,6 @@
      };
   }
 })();
+
+
+  

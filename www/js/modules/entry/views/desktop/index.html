@@ -149,7 +149,7 @@
                   <md-list>
                     <md-list-item class="md-2-line" ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'audio'">
                       <div class="md-list-item-text">
-                        <button ng-click='audio.paused ? audio.play() : audio.pause()' class="btn btn-primary">Play</button>
+                        <button id="playButton" ng-click='audioPlay(resource.attachment)' class="btn btn-primary">Play</button>
                          <button ng-click='audio.restart()' class="btn btn-danger">Stop</button>
                          <button ng-click='audio.muting = !audio.muting' class="btn btn-default">Mute</button>
                          {{ resource.attachment_file_name}}
@@ -240,7 +240,12 @@
           </g>
       </svg>
     </div>
-    <div class="dz-filename"><span data-dz-name=""></span></div>
+    <div class="dz-filename">
+      <span data-dz-name=""></span>
+      <input type="text" class="fileName" style="display:none" />
+      <a class='dz-remove ok' style="display:none">Ok</a>
+      <a class='dz-remove cancel' style="display:none">cancel</a>
+    </div>
   </div>
 </div>
 
