@@ -2,8 +2,7 @@
  * @namespace bootstrapLightbox
  */
 angular.module('bootstrapLightbox', [
-  'ui.bootstrap.modal',
-  'ui.bootstrap.tpls' // templates
+  'ui.bootstrap'
 ]);
 
 // optional dependencies
@@ -16,16 +15,11 @@ try {
   angular.module('ngTouch');
   angular.module('bootstrapLightbox').requires.push('ngTouch');
 } catch (e) {}
-
-try {
-  angular.module('videosharing-embed');
-  angular.module('bootstrapLightbox').requires.push('videosharing-embed');
-} catch (e) {}
 angular.module('bootstrapLightbox').run(['$templateCache', function($templateCache) {
   'use strict';
 
   $templateCache.put('lightbox.html',
-    "<div class=modal-body ng-swipe-left=Lightbox.nextImage() ng-swipe-right=Lightbox.prevImage()><div class=lightbox-nav><button class=close aria-hidden=true ng-click=$dismiss()>×</button><div class=btn-group><a class=\"btn btn-xs btn-default\" ng-click=Lightbox.prevImage() translate>‹ Previous</a> <a ng-href={{Lightbox.imageUrl}} target=_blank class=\"btn btn-xs btn-default\" title=\"Open in new tab\" translate>Open image in new tab</a> <a class=\"btn btn-xs btn-default\" ng-click=Lightbox.nextImage() translate>Next ›</a></div></div><div class=lightbox-image-container><div class=lightbox-image-caption><span>{{Lightbox.imageCaption}}</span></div><div ng-if=Lightbox.showVideo class=\"embed-responsive embed-responsive-16by9\"><embed-video lightbox-video lightbox-src={{Lightbox.imageUrl}} ng-href={{Lightbox.imageUrl}} controls showinfo=0 title=0 byline=0 portrait=0 info=0 badge=0 class=embed-responsive-item></embed-video></div><img ng-if=!Lightbox.showVideo lightbox-src={{Lightbox.imageUrl}} alt=\"\"></div></div>"
+    "<div class=modal-body ng-swipe-left=Lightbox.nextImage() ng-swipe-right=Lightbox.prevImage()><div class=lightbox-nav><button class=close aria-hidden=true ng-click=$dismiss()>×</button><div class=btn-group><a class=\"btn btn-xs btn-default\" ng-click=Lightbox.prevImage()>‹ Previous</a> <a ng-href={{Lightbox.imageUrl}} target=_blank class=\"btn btn-xs btn-default\" title=\"Open in new tab\">Open image in new tab</a> <a class=\"btn btn-xs btn-default\" ng-click=Lightbox.nextImage()>Next ›</a></div></div><div class=lightbox-image-container><div class=lightbox-image-caption><span>{{Lightbox.imageCaption}}</span></div><img lightbox-src={{Lightbox.imageUrl}} alt=\"\"></div></div>"
   );
 
 }]);
@@ -85,20 +79,6 @@ angular.module('bootstrapLightbox').provider('Lightbox', function () {
    * @memberOf bootstrapLightbox.Lightbox
    */
   this.templateUrl = 'lightbox.html';
-
-  /**
-   * @param    {*} image An element in the array of images.
-   * @return   {Boolean} true if medium is video
-   * @type     {Function}
-   * @name     isVideo
-   * @memberOf bootstrapLightbox.Lightbox
-   */
-  this.isVideo = function (image) {
-    if (image.type){
-      return image.type === 'vid' || image.type === 'video';
-    }
-    return false;
-  };
 
   /**
    * @param    {*} image An element in the array of images.
@@ -230,7 +210,6 @@ angular.module('bootstrapLightbox').provider('Lightbox', function () {
     // defined above
     Lightbox.templateUrl = this.templateUrl;
     Lightbox.getImageUrl = this.getImageUrl;
-    Lightbox.isVideo = this.isVideo;
     Lightbox.getImageCaption = this.getImageCaption;
     Lightbox.calculateImageDimensionLimits = this.calculateImageDimensionLimits;
     Lightbox.calculateModalDimensions = this.calculateModalDimensions;
@@ -313,7 +292,6 @@ angular.module('bootstrapLightbox').provider('Lightbox', function () {
         Lightbox.index = 1;
         Lightbox.image = {};
         Lightbox.imageUrl = null;
-        Lightbox.showVideo = null;
         Lightbox.imageCaption = null;
 
         Lightbox.keyboardNavEnabled = false;
@@ -367,35 +345,26 @@ angular.module('bootstrapLightbox').provider('Lightbox', function () {
           cfpLoadingBar.complete();
         }
       };
-      var medium = Lightbox.images[newIndex];
 
-      var imageUrl = Lightbox.getImageUrl(medium);
-      Lightbox.showVideo = Lightbox.isVideo(medium);
+      var imageUrl = Lightbox.getImageUrl(Lightbox.images[newIndex]);
 
-      if (Lightbox.showVideo){
-         success();
-          // set the url and caption
-          Lightbox.imageUrl = imageUrl;
-          Lightbox.imageCaption = Lightbox.getImageCaption(Lightbox.image);
-      } else {
-          // load the image before setting it, so everything in the view is updated
-          // at the same time; otherwise, the previous image remains while the
-          // current image is loading
-          ImageLoader.load(imageUrl).then(function () {
-            success();
+      // load the image before setting it, so everything in the view is updated
+      // at the same time; otherwise, the previous image remains while the
+      // current image is loading
+      ImageLoader.load(imageUrl).then(function () {
+        success();
 
-            // set the url and caption
-            Lightbox.imageUrl = imageUrl;
-            Lightbox.imageCaption = Lightbox.getImageCaption(Lightbox.image);
-          }, function () {
-            success();
+        // set the url and caption
+        Lightbox.imageUrl = imageUrl;
+        Lightbox.imageCaption = Lightbox.getImageCaption(Lightbox.image);
+      }, function () {
+        success();
 
-            // blank image
-            Lightbox.imageUrl = '//:0';
-            // use the caption to show the user an error
-            Lightbox.imageCaption = 'Failed to load image';
-          });
-      }
+        // blank image
+        Lightbox.imageUrl = '//:0';
+        // use the caption to show the user an error
+        Lightbox.imageCaption = 'Failed to load image';
+      });
     };
 
     /**
@@ -508,20 +477,54 @@ angular.module('bootstrapLightbox').directive('lightboxSrc', ['$window',
     var maxW = dimensions.maxWidth;
     var maxH = dimensions.maxHeight;
 
-    var ratioW = maxW / w;
-    var ratioH = maxH / h;
+    var displayW = w;
+    var displayH = h;
 
-    var zoom = Math.min(ratioW, ratioH);
+    // resize the image if it is too small
+    if (w < minW && h < minH) {
+      // the image is both too thin and short, so compare the aspect ratios to
+      // determine whether to min the width or height
+      if (w / h > maxW / maxH) {
+        displayH = minH;
+        displayW = Math.round(w * minH / h);
+      } else {
+        displayW = minW;
+        displayH = Math.round(h * minW / w);
+      }
+    } else if (w < minW) {
+      // the image is too thin
+      displayW = minW;
+      displayH = Math.round(h * minW / w);
+    } else if (h < minH) {
+      // the image is too short
+      displayH = minH;
+      displayW = Math.round(w * minH / h);
+    }
 
-    var zoomedW = Math.floor(w * zoom);
-    var zoomedH = Math.floor(h * zoom);
-
-    var displayW = Math.max(minW, zoomedW);  
-    var displayH = Math.max(minH, zoomedH);  
+    // resize the image if it is too large
+    if (w > maxW && h > maxH) {
+      // the image is both too tall and wide, so compare the aspect ratios
+      // to determine whether to max the width or height
+      if (w / h > maxW / maxH) {
+        displayW = maxW;
+        displayH = Math.round(h * maxW / w);
+      } else {
+        displayH = maxH;
+        displayW = Math.round(w * maxH / h);
+      }
+    } else if (w > maxW) {
+      // the image is too wide
+      displayW = maxW;
+      displayH = Math.round(h * maxW / w);
+    } else if (h > maxH) {
+      // the image is too tall
+      displayH = maxH;
+      displayW = Math.round(w * maxH / h);
+    }
 
     return {
-      'width': displayW,
-      'height': displayH
+      'width': displayW || 0,
+      'height': displayH || 0 // NaN is possible when dimensions.width is 0
     };
   };
 
@@ -589,19 +592,10 @@ angular.module('bootstrapLightbox').directive('lightboxSrc', ['$window',
         });
       };
 
-      // load the new image and/or resize the video whenever the attr changes
+      // load the new image whenever the attr changes
       scope.$watch(function () {
         return attrs.lightboxSrc;
       }, function (src) {
-
-        if (src && angular.isDefined(attrs.lightboxVideo)){
-          imageWidth = 16;
-          imageHeight = 9;
-          // resize the video element and the containing modal
-          resize();
-          return;
-        }
-
         // blank the image before resizing the element; see
         // http://stackoverflow.com/questions/5775469
         element[0].src = '//:0';
