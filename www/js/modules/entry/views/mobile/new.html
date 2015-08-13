@@ -1,7 +1,7 @@
 <ion-view view-title="New Entry" hide-nav-bar="true" class="modal">
   <ion-content>
 
-    <form name="entryForm" ng-submit="MobileEntryAdd()" class="mobile">
+    <form name="entryForm" ng-submit="MobileEntryAdd()" novalidate class="mobile">
       <ion-header-bar class="bar bar-header bar-dark item-input-inset">
         <button class="button button-clear padding-left" ng-click="modal.hide()">
           Cancel
@@ -9,15 +9,19 @@
         <h1 class="title">
           New Entry
         </h1>
-        <input type="submit" value="Save Entry" class="button button-outline button-assertive bold">
+        <input type="submit" value="Save Entry" ng-disabled="entryForm.$invalid" class="button button-outline button-assertive bold">
         </input>
       </ion-header-bar>
 
       <div class="list form">
-        <label class="item item-input item-icon-right">
+        <label class="item item-input item-icon-right" ng-class="{'has-error': entryForm.title.$invalid }">
           <a href="#"><i class="icon ion-android-attach assertive"></i></a>
-          <input type="text" placeholder="Title this entry" ng-model="entry.title">
+          <input type="text" placeholder="Title this entry" required name="title" ng-model="entry.title" ng-class="{error:entryForm.title.$dirty&& entryForm.title.$invalid}"/>      
+          
         </label>
+        <div class="form-error" ng-show="entryForm.title.$touched&&entryForm.title.$invalid">
+              <span ng-show="entryForm.title.$error.required">Title is required</span>
+          </div>
         <label class="item item-input">
           <textarea rows="7" placeholder="What would you like to remember?" ng-model="entry.content"></textarea>
         </label>
@@ -26,9 +30,18 @@
           <input type="text" placeholder="Labels" ng-model="entry.tags">
         </label>
         <label class="item item-input">
-          <input type="date" placeholder="date" ng-model="entry.date">
+          <input type="date" placeholder="date" name='date' ng-model="entry.date">
         </label>
-        <div class="dropzone"></div>
+        <div class="dropzone"  dropzone="dropzoneConfig">
+            <div class="dz-drag hidden"><p>Drag files here</p></div>
+            <div class="dz-message default-message">
+              <md-icon class="material-icons md-36 pull-left">attach_file</md-icon>
+              <md-tooltip>
+                Attach Video, Image, Audio, or PDF
+              </md-tooltip>
+              <p>Drag or click to upload</p>
+            </div>
+          </div>
       </div>
     </form>
 

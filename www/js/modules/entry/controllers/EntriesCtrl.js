@@ -73,31 +73,52 @@
     };
 
     $scope.entry.date = new Date();
-
+     // $scope.entry.date="MM/DD/YYYY"
     //$scope.audio = ngAudio.load("http://www.stephaniequinn.com/Music/Canon.mp3");
-    $scope.audioPlay=function(src){
+    $scope.audioPlay=function(index,src){
+      var x = document.querySelectorAll(".play");
+      angular.forEach(x,function(obj){
+          obj.innerHTML="Play";
+      })
       if($scope.audio)
       {
         if($scope.audio.src==src){
-          if($scope.audio.paused){
-            if($scope.audio.currentTime==0||$scope.audio.currentTime==$scope.audio.duration){
-              $scope.audio = ngAudio.load(src);
 
-                } else{
-        
-                }
+          if($scope.audio.paused){
                 $scope.audio.play();
-                document.querySelector("#playButton").innerHTML="Pause";
+                document.querySelector("#playButton"+index).innerHTML="Pause";
                 }
                 else{
                   $scope.audio.pause();
-                  document.querySelector("#playButton").innerHTML="Play";
+                  document.querySelector("#playButton"+index).innerHTML="Play";
                 }
               }else{
-                $scope.audio=ngAudio.load(src);
+                $scope.audio.restart();
+                $scope.audio=ngAudio.load(src); 
+                $scope.audio.play();
+                document.querySelector("#playButton"+index).innerHTML="Pause";
+               
               }
       }else{
+
         $scope.audio=ngAudio.load(src);
+        $scope.audio.play();
+        document.querySelector("#playButton"+index).innerHTML="Pause";
+      }
+    }
+    $scope.audioStop=function(index,src){
+      console.log($scope.audio)
+      if($scope.audio.src==src){
+        document.querySelector("#playButton"+index).innerHTML="Play";
+        $scope.audio.restart();
+      }
+      else{
+        
+        if($scope.audio.paused){
+          $scope.audio.pause();
+        }else{
+          $scope.audio.play();
+        }
       }
     }
 
@@ -307,6 +328,7 @@
 
 
     $scope.play = function(src) {
+      console.log(src);
        var media = new Media(src, null, null, mediaStatusCallback);
        $cordovaMedia.play(media);
     }
@@ -431,6 +453,10 @@
      $scope.closeModal = function() {
         $scope.modal.hide();
         $scope.modal.remove()
+     };
+     $scope.playMobileAudio=function(src){
+      console.log(src);
+        $scope.track={url:src};
      };
   }
 })();

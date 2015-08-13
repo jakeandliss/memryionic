@@ -46,9 +46,9 @@
         attachment_content_type: "audio",
         attachment_file_name: "canon.mp3"
       }, {
-        attachment: 'http://www.stephaniequinn.com/Music/Canon.mp3',
+        attachment: 'http://p48.ve.vc/data/48/35093/275475/Dil_De_Ramp_Te_-_Preet_Harpal_-_48Kbps_-_www.DjPunjab.Com.mp3',
         attachment_content_type: "audio",
-        attachment_file_name: "canon.mp3"
+        attachment_file_name: "Dil de Ramp te.mp3"
       }, {
         attachment: 'http://techslides.com/demos/sample-videos/small.mp4',
         attachment_content_type: "video",
