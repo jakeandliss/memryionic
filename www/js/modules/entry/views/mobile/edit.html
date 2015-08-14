@@ -1,13 +1,13 @@
 <ion-view view-title="Edit Entry" hide-nav-bar="true" class="modal">
   <ion-content>
 
-    <form name="entryForm" ng-submit="entry.update()" class="mobile">
+    <form name="entryForm" ng-submit="mobileUpdate()" class="mobile">
       <ion-header-bar class="bar bar-header bar-dark item-input-inset">
-        <button class="button button-clear padding-left" ng-click="modal.hide()">
+        <button type="button" class="button button-clear padding-left" ng-click="editModal.hide()">
           Cancel
         </button>
         <h1 class="title">
-          New Entry
+          Update Entry
         </h1>
         <input type="submit" value="Update Entry" class="button button-outline button-assertive bold">
         </input>
@@ -21,10 +21,10 @@
         <label class="item item-input">
           <textarea rows="7" placeholder="What would you like to remember?" ng-model="entry.content"></textarea>
         </label>
-            <label class="item item-input">
+           <!--  <label class="item item-input">
               <i class="icon ion-ios-pricetag placeholder-icon"></i>
               <input type="text" placeholder="Labels" ng-model="entry.tags">
-            </label>
+            </label> -->
             <label class="item item-input">
               <input type="date" placeholder="date" ng-model="entry.date">
             </label>

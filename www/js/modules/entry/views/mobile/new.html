@@ -3,7 +3,7 @@
 
     <form name="entryForm" ng-submit="MobileEntryAdd()" novalidate class="mobile">
       <ion-header-bar class="bar bar-header bar-dark item-input-inset">
-        <button class="button button-clear padding-left" ng-click="modal.hide()">
+        <button type="button" class="button button-clear padding-left" ng-click="mobileEntryCancel()">
           Cancel
         </button>
         <h1 class="title">
@@ -32,15 +32,8 @@
         <label class="item item-input">
           <input type="date" placeholder="date" name='date' ng-model="entry.date">
         </label>
-        <div class="dropzone"  dropzone="dropzoneConfig">
-            <div class="dz-drag hidden"><p>Drag files here</p></div>
-            <div class="dz-message default-message">
-              <md-icon class="material-icons md-36 pull-left">attach_file</md-icon>
-              <md-tooltip>
-                Attach Video, Image, Audio, or PDF
-              </md-tooltip>
-              <p>Drag or click to upload</p>
-            </div>
+        <div class="dropzone" >
+            
           </div>
       </div>
     </form>

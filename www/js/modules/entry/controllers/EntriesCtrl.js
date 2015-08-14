@@ -5,8 +5,8 @@
 
     .controller('EntriesCtrl', EntriesCtrl)
 
-  EntriesCtrl.$inject = ['$scope', '$stateParams', 'Entries', '$ionicModal', '$mdBottomSheet', '$sce', '$ionicPopover', '$modal', 'Lightbox', 'ngAudio', 'timeAgo'];
-  function EntriesCtrl($scope, $stateParams, Entries, $ionicModal, $mdBottomSheet, $sce, $ionicPopover, $modal, Lightbox, ngAudio, timeAgo) {
+  EntriesCtrl.$inject = ['$scope', '$stateParams', 'Entries', '$ionicModal', '$mdBottomSheet', '$sce', '$ionicPopover', '$modal', 'Lightbox', 'ngAudio', 'timeAgo','$ionicScrollDelegate'];
+  function EntriesCtrl($scope, $stateParams, Entries, $ionicModal, $mdBottomSheet, $sce, $ionicPopover, $modal, Lightbox, ngAudio, timeAgo,$ionicScrollDelegate) {
     $scope.entry = {};
     $scope.tags = [
       {name: "tag 1"},
@@ -20,12 +20,11 @@
         $scope.entries.unshift($scope.entry);
         $scope.entry = {};
         $scope.modal.hide(); // hide mobile form on submit
-        $scope.entryForm.$setPristine();
         $scope.entry.date = new Date();
+        $ionicScrollDelegate.scrollTop();
       }
     }
     $scope.entryAdd = function(entry) {
-      console.log(fileDropzone);
       if(fileDropzone.files.length>0){
         fileDropzone.processQueue();
       };
@@ -63,12 +62,20 @@
     $scope.update = function(entry) {
       Entries.update(entry);
     };
+    $scope.mobileUpdate=function(){
+      $scope.editModal.hide();
+      Entries.update($scope.entry);
 
+    }
     // Remove Entry
     $scope.remove = function(entry) {
+      
       if (confirm('Are you sure you want to delete this?')){
-        Entries.remove(Entries.selectedEntry);
-        $mdBottomSheet.cancel();
+        
+          $scope.popover.hide();
+          Entries.remove(Entries.selectedEntry);
+          $mdBottomSheet.cancel();
+        
       }
     };
 
@@ -129,7 +136,10 @@
         $scope.popover = popover;
       });
 
-      $scope.openPopover = function($event) {
+      $scope.openPopover = function($event,entry) {
+        Entries.selectedEntry=entry;
+        $scope.entry=angular.copy(entry);
+        $scope.entry.date=new Date(entry.date);
         $scope.popover.show($event);
       };
 
@@ -150,7 +160,7 @@
       })
     };
 
-    // This modal should only be used for mobile.
+    // This modal should only be used for mobile. (For new Entry)
     $ionicModal.fromTemplateUrl('/js/modules/entry/views/mobile/new.html', function($ionicModal) {
       $scope.modal = $ionicModal;
     }, {
@@ -159,6 +169,28 @@
       // The animation we want to use for the modal entrance
       animation: 'slide-in-up'
     });
+    // This modal should only be used for mobile. (For Update Entry)
+    $ionicModal.fromTemplateUrl('/js/modules/entry/views/mobile/edit.html', function($ionicModal) {
+          $scope.editModal = $ionicModal;
+      }, {
+          // Use our scope for the scope of the modal to keep it simple
+          scope: $scope,
+          // The animation we want to use for the modal entrance
+          animation: 'slide-in-up'
+        });
+    // This modal should only be used for mobile. (For share Entry)
+     $ionicModal.fromTemplateUrl('/js/modules/entry/views/mobile/share.html', function($ionicModal) {
+          $scope.shareModal = $ionicModal;
+      }, {
+          // Use our scope for the scope of the modal to keep it simple
+          scope: $scope,
+          // The animation we want to use for the modal entrance
+          animation: 'slide-in-up'
+      });
+     $scope.openEdit=function(){
+      $scope.editModal.show();
+      $scope.popover.hide();
+     }
     $scope.openModal = function () {
       $mdBottomSheet.cancel();
       $scope.selectedEntry=Entries.selectedEntry;
@@ -206,6 +238,7 @@
         event.stopPropagation();
         event.preventDefault();
         insideDropzone = false;
+
       }
     });
 
@@ -295,6 +328,19 @@
           angular.element(document.querySelector('.default-message')).removeClass('hidden')
           angular.element(document.querySelector('.dropzone')).removeClass('dropzone-custom')
           angular.element(document.querySelectorAll('.dz-hide')).removeClass('hidden')
+        },
+        'dragleave': function(event){
+          // var dzhide=document.querySelectorAll('.dz-hide');
+          // console.log(dzhide);
+          // angular.forEach(dzhide,function(obj){
+          //   angular.element(obj).removeClass('hidden');
+          // });
+          angular.element($("#titleRow")).removeClass('hidden');
+          angular.element($("#wysiwyg")).removeClass('hidden');
+          angular.element($("#buttonRow")).removeClass('hidden');
+          angular.element($("#dzdrag")).removeClass('hidden');
+          angular.element($("#dropzoneDiv")).removeClass('col-sm-12').addClass('col-sm-8');
+          
         },
         'uploadprogress': function(file, progress) {
           angular.element(document.querySelector('.dz-progress')).addClass('progress-bar')
@@ -458,6 +504,11 @@
       console.log(src);
         $scope.track={url:src};
      };
+     $scope.mobileEntryCancel=function(){
+        $scope.entry = {};
+        $scope.modal.hide(); // hide mobile form on submit
+        $scope.entry.date = new Date();
+     }
   }
 })();
 

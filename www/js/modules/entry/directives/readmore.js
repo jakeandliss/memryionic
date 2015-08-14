@@ -40,7 +40,6 @@ readMore.directive('readMore', function() {
                 }
 
                 $scope.changeLength = function (card) {
-                    console.log("Function colled");
                     $scope.isExpanded = !$scope.isExpanded;
                     $scope.textLength = $scope.textLength !== $attrs.length ?  $attrs.length : $scope.text.length;
                 };

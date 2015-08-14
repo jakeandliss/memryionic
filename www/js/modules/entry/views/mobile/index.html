@@ -15,7 +15,7 @@
 
     <div class="list card" ng-repeat="entry in entries">
       <div class="item item-text-wrap gray">
-        <i class="button-icon icon ion-android-more-horizontal" style="float:right;" ng-click="openPopover($event)"></i>
+        <i class="button-icon icon ion-android-more-horizontal" style="float:right;" ng-click="openPopover($event,entry)"></i>
         <h2>{{entry.title}}</h2>
         <p>{{entry.date | date: "longDate"}}</p>
       </div>
@@ -86,8 +86,8 @@
       </section>
 
       <!-- Share Entry -->
-      <div class="item tabs tabs-secondary tabs-icon-left gray" ng-controller="ShareCtrl">
-        <a class="tab-item" href="#" ng-click="modal.show()">
+      <div class="item tabs tabs-secondary tabs-icon-left gray">
+        <a class="tab-item" href="#" ng-click="shareModal.show()">
           <i class="icon ion-share"></i>
           Share
         </a>
@@ -101,10 +101,10 @@
   <ion-popover-view>
     <ion-content>
       <div class="list">
-        <a class="item" ng-click="modal.show()" ng-model="entry.id" ng-controller="EditCtrl">
+        <a class="item" ng-click="openEdit()" ng-model="entry.id">
           Edit
         </a>
-        <a class="item" ng-click="remove(entry)">
+        <a class="item" ng-click="remove()">
           Delete
         </a>
       </div>
