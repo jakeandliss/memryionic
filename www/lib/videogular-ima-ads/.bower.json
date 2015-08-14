@@ -1,16 +1,16 @@
 {
   "name": "videogular-ima-ads",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "main": "./vg-ima-ads.js",
   "dependencies": {
-    "videogular": "1.2.4"
+    "videogular": "1.2.5"
   },
   "homepage": "https://github.com/2fdevs/bower-videogular-ima-ads",
-  "_release": "1.2.4",
+  "_release": "1.2.5",
   "_resolution": {
     "type": "version",
-    "tag": "v1.2.4",
-    "commit": "9b44a69ce2fcd4d0c7a8ca640887fe2021c45f33"
+    "tag": "v1.2.5",
+    "commit": "cfcc530f8415e19681bdd1ee8a521bdc6d57fa56"
   },
   "_source": "git://github.com/2fdevs/bower-videogular-ima-ads.git",
   "_target": "*",

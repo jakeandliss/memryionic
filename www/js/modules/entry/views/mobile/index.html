@@ -23,15 +23,15 @@
       <section  ng-controller="PanelCtrl as panel">
         <div class="item tabs tabs-secondary tabs-icon-left">
           <a class="tab-item" href="#" ng-click="panel.selectTab(1)" ng-class="{ active:panel.isSelected(1) }">
-            <i class="icon ion-ios-glasses"></i>
+            <i class="icon ion-ios-glasses text-danger"></i>
             Visual
           </a>
           <a class="tab-item" href="#" ng-click="panel.selectTab(2)" ng-class="{ active:panel.isSelected(2) }">
-            <i class="icon ion-mic-c"></i>
+            <i class="icon ion-mic-c text-success"></i>
             Audio
           </a>
           <a class="tab-item" href="#" ng-click="panel.selectTab(3)" ng-class="{ active: panel.isSelected(3) }">
-            <i class="icon ion-document-text"></i>
+            <i class="icon ion-document-text text-info"></i>
             Files
           </a>
         </div>

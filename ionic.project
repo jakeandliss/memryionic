@@ -3,7 +3,8 @@
   "app_id": "a3a55248",
   "gulpStartupTasks": [
     "sass",
-    "watch"
+    "watch",
+    "customflatui"
   ],
   "watchPatterns": [
     "www/**/*",
