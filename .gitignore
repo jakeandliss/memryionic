@@ -7,4 +7,4 @@ plugins/
 
 www/lib/*
 !www/lib/angular-bootstrap-lightbox
-!www/lib/flat-ui/less
+!www/lib/flat-ui/less/*
