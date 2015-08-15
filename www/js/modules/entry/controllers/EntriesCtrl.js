@@ -8,10 +8,7 @@
   EntriesCtrl.$inject = ['$scope', '$stateParams', 'Entries', '$ionicModal', '$mdBottomSheet', '$sce', '$ionicPopover', '$modal', 'Lightbox', 'ngAudio', 'timeAgo','$ionicScrollDelegate'];
   function EntriesCtrl($scope, $stateParams, Entries, $ionicModal, $mdBottomSheet, $sce, $ionicPopover, $modal, Lightbox, ngAudio, timeAgo,$ionicScrollDelegate) {
     $scope.entry = {};
-    $scope.tags = [
-      {name: "tag 1"},
-      {name: "tag 2"}
-    ];
+    $scope.tags = [];
 
     // Add Entry
     $scope.MobileEntryAdd=function(entry){
@@ -25,11 +22,17 @@
       }
     }
     $scope.entryAdd = function(entry) {
+      console.log($scope.entry);
+      $scope.entry.tags=[]
+      angular.forEach($scope.tags,function(obj){
+          $scope.entry.tags.push({name:obj.text});
+      })
       if(fileDropzone.files.length>0){
         fileDropzone.processQueue();
       };
       $scope.entries.unshift($scope.entry);
       $scope.entry = {};
+      $scope.tags=[];
       $scope.entryForm.$setPristine();
       $scope.entry.date = new Date();
 
@@ -198,7 +201,7 @@
       var modalInstance = $modal.open({
         animation: $scope.animationsEnabled,
         templateUrl: '/js/modules/entry/views/desktop/edit.html',
-        controller: 'EntriesCtrl',
+        //controller: 'EntriesCtrl',
         size: 'lg',
         animation: true
       });
@@ -226,7 +229,19 @@
     angular.element(document.querySelector('#entries')).on('dragenter', dragEventHandler)
     angular.element(document.querySelector('#entries')).on('dragleave', dragLeaveHandler)
     angular.element(document.querySelector('.dropzone')).on('dragenter', function(event) {
-      counter++;
+    
+      angular.element(document.querySelectorAll('.dz-hide')).addClass('hidden')
+      angular.element(document.querySelector('.dropzone')).addClass('dropzone-custom')
+      angular.element(document.querySelector('.dropzone')).removeClass('hidden')
+      angular.element(document.querySelector('.dz-drag')).removeClass('hidden').parent().parent().addClass('col-sm-12').removeClass('col-sm-8')
+      angular.element(document.querySelector('.dz-message')).addClass('hidden')
+    })
+    angular.element(document.querySelector('.dropzone')).on('dragleave', function(event) {
+      angular.element(document.querySelectorAll('.dz-hide')).removeClass('hidden')
+      angular.element(document.querySelector('.dropzone')).removeClass('dropzone-custom')
+      angular.element(document.querySelector('.dz-drag')).addClass('hidden').parent().parent().removeClass('col-sm-12').addClass('col-sm-8')
+      angular.element(document.querySelector('.dz-message')).removeClass('hidden')
+      
     })
     angular.element.bind({
       dragenter: function(event) {
@@ -243,24 +258,27 @@
     });
 
     function dragEventHandler() {
-      angular.element(document.querySelectorAll('.dz-hide')).addClass('hidden')
-      angular.element(document.querySelector('.dropzone')).addClass('dropzone-custom')
-      angular.element(document.querySelector('.dropzone')).removeClass('hidden')
-      angular.element(document.querySelector('.dz-drag')).removeClass('hidden').parent().parent().addClass('col-sm-12').removeClass('col-sm-8')
-      angular.element(document.querySelector('.dz-message')).addClass('hidden')
+      // angular.element(document.querySelectorAll('.dz-hide')).addClass('hidden')
+      // angular.element(document.querySelector('.dropzone')).addClass('dropzone-custom')
+      // angular.element(document.querySelector('.dropzone')).removeClass('hidden')
+      // angular.element(document.querySelector('.dz-drag')).removeClass('hidden').parent().parent().addClass('col-sm-12').removeClass('col-sm-8')
+      // angular.element(document.querySelector('.dz-message')).addClass('hidden')
       counter++;
+
+     
     }
 
     function dragLeaveHandler() {
       counter--;
       if (counter == 0) {
         if (!insideDropzone) {
-          angular.element(document.querySelectorAll('.dz-hide')).removeClass('hidden')
-          angular.element(document.querySelector('.dropzone')).removeClass('dropzone-custom')
-          angular.element(document.querySelector('.dz-drag')).addClass('hidden').parent().parent().removeClass('col-sm-12').addClass('col-sm-8')
-          angular.element(document.querySelector('.dz-message')).removeClass('hidden')
+          // angular.element(document.querySelectorAll('.dz-hide')).removeClass('hidden')
+          // angular.element(document.querySelector('.dropzone')).removeClass('dropzone-custom')
+          // angular.element(document.querySelector('.dz-drag')).addClass('hidden').parent().parent().removeClass('col-sm-12').addClass('col-sm-8')
+          // angular.element(document.querySelector('.dz-message')).removeClass('hidden')
         }
       }
+
     }
     var previewTemplate = null
     if(document.querySelector('#preview-template') != null){
@@ -329,19 +347,14 @@
           angular.element(document.querySelector('.dropzone')).removeClass('dropzone-custom')
           angular.element(document.querySelectorAll('.dz-hide')).removeClass('hidden')
         },
-        'dragleave': function(event){
-          // var dzhide=document.querySelectorAll('.dz-hide');
-          // console.log(dzhide);
-          // angular.forEach(dzhide,function(obj){
-          //   angular.element(obj).removeClass('hidden');
-          // });
-          angular.element($("#titleRow")).removeClass('hidden');
-          angular.element($("#wysiwyg")).removeClass('hidden');
-          angular.element($("#buttonRow")).removeClass('hidden');
-          angular.element($("#dzdrag")).removeClass('hidden');
-          angular.element($("#dropzoneDiv")).removeClass('col-sm-12').addClass('col-sm-8');
-          
-        },
+        // 'dragleave': function(event){
+        //   angular.element(document.querySelector('.dz-drag')).addClass('hidden').parent().parent().removeClass('col-sm-12').addClass('col-sm-8')
+        //   angular.element(document.querySelector('.default-message')).removeClass('hidden')
+        //   angular.element(document.querySelector('.dropzone')).removeClass('dropzone-custom')
+        //   angular.element(document.querySelectorAll('.dz-hide')).removeClass('hidden')
+        //   counter++;
+        //   console.log("dragleave fire"+counter)
+        // },
         'uploadprogress': function(file, progress) {
           angular.element(document.querySelector('.dz-progress')).addClass('progress-bar')
           if (100 == progress) {

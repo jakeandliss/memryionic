@@ -31,15 +31,11 @@
     $scope.showMenu = true;
     $scope.childLabel="";
 
-    if ($stateParams.id){
 
-      $scope.showIt=true;
-    };
     $scope.filterTags = function(){
 
       if($stateParams.id)
-      {  
-
+      { 
         var filterResult = $scope.tags.filter(function(elem){
           return elem.id == $stateParams.id; 
         });
@@ -50,6 +46,7 @@
         $scope.label = "";
         $scope.labelId = filterResult[0].id;
         $scope.showBackButton=true;
+        
       }
       else
       {
@@ -57,9 +54,18 @@
         $scope.filteredTags = $scope.tags;
       }
     };
-    $scope.filterTags();
+    if ($stateParams.id){
 
-    
+      $scope.showIt=true;
+    };
+    $scope.filterTags();
+     $scope.loadTags=function(query){
+      var inputtags=[]
+      angular.forEach($scope.filteredTags,function(obj){
+        inputtags.push({text:obj.name});
+      })
+      return inputtags;
+    };
 
     $scope.getChildTags = function(id){
      $scope.showMenu = !$scope.showMenu;
@@ -158,7 +164,7 @@ $scope.saveTag = function(){
       $scope.showBackButton=false;
        window.history.back();
     };
-};
+  };
 })();
 
 

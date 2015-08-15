@@ -21,7 +21,8 @@ angular.module('memryApp', [
   'yaru22.angular-timeago',
   'bootstrapLightbox',
   'ngAudio',
-  'readMore'
+  'readMore',
+  'ngTagsInput'
 ])
 
 .run(function ($ionicPlatform, $rootScope, deviceDetector) {
