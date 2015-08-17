@@ -5,8 +5,8 @@
 
     .controller('EntriesCtrl', EntriesCtrl)
 
-  EntriesCtrl.$inject = ['$scope', '$stateParams', 'Entries', '$ionicModal', '$mdBottomSheet', '$sce', '$ionicPopover', '$modal', 'Lightbox', 'ngAudio', 'timeAgo','$ionicScrollDelegate'];
-  function EntriesCtrl($scope, $stateParams, Entries, $ionicModal, $mdBottomSheet, $sce, $ionicPopover, $modal, Lightbox, ngAudio, timeAgo,$ionicScrollDelegate) {
+  EntriesCtrl.$inject = ['$scope', '$stateParams', 'Entries', '$ionicModal', '$mdBottomSheet', '$sce', '$ionicPopover', '$modal', 'Lightbox', 'ngAudio', 'timeAgo'];
+  function EntriesCtrl($scope, $stateParams, Entries, $ionicModal, $mdBottomSheet, $sce, $ionicPopover, $modal, Lightbox, ngAudio, timeAgo) {
     $scope.entry = {};
     $scope.tags = [];
 
@@ -17,16 +17,11 @@
         $scope.entries.unshift($scope.entry);
         $scope.entry = {};
         $scope.modal.hide(); // hide mobile form on submit
+        $scope.entryForm.$setPristine();
         $scope.entry.date = new Date();
-        $ionicScrollDelegate.scrollTop();
       }
     }
     $scope.entryAdd = function(entry) {
-      console.log($scope.entry);
-      $scope.entry.tags=[]
-      angular.forEach($scope.tags,function(obj){
-          $scope.entry.tags.push({name:obj.text});
-      })
       if(fileDropzone.files.length>0){
         fileDropzone.processQueue();
       };
@@ -65,70 +60,40 @@
     $scope.update = function(entry) {
       Entries.update(entry);
     };
-    $scope.mobileUpdate=function(){
-      $scope.editModal.hide();
-      Entries.update($scope.entry);
 
-    }
     // Remove Entry
     $scope.remove = function(entry) {
-      
       if (confirm('Are you sure you want to delete this?')){
-        
-          $scope.popover.hide();
-          Entries.remove(Entries.selectedEntry);
-          $mdBottomSheet.cancel();
-        
+        Entries.remove(Entries.selectedEntry);
+        $mdBottomSheet.cancel();
       }
     };
 
     $scope.entry.date = new Date();
-     // $scope.entry.date="MM/DD/YYYY"
+
     //$scope.audio = ngAudio.load("http://www.stephaniequinn.com/Music/Canon.mp3");
-    $scope.audioPlay=function(index,src){
-      var x = document.querySelectorAll(".play");
-      angular.forEach(x,function(obj){
-          obj.innerHTML="Play";
-      })
+    $scope.audioPlay=function(src,$ind){
       if($scope.audio)
       {
         if($scope.audio.src==src){
-
           if($scope.audio.paused){
+            if($scope.audio.currentTime==0||$scope.audio.currentTime==$scope.audio.duration){
+              $scope.audio = ngAudio.load(src);
+                }
+                else{
+                }
                 $scope.audio.play();
-                document.querySelector("#playButton"+index).innerHTML="Pause";
+                document.querySelector(".playButton " + $index ).innerHTML="Pause";
                 }
                 else{
                   $scope.audio.pause();
-                  document.querySelector("#playButton"+index).innerHTML="Play";
+                  document.querySelector(".playButton " + $index ).innerHTML="Play";
                 }
               }else{
-                $scope.audio.restart();
-                $scope.audio=ngAudio.load(src); 
-                $scope.audio.play();
-                document.querySelector("#playButton"+index).innerHTML="Pause";
-               
+                $scope.audio=ngAudio.load(src);
               }
       }else{
-
         $scope.audio=ngAudio.load(src);
-        $scope.audio.play();
-        document.querySelector("#playButton"+index).innerHTML="Pause";
-      }
-    }
-    $scope.audioStop=function(index,src){
-      console.log($scope.audio)
-      if($scope.audio.src==src){
-        document.querySelector("#playButton"+index).innerHTML="Play";
-        $scope.audio.restart();
-      }
-      else{
-        
-        if($scope.audio.paused){
-          $scope.audio.pause();
-        }else{
-          $scope.audio.play();
-        }
       }
     }
 
@@ -139,10 +104,7 @@
         $scope.popover = popover;
       });
 
-      $scope.openPopover = function($event,entry) {
-        Entries.selectedEntry=entry;
-        $scope.entry=angular.copy(entry);
-        $scope.entry.date=new Date(entry.date);
+      $scope.openPopover = function($event) {
         $scope.popover.show($event);
       };
 
@@ -163,7 +125,7 @@
       })
     };
 
-    // This modal should only be used for mobile. (For new Entry)
+    // This modal should only be used for mobile.
     $ionicModal.fromTemplateUrl('/js/modules/entry/views/mobile/new.html', function($ionicModal) {
       $scope.modal = $ionicModal;
     }, {
@@ -172,28 +134,6 @@
       // The animation we want to use for the modal entrance
       animation: 'slide-in-up'
     });
-    // This modal should only be used for mobile. (For Update Entry)
-    $ionicModal.fromTemplateUrl('/js/modules/entry/views/mobile/edit.html', function($ionicModal) {
-          $scope.editModal = $ionicModal;
-      }, {
-          // Use our scope for the scope of the modal to keep it simple
-          scope: $scope,
-          // The animation we want to use for the modal entrance
-          animation: 'slide-in-up'
-        });
-    // This modal should only be used for mobile. (For share Entry)
-     $ionicModal.fromTemplateUrl('/js/modules/entry/views/mobile/share.html', function($ionicModal) {
-          $scope.shareModal = $ionicModal;
-      }, {
-          // Use our scope for the scope of the modal to keep it simple
-          scope: $scope,
-          // The animation we want to use for the modal entrance
-          animation: 'slide-in-up'
-      });
-     $scope.openEdit=function(){
-      $scope.editModal.show();
-      $scope.popover.hide();
-     }
     $scope.openModal = function () {
       $mdBottomSheet.cancel();
       $scope.selectedEntry=Entries.selectedEntry;
@@ -253,7 +193,6 @@
         event.stopPropagation();
         event.preventDefault();
         insideDropzone = false;
-
       }
     });
 
@@ -293,7 +232,7 @@
         'thumbnailWidth': 100,
         'url': '/resources',
         'addRemoveLinks': true,
-        "autoProcessQueue": false,
+        "autoProcessQueue": true,
         'dictCancelUpload': "Cancel",
         'dictRemoveFile': "Remove",
         'init':function(){
@@ -307,7 +246,7 @@
         'addedfile': function(file){
           var removeLink = $(file.previewElement).find('.dz-remove').first();
           var $a = $("<a>",{text:"Rename",class:"dz-remove rename"});
-          $a.click(function(){ 
+          $a.click(function(){
            var element = $(file.previewElement).find('.fileName').first();
            var spanText = element.prev();
            var rename=$(file.previewElement).find('.rename').first();
@@ -339,7 +278,7 @@
            spanText.hide();
          });
         $a.insertBefore(removeLink);
-          
+
         },
         'drop': function(event) {
           angular.element(document.querySelector('.dz-drag')).addClass('hidden').parent().parent().removeClass('col-sm-12').addClass('col-sm-8')
@@ -347,14 +286,6 @@
           angular.element(document.querySelector('.dropzone')).removeClass('dropzone-custom')
           angular.element(document.querySelectorAll('.dz-hide')).removeClass('hidden')
         },
-        // 'dragleave': function(event){
-        //   angular.element(document.querySelector('.dz-drag')).addClass('hidden').parent().parent().removeClass('col-sm-12').addClass('col-sm-8')
-        //   angular.element(document.querySelector('.default-message')).removeClass('hidden')
-        //   angular.element(document.querySelector('.dropzone')).removeClass('dropzone-custom')
-        //   angular.element(document.querySelectorAll('.dz-hide')).removeClass('hidden')
-        //   counter++;
-        //   console.log("dragleave fire"+counter)
-        // },
         'uploadprogress': function(file, progress) {
           angular.element(document.querySelector('.dz-progress')).addClass('progress-bar')
           if (100 == progress) {
@@ -387,7 +318,6 @@
 
 
     $scope.play = function(src) {
-      console.log(src);
        var media = new Media(src, null, null, mediaStatusCallback);
        $cordovaMedia.play(media);
     }
@@ -513,17 +443,5 @@
         $scope.modal.hide();
         $scope.modal.remove()
      };
-     $scope.playMobileAudio=function(src){
-      console.log(src);
-        $scope.track={url:src};
-     };
-     $scope.mobileEntryCancel=function(){
-        $scope.entry = {};
-        $scope.modal.hide(); // hide mobile form on submit
-        $scope.entry.date = new Date();
-     }
   }
 })();
-
-
-  
