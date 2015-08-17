@@ -27,6 +27,6 @@
     "commit": "68cdfc2aa161e4937d128265d64b23cd68f62408"
   },
   "_source": "git://github.com/compact/angular-bootstrap-lightbox.git",
-  "_target": "0.6.1",
+  "_target": "~0.6.1",
   "_originalSource": "angular-bootstrap-lightbox"
 }
