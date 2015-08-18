@@ -5,8 +5,8 @@
 
     .controller('EntriesCtrl', EntriesCtrl)
 
-  EntriesCtrl.$inject = ['$scope', '$stateParams', 'Entries', '$ionicModal', '$mdBottomSheet', '$sce', '$ionicPopover', '$modal', 'Lightbox', 'ngAudio', 'timeAgo'];
-  function EntriesCtrl($scope, $stateParams, Entries, $ionicModal, $mdBottomSheet, $sce, $ionicPopover, $modal, Lightbox, ngAudio, timeAgo) {
+  EntriesCtrl.$inject = ['$scope', '$stateParams', 'Entries', '$ionicModal', '$mdBottomSheet', '$sce', '$ionicPopover', '$modal', 'Lightbox', 'ngAudio', 'timeAgo','$ionicScrollDelegate'];
+  function EntriesCtrl($scope, $stateParams, Entries, $ionicModal, $mdBottomSheet, $sce, $ionicPopover, $modal, Lightbox, ngAudio, timeAgo,$ionicScrollDelegate) {
     $scope.entry = {};
     $scope.tags = [];
 
@@ -14,14 +14,25 @@
     $scope.MobileEntryAdd=function(entry){
       if($scope.entry.title)
       {
+        $scope.entry.tags=[];
+       angular.forEach($scope.tags,function(obj){
+            $scope.entry.tags.push({id:obj.id,'name':obj.text});
+       });
         $scope.entries.unshift($scope.entry);
         $scope.entry = {};
         $scope.modal.hide(); // hide mobile form on submit
-        $scope.entryForm.$setPristine();
         $scope.entry.date = new Date();
+        $scope.tags = [];
+        $ionicScrollDelegate.scrollTop();
+        $scope.entryForm.$setPristine();
+        
       }
     }
     $scope.entryAdd = function(entry) {
+      $scope.entry.tags=[];
+       angular.forEach($scope.tags,function(obj){
+            $scope.entry.tags.push({id:obj.id,'name':obj.text});
+       });
       if(fileDropzone.files.length>0){
         fileDropzone.processQueue();
       };
@@ -66,36 +77,60 @@
       if (confirm('Are you sure you want to delete this?')){
         Entries.remove(Entries.selectedEntry);
         $mdBottomSheet.cancel();
+        $scope.popover.hide();
       }
     };
 
     $scope.entry.date = new Date();
 
     //$scope.audio = ngAudio.load("http://www.stephaniequinn.com/Music/Canon.mp3");
-    $scope.audioPlay=function(src,$ind){
+     $scope.audioPlay=function(index,src){
+      var x = document.querySelectorAll(".play");
+      angular.forEach(x,function(obj){
+          obj.innerHTML="Play";
+      })
       if($scope.audio)
       {
         if($scope.audio.src==src){
+
           if($scope.audio.paused){
-            if($scope.audio.currentTime==0||$scope.audio.currentTime==$scope.audio.duration){
-              $scope.audio = ngAudio.load(src);
-                }
-                else{
-                }
                 $scope.audio.play();
-                document.querySelector(".playButton " + $index ).innerHTML="Pause";
+                document.querySelector("#playButton"+index).innerHTML="Pause";
                 }
                 else{
                   $scope.audio.pause();
-                  document.querySelector(".playButton " + $index ).innerHTML="Play";
+                  document.querySelector("#playButton"+index).innerHTML="Play";
                 }
               }else{
-                $scope.audio=ngAudio.load(src);
+                $scope.audio.restart();
+                $scope.audio=ngAudio.load(src); 
+                $scope.audio.play();
+                document.querySelector("#playButton"+index).innerHTML="Pause";
+               
               }
       }else{
+
         $scope.audio=ngAudio.load(src);
+        $scope.audio.play();
+        document.querySelector("#playButton"+index).innerHTML="Pause";
       }
     }
+    $scope.audioStop=function(index,src){
+      console.log($scope.audio)
+      if($scope.audio.src==src){
+        document.querySelector("#playButton"+index).innerHTML="Play";
+        $scope.audio.restart();
+      }
+      else{
+        
+        if($scope.audio.paused){
+          $scope.audio.pause();
+        }else{
+          $scope.audio.play();
+        }
+      }
+    }
+
 
     if (window.templateMode == "mobile") {
       $ionicPopover.fromTemplateUrl('my-popover.html', {
@@ -104,7 +139,9 @@
         $scope.popover = popover;
       });
 
-      $scope.openPopover = function($event) {
+      $scope.openPopover = function($event,entry) {
+        Entries.selectedEntry=entry;
+        
         $scope.popover.show($event);
       };
 
@@ -134,6 +171,28 @@
       // The animation we want to use for the modal entrance
       animation: 'slide-in-up'
     });
+    $ionicModal.fromTemplateUrl('/js/modules/entry/views/mobile/edit.html', function($ionicModal) {
+      $scope.editModal = $ionicModal;
+    }, {
+      // Use our scope for the scope of the modal to keep it simple
+      scope: $scope,
+      // The animation we want to use for the modal entrance
+      animation: 'slide-in-up'
+    });
+    $ionicModal.fromTemplateUrl('/js/modules/entry/views/mobile/share.html', function($ionicModal) {
+      $scope.shareModal = $ionicModal;
+    }, {
+      // Use our scope for the scope of the modal to keep it simple
+      scope: $scope,
+      // The animation we want to use for the modal entrance
+      animation: 'slide-in-up'
+    });
+    $scope.openEdit=function(){
+      $scope.editModal.show();
+      $scope.popover.hide();
+      $scope.selectedTags=angular.copy(Entries.selectedEntry);
+        $scope.selectedTags.date=new Date(Entries.selectedEntry.date);
+    }
     $scope.openModal = function () {
       $mdBottomSheet.cancel();
       $scope.selectedEntry=Entries.selectedEntry;
@@ -443,5 +502,12 @@
         $scope.modal.hide();
         $scope.modal.remove()
      };
+      $scope.mobileEntryCancel=function(){
+        $scope.entry = {};
+        $scope.tags=[];
+        $scope.modal.hide(); // hide mobile form on submit
+        $scope.entry.date = new Date();
+     }
+
   }
 })();

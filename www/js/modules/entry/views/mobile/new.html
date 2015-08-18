@@ -25,13 +25,28 @@
         <label class="item item-input">
           <textarea rows="7" placeholder="What would you like to remember?" ng-model="entry.content"></textarea>
         </label>
-        <label class="item item-input">
+         <tags-input name="tagsinput" placeholder="Add labels" class="" ng-model="tags">
+           <auto-complete ng-controller="TagsCtrl as tags" source="loadTags($query)"></auto-complete>
+      </tags-input>
+       <!--  <label class="item item-input">
           <i class="icon ion-ios-pricetag placeholder-icon"></i>
           <input type="text" placeholder="Labels" ng-model="entry.tags">
-        </label>
+        </label> -->
         <label class="item item-input">
           <input type="date" placeholder="date" name='date' ng-model="entry.date">
         </label>
+        
+             <div class="dropzone" dropzone="dropzoneConfig">
+            <div class="dz-drag hidden" id="dzdrag"><p></p></div>
+            <div class="dz-message default-message" id="dzmessage">
+              <md-icon class="material-icons md-36 pull-left">attach_file</md-icon>
+              <md-tooltip>
+                Attach Video, Image, Audio, or PDF
+              </md-tooltip>
+              <p>Click to upload</p>
+            </div>
+          </div>
+        
         <div class="dropzone" >
             
           </div>

@@ -16,17 +16,17 @@
       <div class="list form">
         <label class="item item-input item-icon-right">
           <a href="#"><i class="icon ion-android-attach assertive"></i></a>
-          <input type="text" placeholder="Title this entry" ng-model="entry.title">
+          <input type="text" placeholder="Title this entry" ng-model="selectedTags.title">
         </label>
         <label class="item item-input">
-          <textarea rows="7" placeholder="What would you like to remember?" ng-model="entry.content"></textarea>
+          <textarea rows="7" placeholder="What would you like to remember?" ng-model="selectedTags.content"></textarea>
         </label>
            <!--  <label class="item item-input">
               <i class="icon ion-ios-pricetag placeholder-icon"></i>
               <input type="text" placeholder="Labels" ng-model="entry.tags">
             </label> -->
             <label class="item item-input">
-              <input type="date" placeholder="date" ng-model="entry.date">
+              <input type="date" placeholder="date" ng-model="selectedTags.date">
             </label>
             <div class="dropzone"></div>
       </div>

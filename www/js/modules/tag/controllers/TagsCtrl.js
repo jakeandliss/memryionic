@@ -30,7 +30,7 @@
     $scope.parentTag={};
     $scope.showMenu = true;
     $scope.childLabel="";
-
+    $scope.newTag={};
 
     $scope.filterTags = function(){
 
@@ -62,7 +62,7 @@
      $scope.loadTags=function(query){
       var inputtags=[]
       angular.forEach($scope.filteredTags,function(obj){
-        inputtags.push({text:obj.name});
+        inputtags.push({text:obj.name,id:obj.id});
       })
       return inputtags;
     };
@@ -163,6 +163,21 @@ $scope.saveTag = function(){
  $scope.goBack=function(){
       $scope.showBackButton=false;
        window.history.back();
+    };
+    $scope.addTag=function(){
+      if($stateParams.id){
+        $scope.newTag.ancestry=$stateParams.id;
+      }
+     
+      $scope.modalInstance=$modal.open({
+        templateUrl:'js/modules/tag/views/desktop/new-tag.html',
+        size:'sm',
+        scope:$scope,
+      });
+    };
+    $scope.saveNewTag=function(){
+        console.log($scope.newTag);
+        $scope.modalInstance.dismiss('cancel');
     };
   };
 })();
