@@ -5,8 +5,8 @@
 
     .controller('EntriesCtrl', EntriesCtrl)
 
-  EntriesCtrl.$inject = ['$scope', '$stateParams', 'Entries', '$ionicModal', '$mdBottomSheet', '$sce', '$ionicPopover', '$modal', 'Lightbox', 'ngAudio', 'timeAgo','$ionicScrollDelegate'];
-  function EntriesCtrl($scope, $stateParams, Entries, $ionicModal, $mdBottomSheet, $sce, $ionicPopover, $modal, Lightbox, ngAudio, timeAgo,$ionicScrollDelegate) {
+  EntriesCtrl.$inject = ['$scope', '$stateParams', 'Entries', '$ionicModal', '$mdBottomSheet', '$sce', '$ionicPopover', '$modal', 'Lightbox', 'ngAudio', 'timeAgo','$ionicScrollDelegate','Tags'];
+  function EntriesCtrl($scope, $stateParams, Entries, $ionicModal, $mdBottomSheet, $sce, $ionicPopover, $modal, Lightbox, ngAudio, timeAgo,$ionicScrollDelegate,Tags) {
     $scope.entry = {};
     $scope.tags = [];
 
@@ -15,8 +15,32 @@
       if($scope.entry.title)
       {
         $scope.entry.tags=[];
+        
        angular.forEach($scope.tags,function(obj){
+        if(obj.id){
             $scope.entry.tags.push({id:obj.id,'name':obj.text});
+          }else{
+            var newTag={}
+            var globalTags=Tags.all();
+            if($stateParams.id){
+              if(globalTags[$stateParams.id].children){
+                    var length=globalTags[$stateParams.id].children.length;
+                    var lastID=globalTags[$stateParams.id].children[length-1].id;
+                    var newId=parseInt(lastID)+1;
+                    newTag={id:newId,name:obj.text,ancestry:$stateParams.id}
+              }else{
+                  newTag={id:$stateParams.id+1,name:obj.text,ancestry:$stateParams.id}
+              }
+              Tags.add(newTag);
+            }else{
+              var length=globalTags.length;
+              var lastID=globalTags[length-1].id;
+              var newId=parseInt(lastID)+1;
+              newTag={id:newId,name:obj.text}
+              Tags.add(newTag);
+            }
+            $scope.entry.tags.push(newTag);
+          }
        });
         $scope.entries.unshift($scope.entry);
         $scope.entry = {};
@@ -30,12 +54,41 @@
     }
     $scope.entryAdd = function(entry) {
       $scope.entry.tags=[];
+      $scope.entry.tagID="";
        angular.forEach($scope.tags,function(obj){
+          if(obj.id){
+            $scope.entry.tagID=obj.id;
             $scope.entry.tags.push({id:obj.id,'name':obj.text});
+          }else{
+            var newTag={}
+            var globalTags=Tags.all();
+            if($stateParams.id){
+              if(globalTags[$stateParams.id].children){
+                    var length=globalTags[$stateParams.id].children.length;
+                    var lastID=globalTags[$stateParams.id].children[length-1].id;
+                    var newId=parseInt(lastID)+1;
+                   $scope.entry.tagID=newId;
+                    newTag={id:newId,name:obj.text,ancestry:$stateParams.id}
+              }else{
+                  $scope.entry.tagID=$stateParams.id+1;
+                  newTag={id:$stateParams.id+1,name:obj.text,ancestry:$stateParams.id}
+              }
+              Tags.add(newTag);
+            }else{
+              var length=globalTags.length;
+              var lastID=globalTags[length-1].id;
+              var newId=parseInt(lastID)+1;
+              $scope.entry.tagID=newId;
+              newTag={id:newId,name:obj.text}
+              Tags.add(newTag);
+            }
+            $scope.entry.tags.push(newTag);
+          }
        });
       if(fileDropzone.files.length>0){
         fileDropzone.processQueue();
       };
+      console.log($scope.entry);
       $scope.entries.unshift($scope.entry);
       $scope.entry = {};
       $scope.tags=[];
@@ -116,7 +169,7 @@
       }
     }
     $scope.audioStop=function(index,src){
-      console.log($scope.audio)
+      
       if($scope.audio.src==src){
         document.querySelector("#playButton"+index).innerHTML="Play";
         $scope.audio.restart();
@@ -228,7 +281,6 @@
     angular.element(document.querySelector('#entries')).on('dragenter', dragEventHandler)
     angular.element(document.querySelector('#entries')).on('dragleave', dragLeaveHandler)
     angular.element(document.querySelector('.dropzone')).on('dragenter', function(event) {
-    
       angular.element(document.querySelectorAll('.dz-hide')).addClass('hidden')
       angular.element(document.querySelector('.dropzone')).addClass('dropzone-custom')
       angular.element(document.querySelector('.dropzone')).removeClass('hidden')
@@ -508,6 +560,9 @@
         $scope.modal.hide(); // hide mobile form on submit
         $scope.entry.date = new Date();
      }
+     $scope.focusInputText=function($event){
+          angular.element($event.target).find("input").focus();
+     };
 
   }
 })();

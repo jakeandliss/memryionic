@@ -5,19 +5,22 @@
 		<form role="form" novalidate name="tagForm">
 			<div class="row">
 				<div class="col-md-12">
-					<div class="form-group" ng-class="{'has-error': tagForm.name.$invalid }">
+					<div class="form-group" ng-class="{'has-error': tagForm.name.$invalid&&(tagForm.name.$dirty||tagForm.name.$touched) }">
 						<label for="name">Name:</label>
 						<input type="text" ng-model="newTag.name" required class="form-control" name="name"
 						id="name">
+						<span class="help-block" ng-show="tagForm.name.$invalid&&(tagForm.name.$dirty||tagForm.name.$touched)">
 						<span class="help-block" ng-show="tagForm.name.$error.required">Name is required</span>
+						</span>
 					</div>
 				</div>
 				<div class="col-md-12">
 					<div class="form-group">
 						<label for="parent">Parent:</label>
 
-						<select id="parent" class="form-control" ng-model="newTag.ancestry">
-							<option ng-repeat='tag in tags' value='{{tag.id}}'>{{tag.name}}</option>
+						<select id="parent" class="form-control" ng-options="tag.id as tag.name for tag in tags" ng-model="newTag.ancestry">	
+							<option value="">Make it Parent</option>
+							<!-- <option ng-repeat='tag in tags' value='{{tag.id}}'>{{tag.name}}</option> -->
 						</select>
 					</div>
 				</div>

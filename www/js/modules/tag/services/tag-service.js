@@ -14,33 +14,33 @@
           children: [
             {
               name: "test 0 child",
-              id: "10",
+              id: "1000",
               ancestry: "0",
               children: [
                 {
                   name: "test 0 child child",
-                  id: "18",
-                  ancestry: "10",
+                  id: "2000",
+                  ancestry: "1000",
                   children: [
                     {
                       name: "test 0 child child child",
-                      id: "19",
-                      ancestry: "18"
+                      id: "3000",
+                      ancestry: "2000"
                     },
                     {
                       name: "test 0 child child child",
-                      id: "20",
-                      ancestry: "18"
+                      id: "3001",
+                      ancestry: "2000"
                     },
                     {
                       name: "test 0 child child child",
-                      id: "21",
-                      ancestry: "18"
+                      id: "3002",
+                      ancestry: "2000"
                     },
                     {
                       name: "test 0 child child child",
-                      id: "22",
-                      ancestry: "18"
+                      id: "3003",
+                      ancestry: "2000"
                     }
                   ]
                 }
@@ -67,7 +67,7 @@
           children: [
             {
               name: "test 2 child",
-              id: "12",
+              id: "21",
               ancestry: "2",
             }
           ]
@@ -79,7 +79,7 @@
           children: [
             {
               name: "test 3 child",
-              id: "13",
+              id: "31",
               ancestry: "3",
             }
           ]
@@ -91,7 +91,7 @@
           children: [
             {
               name: "test 4 child",
-              id: "14",
+              id: "41",
               ancestry: "4",
             }
           ]
@@ -103,7 +103,7 @@
           children: [
             {
               name: "test 5 child",
-              id: "15",
+              id: "51",
               ancestry: "5",
             }
           ]
@@ -115,7 +115,7 @@
           children: [
             {
               name: "test 6 child",
-              id: "16",
+              id: "61",
               ancestry: "6",
             }
           ]
@@ -127,7 +127,7 @@
           children: [
             {
               name: "test 7 child",
-              id: "17",
+              id: "71",
               ancestry: "7",
             }
           ]
@@ -139,7 +139,7 @@
           children: [
             {
               name: "test 8 child",
-              id: "18",
+              id: "81",
               ancestry: "8",
             }
           ]
@@ -151,7 +151,7 @@
           children: [
             {
               name: "test 9 child",
-              id: "19",
+              id: "91",
               ancestry: "9"
             }
           ]
@@ -172,6 +172,19 @@
             }
           }
           return null;
+        },
+        add:function(tag){
+          if(tag.ancestry){
+            if(tags[tag.ancestry].children){
+              tags[tag.ancestry].children.push(tag);
+            }else{
+              tags[tag.ancestry].children=[];
+              tags[tag.ancestry].children.push(tag);
+            }
+          }else{
+            tags.push(tag);
+          }
+          
         }
       };
     }

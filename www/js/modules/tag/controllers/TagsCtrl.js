@@ -61,7 +61,10 @@
     $scope.filterTags();
      $scope.loadTags=function(query){
       var inputtags=[]
-      angular.forEach($scope.filteredTags,function(obj){
+      var filterForInputTags=$scope.filteredTags.filter(function(elem){
+        return elem.name.contains(query);
+      })
+      angular.forEach(filterForInputTags,function(obj){
         inputtags.push({text:obj.name,id:obj.id});
       })
       return inputtags;
@@ -176,8 +179,28 @@ $scope.saveTag = function(){
       });
     };
     $scope.saveNewTag=function(){
-        console.log($scope.newTag);
+      if($scope.newTag.ancestry){
+        var filterForNewTags=$scope.tags.filter(function(elem){
+          return elem.id==$scope.newTag.ancestry;
+        });
+        if(filterForNewTags[0].children){
+          var length=filterForNewTags[0].children.length;
+          var lastID=filterForNewTags[0].children[length-1].id;
+          $scope.newTag.id=lastID+1;
+        }else{
+          filterForNewTags[0].children=[];
+          $scope.newTag.id=$scope.newTag.ancestry+1;
+          
+        }
+        filterForNewTags[0].children.push($scope.newTag);
+      }else{
+          var length=$scope.tags.length;
+          var lastID=$scope.tags[length-1].id;
+          $scope.newTag.id=parseInt(lastID)+1;
+          $scope.tags.push($scope.newTag);
+        }
         $scope.modalInstance.dismiss('cancel');
+        $scope.newTag={};
     };
   };
 })();
