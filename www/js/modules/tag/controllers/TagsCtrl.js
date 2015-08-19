@@ -62,7 +62,7 @@
      $scope.loadTags=function(query){
       var inputtags=[]
       var filterForInputTags=$scope.filteredTags.filter(function(elem){
-        return (elem.name.indexOf(query) > -1);
+        return elem.name.indexOf(query) > -1;
       })
       angular.forEach(filterForInputTags,function(obj){
         inputtags.push({text:obj.name,id:obj.id});
@@ -171,7 +171,7 @@ $scope.saveTag = function(){
       if($stateParams.id){
         $scope.newTag.ancestry=$stateParams.id;
       }
-     
+      console.log($scope.newTag.ancestry);
       $scope.modalInstance=$modal.open({
         templateUrl:'js/modules/tag/views/desktop/new-tag.html',
         size:'sm',
@@ -179,6 +179,7 @@ $scope.saveTag = function(){
       });
     };
     $scope.saveNewTag=function(){
+      console.log($scope.newTag);
       $scope.newTag.children=[];
       if($scope.newTag.ancestry){
         var filterForNewTags=$scope.tags.filter(function(elem){
@@ -186,21 +187,26 @@ $scope.saveTag = function(){
         });
         if(filterForNewTags[0].children){
           var length=filterForNewTags[0].children.length;
-          var lastID=filterForNewTags[0].children[length-1].id;
-          $scope.newTag.id=lastID+1;
+          if(length==0){
+              $scope.newTag.id=$stateParams.id+1;
+          }else{
+              var lastID=filterForNewTags[0].children[length-1].id;
+              $scope.newTag.id=lastID+1;
+          }
         }else{
           filterForNewTags[0].children=[];
           $scope.newTag.id=$scope.newTag.ancestry+1;
           
         }
-        filterForNewTags[0].children.push($scope.newTag);
+        // filterForNewTags[0].children.push($scope.newTag);
       }else{
-        $scope.newTag.ancestry="";
           var length=$scope.tags.length;
           var lastID=$scope.tags[length-1].id;
           $scope.newTag.id=parseInt(lastID)+1;
-          $scope.tags.push($scope.newTag);
+          // $scope.tags.push($scope.newTag);
         }
+        console.log($scope.newTag);
+        Tags.add($scope.newTag);
         $scope.modalInstance.dismiss('cancel');
         $scope.newTag={};
     };

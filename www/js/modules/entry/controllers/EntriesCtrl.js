@@ -16,8 +16,9 @@
       {
         $scope.entry.tags=[];
         
-       angular.forEach($scope.tags,function(obj){
-        if(obj.id){
+        angular.forEach($scope.tags,function(obj){
+          if(obj.id){
+            $scope.entry.tagID=obj.id;
             $scope.entry.tags.push({id:obj.id,'name':obj.text});
           }else{
             var newTag={}
@@ -25,18 +26,28 @@
             if($stateParams.id){
               if(globalTags[$stateParams.id].children){
                     var length=globalTags[$stateParams.id].children.length;
-                    var lastID=globalTags[$stateParams.id].children[length-1].id;
-                    var newId=parseInt(lastID)+1;
-                    newTag={id:newId,name:obj.text,ancestry:$stateParams.id}
+                    if(length==0){
+                      var newId=$stateParams.id+1;
+                    }else{
+                      var lastID=globalTags[$stateParams.id].children[length-1].id;
+                      var newId=parseInt(lastID)+1;
+                    }
+                    
+                    //$scope.entry.tagID=newId;
+                    $scope.entry.tagID=$stateParams.id;
+                    newTag={id:newId,name:obj.text,ancestry:$stateParams.id,children:[]}
               }else{
-                  newTag={id:$stateParams.id+1,name:obj.text,ancestry:$stateParams.id}
+                  //$scope.entry.tagID=$stateParams.id+1;
+                  $scope.entry.tagID=$stateParams.id;
+                  newTag={id:$stateParams.id+1,name:obj.text,ancestry:$stateParams.id,children:[]}
               }
               Tags.add(newTag);
             }else{
               var length=globalTags.length;
               var lastID=globalTags[length-1].id;
               var newId=parseInt(lastID)+1;
-              newTag={id:newId,name:obj.text}
+              $scope.entry.tagID=newId;
+              newTag={id:newId,name:obj.text,ancestry:"",children:[]}
               Tags.add(newTag);
             }
             $scope.entry.tags.push(newTag);
