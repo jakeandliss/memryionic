@@ -62,7 +62,7 @@
      $scope.loadTags=function(query){
       var inputtags=[]
       var filterForInputTags=$scope.filteredTags.filter(function(elem){
-        return elem.name.contains(query);
+        return (elem.name.indexOf(query) > -1);
       })
       angular.forEach(filterForInputTags,function(obj){
         inputtags.push({text:obj.name,id:obj.id});
@@ -179,6 +179,7 @@ $scope.saveTag = function(){
       });
     };
     $scope.saveNewTag=function(){
+      $scope.newTag.children=[];
       if($scope.newTag.ancestry){
         var filterForNewTags=$scope.tags.filter(function(elem){
           return elem.id==$scope.newTag.ancestry;
@@ -194,6 +195,7 @@ $scope.saveTag = function(){
         }
         filterForNewTags[0].children.push($scope.newTag);
       }else{
+        $scope.newTag.ancestry="";
           var length=$scope.tags.length;
           var lastID=$scope.tags[length-1].id;
           $scope.newTag.id=parseInt(lastID)+1;

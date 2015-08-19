@@ -19,8 +19,10 @@
         <h2>{{entry.title}}</h2>
         <p>{{entry.date | date: "longDate"}}</p>
       </div>
-
-      <section  ng-controller="PanelCtrl as panel">
+      <div class="item item-text-wrap gray">
+        <p read-more ng-if="entry.content" ng-model="entry.content" words="true" length="50"></p>
+      </div>
+      <section  ng-controller="PanelCtrl as panel" ng-if="entry.resources">
         <div class="item tabs tabs-secondary tabs-icon-left">
           <a class="tab-item" href="#" ng-click="panel.selectTab(1)" ng-class="{ active:panel.isSelected(1) }">
             <i class="icon ion-ios-glasses text-danger"></i>
@@ -39,10 +41,10 @@
 
         <!-- Video/Images content -->
         <div class="item item-body panel" ng-show="panel.isSelected(1)">
-          <p read-more ng-if="entry.content" ng-model="entry.content" words="true" length="50"></p>
+          
 
           <ion-slide-box does-continue="true" >
-            <ion-slide ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'image' || resource.attachment_content_type == 'video'">
+            <ion-slide ng-repeat="resource in entry.resources | filter: selectVisuals" ng-if="resource.attachment_content_type == 'image' || resource.attachment_content_type == 'video'">
               <img ng-src="{{resource.attachment}}" ng-click='showModal($index,entry.resources)' class="full-image" ng-if="resource.attachment_content_type == 'image'">
               <div ng-if="resource.attachment_content_type == 'video'" class="video-thumb" ng-click='showModal($index,entry.resources)'>
                 <img ng-src="{{resource.attachment_thumbnail}}" class="video full-image">
@@ -50,9 +52,7 @@
               </div>
             </ion-slide>
           </ion-slide-box>
-          <p class="labels" ng-if="entry.tags.length">
-            Labels: <a href="#" class="subdued" ng-repeat="tag in entry.tags">{{tag.name}}{{$last ? '' : ', '}}</a>
-          </p>
+         
         </div>
 
         <!-- Audio content -->
@@ -68,9 +68,9 @@
                 <h4>{{resource.attachment_file_name}}</h4>
               </div>
             </div>
-            <p class="item-body">
+           <!--  <p class="item-body">
               Labels: <a href="#" class="subdued" ng-repeat="tag in entry.tags">{{tag.name}}{{$last ? '' : ','}}</a>
-            </p>
+            </p> -->
           </ion-audio-track>
 
         <!-- Files content -->
@@ -79,12 +79,17 @@
             <i class="icon ion-document-text"></i>
             <a href="{{resource.attachment}}">{{resource.attachment_file_name}}</a>
           </p>
-          <p class="labels" ng-if="entry.tags.length">
+         <!--  <p class="labels" ng-if="entry.tags.length">
             Labels: <a href="#" class="subdued" ng-repeat="tag in entry.tags">{{tag.name}}{{$last ? '' : ', '}}</a>
-          </p>
+          </p> -->
         </div>
       </section>
-
+      <!-- tags Section -->
+      <div class="item item-text-wrap gray">
+         <p class="labels" ng-if="entry.tags.length">
+            Labels: <a href="#" class="subdued" ng-repeat="tag in entry.tags">{{tag.name}}{{$last ? '' : ', '}}</a>
+          </p>
+      </div>
       <!-- Share Entry -->
       <div class="item tabs tabs-secondary tabs-icon-left gray">
         <a class="tab-item" href="#" ng-click="shareModal.show()">

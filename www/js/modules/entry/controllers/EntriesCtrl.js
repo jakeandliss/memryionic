@@ -52,6 +52,10 @@
         
       }
     }
+     $scope.selectVisuals = function(resource){
+       return resource.attachment_content_type == 'video' || resource.attachment_content_type == 'image';
+
+      };
     $scope.entryAdd = function(entry) {
       $scope.entry.tags=[];
       $scope.entry.tagID="";
@@ -65,13 +69,21 @@
             if($stateParams.id){
               if(globalTags[$stateParams.id].children){
                     var length=globalTags[$stateParams.id].children.length;
-                    var lastID=globalTags[$stateParams.id].children[length-1].id;
-                    var newId=parseInt(lastID)+1;
-                   $scope.entry.tagID=newId;
-                    newTag={id:newId,name:obj.text,ancestry:$stateParams.id}
+                    console.log(length);
+                    if(length==0){
+                      var newId=$stateParams.id+1;
+                    }else{
+                      var lastID=globalTags[$stateParams.id].children[length-1].id;
+                      var newId=parseInt(lastID)+1;
+                    }
+                    
+                    //$scope.entry.tagID=newId;
+                    $scope.entry.tagID=$stateParams.id;
+                    newTag={id:newId,name:obj.text,ancestry:$stateParams.id,children:[]}
               }else{
-                  $scope.entry.tagID=$stateParams.id+1;
-                  newTag={id:$stateParams.id+1,name:obj.text,ancestry:$stateParams.id}
+                  //$scope.entry.tagID=$stateParams.id+1;
+                  $scope.entry.tagID=$stateParams.id;
+                  newTag={id:$stateParams.id+1,name:obj.text,ancestry:$stateParams.id,children:[]}
               }
               Tags.add(newTag);
             }else{
@@ -79,7 +91,7 @@
               var lastID=globalTags[length-1].id;
               var newId=parseInt(lastID)+1;
               $scope.entry.tagID=newId;
-              newTag={id:newId,name:obj.text}
+              newTag={id:newId,name:obj.text,ancestry:"",children:[]}
               Tags.add(newTag);
             }
             $scope.entry.tags.push(newTag);
@@ -88,7 +100,6 @@
       if(fileDropzone.files.length>0){
         fileDropzone.processQueue();
       };
-      console.log($scope.entry);
       $scope.entries.unshift($scope.entry);
       $scope.entry = {};
       $scope.tags=[];
@@ -281,6 +292,7 @@
     angular.element(document.querySelector('#entries')).on('dragenter', dragEventHandler)
     angular.element(document.querySelector('#entries')).on('dragleave', dragLeaveHandler)
     angular.element(document.querySelector('.dropzone')).on('dragenter', function(event) {
+    //  counter++;
       angular.element(document.querySelectorAll('.dz-hide')).addClass('hidden')
       angular.element(document.querySelector('.dropzone')).addClass('dropzone-custom')
       angular.element(document.querySelector('.dropzone')).removeClass('hidden')
@@ -292,7 +304,6 @@
       angular.element(document.querySelector('.dropzone')).removeClass('dropzone-custom')
       angular.element(document.querySelector('.dz-drag')).addClass('hidden').parent().parent().removeClass('col-sm-12').addClass('col-sm-8')
       angular.element(document.querySelector('.dz-message')).removeClass('hidden')
-      
     })
     angular.element.bind({
       dragenter: function(event) {
@@ -320,13 +331,13 @@
 
     function dragLeaveHandler() {
       counter--;
-      if (counter == 0) {
+       if (counter == 0) {
         if (!insideDropzone) {
           // angular.element(document.querySelectorAll('.dz-hide')).removeClass('hidden')
           // angular.element(document.querySelector('.dropzone')).removeClass('dropzone-custom')
           // angular.element(document.querySelector('.dz-drag')).addClass('hidden').parent().parent().removeClass('col-sm-12').addClass('col-sm-8')
           // angular.element(document.querySelector('.dz-message')).removeClass('hidden')
-        }
+         }
       }
 
     }

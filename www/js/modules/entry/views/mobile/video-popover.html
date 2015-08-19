@@ -1,9 +1,9 @@
 <div class="modal transparent fullscreen-player" ng-click="closeModal()">
-   <ion-slide-box does-continue="true" >
+   <ion-slide-box does-continue="true" active-slide="currentIndex">
             <ion-slide ng-repeat="resource in mobileImageSlide" ng-if="resource.attachment_content_type == 'image' || resource.attachment_content_type == 'video'">
               <img ng-src="{{resource.attachment}}" class="fullscreen-player" ng-if="resource.attachment_content_type == 'image'">
               <div ng-if="resource.attachment_content_type == 'video'" class="fullscreen-player">
-              	<video ng-src="{{resource.attachment}}" class="centerme" controls="controls" autoplay></video>
+              	<video ng-src="{{resource.attachment}}" class="centerme" controls="controls" ></video>
                <!--  <img ng-src="{{resource.attachment_thumbnail}}" class="video full-image">
                 <i class="icon ion-play"></i> -->
               </div>

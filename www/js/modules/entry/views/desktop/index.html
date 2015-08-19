@@ -135,7 +135,7 @@
             <md-tab label="Visual">
               <md-content class="md-padding">
                 <slick settings="slickConfig" class="slick-uninitialized">
-                  <div class="slick" ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'image' || resource.attachment_content_type == 'video'">
+                  <div class="slick" ng-repeat="resource in entry.resources | filter: selectVisuals" ng-if="resource.attachment_content_type == 'image' || resource.attachment_content_type == 'video'">
                     <img ng-src="{{resource.attachment}}" class="md-card-image" ng-if="resource.attachment_content_type == 'image'">
                     <md-icon class="material-icons lightbox-button" ng-click='openLightBoxModel($index,entry.resources)' ng-if="resource.attachment_content_type == 'image'">open_in_new</md-icon>
                     <div ng-click='openLightBoxModel($index,entry.resources)' ng-if="resource.attachment_content_type == 'video'" class="video-thumb">
