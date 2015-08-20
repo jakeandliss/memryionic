@@ -14,7 +14,8 @@
     "angular-timeago": "0.2.0",
     "angular-audio": "1.7.0",
     "ngCordova": "latest",
-    "flat-ui-sass": "latest"
+    "flat-ui-sass": "latest",
+	" ng-tags-input":"latest"
   },
   "dependencies": {
     "ng-device-detector": "~1.1.7"
