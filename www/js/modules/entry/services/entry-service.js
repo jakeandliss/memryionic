@@ -134,6 +134,11 @@
                 });
                 return video_sources;
             },
+            removeResource:function(entry,resource){
+              console.log(entries[entries.indexOf(entry)].resources);
+              var resources =entries[entries.indexOf(entry)].resources;
+              resources.splice(resources.indexOf(resource),1);
+            },
             selectedEntry: {},
             modalInstance: {}
         };

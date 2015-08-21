@@ -25,13 +25,9 @@
         <label class="item item-input">
           <textarea rows="7" placeholder="What would you like to remember?" ng-model="entry.content"></textarea>
         </label>
-         <tags-input name="tagsinput" placeholder="Add labels" class="" ng-model="tags">
-           <auto-complete ng-controller="TagsCtrl as tags" source="loadTags($query)"></auto-complete>
+         <tags-input name="tagsinput" placeholder="Add labels" class="" ng-model="tags"replace-spaces-with-dashes="false">
+           <auto-complete ng-controller="TagsCtrl as tags" source="loadTags($query)" load-on-down-arrow="true" min-length="1"></auto-complete>
       </tags-input>
-       <!--  <label class="item item-input">
-          <i class="icon ion-ios-pricetag placeholder-icon"></i>
-          <input type="text" placeholder="Labels" ng-model="entry.tags">
-        </label> -->
         <label class="item item-input">
           <input type="date" placeholder="date" name='date' ng-model="entry.date">
         </label>

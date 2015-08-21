@@ -107,8 +107,8 @@
             }
             $scope.entry.tags.push(newTag);
           }
-       });
-      if(fileDropzone.files.length>0){
+       }); 
+      if(fileDropzone.files){
         fileDropzone.processQueue();
       };
       $scope.entries.unshift($scope.entry);
@@ -116,7 +116,6 @@
       $scope.tags=[];
       $scope.entryForm.$setPristine();
       $scope.entry.date = new Date();
-
     };
 
     // Edit Entry
@@ -189,6 +188,10 @@
         $scope.audio.play();
         document.querySelector("#playButton"+index).innerHTML="Pause";
       }
+    }
+    $scope.removeFile=function(resource,entry){
+      //entry.resources.slice(entry.resources.indexOf(resource),1);
+      Entries.removeResource(entry,resource);
     }
     $scope.audioStop=function(index,src){
       
@@ -270,24 +273,28 @@
     }
     $scope.openModal = function () {
       $mdBottomSheet.cancel();
-      $scope.selectedEntry=Entries.selectedEntry;
-      $scope.selectedTags=$scope.selectedEntry.tags;
+      
       var modalInstance = $modal.open({
         animation: $scope.animationsEnabled,
         templateUrl: '/js/modules/entry/views/desktop/edit.html',
-        //controller: 'EntriesCtrl',
+        controller: 'EntriesCtrl',
         size: 'lg',
         animation: true
       });
       Entries.modalInstance=modalInstance;
     };
 
-    $scope.closeModal = function () {
+    $scope.closeEditModal = function () {
       Entries.modalInstance.dismiss('cancel');
     };
 
       $scope.selectedEntry=angular.copy(Entries.selectedEntry);
-
+      //$scope.selectedTags=$scope.selectedEntry.tags;
+      $scope.selectedTags=[];
+      var selectTags=$scope.selectedEntry.tags;
+      angular.forEach(selectTags,function(obj){
+        $scope.selectedTags.push({id:obj.id,text:obj.name});
+      })
     $scope.showBottomSheet = function(entry) {
       Entries.selectedEntry=entry;
       $scope.alert = '';
@@ -420,6 +427,7 @@
           angular.element(document.querySelectorAll('.dz-hide')).removeClass('hidden')
         },
         'uploadprogress': function(file, progress) {
+          console.log(file);
           angular.element(document.querySelector('.dz-progress')).addClass('progress-bar')
           if (100 == progress) {
             angular.element(document.querySelector('.dz-progress')).remove();
