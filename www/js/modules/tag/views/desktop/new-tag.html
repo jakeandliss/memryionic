@@ -1,5 +1,5 @@
 <div class="modal-header">
-	<h4 class="modal-title">New Tag</h3>
+	<h4 class="modal-title">New Label</h3>
 	</div>
 	<div class="modal-body">
 		<form role="form" novalidate name="tagForm">
@@ -18,8 +18,8 @@
 					<div class="form-group">
 						<label for="parent">Parent:</label>
 
-						<select id="parent" class="form-control" ng-options="tag.id as tag.name for tag in tags" ng-model="newTag.ancestry">	
-							<option value="">Make it Parent</option>
+						<select id="parent" class="form-control" ng-options="tag.id as tag.name for tag in tags" ng-model="newTag.ancestry">
+							<option value="">No Parent</option>
 							<!-- <option ng-repeat='tag in tags' value='{{tag.id}}'>{{tag.name}}</option> -->
 						</select>
 					</div>
