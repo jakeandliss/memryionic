@@ -24,15 +24,15 @@
       </div>
       <section  ng-controller="PanelCtrl as panel" ng-if="entry.resources">
         <div class="item tabs tabs-secondary tabs-icon-left">
-          <a class="tab-item" href="#" ng-click="panel.selectTab(1)" ng-class="{ active:panel.isSelected(1) }">
+          <a class="tab-item" href="#" ng-click="panel.selectTab(1)" ng-if="CheckVisual(entry.resources)" ng-class="{ active:panel.isSelected(1) }">
             <i class="icon ion-ios-glasses text-danger"></i>
             Visual
           </a>
-          <a class="tab-item" href="#" ng-click="panel.selectTab(2)" ng-class="{ active:panel.isSelected(2) }">
+          <a class="tab-item" href="#" ng-click="panel.selectTab(2)" ng-if="CheckAudio(entry.resources)" ng-class="{ active:panel.isSelected(2) }">
             <i class="icon ion-mic-c text-success"></i>
             Audio
           </a>
-          <a class="tab-item" href="#" ng-click="panel.selectTab(3)" ng-class="{ active: panel.isSelected(3) }">
+          <a class="tab-item" href="#" ng-click="panel.selectTab(3)" ng-if="CheckFiles(entry.resources)" ng-class="{ active: panel.isSelected(3) }">
             <i class="icon ion-document-text text-info"></i>
             Files
           </a>
@@ -40,7 +40,7 @@
 
 
         <!-- Video/Images content -->
-        <div class="item item-body panel" ng-show="panel.isSelected(1)">
+        <div class="item item-body panel" ng-if="CheckVisual(entry.resources)" ng-show="panel.isSelected(1)">
           
 
           <ion-slide-box does-continue="true" >
@@ -56,7 +56,7 @@
         </div>
 
         <!-- Audio content -->
-          <ion-audio-track track="track" ng-show="panel.isSelected(2)">
+          <ion-audio-track track="track" ng-if="CheckAudio(entry.resources)"  ng-show="panel.isSelected(2)">
             <div class="list">
             <ion-audio-progress-bar display-time></ion-audio-progress-bar>
               <div class="item item-thumbnail-left" ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'audio'">
@@ -74,7 +74,7 @@
           </ion-audio-track>
 
         <!-- Files content -->
-        <div class="item item-body panel" ng-show="panel.isSelected(3)">
+        <div class="item item-body panel" ng-if="CheckFiles(entry.resources)" ng-show="panel.isSelected(3)">
           <p ng-repeat="resource in entry.resources"  ng-if="resource.attachment_content_type == 'pdf'">
             <i class="icon ion-document-text"></i>
             <a href="{{resource.attachment}}">{{resource.attachment_file_name}}</a>

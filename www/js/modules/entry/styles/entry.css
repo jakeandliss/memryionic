@@ -464,3 +464,7 @@ Mobile CSS
   margin-left: 20px;
   color: red;
 }
+.edit-image{
+  height: 100px;
+  width:100px;
+}

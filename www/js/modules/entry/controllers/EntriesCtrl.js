@@ -17,7 +17,7 @@
         $scope.entry.tags=[];
         
         angular.forEach($scope.tags,function(obj){
-          if(obj.id){
+          if(obj.id>=0){
             $scope.entry.tagID=obj.id;
             $scope.entry.tags.push({id:obj.id,'name':obj.text});
           }else{
@@ -53,7 +53,8 @@
             $scope.entry.tags.push(newTag);
           }
        });
-        $scope.entries.unshift($scope.entry);
+        // $scope.entries.unshift($scope.entry);
+        Entries.addEntry($scope.entry);
         $scope.entry = {};
         $scope.modal.hide(); // hide mobile form on submit
         $scope.entry.date = new Date();
@@ -71,7 +72,7 @@
       $scope.entry.tags=[];
       $scope.entry.tagID="";
        angular.forEach($scope.tags,function(obj){
-          if(obj.id){
+          if(obj.id>=0){
             $scope.entry.tagID=obj.id;
             $scope.entry.tags.push({id:obj.id,'name':obj.text});
           }else{
@@ -80,7 +81,6 @@
             if($stateParams.id){
               if(globalTags[$stateParams.id].children){
                     var length=globalTags[$stateParams.id].children.length;
-                    console.log(length);
                     if(length==0){
                       var newId=$stateParams.id+1;
                     }else{
@@ -111,7 +111,8 @@
       if(fileDropzone.files){
         fileDropzone.processQueue();
       };
-      $scope.entries.unshift($scope.entry);
+      //$scope.entries.unshift($scope.entry);
+      Entries.addEntry($scope.entry);
       $scope.entry = {};
       $scope.tags=[];
       $scope.entryForm.$setPristine();
@@ -143,9 +144,91 @@
 
     // Update Entry
     $scope.update = function(entry) {
-      Entries.update(entry);
+      $scope.selectedEntry.tags=[];
+      angular.forEach($scope.selectedTags,function(obj){
+          if(obj.id>=0){
+            $scope.entry.tagID=obj.id;
+            $scope.selectedEntry.tags.push({id:obj.id,'name':obj.text});
+          }else{
+            var newTag={}
+            var globalTags=Tags.all();
+            if($stateParams.id){
+              if(globalTags[$stateParams.id].children){
+                    var length=globalTags[$stateParams.id].children.length;
+                    if(length==0){
+                      var newId=$stateParams.id+1;
+                    }else{
+                      var lastID=globalTags[$stateParams.id].children[length-1].id;
+                      var newId=parseInt(lastID)+1;
+                    }
+                    
+                    //$scope.entry.tagID=newId;
+                    $scope.entry.tagID=$stateParams.id;
+                    newTag={id:newId,name:obj.text,ancestry:$stateParams.id,children:[]}
+              }else{
+                  //$scope.entry.tagID=$stateParams.id+1;
+                  $scope.entry.tagID=$stateParams.id;
+                  newTag={id:$stateParams.id+1,name:obj.text,ancestry:$stateParams.id,children:[]}
+              }
+              Tags.add(newTag);
+            }else{
+              var length=globalTags.length;
+              var lastID=globalTags[length-1].id;
+              var newId=parseInt(lastID)+1;
+              $scope.entry.tagID=newId;
+              newTag={id:newId,name:obj.text,ancestry:"",children:[]}
+              Tags.add(newTag);
+            }
+            $scope.selectedEntry.tags.push(newTag);
+          }
+       });
+      Entries.update($scope.selectedEntry);
+       Entries.modalInstance.dismiss('cancel');
     };
-
+    $scope.mobileUpdate=function(){
+      $scope.selectedEntry.tags=[];
+      angular.forEach($scope.selectedTags,function(obj){
+          if(obj.id>=0){
+            $scope.entry.tagID=obj.id;
+            $scope.selectedEntry.tags.push({id:obj.id,'name':obj.text});
+          }else{
+            var newTag={}
+            var globalTags=Tags.all();
+            if($stateParams.id){
+              if(globalTags[$stateParams.id].children){
+                    var length=globalTags[$stateParams.id].children.length;
+                    if(length==0){
+                      var newId=$stateParams.id+1;
+                    }else{
+                      var lastID=globalTags[$stateParams.id].children[length-1].id;
+                      var newId=parseInt(lastID)+1;
+                    }
+                    
+                    //$scope.entry.tagID=newId;
+                    $scope.entry.tagID=$stateParams.id;
+                    newTag={id:newId,name:obj.text,ancestry:$stateParams.id,children:[]}
+              }else{
+                  //$scope.entry.tagID=$stateParams.id+1;
+                  $scope.entry.tagID=$stateParams.id;
+                  newTag={id:$stateParams.id+1,name:obj.text,ancestry:$stateParams.id,children:[]}
+              }
+              Tags.add(newTag);
+            }else{
+              var length=globalTags.length;
+              var lastID=globalTags[length-1].id;
+              var newId=parseInt(lastID)+1;
+              $scope.entry.tagID=newId;
+              newTag={id:newId,name:obj.text,ancestry:"",children:[]}
+              Tags.add(newTag);
+            }
+            $scope.selectedEntry.tags.push(newTag);
+          }
+       });
+      Entries.update($scope.selectedEntry);
+      $scope.selectedEntry={};
+      $scope.selectedTags=[];
+      $scope.editModal.hide();
+    }
     // Remove Entry
     $scope.remove = function(entry) {
       if (confirm('Are you sure you want to delete this?')){
@@ -190,8 +273,33 @@
       }
     }
     $scope.removeFile=function(resource,entry){
-      //entry.resources.slice(entry.resources.indexOf(resource),1);
-      Entries.removeResource(entry,resource);
+
+       var modalInstance = $modal.open({
+        animation: $scope.animationsEnabled,
+        templateUrl: '/js/modules/entry/views/desktop/delete-confirm.html',
+        controller: 'EntriesCtrl',
+        size: 'sm',
+        animation: true
+      });
+       Entries.resource=resource;
+       Entries.selectedEntry=entry;
+      Entries.modalInstance=modalInstance;
+      //   if(confirm('Are you sure you want to delete this?')){
+      //       Entries.removeResource(entry,resource);
+      // }
+    }
+    $scope.removefromSelectedFile=function(resource){
+        var resources=$scope.selectedEntry.resources
+        var index=resources.map(function(e){return e.attachment}).indexOf(resource.attachment);
+        resources.splice(index,1);
+        $scope.selectedEntry.resources=resources;
+    }
+    $scope.deleteResource=function(){
+      Entries.removeResource(Entries.selectedEntry,Entries.resource);
+      Entries.modalInstance.dismiss('cancel');
+    }
+    $scope.candelDeleteResource=function(){
+      Entries.modalInstance.dismiss('cancel');
     }
     $scope.audioStop=function(index,src){
       
@@ -268,8 +376,13 @@
     $scope.openEdit=function(){
       $scope.editModal.show();
       $scope.popover.hide();
-      $scope.selectedTags=angular.copy(Entries.selectedEntry);
-        $scope.selectedTags.date=new Date(Entries.selectedEntry.date);
+      $scope.selectedEntry=angular.copy(Entries.selectedEntry);
+      $scope.selectedEntry.date=new Date(Entries.selectedEntry.date);
+      $scope.selectedTags=[];
+      var selectTags=$scope.selectedEntry.tags;
+      angular.forEach(selectTags,function(obj){
+        $scope.selectedTags.push({id:obj.id,text:obj.name});
+      })
     }
     $scope.openModal = function () {
       $mdBottomSheet.cancel();
@@ -293,7 +406,7 @@
       $scope.selectedTags=[];
       var selectTags=$scope.selectedEntry.tags;
       angular.forEach(selectTags,function(obj){
-        $scope.selectedTags.push({id:obj.id,text:obj.name});
+        $scope.selectedTags.push({text:obj.name,id:obj.id});
       })
     $scope.showBottomSheet = function(entry) {
       Entries.selectedEntry=entry;
@@ -427,7 +540,6 @@
           angular.element(document.querySelectorAll('.dz-hide')).removeClass('hidden')
         },
         'uploadprogress': function(file, progress) {
-          console.log(file);
           angular.element(document.querySelector('.dz-progress')).addClass('progress-bar')
           if (100 == progress) {
             angular.element(document.querySelector('.dz-progress')).remove();
@@ -593,6 +705,38 @@
      $scope.focusInputText=function($event){
           angular.element($event.target).find("input").focus();
      };
-
+     $scope.CheckVisual=function(resource){
+        var visualResult=resource.filter(function(elem){
+            return elem.attachment_content_type=="image"||elem.attachment_content_type=="video";
+            })
+        if(visualResult.length){
+          return true
+        }
+        else{
+          return false
+        }
+     }
+     $scope.CheckAudio=function(resource){
+        var visualResult=resource.filter(function(elem){
+            return elem.attachment_content_type=="audio"
+            })
+        if(visualResult.length){
+          return true
+        }
+        else{
+          return false
+        }
+     }
+     $scope.CheckFiles=function(resource){
+        var visualResult=resource.filter(function(elem){
+            return elem.attachment_content_type=="pdf";
+            })
+        if(visualResult.length){
+          return true
+        }
+        else{
+          return false
+        }
+     }
   }
 })();

@@ -132,7 +132,7 @@
           </md-card-content>
 
           <md-tabs md-dynamic-height md-border-bottom md-center-tabs md-stretch-tabs="always" ng-if="entry.resources">
-            <md-tab label="Visual">
+            <md-tab label="Visual" ng-if="CheckVisual(entry.resources)">
               <md-content class="md-padding">
                 <slick settings="slickConfig" class="slick-uninitialized">
                   <div class="slick" ng-repeat="resource in entry.resources | filter: selectVisuals" ng-if="resource.attachment_content_type == 'image' || resource.attachment_content_type == 'video'">
@@ -147,7 +147,7 @@
 
               </md-content>
             </md-tab>
-            <md-tab label="Audio">
+            <md-tab label="Audio" ng-if="CheckAudio(entry.resources)">
               <md-content class="md-padding audio">
                   <div class="input-group margin">
                     <label class="input-group-addon">Time</label>
@@ -164,21 +164,21 @@
                          <button ng-click='audioStop($index,resource.attachment)' class="btn btn-danger">Stop</button>
                          <button ng-click='audio.muting = !audio.muting' class="btn btn-default">Mute</button>
                          {{ resource.attachment_file_name}}
-                         <a ng-click="removeFile(resource,entry)" class="pull-right">Remove</a>
+                         <a ng-click="removeFile(resource,entry)" class="pull-right pointer">Remove</a>
                       </div>
                     </md-list-item>
                 </md-list>
               </md-content>
             </md-tab>
 
-            <md-tab label="Files">
+            <md-tab label="Files" ng-if="CheckFiles(entry.resources)">
               <md-content class="md-padding files">
                 <md-list>
                   <md-list-item class="md-2-line" ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'pdf'">
                     <md-icon class="material-icons">picture_as_pdf</md-icon>
                     <div class="md-list-item-text">
-                      <h3><a href="{{ resource.attachment }}" target="_blank">{{ resource.attachment_file_name }}</a></h3>
-                      <a ng-click="removeFile(resource,entry)" class="pull-right">Remove</a>
+                      <h3><a href="{{ resource.attachment }}" target="_blank">{{ resource.attachment_file_name }}</a>
+                      <a ng-click="removeFile(resource,entry)" class="pull-right pointer">Remove</a></h3>
                       <p> </p>
                     </div>
                   </md-list-item>

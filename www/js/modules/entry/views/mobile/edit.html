@@ -16,18 +16,72 @@
       <div class="list form">
         <label class="item item-input item-icon-right">
           <a href="#"><i class="icon ion-android-attach assertive"></i></a>
-          <input type="text" placeholder="Title this entry" ng-model="selectedTags.title">
+          <input type="text" placeholder="Title this entry" ng-model="selectedEntry.title">
         </label>
         <label class="item item-input">
-          <textarea rows="7" placeholder="What would you like to remember?" ng-model="selectedTags.content"></textarea>
+          <textarea rows="7" placeholder="What would you like to remember?" ng-model="selectedEntry.content"></textarea>
         </label>
-           <!--  <label class="item item-input">
-              <i class="icon ion-ios-pricetag placeholder-icon"></i>
-              <input type="text" placeholder="Labels" ng-model="entry.tags">
-            </label> -->
             <label class="item item-input">
-              <input type="date" placeholder="date" ng-model="selectedTags.date">
+              <input type="date" placeholder="date" ng-model="selectedEntry.date">
             </label>
+        <tags-input name="tagsinput" placeholder="Add labels" class="" ng-model="selectedTags" replace-spaces-with-dashes="false">
+           <auto-complete ng-controller="TagsCtrl as tags" source="loadTags($query)" load-on-down-arrow="true" min-length="1"></auto-complete>
+      </tags-input>
+                 <section  ng-controller="PanelCtrl as panel" ng-if="selectedEntry.resources">
+        <div class="item tabs tabs-secondary tabs-icon-left">
+          <a class="tab-item" href="#" ng-click="panel.selectTab(1)" ng-class="{ active:panel.isSelected(1) }">
+            <i class="icon ion-ios-glasses text-danger"></i>
+            Visual
+          </a>
+          <a class="tab-item" href="#" ng-click="panel.selectTab(2)" ng-class="{ active:panel.isSelected(2) }">
+            <i class="icon ion-mic-c text-success"></i>
+            Audio
+          </a>
+          <a class="tab-item" href="#" ng-click="panel.selectTab(3)" ng-class="{ active: panel.isSelected(3) }">
+            <i class="icon ion-document-text text-info"></i>
+            Files
+          </a>
+        </div>
+
+
+        <!-- Video/Images content -->
+        <div class="item item-body panel" ng-show="panel.isSelected(1)">
+         <div class="pull-left" ng-repeat="resource in selectedEntry.resources | filter: selectVisuals" ng-if="resource.attachment_content_type == 'image' || resource.attachment_content_type == 'video'">
+            <div ng-mouseover="onHover=true" ng-mouseout="onHover=false" ng-if="resource.attachment_content_type == 'image'">  
+              <img ng-src="{{resource.attachment}}" class="edit-image" >
+              <div>
+                <a ng-click="removefromSelectedFile(resource)" >Delete</a>
+              </div>
+            </div>
+              <div ng-if="resource.attachment_content_type == 'video'" class="">
+                <img ng-src="{{resource.attachment_thumbnail}}" class="edit-image">
+                <div>
+                  <a ng-click="removefromSelectedFile(resource)" >Delete</a>
+                  <i class="icon ion-remove"></i>
+                </div>
+              </div>
+            </div>
+        </div>
+        <!-- Audio content -->
+          <div class="item item-body panel" ng-show="panel.isSelected(2)">
+            <div class="list">
+              <div class="item item-thumbnail-left" ng-repeat="resource in selectedEntry.resources" ng-if="resource.attachment_content_type == 'audio'">
+                <img src="http://komatsushima.main.jp/wp-content/uploads/2013/12/podcast.png">
+                <h4>{{resource.attachment_file_name}}</h4>
+                <a class="pull-right" ng-click="removefromSelectedFile(resource)" >Delete</a>
+              </div>
+            </div>
+          </div>
+
+        <!-- Files content -->
+        <div class="item item-body panel" ng-show="panel.isSelected(3)">
+          <p ng-repeat="resource in selectedEntry.resources"  ng-if="resource.attachment_content_type == 'pdf'">
+            <i class="icon ion-document-text"></i>
+            {{resource.attachment_file_name}}
+            <a class="pull-right" ng-click="removefromSelectedFile(resource)" >Delete</a>
+          </p>
+        </div>
+      </section>
             <div class="dropzone"></div>
       </div>
 
