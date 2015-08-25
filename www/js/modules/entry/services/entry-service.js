@@ -135,16 +135,13 @@
                 return video_sources;
             },
             removeResource:function(entry,resource){
-              console.log(entries[entries.indexOf(entry)].resources);
               var resources =entries[entries.indexOf(entry)].resources;
               resources.splice(resources.indexOf(resource),1);
             },
             addEntry:function(entry){
-              console.log(entry);
               entries.unshift(entry);
             },
             update:function(entry){
-              console.log(entry);
               var index=entries.map(function(e){return e.id}).indexOf(entry.id);
               entries[index]=entry;
             },

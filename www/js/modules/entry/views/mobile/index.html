@@ -66,6 +66,7 @@
                   <ion-spinner icon="ios"></ion-spinner>
                 </ion-audio-controls>
                 <h4>{{resource.attachment_file_name}}</h4>
+                 <a ng-click="removeMobileFile(resource,entry)" class="pull-right pointer">Remove</a>
               </div>
             </div>
            <!--  <p class="item-body">
@@ -78,6 +79,7 @@
           <p ng-repeat="resource in entry.resources"  ng-if="resource.attachment_content_type == 'pdf'">
             <i class="icon ion-document-text"></i>
             <a href="{{resource.attachment}}">{{resource.attachment_file_name}}</a>
+            <a ng-click="removeMobileFile(resource,entry)" class="pull-right pointer">Remove</a>
           </p>
          <!--  <p class="labels" ng-if="entry.tags.length">
             Labels: <a href="#" class="subdued" ng-repeat="tag in entry.tags">{{tag.name}}{{$last ? '' : ', '}}</a>
