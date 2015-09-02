@@ -91,10 +91,6 @@
 
       }
     }, 500);
-
-
-
-
    };
 
 
@@ -105,9 +101,10 @@
   $scope.edit = function($event,tag)
   {
     $scope.selectedTag = {};
-    $scope.selectedTag.name = tag.name;
-    $scope.selectedTag.id = tag.id;
-    $scope.selectedTag.ancestry = tag.ancestry;
+    $scope.selectedTag=angular.copy(tag);
+    // $scope.selectedTag.name = tag.name;
+    // $scope.selectedTag.id = tag.id;
+    // $scope.selectedTag.ancestry = tag.ancestry;
     var test= angular.element($event.target).parent().parent();
     $scope.selectedId=tag.id;
     $ionicListDelegate.closeOptionButtons();
@@ -117,7 +114,10 @@
 
   $scope.save = function()
   {
-
+    $scope.selectedId=null;
+    $scope.isEditing = false;
+    //Tags.update($scope.selectedTag);
+    // $scope.selectedTag={};
   };
 
   $scope.cancel = function()
@@ -143,10 +143,10 @@ $scope.listCanSwipe = true;
 
 $scope.showEditLabelPopUp = function(tag){
   $scope.selectedTag = {};
-  $scope.selectedTag.name = tag.name;
-  $scope.selectedTag.id = tag.id;
-  $scope.selectedTag.ancestry = tag.ancestry;
-  
+  // $scope.selectedTag.name = tag.name;
+  // $scope.selectedTag.id = tag.id;
+  // $scope.selectedTag.ancestry = tag.ancestry;
+  $scope.selectedTag=angular.copy(tag);
   $scope.modalInstance = $modal.open({
     templateUrl: '/js/modules/tag/views/desktop/edit-tag.html',
     size:'sm',
@@ -161,8 +161,14 @@ $scope.closeModal = function(){
 
 $scope.saveTag = function(){
   //Todo :: add code for saving the data
+
   $scope.modalInstance.dismiss('cancel');
 };
+$scope.updateTag=function(){
+  console.log($scope.selectedTag);
+  Tags.update($scope.selectedTag);
+  $scope.modalInstance.dismiss('cancel');
+}
  $scope.goBack=function(){
       $scope.showBackButton=false;
        window.history.back();
@@ -179,7 +185,6 @@ $scope.saveTag = function(){
       });
     };
     $scope.saveNewTag=function(){
-      console.log($scope.newTag);
       $scope.newTag.children=[];
       if($scope.newTag.ancestry){
         var filterForNewTags=$scope.tags.filter(function(elem){
@@ -205,10 +210,13 @@ $scope.saveTag = function(){
           $scope.newTag.id=parseInt(lastID)+1;
           // $scope.tags.push($scope.newTag);
         }
-        console.log($scope.newTag);
         Tags.add($scope.newTag);
         $scope.modalInstance.dismiss('cancel');
         $scope.newTag={};
+    };
+    $scope.newLabel=function(){
+      //angular.element("ul").insertBefore(document.querySelector("#edit-tag"));
+      $scope.isEditing = true;
     };
   };
 })();

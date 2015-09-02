@@ -185,6 +185,10 @@
             tags.push(tag);
           }
           
+        },
+        update:function(tag){
+          var index=tags.map(function(e){ return e.id}).indexOf(tag.id)
+          tags[index]=tag;
         }
       };
     }

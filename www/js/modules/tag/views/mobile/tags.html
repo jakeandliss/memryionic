@@ -3,6 +3,7 @@
       <div class="item item-icon-left item-dark">
         <i class="icon ion-ios-pricetag"></i>
        <span style="padding-left:65px"> {{childLabel}}</span>
+       <!--  <span ng-show="!showIt" class="item-note" ng-click="newLabel()">Add New</span> -->
         <span ng-show="showIt" class="item-note" ng-click="editLabel()">Edit</span>
       </div>
 
@@ -30,7 +31,9 @@
         <span class="input-label">Name</span>
         <input type="text" name="name" id='name' required ng-model="selectedTag.name">
       </label>
-        <div class="form-error" ng-show="tagForm.name.$error.required">Name is required
+      <div class="form-error" ng-show="tagForm.name.$invalid&&(tagForm.name.$dirty||tagForm.name.$touched)">
+        <div ng-show="tagForm.name.$error.required">Name is required
+      </div>
       </div>
 
       <label class="item item-input item-select">

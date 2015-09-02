@@ -32,7 +32,6 @@
                       var lastID=globalTags[$stateParams.id].children[length-1].id;
                       var newId=parseInt(lastID)+1;
                     }
-                    
                     //$scope.entry.tagID=newId;
                     $scope.entry.tagID=$stateParams.id;
                     newTag={id:newId,name:obj.text,ancestry:$stateParams.id,children:[]}
@@ -41,15 +40,15 @@
                   $scope.entry.tagID=$stateParams.id;
                   newTag={id:$stateParams.id+1,name:obj.text,ancestry:$stateParams.id,children:[]}
               }
-              Tags.add(newTag);
+              // Tags.add(newTag);
             }else{
               var length=globalTags.length;
               var lastID=globalTags[length-1].id;
               var newId=parseInt(lastID)+1;
               $scope.entry.tagID=newId;
               newTag={id:newId,name:obj.text,ancestry:"",children:[]}
-              Tags.add(newTag);
             }
+            Tags.add(newTag);
             $scope.entry.tags.push(newTag);
           }
        });
@@ -74,11 +73,12 @@
        angular.forEach($scope.tags,function(obj){
           if(obj.id>=0){
             $scope.entry.tagID=obj.id;
-            $scope.entry.tags.push({id:obj.id,'name':obj.text});
+            $scope.entry.tags.push({id:obj.id,'name':obj.text,ancestry:"",children:[]});
           }else{
             var newTag={}
             var globalTags=Tags.all();
             if($stateParams.id){
+              $scope.entry.tagID=$stateParams.id;
               if(globalTags[$stateParams.id].children){
                     var length=globalTags[$stateParams.id].children.length;
                     if(length==0){
@@ -89,11 +89,12 @@
                     }
                     
                     //$scope.entry.tagID=newId;
-                    $scope.entry.tagID=$stateParams.id;
+                    
                     newTag={id:newId,name:obj.text,ancestry:$stateParams.id,children:[]}
               }else{
                   //$scope.entry.tagID=$stateParams.id+1;
-                  $scope.entry.tagID=$stateParams.id;
+                  globalTags[$stateParams.id].children=[];
+                  //$scope.entry.tagID=$stateParams.id;
                   newTag={id:$stateParams.id+1,name:obj.text,ancestry:$stateParams.id,children:[]}
               }
               Tags.add(newTag);
@@ -102,9 +103,10 @@
               var lastID=globalTags[length-1].id;
               var newId=parseInt(lastID)+1;
               $scope.entry.tagID=newId;
-              newTag={id:newId,name:obj.text,ancestry:"",children:[]}
+              newTag={id:newId,name:obj.text,ancestry:"",children:[]} 
               Tags.add(newTag);
             }
+           
             $scope.entry.tags.push(newTag);
           }
        }); 
@@ -112,11 +114,13 @@
         fileDropzone.processQueue();
       };
       //$scope.entries.unshift($scope.entry);
+      console.log($scope.entry);
       Entries.addEntry($scope.entry);
       $scope.entry = {};
       $scope.tags=[];
       $scope.entryForm.$setPristine();
       $scope.entry.date = new Date();
+      $scope.filterEntites();
     };
 
     // Edit Entry
@@ -231,11 +235,21 @@
     }
     // Remove Entry
     $scope.remove = function(entry) {
-      if (confirm('Are you sure you want to delete this?')){
-        Entries.remove(Entries.selectedEntry);
-        $mdBottomSheet.cancel();
+      if($scope.popover){
         $scope.popover.hide();
       }
+       var modalInstance = $modal.open({
+        animation: $scope.animationsEnabled,
+        templateUrl: '/js/modules/entry/views/desktop/delete-confirm.html',
+        controller: 'EntriesCtrl',
+        size: 'sm',
+        animation: true
+      });
+       Entries.modalInstance=modalInstance;
+      // if (confirm('Are you sure you want to delete this?')){
+      //   Entries.remove(Entries.selectedEntry);
+      //  }
+      $mdBottomSheet.cancel();
     };
 
     $scope.entry.date = new Date();
@@ -302,7 +316,14 @@
         $scope.selectedEntry.resources=resources;
     }
     $scope.deleteResource=function(){
-      Entries.removeResource(Entries.selectedEntry,Entries.resource);
+      if(Entries.resource.attachment){
+        Entries.removeResource(Entries.selectedEntry,Entries.resource);
+        Entries.selectedEntry={};
+        Entries.resource={};
+      }else{
+           Entries.remove(Entries.selectedEntry);
+           Entries.selectedEntry={};
+      }
       Entries.modalInstance.dismiss('cancel');
     }
     $scope.candelDeleteResource=function(){
@@ -638,25 +659,13 @@
           var filterResult=$scope.entries.filter(function(elem){
               return elem.tagID==$stateParams.id;
           });
-          $scope.entries=filterResult;
+          $scope.filterentries=filterResult;
           $scope.showBackButton=true;
       }
       else{
-
+          $scope.filterentries=$scope.entries;
       }
     };
-      $scope.filterEntites=function(){
-         if($stateParams.id){
-          var filterResult=$scope.entries.filter(function(elem){
-              return elem.tagID==$stateParams.id;
-          });
-          $scope.entries=filterResult;
-          $scope.showBackButton=true;
-      }
-      else{
-
-      }
-    }
     $scope.filterEntites();
     $scope.Lightbox=Lightbox;
     $scope.images=[];

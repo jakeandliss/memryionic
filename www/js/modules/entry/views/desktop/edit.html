@@ -20,8 +20,8 @@
            <auto-complete ng-controller="TagsCtrl as tags" source="loadTags($query)" load-on-down-arrow="true" min-length="1"></auto-complete>
         </tags-input>
         </div>
-        <div ng-if="selectedEntry.resources" class="md-padding">
-            <div class="pull-left" ng-repeat="resource in selectedEntry.resources" ng-if="resource.attachment_content_type == 'image' || resource.attachment_content_type == 'video'">
+        <div ng-if="selectedEntry.resources" class="md-padding col-sm-12">
+            <div class="pull-left " ng-repeat="resource in selectedEntry.resources" ng-if="resource.attachment_content_type == 'image' || resource.attachment_content_type == 'video'">
               <div ng-if="resource.attachment_content_type == 'image'">
               <img ng-src="{{resource.attachment}}" class="edit-image" >
               <!-- <md-icon ng-show="onHover" class="">image</md-icon> -->
@@ -54,7 +54,7 @@
             </div>
           </div>
           <div class="col-sm-4 dz-hide">
-            <button class="btn btn-block btn-primary" type="submit">Update Entry</button>
+            <button id="updateEntry" class="btn btn-block btn-primary" type="submit">Update Entry</button>
             <a class="btn btn-block btn-default" data-dismiss="modal" ng-click="closeEditModal()">Cancel</a>
           </div>
         </div>
