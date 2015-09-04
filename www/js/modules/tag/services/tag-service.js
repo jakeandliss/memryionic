@@ -187,8 +187,15 @@
           
         },
         update:function(tag){
-          var index=tags.map(function(e){ return e.id}).indexOf(tag.id)
-          tags[index]=tag;
+          console.log(tag);
+          if(tag.ancestry){
+            var childTags=tags[tag.ancestry].children;
+            var index=childTags.map(function(e) {return e.id}).indexOf(tag.id);
+            childTags[index]=tag
+          }else{
+            var index=tags.map(function(e){ return e.id}).indexOf(tag.id)
+            tags[index]=tag;
+          }
         }
       };
     }

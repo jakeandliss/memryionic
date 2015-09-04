@@ -229,15 +229,10 @@
           }
        });
       Entries.update($scope.selectedEntry);
-      $scope.selectedEntry={};
-      $scope.selectedTags=[];
       $scope.editModal.hide();
     }
     // Remove Entry
     $scope.remove = function(entry) {
-      if($scope.popover){
-        $scope.popover.hide();
-      }
        var modalInstance = $modal.open({
         animation: $scope.animationsEnabled,
         templateUrl: '/js/modules/entry/views/desktop/delete-confirm.html',
@@ -246,12 +241,22 @@
         animation: true
       });
        Entries.modalInstance=modalInstance;
+      $mdBottomSheet.cancel();
+    };
+    $scope.removeMobile=function(){
+      // console.log($scope.popover);
+      $scope.popover.hide();
+      $ionicPopover.fromTemplateUrl('delete-confirm.html', {
+        scope: $scope
+      }).then(function(popover) {
+        $scope.popoverDelete = popover;
+        $scope.popoverDelete.show(currentEvent);
+      });
+
       // if (confirm('Are you sure you want to delete this?')){
       //   Entries.remove(Entries.selectedEntry);
       //  }
-      $mdBottomSheet.cancel();
-    };
-
+    }
     $scope.entry.date = new Date();
 
     //$scope.audio = ngAudio.load("http://www.stephaniequinn.com/Music/Canon.mp3");
@@ -302,11 +307,19 @@
       //       Entries.removeResource(entry,resource);
       // }
     }
-    $scope.removeMobileFile=function(resource,entry){
+    $scope.removeMobileFile=function($event,resource,entry){
 
-        if(confirm('Are you sure you want to delete this?')){
-            Entries.removeResource(entry,resource);
-      }
+      //   if(confirm('Are you sure you want to delete this?')){
+      //       Entries.removeResource(entry,resource);
+      // }
+      Entries.resource=resource;
+       Entries.selectedEntry=entry;
+       $ionicPopover.fromTemplateUrl('delete-confirm.html', {
+        scope: $scope
+      }).then(function(popover) {
+        $scope.popoverDelete = popover;
+        $scope.popoverDelete.show($event);
+      });
     }
 
     $scope.removefromSelectedFile=function(resource){
@@ -316,18 +329,28 @@
         $scope.selectedEntry.resources=resources;
     }
     $scope.deleteResource=function(){
-      if(Entries.resource.attachment){
-        Entries.removeResource(Entries.selectedEntry,Entries.resource);
-        Entries.selectedEntry={};
-        Entries.resource={};
-      }else{
-           Entries.remove(Entries.selectedEntry);
-           Entries.selectedEntry={};
+      if(Entries.selectedEntry.title||Entries.resource.attachment){
+        if(Entries.resource.attachment){
+          Entries.removeResource(Entries.selectedEntry,Entries.resource);
+          Entries.selectedEntry={};
+          Entries.resource={};
+        }else{
+             Entries.remove(Entries.selectedEntry);
+             Entries.selectedEntry={};
+        }
       }
-      Entries.modalInstance.dismiss('cancel');
+      if($scope.popoverDelete){
+        $scope.popoverDelete.hide();
+      }else{
+        Entries.modalInstance.dismiss('cancel');
+      }
     }
     $scope.candelDeleteResource=function(){
-      Entries.modalInstance.dismiss('cancel');
+      if($scope.popoverDelete){
+        $scope.popoverDelete.hide();
+      }else{
+        Entries.modalInstance.dismiss('cancel');
+      }
     }
     $scope.audioStop=function(index,src){
       
@@ -345,7 +368,7 @@
       }
     }
 
-
+    var currentEvent="";
     if (window.templateMode == "mobile") {
       $ionicPopover.fromTemplateUrl('my-popover.html', {
         scope: $scope
@@ -355,7 +378,8 @@
 
       $scope.openPopover = function($event,entry) {
         Entries.selectedEntry=entry;
-        
+        currentEvent=$event;
+        console.log(currentEvent);
         $scope.popover.show($event);
       };
 
@@ -730,11 +754,22 @@
         var visualResult=resource.filter(function(elem){
             return elem.attachment_content_type=="image"||elem.attachment_content_type=="video";
             })
+        var AudioResult=resource.filter(function(elem){
+          return elem.attachment_content_type=="audio";
+        })
         if(visualResult.length){
+          //$scope.selectTab(1);
           return true
+        }else if(AudioResult.length){
+          // debugger;
+          //$scope.selectTab(2);
+          return false
+          
         }
         else{
+          //$scope.selectTab(3);
           return false
+          
         }
      }
      $scope.CheckAudio=function(resource){
@@ -759,5 +794,14 @@
           return false
         }
      }
+     $scope.tab = 1;
+
+      $scope.selectTab = function(setTab) {
+        $scope.tab = setTab;
+      }
+
+      $scope.isSelected = function(checkTab) {
+        return $scope.tab === checkTab;
+      }
   }
 })();

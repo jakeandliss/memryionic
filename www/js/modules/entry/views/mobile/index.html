@@ -22,7 +22,7 @@
       <div class="item item-text-wrap gray">
         <p read-more ng-if="entry.content" ng-model="entry.content" words="true" length="50"></p>
       </div>
-      <section  ng-controller="PanelCtrl as panel" ng-if="entry.resources">
+      <section ng-controller="PanelCtrl as panel" ng-if="entry.resources">
         <div class="item tabs tabs-secondary tabs-icon-left">
           <a class="tab-item" href="#" ng-click="panel.selectTab(1)" ng-if="CheckVisual(entry.resources)" ng-class="{ active:panel.isSelected(1) }">
             <i class="icon ion-ios-glasses text-danger"></i>
@@ -66,7 +66,7 @@
                   <ion-spinner icon="ios"></ion-spinner>
                 </ion-audio-controls>
                 <h4>{{resource.attachment_file_name}}</h4>
-                 <a ng-click="removeMobileFile(resource,entry)" class="pull-right pointer">Remove</a>
+                 <a ng-click="removeMobileFile($event,resource,entry)" class="pull-right pointer">Remove</a>
               </div>
             </div>
            <!--  <p class="item-body">
@@ -79,7 +79,7 @@
           <p ng-repeat="resource in entry.resources"  ng-if="resource.attachment_content_type == 'pdf'">
             <i class="icon ion-document-text"></i>
             <a href="{{resource.attachment}}">{{resource.attachment_file_name}}</a>
-            <a ng-click="removeMobileFile(resource,entry)" class="pull-right pointer">Remove</a>
+            <a ng-click="removeMobileFile($event,resource,entry)" class="pull-right pointer">Remove</a>
           </p>
          <!--  <p class="labels" ng-if="entry.tags.length">
             Labels: <a href="#" class="subdued" ng-repeat="tag in entry.tags">{{tag.name}}{{$last ? '' : ', '}}</a>
@@ -111,9 +111,24 @@
         <a class="item" ng-click="openEdit()" ng-model="entry.id">
           Edit
         </a>
-        <a class="item" ng-click="remove()">
+        <a class="item" ng-click="removeMobile()">
           Delete
         </a>
+      </div>
+    </ion-content>
+  </ion-popover-view>
+</script>
+<script id="delete-confirm.html" type="text/ng-template">
+  <ion-popover-view>
+    <ion-content>
+      <div class="list">
+        <div class="item" >
+          Are you sure you want to delete this?
+        </div>
+        <div class="item">
+          <button id="deleteButton" ng-click="deleteResource()" class="btn btn-primary">Yes</button>
+          <button ng-click="candelDeleteResource()" class="btn btn-default">No</button>
+        </div>
       </div>
     </ion-content>
   </ion-popover-view>

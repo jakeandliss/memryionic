@@ -120,6 +120,15 @@
       content: 'Look at my mukluks!',
       image: 'https://pbs.twimg.com/profile_images/598205061232103424/3j5HUXMY.png',
       date: "1995-12-05",
+      resources: [{
+        attachment: 'http://www.urartuuniversity.com/content_images/pdf-sample.pdf',
+        attachment_content_type: "pdf",
+        attachment_file_name: "pdf-sample"
+      }, {
+        attachment: 'http://www.urartuuniversity.com/content_images/pdf-sample.pdf',
+        attachment_content_type: "pdf",
+        attachment_file_name: "pdf sample file number 2"
+      }],
        tags: [{
         id:1,
         name: 'test 1'
@@ -174,7 +183,7 @@
             },
             update:function(entry){
               var index=entries.map(function(e){return e.id}).indexOf(entry.id);
-              entries[index]=entry;
+              entries[index]=angular.copy(entry);
             },
             resource:{},
             selectedEntry: {},
