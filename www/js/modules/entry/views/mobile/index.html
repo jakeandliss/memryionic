@@ -22,27 +22,21 @@
       <div class="item item-text-wrap gray">
         <p read-more ng-if="entry.content" ng-model="entry.content" words="true" length="50"></p>
       </div>
-      <section ng-controller="PanelCtrl as panel" ng-if="entry.resources">
-        <div class="item tabs tabs-secondary tabs-icon-left">
-          <a class="tab-item" href="#" ng-click="panel.selectTab(1)" ng-if="CheckVisual(entry.resources)" ng-class="{ active:panel.isSelected(1) }">
-            <i class="icon ion-ios-glasses text-danger"></i>
-            Visual
-          </a>
-          <a class="tab-item" href="#" ng-click="panel.selectTab(2)" ng-if="CheckAudio(entry.resources)" ng-class="{ active:panel.isSelected(2) }">
-            <i class="icon ion-mic-c text-success"></i>
-            Audio
-          </a>
-          <a class="tab-item" href="#" ng-click="panel.selectTab(3)" ng-if="CheckFiles(entry.resources)" ng-class="{ active: panel.isSelected(3) }">
-            <i class="icon ion-document-text text-info"></i>
-            Files
+       
+      <div ng-if="entry.resources" >
+      <section ng-controller="PanelCtrl as panel1" ng-init="CreateResourceTypeList(entry.resources)">
+         <div class="item tabs tabs-secondary tabs-icon-left" ng-if="ResourceList.length>1">
+          <a class="tab-item" ng-repeat="fileType in ResourceList" ng-click="panel1.selectTab($index)" ng-class="{ active:panel1.isSelected($index) }">
+            <div ng-click="selectTab(fileType.id)">
+            <i class="icon ion-ios-glasses text-danger" ng-if="fileType.type=='Visual'"></i>
+            <i class="icon ion-mic-c text-success" ng-if="fileType.type=='Audio'"></i>
+            <i class="icon ion-document-text text-info" ng-if="fileType.type=='Files'"></i>
+            {{fileType.type}}
+          </div>
           </a>
         </div>
-
-
-        <!-- Video/Images content -->
-        <div class="item item-body panel" ng-if="CheckVisual(entry.resources)" ng-show="panel.isSelected(1)">
-          
-
+        <div ng-repeat="fileType in ResourceList">
+        <div class="item item-body panel" ng-if="fileType.type=='Visual'" ng-show="isSelected(fileType.id)">
           <ion-slide-box does-continue="true" >
             <ion-slide ng-repeat="resource in entry.resources | filter: selectVisuals" ng-if="resource.attachment_content_type == 'image' || resource.attachment_content_type == 'video'">
               <img ng-src="{{resource.attachment}}" ng-click='showModal($index,entry.resources)' class="full-image" ng-if="resource.attachment_content_type == 'image'">
@@ -52,11 +46,10 @@
               </div>
             </ion-slide>
           </ion-slide-box>
-         
-        </div>
+        </div> 
 
-        <!-- Audio content -->
-          <ion-audio-track track="track" ng-if="CheckAudio(entry.resources)"  ng-show="panel.isSelected(2)">
+        <!--Audio content -->
+          <ion-audio-track track="track" ng-if="fileType.type=='Audio'"  ng-show="isSelected(fileType.id)">
             <div class="list">
             <ion-audio-progress-bar display-time></ion-audio-progress-bar>
               <div class="item item-thumbnail-left" ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'audio'">
@@ -68,24 +61,26 @@
                 <h4>{{resource.attachment_file_name}}</h4>
                  <a ng-click="removeMobileFile($event,resource,entry)" class="pull-right pointer">Remove</a>
               </div>
-            </div>
+            </div> 
            <!--  <p class="item-body">
               Labels: <a href="#" class="subdued" ng-repeat="tag in entry.tags">{{tag.name}}{{$last ? '' : ','}}</a>
             </p> -->
-          </ion-audio-track>
+         </ion-audio-track> 
 
         <!-- Files content -->
-        <div class="item item-body panel" ng-if="CheckFiles(entry.resources)" ng-show="panel.isSelected(3)">
+        <div class="item item-body panel" ng-if="fileType.type=='Files'" ng-show="isSelected(fileType.id)">
           <p ng-repeat="resource in entry.resources"  ng-if="resource.attachment_content_type == 'pdf'">
             <i class="icon ion-document-text"></i>
             <a href="{{resource.attachment}}">{{resource.attachment_file_name}}</a>
             <a ng-click="removeMobileFile($event,resource,entry)" class="pull-right pointer">Remove</a>
-          </p>
+          </p> 
          <!--  <p class="labels" ng-if="entry.tags.length">
             Labels: <a href="#" class="subdued" ng-repeat="tag in entry.tags">{{tag.name}}{{$last ? '' : ', '}}</a>
           </p> -->
-        </div>
+       </div>
+       </div>
       </section>
+    </div>
       <!-- tags Section -->
       <div class="item item-text-wrap gray">
          <p class="labels" ng-if="entry.tags.length">

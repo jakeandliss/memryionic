@@ -67,6 +67,7 @@
        return resource.attachment_content_type == 'video' || resource.attachment_content_type == 'image';
 
       };
+      
     $scope.entryAdd = function(entry) {
       $scope.entry.tags=[];
       $scope.entry.tagID="";
@@ -757,20 +758,22 @@
         var AudioResult=resource.filter(function(elem){
           return elem.attachment_content_type=="audio";
         })
-        if(visualResult.length){
-          //$scope.selectTab(1);
+        var fileResult=resource.filter(function(elem){
+          return elem.attachment_content_type=="pdf";
+        })
+        if(visualResult.length){  
           return true
-        }else if(AudioResult.length){
-          // debugger;
-          //$scope.selectTab(2);
-          return false
-          
-        }
-        else{
+        }else{
+          if(AudioResult.length){
+
+          }else if(fileResult.length){
+            
+          }
           //$scope.selectTab(3);
           return false
           
         }
+      
      }
      $scope.CheckAudio=function(resource){
         var visualResult=resource.filter(function(elem){
@@ -794,14 +797,5 @@
           return false
         }
      }
-     $scope.tab = 1;
-
-      $scope.selectTab = function(setTab) {
-        $scope.tab = setTab;
-      }
-
-      $scope.isSelected = function(checkTab) {
-        return $scope.tab === checkTab;
-      }
   }
 })();
