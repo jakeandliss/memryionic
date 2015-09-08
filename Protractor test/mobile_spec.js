@@ -129,7 +129,7 @@ describe("Edit tag",function(){
 		browser.sleep(3000);
 		var tagList=element.all(by.repeater("tag in filteredTags"));
 		var firstTag=tagList.get(0).element(by.css('[ng-click="test(tag)"]'));
-		browser.actions().mouseMove(firstTag).mouseDown().mouseMove({x:40,y:350}).perform();	
+		browser.actions().mouseMove(fi rstTag).mouseDown().mouseMove({x:40,y:350}).perform();	
 		// browser.actions().mouseMove(firstTag,{x:400}).perform();
 		// browser.actions().mouseDown().perform();
 		// browser.actions().mouseMove({x:200}).perform();

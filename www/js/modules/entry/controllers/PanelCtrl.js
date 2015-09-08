@@ -38,7 +38,7 @@
             }
         }
         if ( b == newList.length ) {
-            newList.push( current ); 
+            newList.push(current); 
             id++;
         }
         b = 0;

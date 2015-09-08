@@ -94,15 +94,13 @@
             <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="SearchEndDate" is-open="openedEnd" datepicker-options="dateOptions" ng-required="true" close-text="Close" style="text-align:right;" placeholder="End Date" />
             <span class="input-group-addon flat" ng-click="openEnd($event)"><i class="fui-calendar" ></i></span>
           </div>
-          <button class="btn btn-primary btn-wide" >Search</button>
+          <button type="submit" class="btn btn-primary btn-wide" >Search</button>
         </div>
           <i class="fui-cross-circle pull-right pointer" ng-click="
           closeSearch()"></i>
       </form>
     </div>
-
-
-    <div class="row margin-top" ng-repeat="entry in filterentries">
+    <!-- <div class="row margin-top" ng-repeat="entry in filterentries">
       <div class="col-xs-9" style="margin-right:-.5rem">
         <md-card class="entry rounded">
           <md-card-content class="header">
@@ -117,7 +115,6 @@
               <img ng-src="{{user.avatar}}" class="md-avatar" ng-controller="UserCtrl">
               <div class="md-list-item-text">
             <h2 name="title" class="md-title">
-              <!-- <span ng-bind="entry.title"></span> -->
               {{entry.title}}
             </h2>
             <h4 class="date">{{entry.date | date: "longDate"}} ({{entry.date | timeAgo }}).</h4>
@@ -129,66 +126,124 @@
             <p read-more ng-if="entry.content" ng-model="entry.content" words="true" length="50"></p>
 
           </md-card-content>
-
-          <md-tabs md-dynamic-height md-border-bottom md-center-tabs md-stretch-tabs="always" ng-if="entry.resources">
-            <md-tab label="Visual" ng-if="CheckVisual(entry.resources)">
-              <md-content class="md-padding">
-                <slick settings="slickConfig" class="slick-uninitialized">
-                  <div class="slick" ng-repeat="resource in entry.resources | filter: selectVisuals" ng-if="resource.attachment_content_type == 'image' || resource.attachment_content_type == 'video'">
-                    <img ng-src="{{resource.attachment}}" class="md-card-image" ng-if="resource.attachment_content_type == 'image'">
-                    <div id="popupButton" ng-click='openLightBoxModel($index,entry.resources)'>
-                    <md-icon class="material-icons lightbox-button"  ng-if="resource.attachment_content_type == 'image'">open_in_new</md-icon>
-                  </div>
-                    <div ng-click='openLightBoxModel($index,entry.resources)' ng-if="resource.attachment_content_type == 'video'" class="video-thumb">
-                     <img ng-src="{{resource.attachment_thumbnail}}" class="video">
+        <div ng-controller="PanelCtrl as panel" ng-init="CreateResourceTypeList(entry.resources)">
+          <div ng-if="ResourceList.length>1">
+            <md-tabs md-dynamic-height md-border-bottom md-center-tabs md-stretch-tabs="always" ng-if="entry.resources">
+              <md-tab label="Visual" ng-if="CheckVisual(entry.resources)">
+                <md-content class="md-padding">
+                  <slick settings="slickConfig" class="slick-uninitialized">
+                    <div class="slick" ng-repeat="resource in entry.resources | filter: selectVisuals" ng-if="resource.attachment_content_type == 'image' || resource.attachment_content_type == 'video'">
+                      <img ng-src="{{resource.attachment}}" class="md-card-image" ng-if="resource.attachment_content_type == 'image'">
                       <div id="popupButton" ng-click='openLightBoxModel($index,entry.resources)'>
-                     <md-icon class="material-icons">play_circle_filled</md-icon>
-                   </div>
+                      <md-icon class="material-icons lightbox-button"  ng-if="resource.attachment_content_type == 'image'">open_in_new</md-icon>
                     </div>
-                  </div>
-                </slick>
+                      <div ng-click='openLightBoxModel($index,entry.resources)' ng-if="resource.attachment_content_type == 'video'" class="video-thumb">
+                       <img ng-src="{{resource.attachment_thumbnail}}" class="video">
+                        <div id="popupButton" ng-click='openLightBoxModel($index,entry.resources)'>
+                       <md-icon class="material-icons">play_circle_filled</md-icon>
+                     </div>
+                      </div>
+                    </div>
+                  </slick>
 
-              </md-content>
-            </md-tab>
-            <md-tab label="Audio" ng-if="CheckAudio(entry.resources)">
-              <md-content class="md-padding audio">
-                  <div class="input-group margin">
-                    <label class="input-group-addon">Time</label>
-                    <input class="form-control" type=range min=0 max=1 step=0.01 ng-model='audio.progress'>
-                  </div>
-                  <div class="input-group margin">
-                    <label class="input-group-addon">Volume</label>
-                    <input class="form-control" type=range min=0 max=1 step=0.01 ng-model='audio.volume'>
-                  </div>
+                </md-content>
+              </md-tab>
+              <md-tab label="Audio" ng-if="CheckAudio(entry.resources)">
+                <md-content class="md-padding audio">
+                    <div class="input-group margin">
+                      <label class="input-group-addon">Time</label>
+                      <input class="form-control" type=range min=0 max=1 step=0.01 ng-model='audio.progress'>
+                    </div>
+                    <div class="input-group margin">
+                      <label class="input-group-addon">Volume</label>
+                      <input class="form-control" type=range min=0 max=1 step=0.01 ng-model='audio.volume'>
+                    </div>
+                    <md-list>
+                      <md-list-item class="md-2-line" ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'audio'">
+                        <div class="md-list-item-text">
+                          <button id="playButton{{$index}}" ng-click='audioPlay($index,resource.attachment)' class="btn btn-primary play">Play</button>
+                           <button id="stopButton{{$index}}" ng-click='audioStop($index,resource.attachment)' class="btn btn-danger">Stop</button>
+                           <button id="muteButton{{$index}}" ng-click='audio.muting = !audio.muting' class="btn btn-default">Mute</button>
+                           {{ resource.attachment_file_name}}
+                           <a ng-click="removeFile(resource,entry)" class="pull-right pointer">Remove</a>
+                        </div>
+                      </md-list-item>
+                  </md-list>
+                </md-content>
+              </md-tab>
+
+              <md-tab label="Files" ng-if="CheckFiles(entry.resources)">
+                <md-content class="md-padding files">
                   <md-list>
-                    <md-list-item class="md-2-line" ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'audio'">
+                    <md-list-item class="md-2-line" ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'pdf'">
+                      <md-icon class="material-icons">picture_as_pdf</md-icon>
                       <div class="md-list-item-text">
-                        <button id="playButton{{$index}}" ng-click='audioPlay($index,resource.attachment)' class="btn btn-primary play">Play</button>
-                         <button id="stopButton{{$index}}" ng-click='audioStop($index,resource.attachment)' class="btn btn-danger">Stop</button>
-                         <button id="muteButton{{$index}}" ng-click='audio.muting = !audio.muting' class="btn btn-default">Mute</button>
-                         {{ resource.attachment_file_name}}
-                         <a ng-click="removeFile(resource,entry)" class="pull-right pointer">Remove</a>
+                        <h3><a href="{{ resource.attachment }}" target="_blank">{{ resource.attachment_file_name }}</a>
+                        <a ng-click="removeFile(resource,entry)" class="pull-right pointer">Remove</a></h3>
+                        <p> </p>
                       </div>
                     </md-list-item>
-                </md-list>
-              </md-content>
-            </md-tab>
-
-            <md-tab label="Files" ng-if="CheckFiles(entry.resources)">
-              <md-content class="md-padding files">
-                <md-list>
-                  <md-list-item class="md-2-line" ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'pdf'">
-                    <md-icon class="material-icons">picture_as_pdf</md-icon>
-                    <div class="md-list-item-text">
-                      <h3><a href="{{ resource.attachment }}" target="_blank">{{ resource.attachment_file_name }}</a>
-                      <a ng-click="removeFile(resource,entry)" class="pull-right pointer">Remove</a></h3>
-                      <p> </p>
+                  </md-list>
+                </md-content>
+              </md-tab>
+            </md-tabs>
+          </div>
+          <div ng-if="ResourceList.length==1">
+            <div ng-if="ResourceList[0].type=='Visual'">
+              <slick settings="slickConfig" class="slick-uninitialized">
+                    <div class="slick" ng-repeat="resource in entry.resources | filter: selectVisuals" ng-if="resource.attachment_content_type == 'image' || resource.attachment_content_type == 'video'">
+                      <img ng-src="{{resource.attachment}}" class="md-card-image" ng-if="resource.attachment_content_type == 'image'">
+                      <div id="popupButton" ng-click='openLightBoxModel($index,entry.resources)'>
+                      <md-icon class="material-icons lightbox-button"  ng-if="resource.attachment_content_type == 'image'">open_in_new</md-icon>
                     </div>
-                  </md-list-item>
-                </md-list>
-              </md-content>
-            </md-tab>
-          </md-tabs>
+                      <div ng-click='openLightBoxModel($index,entry.resources)' ng-if="resource.attachment_content_type == 'video'" class="video-thumb">
+                       <img ng-src="{{resource.attachment_thumbnail}}" class="video">
+                        <div id="popupButton" ng-click='openLightBoxModel($index,entry.resources)'>
+                       <md-icon class="material-icons">play_circle_filled</md-icon>
+                     </div>
+                      </div>
+                    </div>
+                  </slick>
+            </div>
+            <div ng-if="ResourceList[0].type=='Audio'">
+              <md-content class="md-padding audio">
+                    <div class="input-group margin">
+                      <label class="input-group-addon">Time</label>
+                      <input class="form-control" type=range min=0 max=1 step=0.01 ng-model='audio.progress'>
+                    </div>
+                    <div class="input-group margin">
+                      <label class="input-group-addon">Volume</label>
+                      <input class="form-control" type=range min=0 max=1 step=0.01 ng-model='audio.volume'>
+                    </div>
+                    <md-list>
+                      <md-list-item class="md-2-line" ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'audio'">
+                        <div class="md-list-item-text">
+                          <button id="playButton{{$index}}" ng-click='audioPlay($index,resource.attachment)' class="btn btn-primary play">Play</button>
+                           <button id="stopButton{{$index}}" ng-click='audioStop($index,resource.attachment)' class="btn btn-danger">Stop</button>
+                           <button id="muteButton{{$index}}" ng-click='audio.muting = !audio.muting' class="btn btn-default">Mute</button>
+                           {{ resource.attachment_file_name}}
+                           <a ng-click="removeFile(resource,entry)" class="pull-right pointer">Remove</a>
+                        </div>
+                      </md-list-item>
+                  </md-list>
+                </md-content>
+            </div>
+            <div ng-if="ResourceList[0].type=='Files'">
+               <md-content class="md-padding files">
+                  <md-list>
+                    <md-list-item class="md-2-line" ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'pdf'">
+                      <md-icon class="material-icons">picture_as_pdf</md-icon>
+                      <div class="md-list-item-text">
+                        <h3><a href="{{ resource.attachment }}" target="_blank">{{ resource.attachment_file_name }}</a>
+                        <a ng-click="removeFile(resource,entry)" class="pull-right pointer">Remove</a></h3>
+                        <p> </p>
+                      </div>
+                    </md-list-item>
+                  </md-list>
+                </md-content>
+            </div>
+          </div>
+        </div>
         </md-card>
       </div>
 
@@ -197,16 +252,173 @@
           <button class='btn btn-block btn-primary' ui-sref="app.tagEntries({ id: tag.id })">{{tag.name}}</button>
         </div>
       </div>
+    </div> -->   
+  <div class="row margin-top">
+    <div infinite-scroll="showNext()" infinite-scroll-immediate-check="false" infinite-scroll-distance='0' infinite-scroll-disabled="busy">
+      <div ng-repeat="entry in filterentries">
+        <div class="col-xs-9" style="margin-right:-.5rem">
+          <md-card class="entry rounded">
+            <md-card-content class="header">
+              <md-button class="pull-right no-margin" aria-label="Edit or Delete" class="md-primary md-raised" ng-click="showBottomSheet(entry)">
+                <md-icon class="material-icons">more_horiz</md-icon>
+                <md-tooltip>
+                  Edit or Delete
+                </md-tooltip>
+              </md-button>
+              <md-list class="no-margin">
+              <md-list-item class="md-2-line no-margin">
+                <img ng-src="{{user.avatar}}" class="md-avatar" ng-controller="UserCtrl">
+                <div class="md-list-item-text">
+              <h2 name="title" class="md-title">
+                {{entry.title}}
+              </h2>
+              <h4 class="date">{{entry.date | date: "longDate"}} ({{entry.date | timeAgo }}).</h4>
+            </div>
+              </md-list-item>
+            </md-list>
+            </md-card-content>
+            <md-card-content class="content">
+              <p read-more ng-if="entry.content" ng-model="entry.content" words="true" length="50"></p>
+
+            </md-card-content>
+          <div ng-controller="PanelCtrl as panel" ng-init="CreateResourceTypeList(entry.resources)">
+            <div ng-if="ResourceList.length>1">
+              <md-tabs md-dynamic-height md-border-bottom md-center-tabs md-stretch-tabs="always" ng-if="entry.resources">
+                <md-tab label="Visual" ng-if="CheckVisual(entry.resources)">
+                  <md-content class="md-padding">
+                    <slick settings="slickConfig" class="slick-uninitialized">
+                      <div class="slick" ng-repeat="resource in entry.resources | filter: selectVisuals" ng-if="resource.attachment_content_type == 'image' || resource.attachment_content_type == 'video'">
+                        <img ng-src="{{resource.attachment}}" class="md-card-image" ng-if="resource.attachment_content_type == 'image'">
+                        <div id="popupButton" ng-click='openLightBoxModel($index,entry.resources)'>
+                        <md-icon class="material-icons lightbox-button"  ng-if="resource.attachment_content_type == 'image'">open_in_new</md-icon>
+                      </div>
+                        <div ng-click='openLightBoxModel($index,entry.resources)' ng-if="resource.attachment_content_type == 'video'" class="video-thumb">
+                         <img ng-src="{{resource.attachment_thumbnail}}" class="video">
+                          <div id="popupButton" ng-click='openLightBoxModel($index,entry.resources)'>
+                         <md-icon class="material-icons">play_circle_filled</md-icon>
+                       </div>
+                        </div>
+                      </div>
+                    </slick>
+
+                  </md-content>
+                </md-tab>
+                <md-tab label="Audio" ng-if="CheckAudio(entry.resources)">
+                  <md-content class="md-padding audio">
+                      <div class="input-group margin">
+                        <label class="input-group-addon">Time</label>
+                        <input class="form-control" type=range min=0 max=1 step=0.01 ng-model='audio.progress'>
+                      </div>
+                      <div class="input-group margin">
+                        <label class="input-group-addon">Volume</label>
+                        <input class="form-control" type=range min=0 max=1 step=0.01 ng-model='audio.volume'>
+                      </div>
+                      <md-list>
+                        <md-list-item class="md-2-line" ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'audio'">
+                          <div class="md-list-item-text">
+                            <button id="playButton{{$index}}" ng-click='audioPlay($index,resource.attachment)' class="btn btn-primary play">Play</button>
+                             <button id="stopButton{{$index}}" ng-click='audioStop($index,resource.attachment)' class="btn btn-danger">Stop</button>
+                             <button id="muteButton{{$index}}" ng-click='audio.muting = !audio.muting' class="btn btn-default">Mute</button>
+                             {{ resource.attachment_file_name}}
+                             <a ng-click="removeFile(resource,entry)" class="pull-right pointer">Remove</a>
+                          </div>
+                        </md-list-item>
+                    </md-list>
+                  </md-content>
+                </md-tab>
+
+                <md-tab label="Files" ng-if="CheckFiles(entry.resources)">
+                  <md-content class="md-padding files">
+                    <md-list>
+                      <md-list-item class="md-2-line" ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'pdf'">
+                        <md-icon class="material-icons">picture_as_pdf</md-icon>
+                        <div class="md-list-item-text">
+                          <h3><a href="{{ resource.attachment }}" target="_blank">{{ resource.attachment_file_name }}</a>
+                          <a ng-click="removeFile(resource,entry)" class="pull-right pointer">Remove</a></h3>
+                          <p> </p>
+                        </div>
+                      </md-list-item>
+                    </md-list>
+                  </md-content>
+                </md-tab>
+              </md-tabs>
+            </div>
+            <div ng-if="ResourceList.length==1">
+              <div ng-if="ResourceList[0].type=='Visual'">
+                <slick settings="slickConfig" class="slick-uninitialized">
+                      <div class="slick" ng-repeat="resource in entry.resources | filter: selectVisuals" ng-if="resource.attachment_content_type == 'image' || resource.attachment_content_type == 'video'">
+                        <img ng-src="{{resource.attachment}}" class="md-card-image" ng-if="resource.attachment_content_type == 'image'">
+                        <div id="popupButton" ng-click='openLightBoxModel($index,entry.resources)'>
+                        <md-icon class="material-icons lightbox-button"  ng-if="resource.attachment_content_type == 'image'">open_in_new</md-icon>
+                      </div>
+                        <div ng-click='openLightBoxModel($index,entry.resources)' ng-if="resource.attachment_content_type == 'video'" class="video-thumb">
+                         <img ng-src="{{resource.attachment_thumbnail}}" class="video">
+                          <div id="popupButton" ng-click='openLightBoxModel($index,entry.resources)'>
+                         <md-icon class="material-icons">play_circle_filled</md-icon>
+                       </div>
+                        </div>
+                      </div>
+                    </slick>
+              </div>
+              <div ng-if="ResourceList[0].type=='Audio'">
+                <md-content class="md-padding audio">
+                      <div class="input-group margin">
+                        <label class="input-group-addon">Time</label>
+                        <input class="form-control" type=range min=0 max=1 step=0.01 ng-model='audio.progress'>
+                      </div>
+                      <div class="input-group margin">
+                        <label class="input-group-addon">Volume</label>
+                        <input class="form-control" type=range min=0 max=1 step=0.01 ng-model='audio.volume'>
+                      </div>
+                      <md-list>
+                        <md-list-item class="md-2-line" ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'audio'">
+                          <div class="md-list-item-text">
+                            <button id="playButton{{$index}}" ng-click='audioPlay($index,resource.attachment)' class="btn btn-primary play">Play</button>
+                             <button id="stopButton{{$index}}" ng-click='audioStop($index,resource.attachment)' class="btn btn-danger">Stop</button>
+                             <button id="muteButton{{$index}}" ng-click='audio.muting = !audio.muting' class="btn btn-default">Mute</button>
+                             {{ resource.attachment_file_name}}
+                             <a ng-click="removeFile(resource,entry)" class="pull-right pointer">Remove</a>
+                          </div>
+                        </md-list-item>
+                    </md-list>
+                  </md-content>
+              </div>
+              <div ng-if="ResourceList[0].type=='Files'">
+                 <md-content class="md-padding files">
+                    <md-list>
+                      <md-list-item class="md-2-line" ng-repeat="resource in entry.resources" ng-if="resource.attachment_content_type == 'pdf'">
+                        <md-icon class="material-icons">picture_as_pdf</md-icon>
+                        <div class="md-list-item-text">
+                          <h3><a href="{{ resource.attachment }}" target="_blank">{{ resource.attachment_file_name }}</a>
+                          <a ng-click="removeFile(resource,entry)" class="pull-right pointer">Remove</a></h3>
+                          <p> </p>
+                        </div>
+                      </md-list-item>
+                    </md-list>
+                  </md-content>
+              </div>
+            </div>
+          </div>
+          </md-card>
+        </div>
+
+        <div class="col-xs-3" style="margin-left:-.9rem;">
+          <div ng-repeat="tag in entry.tags" class="margin-bottom">
+            <button class='btn btn-block btn-primary' ui-sref="app.tagEntries({ id: tag.id })">{{tag.name}}</button>
+          </div>
+        </div>
+      </div> 
     </div>
-
-
-
-    <div class="row margin-top" ng-show="entries.length==0">
+  </div>
+    <div class="row margin-top">
       <div class="col-sm-9">
         <md-card class="entry">
           <md-card-content class="content">
-          <p class="md-title">
-            No Content Found
+          <p class="md-title" ng-show="!busy">
+            No More Content Found
+          </p>
+          <p class="md-title" ng-show="busy">
+            Loading....
           </p>
         </md-card-content>
       </md-card>

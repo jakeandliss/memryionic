@@ -15,10 +15,12 @@
     "angular-audio": "1.7.0",
     "ngCordova": "latest",
     "flat-ui-sass": "latest",
-	" ng-tags-input":"latest"
+    " ng-tags-input": "latest",
+    "ngInfiniteScroll":"1.0.0"
   },
   "dependencies": {
-    "ng-device-detector": "~1.1.7"
+    "ng-device-detector": "~1.1.7",
+    "ngInfiniteScroll": "1.0.0"
   },
   "resolutions": {
     "angular": "1.3.13"

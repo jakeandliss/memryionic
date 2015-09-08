@@ -5,11 +5,12 @@
 
     .controller('EntriesCtrl', EntriesCtrl)
 
-  EntriesCtrl.$inject = ['$scope', '$stateParams', 'Entries', '$ionicModal', '$mdBottomSheet', '$sce', '$ionicPopover', '$modal', 'Lightbox', 'ngAudio', 'timeAgo','$ionicScrollDelegate','Tags'];
-  function EntriesCtrl($scope, $stateParams, Entries, $ionicModal, $mdBottomSheet, $sce, $ionicPopover, $modal, Lightbox, ngAudio, timeAgo,$ionicScrollDelegate,Tags) {
+  EntriesCtrl.$inject = ['$scope', '$stateParams', 'Entries', '$ionicModal', '$mdBottomSheet', '$sce', '$ionicPopover', '$modal', 'Lightbox', 'ngAudio', 'timeAgo','$ionicScrollDelegate','Tags','$ionicPopup'];
+  function EntriesCtrl($scope, $stateParams, Entries, $ionicModal, $mdBottomSheet, $sce, $ionicPopover, $modal, Lightbox, ngAudio, timeAgo,$ionicScrollDelegate,Tags,$ionicPopup) {
     $scope.entry = {};
     $scope.tags = [];
-
+    $scope.SearchBeginningDate=new Date();
+    $scope.SearchEndDate=new Date();
     // Add Entry
     $scope.MobileEntryAdd=function(entry){
       if($scope.entry.title)
@@ -115,7 +116,6 @@
         fileDropzone.processQueue();
       };
       //$scope.entries.unshift($scope.entry);
-      console.log($scope.entry);
       Entries.addEntry($scope.entry);
       $scope.entry = {};
       $scope.tags=[];
@@ -245,15 +245,23 @@
       $mdBottomSheet.cancel();
     };
     $scope.removeMobile=function(){
-      // console.log($scope.popover);
       $scope.popover.hide();
-      $ionicPopover.fromTemplateUrl('delete-confirm.html', {
-        scope: $scope
-      }).then(function(popover) {
-        $scope.popoverDelete = popover;
-        $scope.popoverDelete.show(currentEvent);
-      });
-
+      // $ionicPopover.fromTemplateUrl('delete-confirm.html', {
+      //   scope: $scope
+      // }).then(function(popover) {
+      //   $scope.popoverDelete = popover;
+      //   $scope.popoverDelete.show(currentEvent);
+      // });
+          var deletePopup=$ionicPopup.confirm({
+            title:"confirm Delete",
+            template:"Are you sure you want to delete this?"
+          });
+          deletePopup.then(function(result){
+            console.log(result);
+            if(result){
+              Entries.remove(Entries.selectedEntry);
+            }
+          });
       // if (confirm('Are you sure you want to delete this?')){
       //   Entries.remove(Entries.selectedEntry);
       //  }
@@ -380,7 +388,6 @@
       $scope.openPopover = function($event,entry) {
         Entries.selectedEntry=entry;
         currentEvent=$event;
-        console.log(currentEvent);
         $scope.popover.show($event);
       };
 
@@ -712,8 +719,8 @@
     $scope.searchToggle=false;
     $scope.closeSearch=function(){
       $scope.SearchText=null;
-      $scope.SearchBeginningDate=null;
-      $scope.SearchEndDate=null;
+      $scope.SearchBeginningDate=new Date();
+      $scope.SearchEndDate=new Date();
       $scope.searchToggle=false;
     }
 
@@ -796,6 +803,21 @@
         else{
           return false
         }
+     }
+     $scope.scrolling=new Entries.scrolling($stateParams.id);
+     $scope.filterentries=$scope.scrolling.entriesList;
+     $scope.busy=false;
+     $scope.showNext=function(){
+      if($(window).scrollTop()>$(document).height()-750){
+        if(!$scope.busy){
+          $scope.busy=true;
+          var list=Entries.getNextRecords($scope.scrolling.entriesList.length,$stateParams.id);
+          angular.forEach(list,function(item){
+            $scope.scrolling.entriesList.push(item)
+          })
+          $scope.busy=false;
+        }
+      }
      }
   }
 })();

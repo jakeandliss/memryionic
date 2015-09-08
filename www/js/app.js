@@ -22,7 +22,8 @@ angular.module('memryApp', [
   'bootstrapLightbox',
   'ngAudio',
   'readMore',
-  'ngTagsInput'
+  'ngTagsInput',
+  'infinite-scroll'
 ])
 
 .run(function ($ionicPlatform, $rootScope, deviceDetector) {

@@ -11,9 +11,9 @@
     </div>
   </ion-nav-title>
 
-  <ion-content ng-controller="EntriesCtrl as entry">
+<ion-content ng-controller="EntriesCtrl as entry">
 
-    <div class="list card" ng-repeat="entry in entries">
+    <div class="list card" ng-repeat="entry in scrolling.entriesList">
       <div class="item item-text-wrap gray">
         <i class="button-icon icon ion-android-more-horizontal" style="float:right;" ng-click="openPopover($event,entry)"></i>
         <h2>{{entry.title}}</h2>
@@ -95,7 +95,9 @@
         </a>
       </div>
     </div>
-  </ion-content>
+    <ion-infinite-scroll on-infinite="showNext()" distance="1%">
+  </ion-infinite-scroll>
+</ion-content>
 </ion-view>
 
 <!-- Popover for editing and deleting-->
