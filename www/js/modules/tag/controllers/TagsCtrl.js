@@ -39,14 +39,17 @@
         var filterResult = $scope.tags.filter(function(elem){
           return elem.id == $stateParams.id; 
         });
-        $scope.parentTag = filterResult[0];
-        //$scope.selectedTag = filterResult[0];
-        $scope.filteredTags = filterResult[0].children;
-        $scope.childLabel = filterResult[0].name;
-        $scope.label = "";
-        $scope.labelId = filterResult[0].id;
-        $scope.showBackButton=true;
-        
+        if(filterResult.length){
+          $scope.parentTag = filterResult[0];
+          //$scope.selectedTag = filterResult[0];
+          $scope.filteredTags = filterResult[0].children;
+          $scope.childLabel = filterResult[0].name;
+          $scope.label = "";
+          $scope.labelId = filterResult[0].id;
+          $scope.showBackButton=true;
+        }else{
+          $scope.childLabel="Go Back"
+        }
       }
       else
       {

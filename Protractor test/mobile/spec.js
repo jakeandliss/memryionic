@@ -40,7 +40,9 @@ describe('delete Entry',function(){
 		browser.sleep(1500);
 		element(by.css('[ng-click="removeMobile()"]')).click();
 		browser.sleep(500);
-		element(by.css('[ng-click="deleteResource()"]')).click();
+		element.all(by.css('[ng-click="$buttonTapped(button, $event)"]')).then(function(buttons){
+			buttons[2].click();	
+		});
         browser.sleep(2000);
 	})
 });

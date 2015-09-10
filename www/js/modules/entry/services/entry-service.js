@@ -20,7 +20,8 @@
         // Might use a resource here that returns a JSON array
 
     // Some fake testing data
-    var entries = [{
+    var entries=[];
+    var oldEntries = [{
       id: 0,
       tagID:0,
       title: 'When I was on my way home today this happened. And I wasn\'t expecting it...',
@@ -231,69 +232,74 @@
         name: 'test 5'
       }]
     }];
-    function scrolling(id){
-      this.entriesList=[];
-      this.loading=false;
-      this.after=0;
-      if(id>=0){
-          var filterResult=entries.filter(function(elem){
+      function getNextRecords(after,id){
+        if(id>=0){
+          var filterResult=oldEntries.filter(function(elem){
               return elem.tagID==id;
           });
-          
-          if(filterResult.length){
-            var totalRecord=filterResult.length;
-            if(totalRecord>5){
-              totalRecord=5;
+          var lastIndex=filterResult.map(function(e){return e.id}).indexOf(after);
+          lastIndex++;
+          var loopUpto=filterResult.length - lastIndex;
+            if(loopUpto>10){
+              loopUpto=10;
+            }else if(loopUpto<=0){
+              loopUpto=0;
+            }else{
+              loopUpto=loopUpto+after;
             }
-            for(i=0;i<totalRecord;i++){
-              this.entriesList.push(filterResult[this.after]);
-              this.after++;
+            for(i=lastIndex;i<loopUpto;i++){
+              entries.push(filterResult[lastIndex]);
             };
-          }
         }else{
-          for(i=0;i<=5;i++){
-            this.entriesList.push(entries[this.after]);
-            this.after++;
-          };
+          var lastIndex=oldEntries.map(function(e){return e.id}).indexOf(after);
+          lastIndex++;
+          var loopUpto=oldEntries.length - lastIndex;
+            if(loopUpto>10){
+              loopUpto=10;
+            }else if(loopUpto<=0){
+              loopUpto=0;
+            }else{
+              loopUpto=loopUpto+lastIndex;
+            }
+            for(i=lastIndex;i<loopUpto;i++){
+              entries.push(oldEntries[i]);
+            };
         }
           return null;
-      };
-      function getNextRecords(after,id){
-        var List=[]
-        if(id>=0){
-          var filterResult=entries.filter(function(elem){
-              return elem.tagID==id;
-          });
-          var loopUpto=filterResult.length - after;
-            if(loopUpto>10){
-              loopUpto=10;
-            }else if(loopUpto<0){
-              loopUpto=0;
-            }else{
-              loopUpto=loopUpto+after;
-            }
-            for(i=after;i<loopUpto;i++){
-              List.push(filterResult[after]);
-              after++;
-            };
-        }else{
-          var loopUpto=entries.length - after;
-            if(loopUpto>10){
-              loopUpto=10;
-            }else if(loopUpto<0){
-              loopUpto=0;
-            }else{
-              loopUpto=loopUpto+after;
-            }
-            for(i=after;i<loopUpto;i++){
-              List.push(entries[after]);
-              after++;
-            };
-        }
-          return List;
       }
         return {
             all: function () {
+                return oldEntries;
+            },
+            getEntries:function(id){
+              
+                entries.length=0;
+               
+                if(id>=0){
+                  var filterResult=oldEntries.filter(function(elem){
+                    return elem.tagID==id;
+                  });
+                  var loopUpto=filterResult.length;
+                  if(loopUpto>5){
+                    loopUpto=5;
+                  }else if(loopUpto<0){
+                    loopUpto=0;
+                  }else{
+                    loopUpto=filterResult.length;
+                  }
+                  i=0;
+                   while(i<loopUpto){
+                    entries.push(filterResult[i]);
+                    i++;
+                   } 
+                  // for(i=0;i<loopUpto;i++){
+                  //   entries.push(filterResult[i]);
+                  // }
+                }else{
+                  for(i=0;i<5;i++){
+                    entries.push(oldEntries[i]);
+                  }
+                }
                 return entries;
             },
             remove: function (entry) {
@@ -308,8 +314,10 @@
                 return null;
             },
             getVideos: function () {
+              var video_sources = [];
+              if(entries.length){
                 var resources = entries[0].resources;
-                var video_sources = [];
+                
                 angular.forEach(resources, function (value, key) {
                     if (value.attachment_content_type == 'video') {
                         video_sources.push({
@@ -318,6 +326,7 @@
                         })
                     }
                 });
+              };
                 return video_sources;
             },
             removeResource:function(entry,resource){
@@ -334,7 +343,6 @@
             resource:{},
             selectedEntry: {},
             modalInstance: {},
-            scrolling:scrolling,
             getNextRecords:getNextRecords
         };
     })
