@@ -40,8 +40,8 @@ describe('delete Entry',function(){
 		browser.sleep(1500);
 		element(by.css('[ng-click="removeMobile()"]')).click();
 		browser.sleep(500);
-		element.all(by.css('[ng-click="$buttonTapped(button, $event)"]')).then(function(buttons){
-			buttons[2].click();	
+		element.all(by.repeater('button in buttons')).then(function(buttons){
+			buttons[1].click();	
 		});
         browser.sleep(2000);
 	})
@@ -79,29 +79,32 @@ describe('open imageSlide',function(){
 describe('delete Audio',function(){
 	it('',function(){
 		var entries=element.all(by.repeater("entry in entries"));
-		entries.get(0).element.all(by.css('[ng-click="selectTab(fileType.id)"]')).then(function (list){list[3].click()});
+		// entries.get(0).element.all(by.css('[ng-click="selectTab(fileType.id)"]')).then(function (list){
+		// 	expect(list[1].getText()).toEqual(1);
+		// });
+		element(by.id("selectTab2")).click();
 		browser.sleep(2000);
-		entries.get(0).element(by.css('[ng-click="removeMobileFile($event,resource,entry)"]')).click();
-		//element(by.css('[ng-click="candelDeleteResource()"]')).click();
-        // var deletebutton=element(by.id("deleteButton"));
-        // browser.actions().mouseMove(deletebutton).click().perform();
-        var popover=element.all(by.css(".popover-backdrop"));
-        	expect(1).toEqual(1);
-        	popover.get(0).element(by.id("deleteButton")).click();
-        	//popover[popover.count()-1].element(by.id("deleteButton")).click();
+		var removeButton= entries.get(0).element(by.css('[ng-if="resource.attachment_content_type == \'audio\'"]'));
+		removeButton.element(by.css('[ng-click="removeMobileFile($event,resource,entry)"]')).click();
+        browser.sleep(1000);
+        element.all(by.repeater('button in buttons')).then(function(buttons){
+			buttons[1].click();	
+		});
         browser.sleep(2000);
 	})
 });
 describe('delete File',function(){
 	it('',function(){
 		var entries=element.all(by.repeater("entry in entries"));
-		entries.get(0).element.all(by.css('[ng-click="selectTab(fileType.id)"]')).then(function (list){list[2].click()});
+		// entries.get(0).element.all(by.css('[ng-click="selectTab(fileType.id)"]')).then(function (list){list[1].click()});
+		element(by.id("selectTab1")).click();
 		browser.sleep(2000);
 		var removeButton= entries.get(0).element(by.css('[ng-if="resource.attachment_content_type == \'pdf\'"]'));
 		removeButton.element(by.css('[ng-click="removeMobileFile($event,resource,entry)"]')).click();
-        var popover=element.all(by.css(".popover-backdrop"));
-        	
-        	popover.get(1).element(by.id("deleteButton")).click();
+        browser.sleep(1000);
+        element.all(by.repeater('button in buttons')).then(function(buttons){
+			buttons[1].click();	
+		});
         browser.sleep(2000);
 	})
 });

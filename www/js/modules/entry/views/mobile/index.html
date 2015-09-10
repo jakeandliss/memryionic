@@ -27,7 +27,7 @@
       <section ng-controller="PanelCtrl as panel1" ng-init="CreateResourceTypeList(entry.resources)">
          <div class="item tabs tabs-secondary tabs-icon-left" ng-if="ResourceList.length>1">
           <a class="tab-item" ng-repeat="fileType in ResourceList" ng-click="panel1.selectTab($index)" ng-class="{ active:panel1.isSelected($index) }">
-            <div ng-click="selectTab(fileType.id)">
+            <div id="selectTab{{$index}}" ng-click="selectTab(fileType.id)">
             <i class="icon ion-ios-glasses text-danger" ng-if="fileType.type=='Visual'"></i>
             <i class="icon ion-mic-c text-success" ng-if="fileType.type=='Audio'"></i>
             <i class="icon ion-document-text text-info" ng-if="fileType.type=='Files'"></i>

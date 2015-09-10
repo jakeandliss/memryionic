@@ -100,9 +100,9 @@
           closeSearch()"></i>
       </form>
     </div>
-  <div class="row margin-top">
+  <div>
     <div infinite-scroll="showNext()" infinite-scroll-immediate-check="false" infinite-scroll-distance='0' infinite-scroll-disabled="busy">
-      <div ng-repeat="entry in entries">
+      <div class="row margin-top" ng-repeat="entry in entries">
         <div class="col-xs-9" style="margin-right:-.5rem">
           <md-card class="entry rounded">
             <md-card-content class="header">
@@ -136,7 +136,7 @@
                     <slick settings="slickConfig" class="slick-uninitialized">
                       <div class="slick" ng-repeat="resource in entry.resources | filter: selectVisuals" ng-if="resource.attachment_content_type == 'image' || resource.attachment_content_type == 'video'">
                         <img ng-src="{{resource.attachment}}" class="md-card-image" ng-if="resource.attachment_content_type == 'image'">
-                        <div id="popupButton" ng-click='openLightBoxModel($index,entry.resources)'>
+                        <div id="popupButton{{$index}}" ng-click='openLightBoxModel($index,entry.resources)'>
                         <md-icon class="material-icons lightbox-button"  ng-if="resource.attachment_content_type == 'image'">open_in_new</md-icon>
                       </div>
                         <div ng-click='openLightBoxModel($index,entry.resources)' ng-if="resource.attachment_content_type == 'video'" class="video-thumb">

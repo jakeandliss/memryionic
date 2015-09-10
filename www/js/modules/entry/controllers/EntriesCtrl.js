@@ -814,9 +814,11 @@
        $scope.showNext=function(){
         if($(window).scrollTop()>$(document).height()-750){
           if(!$scope.busy){
-            $scope.busy=true;
-            Entries.getNextRecords($scope.entries[$scope.entries.length-1].id,$stateParams.id);
-            $scope.busy=false;
+            if($scope.entries.length){
+              $scope.busy=true;
+              Entries.getNextRecords($scope.entries[$scope.entries.length-1].id,$stateParams.id);
+              $scope.busy=false;
+            }
           }
         }
        }

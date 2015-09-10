@@ -303,7 +303,9 @@
                 return entries;
             },
             remove: function (entry) {
+                
                 entries.splice(entries.indexOf(entry), 1);
+                oldEntries.splice(oldEntries.indexOf(entry),1);
             },
             get: function (EntryId) {
                 for (var i = 0; i < entries.length; i++) {
@@ -334,11 +336,14 @@
               resources.splice(resources.indexOf(resource),1);
             },
             addEntry:function(entry){
+              oldEntries.unshift(entry);
               entries.unshift(entry);
             },
             update:function(entry){
               var index=entries.map(function(e){return e.id}).indexOf(entry.id);
-              entries[index]=angular.copy(entry);
+              entries[index]=entry;
+              var oldFileIndex=oldEntries.map(function(e){return e.id}).indexOf(entry.id);
+              oldEntries[oldFileIndex]=entry;
             },
             resource:{},
             selectedEntry: {},

@@ -8,7 +8,7 @@ describe('Add New Entry', function() {
     element(by.model("newTag.text")).sendKeys("tes");
     element(by.model("newTag.text")).sendKeys(",");
     element(by.id("saveEntry")).click();
-    var EntryList=element.all(by.repeater("entry in filterentries"));
+    var EntryList=element.all(by.repeater("entry in entries"));
     expect(EntryList.count()).toEqual(6);
     expect(EntryList.get(0).element(by.name("title")).getText()).toEqual("Protractor Title");
   });
@@ -80,9 +80,32 @@ describe('Add new Entry in selected tag', function() {
          
   });
 });
+
+describe('delete entry',function(){
+    it('',function(){
+        var entries=element.all(by.repeater('entry in entries'));
+        entries.get(0).element(by.css('[ng-click="showBottomSheet(entry)"]')).click();
+        browser.sleep(500);
+        element(by.css('[ng-click="remove()"]')).click();
+        browser.sleep(1000);
+        element(by.css('[ng-click="deleteResource()"]')).click();
+        browser.sleep(1000);
+    })
+});
+describe('delete entry',function(){
+    it('',function(){
+        var entries=element.all(by.repeater('entry in entries'));
+        entries.get(0).element(by.css('[ng-click="showBottomSheet(entry)"]')).click();
+        browser.sleep(500);
+        element(by.css('[ng-click="remove()"]')).click();
+        browser.sleep(1000);
+        element(by.css('[ng-click="deleteResource()"]')).click();
+        browser.sleep(1000);
+    })
+})
 describe('edit Entry',function(){
     it('check Entry open in popup modal',function(){
-        var EntryList=element.all(by.repeater('entry in filterentries'));
+        var EntryList=element.all(by.repeater('entry in entries'));
         EntryList.get(0).element(by.css('[ng-click="showBottomSheet(entry)"]')).click();
         browser.sleep(500);
         element(by.css('[ng-click="openModal($index)"]')).click();
@@ -110,28 +133,23 @@ describe("Edit tag",function(){
 });
 describe('open image',function(){
     it("should have Image",function(){
-        browser.get('http://localhost:8100/#/entries');
-        browser.driver.manage().window().maximize();
-        browser.executeScript('window.scrollTo(0,300);');
-        // var EntryList=element.all(by.repeater("entry in filterentries"));     
-        // EntryList.get(0).element(by.id('popupButton')).click();
-        element.all(by.repeater("entry in filterentries")).then(function(entries){
-            browser.actions().mouseMove(entries[0].element(by.id("popupButton"))).click().perform();
+        // browser.get('http://localhost:8100/#/entries')
+        browser.executeScript('window.scrollTo(0,350);');
+        element.all(by.repeater("entry in entries")).then(function(entries){
+            entries[0].element(by.id("popupButton0")).click();
         })
-        //browser.actions().mouseMove(popupButton).click().perform();
-        browser.sleep(500);
         var imageElement=element(by.css('[ng-swipe-left="Lightbox.nextImage()"]'));
+        imageElement.sendKeys(protractor.Key.RIGHT); 
         imageElement.sendKeys(protractor.Key.RIGHT);
-        browser.sleep(500); 
         imageElement.sendKeys(protractor.Key.RIGHT);
-        browser.sleep(3000);
-        imageElement.sendKeys(protractor.Key.RIGHT);
-        imageElement.sendKeys(protractor.Key.ESCAPE);
+        // imageElement.sendKeys(protractor.Key.ESCAPE);
+        // browser.actions().sendKeys(protractor.Key.ESCAPE).perform();
+        element(by.css('[ng-click="close($event)"]')).click();
     })
 });
 describe("Delete Image/Video",function(){
     it("Delete will perform on update",function(){
-        var EntryList=element.all(by.repeater('entry in filterentries'));
+        var EntryList=element.all(by.repeater('entry in entries'));
         EntryList.get(0).element(by.css('[ng-click="showBottomSheet(entry)"]')).click();
         browser.sleep(500);
         element(by.css('[ng-click="openModal($index)"]')).click();
@@ -143,7 +161,7 @@ describe("Delete Image/Video",function(){
 });
 describe("Delete Entry",function(){
     it("check confirm",function(){
-        var EntryList=element.all(by.repeater('entry in filterentries'));
+        var EntryList=element.all(by.repeater('entry in entries'));
         EntryList.get(0).element(by.css('[ng-click="showBottomSheet(entry)"]')).click();
         browser.sleep(1000);
         element(by.css('[ng-click="remove()"]')).click();
@@ -154,8 +172,8 @@ describe("Delete Entry",function(){
 });
 describe("play Audio",function(){
     it("pause,mute and stop",function(){
-        var EntryList=element.all(by.repeater("entry in filterentries"));
-        browser.executeScript('window.scrollTo(0,250);').then(function () {});
+        var EntryList=element.all(by.repeater("entry in entries"));
+        browser.executeScript('window.scrollTo(0,400);').then(function () {});
         browser.sleep(2000);
         EntryList.get(0).element(by.id("playButton3")).click();
         browser.sleep(5000);
@@ -173,7 +191,7 @@ describe("play Audio",function(){
 });
 describe("Delete Audio File",function(){
     it("confirm Delete",function(){
-        var EntryList=element.all(by.repeater("entry in filterentries"));
+        var EntryList=element.all(by.repeater("entry in entries"));
         EntryList.get(0).element(by.css('[ng-click="removeFile(resource,entry)"]')).click();
         browser.sleep(500);
         element(by.css('[ng-click="deleteResource()"]')).click();
@@ -186,7 +204,7 @@ describe("Delete Audio File",function(){
 });
 describe("Delete pdf File",function(){
     it("confirm Delete",function(){
-        var EntryList=element.all(by.repeater("entry in filterentries"));
+        var EntryList=element.all(by.repeater("entry in entries"));
         EntryList.get(0).element(by.css('[ng-click="removeFile(resource,entry)"]')).click();
         browser.sleep(500);
         element(by.css('[ng-click="deleteResource()"]')).click();
