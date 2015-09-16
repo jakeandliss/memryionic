@@ -5,8 +5,8 @@
 
       .controller('EntriesCtrl', EntriesCtrl)
 
-    EntriesCtrl.$inject = ['$scope', '$stateParams', 'Entries', '$ionicModal', '$mdBottomSheet', '$sce', '$ionicPopover', '$modal', 'Lightbox', 'ngAudio', 'timeAgo','$ionicScrollDelegate','Tags','$ionicPopup'];
-    function EntriesCtrl($scope, $stateParams, Entries, $ionicModal, $mdBottomSheet, $sce, $ionicPopover, $modal, Lightbox, ngAudio, timeAgo,$ionicScrollDelegate,Tags,$ionicPopup) {
+    EntriesCtrl.$inject = ['$scope', '$stateParams', 'Entries', '$ionicModal', '$mdBottomSheet', '$sce', '$ionicPopover', '$modal', 'Lightbox', 'ngAudio', 'timeAgo','$ionicScrollDelegate','Tags','$ionicPopup','UserService'];
+    function EntriesCtrl($scope, $stateParams, Entries, $ionicModal, $mdBottomSheet, $sce, $ionicPopover, $modal, Lightbox, ngAudio, timeAgo,$ionicScrollDelegate,Tags,$ionicPopup,UserService) {
       $scope.entry = {};
       $scope.tags = [];
       $scope.SearchBeginningDate=new Date();
@@ -468,7 +468,21 @@
       $scope.closeEditModal = function () {
         Entries.modalInstance.dismiss('cancel');
       };
-
+      $scope.share=function(){
+         $mdBottomSheet.cancel();
+        
+        var modalInstance = $modal.open({
+          animation: $scope.animationsEnabled,
+          templateUrl: '/js/modules/entry/views/desktop/share.html',
+          controller: 'EntriesCtrl',
+          size: 'md',
+          animation: true
+        });
+        Entries.modalInstance=modalInstance;
+      }
+      $scope.closeShare=function(){
+        Entries.modalInstance.dismiss('cancel');
+      }
         $scope.selectedEntry=angular.copy(Entries.selectedEntry);
         //$scope.selectedTags=$scope.selectedEntry.tags;
         $scope.selectedTags=[];
@@ -821,6 +835,27 @@
             }
           }
         }
+       }
+
+       $scope.shareUsers=[];
+       $scope.user={};
+       $scope.AddUser=function(){
+          var checkUser=$scope.shareUsers.filter(function(elem){
+            return elem.email==$scope.user.email;
+          })
+          if(checkUser.length<=0){
+            $scope.shareUsers.push($scope.user);
+          }
+          $scope.user={};
+       }
+       $scope.fillUser=function(){
+        var returnUser=UserService.getUser($scope.user.email);
+        if(returnUser.length){
+          $scope.user=returnUser[0];
+        }
+       }
+       $scope.removeShareUser=function(user){
+          $scope.shareUsers.splice($scope.shareUsers.indexOf(user),1);
        }
     }
   })();

@@ -1,0 +1,43 @@
+
+<div class="col-sm-3">	
+	<md-list>
+      <md-list-item class="md-2-line">
+        <img src="https://avatars3.githubusercontent.com/u/11214?v=3&s=460" class="md-avatar" alt="" />
+        <div class="md-list-item-text">
+          <h3>Jake Thompson</h3>
+          <a ui-sref="app.profile"><u>Edit Profile</u></a>
+        </div>
+      </md-list-item>
+    </md-list>
+    <div ng-repeat="group in GroupList" class="margin-bottom tag">
+    	<a class="btn btn-primary" ui-sref="app.selectGroup({id:group.id})">{{group.name}}</a>
+    </div>
+</div>
+<div class="col-sm-9 bg-white" >
+	<div class=" padding rounded">
+	<h3 class="md-title"><span class="pull-left"> Group</span> 
+		<button class="btn btn-primary pull-right"> Add Group</button>
+	</h3>
+	</div><br>
+	<div class=" padding rounded" ng-show="showGroupDetail">
+			<h4 class="md-title">
+				<span class="pull-left">{{selectGroup.name}}</span>
+				<button type="button" class="btn btn-primary pull-right" ng-click="addMember()">Add Members</button>
+			</h4>		
+	
+		<table>
+			<tr>
+				<th>Email</th>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Actions</th>
+			</tr>
+			<tr ng-repeat="user in selectGroup.users">
+				<td>{{user.email}}</td>
+				<td>{{user.firstName}}</td>
+				<td>{{user.lastName}}</td>
+				<td><a class="pointer" ng-click="removeUser(selectGroup.id,user)">Remove</a></td>
+			</tr>
+		</table>
+	</div>
+</div>

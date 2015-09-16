@@ -1,12 +1,11 @@
 <div class="modal-header">
  		<h4 class="modal-title">Entry Title
- 		<a class="pointer pull-right" ng-click="closeShare()">
+ 		<a class="pointer pull-right" ng-click="closeModal()">
  			<md-icon class="material-icons">clear</md-icon>
  		</a></h4>
 </div>
 <div class="modal-body">
-	Who would you like to share this entry with?
- 	<div class="row centered">
+	<div class="row centered">
 	 	<div class="col-xs-4 col-centered">Email</div>
 	 	<div class="col-xs-3 col-centered">
 	 		First Name
@@ -15,25 +14,9 @@
 	 		Last Name 
 	 	</div>
 	 	<div class="col-xs-2 col-centered"></div>
- 	</div>
- 	<div ng-repeat="shareUser in shareUsers">
- 		<div class="row centered">
-		 	<div class="col-xs-4 col-centered">{{shareUser.email}}</div>
-		 	<div class="col-xs-3 col-centered">
-		 		{{shareUser.firstName}}
-		 	</div>
-		 	<div class="col-xs-3 col-centered">
-		 		{{shareUser.lastName}}
-		 	</div>
-		 	<div class="col-xs-2 col-centered">
-		 		<a class="pointer pull right" ng-click="removeShareUser(shareUser)">
-		 			<md-icon class="material-icons">clear</md-icon>
-		 		</a>
-		 	</div>
- 		</div>
- 	</div>
- 	<div class="row centered">
- 		<form name="shareForm" novalidate ng-submit="AddUser()">
+	</div>
+	<form name="shareForm" novalidate ng-submit="AddUser()">
+		<div class="row centered">
 		 	<div class="col-xs-4 col-centered">
 		 		<input type="email" ng-model="user.email" name="email" required class="form-control flat bg-gray margin-bottom" ng-class="{error:shareForm.email.$dirty&& shareForm.email.$invalid}" ng-blur="fillUser()"> 
 		 	</div>
@@ -44,11 +27,12 @@
 		 		<input type="text" ng-model="user.lastName" class="form-control flat bg-gray margin-bottom">
 		 	</div>
 		 	<div class="col-xs-2 col-centered">
-		 		<button type="submit" ng-disabled="shareForm.$invalid" class="btn btn-primary">Add</button>
+		 		
 		 	</div>
-	 	</form>
- 	</div>
- 	<hr>
- 	Do you like to share your entry with group of users?
- 	<button class="btn btn-primary btn-block">Share</button>
- </div>
+		 	
+	 	</div>
+	 	<div class="row centered" >
+	 		<button type="submit" ng-disabled="shareForm.$invalid" class="btn btn-primary col-xs-4 col-centered">Save</button>
+	 	</div>
+ 	</form>
+</div>
