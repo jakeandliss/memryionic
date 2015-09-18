@@ -106,7 +106,13 @@
         <div class="col-xs-9" style="margin-right:-.5rem">
           <md-card class="entry rounded">
             <md-card-content class="header">
-              <md-button class="pull-right no-margin" aria-label="Edit or Delete" class="md-primary md-raised" ng-click="showBottomSheet(entry)">
+              <md-button class="pull-right no-margin" aria-label="Edit or Delete" class="md-primary md-raised" ng-show="!entry.shared" ng-click="showBottomSheet(entry)">
+                <md-icon class="material-icons">more_horiz</md-icon>
+                <md-tooltip>
+                  Edit or Delete
+                </md-tooltip>
+              </md-button>
+              <md-button class="pull-right no-margin" aria-label="Edit or Delete" class="md-primary md-raised" ng-show="entry.shared" ng-click="showSharedBottomSheet(entry)">
                 <md-icon class="material-icons">more_horiz</md-icon>
                 <md-tooltip>
                   Edit or Delete
@@ -261,16 +267,16 @@
       <div class="col-sm-9">
         <md-card class="entry">
           <md-card-content class="content">
-          <p class="md-title" ng-show="!busy">
-            No More Content Found
-          </p>
-          <p class="md-title" ng-show="busy">
-            Loading....
-          </p>
-        </md-card-content>
-      </md-card>
+            <p class="md-title" ng-show="!busy">
+              No More Content Found
+            </p>
+            <p class="md-title" ng-show="busy">
+              Loading....
+            </p>
+          </md-card-content>
+        </md-card>
+      </div>
     </div>
-  </div>
 </div>
 
 

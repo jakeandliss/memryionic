@@ -50,5 +50,12 @@
  	</div>
  	<hr>
  	Do you like to share your entry with group of users?
- 	<button class="btn btn-primary btn-block">Share</button>
+ 	<div ng-controller="GroupCtrl">
+ 		<div class="form-group" >
+ 			<div class="checkbox-inline" ng-repeat="group in GroupList">
+ 			<label><input type="checkbox" ng-change="checkFire(group)" ng-model="group.checked">{{group.name}} </label>
+ 			</div>
+ 		</div>
+ 	</div>
+ 	<button class="btn btn-primary btn-block" ng-click="shareEntry()">Share</button>
  </div>

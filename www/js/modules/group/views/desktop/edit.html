@@ -1,0 +1,21 @@
+<div class="modal-header">
+  <h4 class="modal-title">Edit Group</h3>
+  </div>
+  <div class="modal-body">
+    <form role="form" novalidate name="groupForm">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group" ng-class="{'has-error': groupForm.name.$invalid }">
+            <label for="name">Name:</label>
+            <input type="text" ng-model="selectedGroup.name" required class="form-control" name="name" id="name">
+            <span class="help-block" ng-show="groupForm.name.$error.required">Name is required</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-primary" id="updateTag" ng-disabled="groupForm.$invalid" ng-click="updateGroup()">Save</button>
+  <button type="button" class="btn btn-warning" ng-click="closeModal()">Cancel</button>
+</div>

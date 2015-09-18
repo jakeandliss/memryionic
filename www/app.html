@@ -26,6 +26,10 @@ navigation history that also transitions its views in and out.
       <ion-nav-view name="profile"></ion-nav-view>
     </ion-tab>
 
+    <!-- Group Tab -->
+    <ion-tab title="Group" icon-off="ion-person-stalker-outline" icon-on="ion-person-stalker" ui-sref="app.group">
+      <ion-nav-view name="group"></ion-nav-view>
+    </ion-tab>
   </ion-tabs>
 </div>
 
@@ -42,6 +46,7 @@ navigation history that also transitions its views in and out.
     <div class="collapse navbar-collapse navbar-right" id="navbar-collapse-01">
       <ul class="nav navbar-nav">
         <li><a class="a font-white bold" ui-sref="app.entries">Entries</a></li>
+        <li><a class="a font-white bold" ui-sref="app.group">Group</a></li>
         <li><a class="a font-white bold" ui-sref="app.profile">Profile</a></li>
         <li><a class="a font-white bold" ui-sref="app.tags">Logout</a></li>
       </ul>
@@ -60,5 +65,6 @@ navigation history that also transitions its views in and out.
     <div ui-view="tags"></div>
     <div ui-view="profile"></div>
     <div ui-view="forgot-password"></div>
+    <div ui-view="group"></div>
 
 </div>

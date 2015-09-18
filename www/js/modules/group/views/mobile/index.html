@@ -1,1 +1,90 @@
-<h2>Group Index</h2>
+<ion-view view-title="Group">
+  <ion-content>
+      <div class="item item-icon-left item-dark">
+        <i class="icon ion-person-stalker"></i>
+       <span class="item-note"> 
+       <span  ng-click="newMobileGroup()">Add New</span>
+      </span>
+      </div>
+      <!-- new tag-->
+    <form id="newGroup" name="newGroup" novalidate ng-show="isNew">
+      <label class="item item-input" ng-class="{'has-error':newGroup.name.$invalid}">
+        <span class="input-label">Name</span>
+        <input type="text" name="name" id="name" required ng-model="group.name">
+      </label>
+      <div class="form-error" ng-show="newGroup.name.$invalid&&newGroup.name.$dirty">
+        <div ng-show="newGroup.name.$error.required">Name is required
+      </div>
+      </div>
+      <div class='row'>
+          <div class='col'></div>
+        <div class='col'><a style="float:right;" class="padding-top" ng-click="cancelNewGroup()">Cancel</a></div>
+        <div class='col'>
+          <button type="button" class="button button-small button-outline button-assertive expand" ng-disabled="newGroup.$invalid" ng-click="AddMobileGroup()">Save</button>
+        </div>
+      </div>
+    </form>
+    <!-- group list -->
+  <div id="group-list">
+    <ion-list class="list checklist" can-swipe="true">
+      <ul>
+        <li ng-repeat="group in GroupList">
+          <ion-item >
+          <div class="item-icon-left item-icon-right item-stable" ui-sref="app.selectMobileGroup({id:group.id})">
+             {{ group.name }}
+             <ion-option-button class="button-energized icon ion-edit" ng-click="editMobile($event,group)"></ion-option-button>
+             <ion-option-button class="button-assertive icon ion-trash-b" ng-click="deleteMobile(group)"></ion-option-button>
+          </div>
+        </ion-item>
+      </li>
+     </ul> 
+    </ion-list>
+  </div>
+    <!-- edit group -->
+    
+    <form id="edit-group" name="editGroup" novalidate ng-show="isEditing">
+      <label class="item item-input" ng-class="{'has-error': editGroup.name.$invalid }">
+        <span class="input-label">Name</span>
+        <input type="text" id='name' name='name' required ng-model="selectedGroup.name">
+      </label>
+      <div class="form-error" ng-show="editGroup.name.$invalid&&editGroup.name.$dirty">
+        <div ng-show="editGroup.name.$error.required">Name is required </div>
+      </div>
+      <div class='row'>
+          <div class='col'></div>
+        <div class='col'><a style="float:right;" class="padding-top" ng-click="cancel()">Cancel</a></div>
+        <div class='col'>
+        <button class="button button-small button-outline button-assertive expand" ng-disabled="editGroup.$invalid" ng-click="updateMobileGroup()">Save</button>
+      </div>
+    </form>
+
+
+    <!-- Partial for editing labels -->
+   <!--  <form id="edit-tag" name="tagForm" novalidate ng-show="isEditing">
+      <label class="item item-input" ng-class="{'has-error': tagForm.name.$invalid }">
+        <span class="input-label">Name</span>
+        <input type="text" name="name" id='name' required ng-model="selectedTag.name">
+      </label>
+      <div class="form-error" ng-show="tagForm.name.$invalid&&(tagForm.name.$dirty||tagForm.name.$touched)">
+        <div ng-show="tagForm.name.$error.required">Name is required </div>
+      </div>
+
+      <label class="item item-input item-select">
+        <span class="input-label">
+          Parent
+        </span>
+        <select name="parent_id" ng-model="selectedTag.ancestry">
+          <option ng-repeat='tag in tags' value='{{tag.id}}'>{{tag.name}}</option>
+        </select>
+      </label>
+      <div class='row'>
+          <div class='col'></div>
+        <div class='col'><a style="float:right;" class="padding-top" ng-click="cancel()">Cancel</a></div>
+        <div class='col'>
+        <button class="button button-small button-outline button-assertive expand" ng-disabled="tagForm.$invalid" ng-click="save()">Save</button>
+    	</div>
+
+       </div>
+    </form> -->
+  </ion-content>
+</ion-view>

@@ -1,0 +1,22 @@
+.desktop .group .edit{
+  float: left;
+  width: 20%;
+  display: inherit;
+  padding: 5px;
+  background-color: #01A383;
+  height: 100%;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  display: none;
+}
+.desktop .group:hover button{
+  width: 80%;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.desktop .group:hover .edit {
+  display: inherit;
+}
+.desktop .group md-icon {
+    color: #fff;
+}

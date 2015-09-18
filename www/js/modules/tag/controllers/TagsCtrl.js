@@ -162,7 +162,6 @@ $scope.saveTag = function(){
   $scope.modalInstance.dismiss('cancel');
 };
 $scope.updateTag=function(){
-  console.log($scope.selectedTag);
   Tags.update($scope.selectedTag);
   $scope.modalInstance.dismiss('cancel');
 }

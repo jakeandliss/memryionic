@@ -15,7 +15,8 @@
 
     <div class="list card" ng-repeat="entry in entries">
       <div class="item item-text-wrap gray">
-        <i class="button-icon icon ion-android-more-horizontal" style="float:right;" ng-click="openPopover($event,entry)"></i>
+        <i class="button-icon icon ion-android-more-horizontal" style="float:right;" ng-click="openPopover($event,entry)" ng-show="!entry.shared"></i>
+         <i class="button-icon icon ion-android-more-horizontal" style="float:right;" ng-click="openSharePopover($event,entry)" ng-show="entry.shared"></i>
         <h2>{{entry.title}}</h2>
         <p>{{entry.date | date: "longDate"}}</p>
       </div>
@@ -115,17 +116,16 @@
     </ion-content>
   </ion-popover-view>
 </script>
-<script id="delete-confirm.html" type="text/ng-template">
+<script id="my-share-popover.html" type="text/ng-template">
   <ion-popover-view>
     <ion-content>
       <div class="list">
-        <div class="item" >
-          Are you sure you want to delete this?
-        </div>
-        <div class="item">
-          <button id="deleteButton" ng-click="deleteResource()" class="btn btn-primary">Yes</button>
-          <button ng-click="candelDeleteResource()" class="btn btn-default">No</button>
-        </div>
+        <a class="item" ng-click="openShareEdit()" ng-model="entry.id">
+          Edit
+        </a>
+        <a class="item" ng-click="removeShareMobile()">
+          Hide
+        </a>
       </div>
     </ion-content>
   </ion-popover-view>

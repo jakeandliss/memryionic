@@ -1,0 +1,62 @@
+
+  <div class="desktop">
+    <div id="entries">
+      <form name="entryForm" id="edit-entry" class="bg-white padding" ng-submit="updateShare(entry)">
+        <div class="row dz-hide">
+          <div class="col-sm-8">
+            <input type="text" placeholder="Title this entry" class="form-control flat margin-bottom bg-gray" ng-disabled="true"  ng-model="selectedEntry.title" />
+          </div>
+          <div class="col-sm-4">
+            <div class="input-group date" ng-disabled="true">
+              <input type="text" class="form-control flat" ng-disabled="true" datepicker-popup="{{format}}" ng-model="selectedEntry.date" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+              <span class="input-group-addon flat" ><i class="fui-calendar-solid"></i></span>
+            </div>
+          </div>
+        </div>
+        <textarea placeholder="What would you like to remember?" rows="4" class="form-control flat margin-bottom bg-gray dz-hide" ng-disabled="true" ng-model="selectedEntry.content"></textarea>
+        <div class="tagsinput-primary dz-hide margin-bottom bg-gray">
+        <tags-input id="tagsLabel" name="tagsinput" placeholder="Add labels" ng-click="focusInputText($event)" class="" ng-model="selectedTags" replace-spaces-with-dashes="false">
+           <auto-complete ng-controller="TagsCtrl as tags" source="loadTags($query)" load-on-down-arrow="true" min-length="1"></auto-complete>
+        </tags-input>
+        </div>
+        <div ng-if="selectedEntry.resources" ng-disabled="true" class="md-padding col-sm-12">
+            <div class="pull-left " ng-repeat="resource in selectedEntry.resources" ng-if="resource.attachment_content_type == 'image' || resource.attachment_content_type == 'video'">
+              <div ng-if="resource.attachment_content_type == 'image'">
+              <img ng-src="{{resource.attachment}}" class="edit-image" >
+              <!-- <md-icon ng-show="onHover" class="">image</md-icon> -->
+              <div class="pointer">
+                <md-icon >delete</md-icon>
+                <a ng-click="removefromSelectedFile(resource)" >Delete</a>
+              </div>
+              </div>
+               <div ng-if="resource.attachment_content_type == 'video'">
+              <img ng-src="{{resource.attachment_thumbnail}}" class="edit-image">
+              <!-- <md-icon class="">play_circle_filled</md-icon> -->
+               <div class="pointer">
+                <md-icon>delete</md-icon>
+                <a ng-click="removefromSelectedFile(resource)" >Delete</a>
+              </div>
+              </div>
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-8">
+            <!-- <div class="dropzone" dropzone="dropzoneConfig">
+              <div class="dz-drag hidden"><p>Drag files here</p></div>
+              <div class="dz-message default-message">
+                <md-icon class="material-icons md-36 pull-left">attach_file</md-icon>
+                <md-tooltip>
+                  Attach Video, Image, Audio, or PDF
+                </md-tooltip>
+                <p>Drag or click to upload</p>
+              </div>
+            </div> -->
+          </div>
+          <div class="col-sm-4 dz-hide">
+            <button id="updateEntry" class="btn btn-block btn-primary" type="submit">Update Entry</button>
+            <a class="btn btn-block btn-default" data-dismiss="modal" ng-click="closeEditModal()">Cancel</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>

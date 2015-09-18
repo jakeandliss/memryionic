@@ -24,6 +24,7 @@
     var oldEntries = [{
       id: 0,
       tagID:0,
+      shared:false,
       title: 'When I was on my way home today this happened. And I wasn\'t expecting it...',
       content: 'You on your way? Because there is a really cool party and I want to go to it really really bad. There is only one way to go. With a #friend. You on your way? Because there is a really cool party and I want to go to it really really bad. There is only one way to go. With a #friend. You on your way? Because there is a really cool party and I want to go to it really really bad. There is only one way to go. With a #friend. There is only one way to go. With a #friend. You on your way? Because there is a really cool party and I want to go to it really really bad. There is only one way to go. With a #friend. You on your way? Because there is a really cool party and I want to go to it really really bad.',
       resources: [{
@@ -64,6 +65,7 @@
     }, {
       id: 1,
       tagID:0,
+      shared:false,
       title: 'Max Lynx',
       content: 'Hey, it\'s me',
       image: 'https://avatars3.githubusercontent.com/u/11214?v=3&s=460',
@@ -92,6 +94,7 @@
     }, {
       id: 2,
       tagID:1,
+      shared:false,
       title: 'Adam Bradleyson',
       content: 'I should buy a boat',
       image: 'https://pbs.twimg.com/profile_images/479090794058379264/84TKj_qa.jpeg',
@@ -117,6 +120,7 @@
     }, {
       id: 3,
       tagID:1,
+      shared:false,
       title: 'Perry Governor',
       content: 'Look at my mukluks!',
       image: 'https://pbs.twimg.com/profile_images/598205061232103424/3j5HUXMY.png',
@@ -137,17 +141,18 @@
     }, {
       id: 4,
       tagID:2,
+      shared:true,
       title: 'Mike Harrington',
       content: 'This is wicked good ice cream.',
       image: 'https://pbs.twimg.com/profile_images/578237281384841216/R3ae1n61.png',
       date: "1992-11-05",
        tags: [{
-        id:2,
-        name: 'test 2'
-      }]
+        name:"shared"
+       }]
     },{
       id: 5,
       tagID:2,
+      shared:false,
       title: 'test id: 5',
       content: 'You on your way? Because there is a really cool party and I want to go to it really really bad. There is only one way to go. With a #friend. You on your way? Because there is a really cool party and I want to go to it really really bad. There is only one way to go. With a #friend. You on your way? Because there is a really cool party and I want to go to it really really bad. There is only one way to go. With a #friend. There is only one way to go. With a #friend. You on your way? Because there is a really cool party and I want to go to it really really bad. There is only one way to go. With a #friend. You on your way? Because there is a really cool party and I want to go to it really really bad.',
       date: "2012-04-23",
@@ -158,17 +163,18 @@
     }, {
       id: 6,
       tagID:3,
+      shared:true,
       title: 'test id: 6',
       content: 'Hey, it\'s me',
       image: 'https://avatars3.githubusercontent.com/u/11214?v=3&s=460',
       date: "1929-01-05",
        tags: [{
-        id:3,
-        name: 'test 3'
-      }]
+        name:"shared"
+       }]
     }, {
       id: 7,
       tagID:4,
+      shared:true,
       title: 'test id: 7',
       content: 'I should buy a boat',
       image: 'https://pbs.twimg.com/profile_images/479090794058379264/84TKj_qa.jpeg',
@@ -188,12 +194,12 @@
         attachment_file_name: "video-1"
       }],
        tags: [{
-        id:4,
-        name: 'test 4'
-      }]
+        name:"shared"
+       }]
     }, {
       id: 8,
       tagID:5,
+      shared:false,
       title: 'test id: 8',
       content: 'Look at my mukluks!',
       image: 'https://pbs.twimg.com/profile_images/598205061232103424/3j5HUXMY.png',
@@ -214,6 +220,7 @@
     }, {
       id: 9,
       tagID:5,
+      shared:false,
       title: 'test id: 9',
       content: 'This is wicked good ice cream.',
       image: 'https://pbs.twimg.com/profile_images/578237281384841216/R3ae1n61.png',
@@ -225,6 +232,7 @@
     },{
       id:10,
       tagID:5,
+      shared:false,
       date: "1992-11-05",
       title:"test id 10",
       tags: [{
@@ -307,6 +315,11 @@
                 entries.splice(entries.indexOf(entry), 1);
                 oldEntries.splice(oldEntries.indexOf(entry),1);
             },
+            hide: function (entry) {
+                
+                entries.splice(entries.indexOf(entry), 1);
+                oldEntries.splice(oldEntries.indexOf(entry),1);
+            },
             get: function (EntryId) {
                 for (var i = 0; i < entries.length; i++) {
                     if (entries[i].id === parseInt(entryId)) {
@@ -344,6 +357,12 @@
               entries[index]=entry;
               var oldFileIndex=oldEntries.map(function(e){return e.id}).indexOf(entry.id);
               oldEntries[oldFileIndex]=entry;
+            },
+            updateShare:function(id,tags){
+              var index=entries.map(function(e){return e.id}).indexOf(id);
+              entries[index].tags=tags
+              var oldFileIndex=oldEntries.map(function(e){return e.id}).indexOf(id);
+              oldEntries[oldFileIndex].tags=tags;
             },
             resource:{},
             selectedEntry: {},

@@ -1,5 +1,5 @@
 <div class="modal">
-  <form name="shareForm" ng-submit="entry.share">
+  <form name="shareForm">
     <ion-header-bar class="bar bar-header bar-dark item-input-inset">
       <button class="button button-clear" ng-click="shareModal.hide()">
         Cancel
@@ -7,26 +7,45 @@
       <h1 class="title">
         Share Entry
       </h1>
-      <input type="submit" value="Share Entry" class="button button-outline button-assertive bold">
-      </input>
+      <button type="button" ng-click="shareMobileEntry()" class="button button-outline button-assertive bold">Share Entry
+      </button>
     </ion-header-bar>
-
+Who would you like to share this entry with?
     <div class="list list-inset form">
+
         <label class="item item-input">
-          <input type="text" placeholder="Email Address" ng-model="share.email">
+          <input type="email" placeholder="Email Address" ng-model="user.email" ng-blur="fillUser()">
         </label>
         <div class="row">
           <div class="col">
             <label class="item item-input">
-              <input type="text" placeholder="First Name" ng-model="share.first_name">
+              <input type="text" placeholder="First Name" ng-model="user.firstName">
             </label>
           </div>
           <div class="col">
-          <label class="item item-input">
-            <input type="text" placeholder="Last Name" ng-model="share.last_name">
-          </label>
+            <label class="item item-input">
+              <input type="text" placeholder="Last Name" ng-model="user.lastName">
+            </label>
+          </div>
         </div>
+          <label >
+            <button type="button" class="button button-assertive"  ng-click="AddUser()">Add
+            </button>
+          </label>
+    </div>
+    <div class="list" ng-controller="GroupCtrl">
+      Do you like to share your entry with group of users?
+      <div class="item item-checkbox" ng-repeat="group in GroupList">
+          <label class="checkbox"><input type="checkbox" ng-change="checkFire(group)" ng-model="group.checked" ></label>{{group.name}}
       </div>
+    </div>
+    <div class="list">
+        <div class="item item-button-right" ng-repeat="shareUser in shareUsers">
+          {{shareUser.firstName+" "+ shareUser.lastName}}
+          <button class="button button-positive" ng-click="removeShareUser(shareUser)">
+            <i class="icon ion-close"></i>
+          </button>
+        </div>
     </div>
   </form>
 </div>

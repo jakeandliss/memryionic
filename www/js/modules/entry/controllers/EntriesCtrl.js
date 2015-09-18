@@ -26,16 +26,16 @@
               var globalTags=Tags.all();
               if($stateParams.id){
                 if(globalTags[$stateParams.id].children){
-                      var length=globalTags[$stateParams.id].children.length;
-                      if(length==0){
-                        var newId=$stateParams.id+1;
-                      }else{
-                        var lastID=globalTags[$stateParams.id].children[length-1].id;
-                        var newId=parseInt(lastID)+1;
-                      }
-                      //$scope.entry.tagID=newId;
-                      $scope.entry.tagID=$stateParams.id;
-                      newTag={id:newId,name:obj.text,ancestry:$stateParams.id,children:[]}
+                  var length=globalTags[$stateParams.id].children.length;
+                  if(length==0){
+                    var newId=$stateParams.id+1;
+                  }else{
+                    var lastID=globalTags[$stateParams.id].children[length-1].id;
+                    var newId=parseInt(lastID)+1;
+                  }
+                  //$scope.entry.tagID=newId;
+                  $scope.entry.tagID=$stateParams.id;
+                  newTag={id:newId,name:obj.text,ancestry:$stateParams.id,children:[]}
                 }else{
                     //$scope.entry.tagID=$stateParams.id+1;
                     $scope.entry.tagID=$stateParams.id;
@@ -190,6 +190,47 @@
          Entries.update($scope.selectedEntry);
          Entries.modalInstance.dismiss('cancel');
       };
+      $scope.updateShare=function(entry){
+        $scope.selectedEntry.tags=[];
+        angular.forEach($scope.selectedTags,function(obj){
+            if(obj.id>=0){
+              $scope.entry.tagID=obj.id;
+              $scope.selectedEntry.tags.push({id:obj.id,'name':obj.text});
+            }else{
+              var newTag={}
+              var globalTags=Tags.all();
+              if($stateParams.id){
+                if(globalTags[$stateParams.id].children){
+                      var length=globalTags[$stateParams.id].children.length;
+                      if(length==0){
+                        var newId=$stateParams.id+1;
+                      }else{
+                        var lastID=globalTags[$stateParams.id].children[length-1].id;
+                        var newId=parseInt(lastID)+1;
+                      }
+                      //$scope.entry.tagID=newId;
+                      $scope.entry.tagID=$stateParams.id;
+                      newTag={id:newId,name:obj.text,ancestry:$stateParams.id,children:[]}
+                }else{
+                    //$scope.entry.tagID=$stateParams.id+1;
+                    $scope.entry.tagID=$stateParams.id+1;
+                    newTag={id:$stateParams.id+1,name:obj.text,ancestry:$stateParams.id,children:[]}
+                }
+                Tags.add(newTag);
+              }else{
+                var length=globalTags.length;
+                var lastID=globalTags[length-1].id;
+                var newId=parseInt(lastID)+1;
+                $scope.entry.tagID=newId;
+                newTag={id:newId,name:obj.text,ancestry:"",children:[]}
+                Tags.add(newTag);
+              }
+              $scope.selectedEntry.tags.push(newTag);
+            }
+         });
+         Entries.updateShare($scope.selectedEntry.id,$scope.selectedEntry.tags);
+         Entries.modalInstance.dismiss('cancel');
+      }
       $scope.mobileUpdate=function(){
         $scope.selectedEntry.tags=[];
         angular.forEach($scope.selectedTags,function(obj){
@@ -231,6 +272,47 @@
         Entries.update($scope.selectedEntry);
         $scope.editModal.hide();
       }
+      $scope.mobileShareUpdate=function(){
+        $scope.selectedEntry.tags=[];
+        angular.forEach($scope.selectedTags,function(obj){
+            if(obj.id>=0){
+              $scope.entry.tagID=obj.id;
+              $scope.selectedEntry.tags.push({id:obj.id,'name':obj.text});
+            }else{
+              var newTag={}
+              var globalTags=Tags.all();
+              if($stateParams.id){
+                if(globalTags[$stateParams.id].children){
+                      var length=globalTags[$stateParams.id].children.length;
+                      if(length==0){
+                        var newId=$stateParams.id+1;
+                      }else{
+                        var lastID=globalTags[$stateParams.id].children[length-1].id;
+                        var newId=parseInt(lastID)+1;
+                      }
+                      //$scope.entry.tagID=newId;
+                      $scope.entry.tagID=$stateParams.id;
+                      newTag={id:newId,name:obj.text,ancestry:$stateParams.id,children:[]}
+                }else{
+                    //$scope.entry.tagID=$stateParams.id+1;
+                    $scope.entry.tagID=$stateParams.id;
+                    newTag={id:$stateParams.id+1,name:obj.text,ancestry:$stateParams.id,children:[]}
+                }
+                Tags.add(newTag);
+              }else{
+                var length=globalTags.length;
+                var lastID=globalTags[length-1].id;
+                var newId=parseInt(lastID)+1;
+                $scope.entry.tagID=newId;
+                newTag={id:newId,name:obj.text,ancestry:"",children:[]}
+                Tags.add(newTag);
+              }
+              $scope.selectedEntry.tags.push(newTag);
+            }
+         });
+        Entries.updateShare($scope.selectedEntry.id,$scope.selectedEntry.tags);
+        $scope.editShareModal.hide();
+      }
       // Remove Entry
       $scope.remove = function(entry) {
          var modalInstance = $modal.open({
@@ -245,24 +327,27 @@
       };
       $scope.removeMobile=function(){
         $scope.popover.hide();
-        // $ionicPopover.fromTemplateUrl('delete-confirm.html', {
-        //   scope: $scope
-        // }).then(function(popover) {
-        //   $scope.popoverDelete = popover;
-        //   $scope.popoverDelete.show(currentEvent);
-        // });
-            var deletePopup=$ionicPopup.confirm({
-              title:"Confirm Delete",
-              template:"Are you sure you want to delete this?"
-            });
-            deletePopup.then(function(result){
-              if(result){
-                Entries.remove(Entries.selectedEntry);
-              }
-            });
-        // if (confirm('Are you sure you want to delete this?')){
-        //   Entries.remove(Entries.selectedEntry);
-        //  }
+        var deletePopup=$ionicPopup.confirm({
+          title:"Confirm Delete",
+          template:"Are you sure you want to delete this?"
+        });
+        deletePopup.then(function(result){
+          if(result){
+            Entries.remove(Entries.selectedEntry);
+          }
+        });
+      }
+      $scope.removeShareMobile=function(){
+        $scope.sharePopover.hide();
+        var deletePopup=$ionicPopup.confirm({
+          title:"Confirm Hide",
+          template:"Are you sure you want to Hide this?"
+        });
+        deletePopup.then(function(result){
+          if(result){
+            Entries.hide(Entries.selectedEntry);
+          }
+        });
       }
       $scope.entry.date = new Date();
 
@@ -315,18 +400,6 @@
         // }
       }
       $scope.removeMobileFile=function($event,resource,entry){
-
-        //   if(confirm('Are you sure you want to delete this?')){
-        //       Entries.removeResource(entry,resource);
-        // }
-        // Entries.resource=resource;
-        //  Entries.selectedEntry=entry;
-        //  $ionicPopover.fromTemplateUrl('delete-confirm.html', {
-        //   scope: $scope
-        // }).then(function(popover) {
-        //   $scope.popoverDelete = popover;
-        //   $scope.popoverDelete.show($event);
-        // });
             var deletePopup=$ionicPopup.confirm({
               title:"Confirm Delete",
               template:"Are you sure you want to delete this?"
@@ -392,13 +465,21 @@
         }).then(function(popover) {
           $scope.popover = popover;
         });
-
+        $ionicPopover.fromTemplateUrl('my-share-popover.html', {
+          scope: $scope
+        }).then(function(popover) {
+          $scope.sharePopover = popover;
+        });
         $scope.openPopover = function($event,entry) {
           Entries.selectedEntry=entry;
           currentEvent=$event;
           $scope.popover.show($event);
         };
-
+        $scope.openSharePopover=function($event,entry){
+          Entries.selectedEntry=entry;
+          currentEvent=$event;
+          $scope.sharePopover.show($event);
+        }
         $scope.closePopover = function() {
           $scope.popover.hide();
         };
@@ -433,6 +514,14 @@
         // The animation we want to use for the modal entrance
         animation: 'slide-in-up'
       });
+      $ionicModal.fromTemplateUrl('/js/modules/entry/views/mobile/share-edit.html', function($ionicModal) {
+        $scope.editShareModal = $ionicModal;
+      }, {
+        // Use our scope for the scope of the modal to keep it simple
+        scope: $scope,
+        // The animation we want to use for the modal entrance
+        animation: 'slide-in-up'
+      });
       $ionicModal.fromTemplateUrl('/js/modules/entry/views/mobile/share.html', function($ionicModal) {
         $scope.shareModal = $ionicModal;
       }, {
@@ -444,6 +533,17 @@
       $scope.openEdit=function(){
         $scope.editModal.show();
         $scope.popover.hide();
+        $scope.selectedEntry=angular.copy(Entries.selectedEntry);
+        $scope.selectedEntry.date=new Date(Entries.selectedEntry.date);
+        $scope.selectedTags=[];
+        var selectTags=$scope.selectedEntry.tags;
+        angular.forEach(selectTags,function(obj){
+          $scope.selectedTags.push({id:obj.id,text:obj.name});
+        })
+      }
+      $scope.openShareEdit=function(){
+        $scope.editShareModal.show();
+        $scope.sharePopover.hide();
         $scope.selectedEntry=angular.copy(Entries.selectedEntry);
         $scope.selectedEntry.date=new Date(Entries.selectedEntry.date);
         $scope.selectedTags=[];
@@ -498,7 +598,22 @@
           templateUrl: '/js/modules/entry/views/desktop/bottom-sheet.html',
         })
       };
-
+      $scope.showSharedBottomSheet=function(entry){
+        Entries.selectedEntry=entry;
+        Entries.selectedEntry.date=new Date(entry.date);
+        $scope.alert = '';
+        $mdBottomSheet.show({
+          templateUrl: '/js/modules/entry/views/desktop/shared-bottom-sheet.html',
+        })
+      };
+      $scope.hide=function(){
+        Entries.remove(Entries.selectedEntry);
+        $mdBottomSheet.cancel();
+      };
+      $scope.hideShare=function(){
+        Entries.hide(Entries.selectedEntry);
+        $mdBottomSheet.cancel();
+      }
       // Dropzone
       var counter = 0;
       var insideDropzone = false;
@@ -848,14 +963,67 @@
           }
           $scope.user={};
        }
+       var newUserEmails=[];
        $scope.fillUser=function(){
         var returnUser=UserService.getUser($scope.user.email);
         if(returnUser.length){
           $scope.user=returnUser[0];
         }
+        newUserEmails.push($scope.user.email);
        }
        $scope.removeShareUser=function(user){
           $scope.shareUsers.splice($scope.shareUsers.indexOf(user),1);
+       }
+       $scope.shareGroupList=[];
+       $scope.checkFire=function(group){
+        var filerResult=$scope.shareGroupList.filter(function(elem){
+          return elem.id==group.id
+        })
+        if(filerResult.length<=0){
+          $scope.shareGroupList.push(group)
+        }else{
+          $scope.shareGroupList.splice($scope.shareGroupList.indexOf(group),1);
+        }
+       }
+       $scope.shareEntry=function(){
+        if($scope.shareGroupList.length){
+          angular.forEach($scope.shareGroupList,function(group){
+            angular.forEach(group.users,function(user){
+              var checkUser=$scope.shareUsers.filter(function(elem){
+                return elem.email==user.email;
+              })
+              if(checkUser<=0){
+                $scope.shareUsers.push(user);
+              }
+            })
+          })
+        }
+        console.log($scope.shareUsers);
+        console.log(newUserEmails);
+        Entries.modalInstance.dismiss('cancel');
+       }
+       $scope.shareMobileEntry=function(){
+        if($scope.shareGroupList.length){
+          angular.forEach($scope.shareGroupList,function(group){
+            angular.forEach(group.users,function(user){
+              $scope.shareUsers.push(user);
+            })
+          })
+        }
+        console.log($scope.shareUsers);
+        $scope.shareModal.hide();
+       }
+       $scope.openSharedModal=function(){
+        $mdBottomSheet.cancel();
+        
+        var modalInstance = $modal.open({
+          animation: $scope.animationsEnabled,
+          templateUrl: '/js/modules/entry/views/desktop/share-edit.html',
+          controller: 'EntriesCtrl',
+          size: 'lg',
+          animation: true
+        });
+        Entries.modalInstance=modalInstance;
        }
     }
   })();

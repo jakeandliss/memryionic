@@ -17,20 +17,33 @@
 				})
 				return filterGroup;
 			},
+			add:function(group){
+				var lastId=groupList[groupList.length-1].id;
+				console.log("lastId="+lastId);
+				group.id=lastId+1;
+				console.log(group.id)
+				groupList.push(group);
+			},
+			update:function(group){
+				var index=groupList.map(function(elem){return elem.id}).indexOf(group.id);
+				groupList[index]=group;
+			},
+			delete:function(group){
+				groupList.splice(groupList.indexOf(group),1);
+			},
 			removeUser:function(id,user){
 				var Index=groupList.map(function(elem) {return elem.id}).indexOf(id);
 				groupList[Index].users.splice(groupList[Index].users.indexOf(user),1);
 			},
 			SaveUser:function(id,user){
-				// console.log(id);
-				// var Index=groupList.map(function(e) {
-				// 	console.log(e.id)
-				// 	return e.id}).indexOf(id);
-				// console.log(Index);
-				// groupList[Index].users.push(user);
 				angular.forEach(groupList,function(item){
 					if(item.id==id){
-						item.users.push(user);
+						var findUser=item.users.filter(function(elem){
+							return elem.email==user.email;
+						})
+						if(findUser.length<=0){
+							item.users.push(user);
+						}
 					}
 				})
 			},

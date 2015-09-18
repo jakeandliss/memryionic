@@ -1,0 +1,55 @@
+<ion-view view-title="Add users">
+<ion-nav-buttons side="right">
+      <button class="button" ng-click="showNewUserForm()">
+        Add user
+      </button>
+   </ion-nav-buttons>
+  <ion-content>
+  	<!-- Add Member Form -->
+  	<form id="newUser" name="newUser" novalidate ng-show="isNewUserMobile">
+      <label class="item item-input" ng-class="{'has-error':newUser.name.$invalid}">
+        <span class="input-label">Email</span>
+        <input type="email" name="email" id="email" required ng-model="user.email" ng-blur="fillUser()" placeholder="eg. johan@hotmail.com">
+      </label>
+      <div class="form-error" ng-show="newUser.email.$invalid&&newUser.email.$dirty">
+        <div ng-show="newUser.email.$error.required">Name is required
+      </div>
+      </div>
+      <label class="item item-input">
+      	<span class="input-label">First Name</span>
+      	<input type="text" ng-model="user.firstName" placeholder="eg. Johan"> 
+      </label>
+      <label class="item item-input">
+      	<span class="input-label">Last Name</span>
+      	<input type="text" ng-model="user.lastName" placeholder="eg. Miller"> 
+      </label>
+      <div class='row'>
+          <div class='col'></div>
+        <div class='col'><a style="float:right;" class="padding-top" ng-click="cancelNewGroup()">Cancel</a></div>
+        <div class='col'>
+          <button type="button" class="button button-small button-outline button-assertive expand" ng-disabled="newUser.$invalid" ng-click="AddMobileUser()">Save</button>
+        </div>
+      </div>
+    </form>
+    <!-- list of Members -->
+    <ion-list class="list" show-delete="false" can-swipe="true">
+      <ul>
+        <li ng-show="selectGroup.users.length<=0">
+          No User
+        </li>
+        <li ng-repeat="user in selectGroup.users" >
+          <ion-item>
+            <div class="item-icon-left item-button-right item-stable" >
+             <i class="icon ion-person"></i>
+               {{ user.firstName+" "+user.lastName }}
+            <ion-option-button class="button-assertive icon ion-trash-b" ng-click="removeUser(selectGroup.id,user)"></ion-option-button>
+        	</div>
+         
+        
+          </ion-item>
+        </li>
+      </ul>
+    </ion-list>
+
+  </ion-content>
+</ion-view>

@@ -27,5 +27,16 @@
             }
           }
       })
+      .state('app.selectMobileGroup',{
+        url:"/group/:id",
+        views: {
+            'group': {
+              templateUrl: function(){
+                return 'js/modules/group/views/'+ window.templateMode +'/new.html';
+              },
+              controller: 'GroupCtrl'
+            }
+          }
+      })
     }
 })()

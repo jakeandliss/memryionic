@@ -1,0 +1,22 @@
+<div class="modal-header">
+ 		<h4 class="modal-title">Add Group
+ 		<a class="pointer pull-right" ng-click="closeModal()">
+ 			<md-icon class="material-icons">clear</md-icon>
+ 		</a></h4>
+</div>
+<div class="modal-body">
+	<form name="groupForm" novalidate ng-submit="AddGroup()">
+		<div class="row centered">
+			<div class="col-xs-3 col-centered">
+				Group Name:
+			</div>
+		 	<div class="col-xs-5 col-centered">
+		 	 <div class="form-group" ng-class="{has-error:groupForm.name.$dirty&& groupForm.name.$invalid}">
+		 		<input type="text" ng-model="group.name" name="name" required class="form-control flat bg-gray margin-bottom" >
+		 	 </div>
+		 	</div>
+		 	<div class="col-xs-4 col-centered">
+		 		<button type="submit" ng-disabled="groupForm.$invalid" class="btn btn-primary">Add Group</button>
+		 	</div>
+ 	</form>
+</div>
