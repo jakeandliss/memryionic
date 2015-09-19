@@ -64,10 +64,10 @@
           
         }
       }
-       $scope.selectVisuals = function(resource){
+      $scope.selectVisuals = function(resource){
          return resource.attachment_content_type == 'video' || resource.attachment_content_type == 'image';
 
-        };
+      };
         
       $scope.entryAdd = function(entry) {
         $scope.entry.tags=[];
@@ -126,6 +126,15 @@
 
       // Edit Entry
       $scope.entries = Entries.getEntries($stateParams.id);
+      var checksharedTag=function(){
+        angular.forEach($scope.entries,function(entry){
+          if(entry.shared){
+            var returnTag=Tags.addSharedTag();
+            Entries.addSharedTag(entry.id,returnTag);
+          }
+        });
+      }
+      checksharedTag();
       var config = {
         sources: Entries.getVideos()
       };
@@ -946,6 +955,7 @@
             if($scope.entries.length){
               $scope.busy=true;
               Entries.getNextRecords($scope.entries[$scope.entries.length-1].id,$stateParams.id);
+              checksharedTag();
               $scope.busy=false;
             }
           }

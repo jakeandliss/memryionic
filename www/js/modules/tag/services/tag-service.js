@@ -186,6 +186,22 @@
           }
           
         },
+        addSharedTag:function(){
+          var checkSharedTag=tags.filter(function(elem){
+            return elem.name=="shared";
+          })
+          var tag={}
+          if(checkSharedTag<=0){
+            var lastId=tags[tags.length-1].id;
+            tag.id=parseInt(lastId)+1;
+            tag.name="shared";
+            tags.push(tag);
+            return tag;
+          }else{
+            return checkSharedTag[0];
+          }
+          
+        },
         update:function(tag){
           console.log(tag);
           if(tag.ancestry){

@@ -146,9 +146,7 @@
       content: 'This is wicked good ice cream.',
       image: 'https://pbs.twimg.com/profile_images/578237281384841216/R3ae1n61.png',
       date: "1992-11-05",
-       tags: [{
-        name:"shared"
-       }]
+       tags: []
     },{
       id: 5,
       tagID:2,
@@ -168,9 +166,7 @@
       content: 'Hey, it\'s me',
       image: 'https://avatars3.githubusercontent.com/u/11214?v=3&s=460',
       date: "1929-01-05",
-       tags: [{
-        name:"shared"
-       }]
+       tags: []
     }, {
       id: 7,
       tagID:4,
@@ -193,9 +189,7 @@
         attachment_thumbnail: "https://xenforo.com/community/data/xengallery/111/111665-2c14996ac0401ed7ab0dfc762064120e.jpg",
         attachment_file_name: "video-1"
       }],
-       tags: [{
-        name:"shared"
-       }]
+       tags: []
     }, {
       id: 8,
       tagID:5,
@@ -300,9 +294,6 @@
                     entries.push(filterResult[i]);
                     i++;
                    } 
-                  // for(i=0;i<loopUpto;i++){
-                  //   entries.push(filterResult[i]);
-                  // }
                 }else{
                   for(i=0;i<5;i++){
                     entries.push(oldEntries[i]);
@@ -351,6 +342,24 @@
             addEntry:function(entry){
               oldEntries.unshift(entry);
               entries.unshift(entry);
+            },
+            addSharedTag:function(id,tag){
+              var index=entries.map(function(e){return e.id}).indexOf(id);
+              var checkSharedTag=entries[index].tags.filter(function(elem){
+                return elem.id==tag.id;
+              })
+              if(checkSharedTag.length<=0){
+                entries[index].tagID=tag.id;
+                entries[index].tags.push(tag);
+              }
+              var oldFileIndex=oldEntries.map(function(e){return e.id}).indexOf(id);
+              var checkSharedTagEntries=oldEntries[oldFileIndex].tags.filter(function(elem){
+                return elem.id==tag.id;
+              })
+              if(checkSharedTagEntries.length<=0){
+                oldEntries[oldFileIndex].tagID=tag.id;
+                oldEntries[oldFileIndex].tags.push(tag);
+              }
             },
             update:function(entry){
               var index=entries.map(function(e){return e.id}).indexOf(entry.id);

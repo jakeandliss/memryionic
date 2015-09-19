@@ -74,7 +74,7 @@
           GroupServices.modalInstance.dismiss('cancel');
         }
         $scope.AddMobileGroup=function(){
-           $scope.group.users=[];
+          $scope.group.users=[];
           GroupServices.add($scope.group);
           $scope.isNew=false; 
           $scope.group={}
@@ -87,7 +87,7 @@
           $scope.isNewUserMobile=false;
         }
         $scope.selectedGroup=GroupServices.selectedGroup;
-        $scope.showEditgGroupPopUp=function(group){
+        $scope.showEditGroupPopUp=function(group){
           GroupServices.selectedGroup=angular.copy(group);
            var modalInstance = $modal.open({
             animation: $scope.animationsEnabled,

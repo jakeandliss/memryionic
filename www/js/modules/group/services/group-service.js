@@ -18,10 +18,12 @@
 				return filterGroup;
 			},
 			add:function(group){
-				var lastId=groupList[groupList.length-1].id;
-				console.log("lastId="+lastId);
-				group.id=lastId+1;
-				console.log(group.id)
+				if(groupList.length){
+					var lastId=groupList[groupList.length-1].id;
+					group.id=lastId+1;
+				}else{
+					group.id=1;
+				}
 				groupList.push(group);
 			},
 			update:function(group){

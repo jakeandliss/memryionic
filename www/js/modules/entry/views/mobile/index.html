@@ -33,7 +33,7 @@
             <i class="icon ion-mic-c text-success" ng-if="fileType.type=='Audio'"></i>
             <i class="icon ion-document-text text-info" ng-if="fileType.type=='Files'"></i>
             {{fileType.type}}
-          </div>
+            </div>
           </a>
         </div>
         <div ng-repeat="fileType in ResourceList">
@@ -63,9 +63,6 @@
                  <a ng-click="removeMobileFile($event,resource,entry)" class="pull-right pointer">Remove</a>
               </div>
             </div> 
-           <!--  <p class="item-body">
-              Labels: <a href="#" class="subdued" ng-repeat="tag in entry.tags">{{tag.name}}{{$last ? '' : ','}}</a>
-            </p> -->
          </ion-audio-track> 
 
         <!-- Files content -->
@@ -74,10 +71,7 @@
             <i class="icon ion-document-text"></i>
             <a href="{{resource.attachment}}">{{resource.attachment_file_name}}</a>
             <a ng-click="removeMobileFile($event,resource,entry)" class="pull-right pointer">Remove</a>
-          </p> 
-         <!--  <p class="labels" ng-if="entry.tags.length">
-            Labels: <a href="#" class="subdued" ng-repeat="tag in entry.tags">{{tag.name}}{{$last ? '' : ', '}}</a>
-          </p> -->
+          </p>
        </div>
        </div>
       </section>
