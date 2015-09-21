@@ -1,23 +1,46 @@
+var memryionic=function(){
+	
+	var titleInput=element(by.model("entry.title"));
+	var contentInput=element(by.model("entry.content"));
+	var tagLabel=element(by.model("newTag.text"));
+	var newEntry=element(by.css('a[ng-click="modal.show()"]'));
+	var cancelEntry=element(by.css('button[ng-click="mobileEntryCancel()"]'));
+	var saveEntry=element(by.id('SaveEntry'));
+	this.entryList=function(){
+		return element.all(by.repeater("entry in entries"));
+	}
+	this.get=function(){
+		browser.get('http://localhost:8100/#/entries');
+	}
+	this.AddEntry=function(title,content,tag){
+		newEntry.click();
+		titleInput.sendKeys(title);
+		contentInput.sendKeys(content);
+		tagLabel.sendKeys(tag);
+		tagLabel.sendKeys(",");
+		saveEntry.click();
+	}
+	this.checlValidation=function(){
+		newEntry.click();
+		titleInput.sendKeys("test");
+		titleInput.clear();
+		browser.sleep(2000);
+		cancelEntry.click();
+	}
+};
 describe("Add New Entry",function(){
 	it("Shoud be add title",function(){
 		browser.driver.get('http://localhost:8100/#/entries');
 		browser.driver.manage().window().maximize();
-		element(by.css('a[ng-click="modal.show()"]')).click();
-		element(by.model("entry.title")).sendKeys("Protractor test title");
-		element(by.model("entry.content")).sendKeys("Protractor test content");
-		element(by.model("newTag.text")).sendKeys("tes");
-		element(by.model("newTag.text")).sendKeys(",");
-		element(by.id('SaveEntry')).click();
+		var memry=new memryionic();
+		memry.AddEntry('protractor test title','protractor test content','test')
 		browser.sleep(3000);
 	})
 });
 describe("Validation in new Entry",function(){
 	it("save Entry button should disable un-till invalid",function(){
-		element(by.css('a[ng-click="modal.show()"]')).click();
-		element(by.model("entry.title")).sendKeys("test value");
-		element(by.model("entry.title")).clear();
-		browser.sleep(2000);
-		element(by.css('button[ng-click="mobileEntryCancel()"]')).click();
+		var memry=new memryionic();
+		memry.checlValidation();
 	});
 });
 describe("edit entry",function(){
@@ -31,6 +54,20 @@ describe("edit entry",function(){
 		browser.sleep(1500);
 		element(by.id("UpdateEntry")).click();
 		browser.sleep(2000);
+	})
+});
+describe('share Entry',function(){
+	it("",function(){
+		// browser.driver.get('http://localhost:8100/#/entries');
+		var entries=element.all(by.repeater("entry in entries"));
+		entries.get(0).element(by.css('[ng-click="shareModal.show()"]')).click();
+		browser.sleep(2500);
+		element(by.model('user.email')).sendKeys("test@gmail.com");
+		element(by.model('user.email')).sendKeys(protractor.Key.TAB);
+		element(by.css('[ng-click="AddUser()"]')).click();
+		browser.sleep(2500);
+		element(by.css('[ng-click="shareMobileEntry()"]')).click();
+
 	})
 });
 describe('delete Entry',function(){
@@ -150,5 +187,41 @@ describe("open child tag",function(){
 		var tagList=element.all(by.repeater("tag in filteredTags"));
 		tagList.get(0).element(by.css('[ng-click="test(tag)"]')).click();
 		browser.sleep(5000);
+	})
+});
+describe("open group's and add new group",function(){
+	it("",function(){
+		browser.driver.get("http://localhost:8100/#/group")
+		browser.sleep(1000);
+		element(by.css('[ng-click="newMobileGroup()"]')).click();
+		element(by.model("group.name")).sendKeys("New Group");
+		element(by.css('[ng-click="AddMobileGroup()"]')).click();
+		browser.sleep(2000);
+	})
+});
+describe("edit group",function(){
+	it("",function(){
+		element.all(by.repeater("group in GroupList")).then(function(groups){
+			browser.actions().mouseMove(groups[0].element(by.className("item-content"))).mouseDown().mouseMove({x:40,y:350}).perform();
+			// browser.actions().perform();
+			// browser.actions().perform();
+			browser.sleep(3000);
+			browser.actions().mouseUp().perform();
+			browser.sleep(3000);
+		})
+	})
+});
+describe("Add User in group",function(){
+	it("",function(){
+		element.all(by.repeater("group in GroupList")).then(function(groups){
+			groups[0].element(by.css('[ui-sref="app.selectMobileGroup({id:group.id})"]')).click();
+		})
+		browser.sleep(1000);
+		element(by.css('[ng-click="showNewUserForm()"]')).click();
+		element(by.model('user.email')).sendKeys("test2@gmail.com");
+		element(by.model('user.email')).sendKeys(protractor.Key.TAB);
+		browser.sleep(1000);
+		element(by.css('[ng-click="AddMobileUser()"]')).click();
+		browser.sleep(2000);
 	})
 });

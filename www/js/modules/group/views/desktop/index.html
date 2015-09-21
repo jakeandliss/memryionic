@@ -10,7 +10,7 @@
 	      </md-list-item>
 	    </md-list>
 	    <div ng-repeat="group in GroupList" class="margin-bottom group">
-	    	<a id="editGroup" class="edit pointer" ng-click="showEditGroupPopUp(group)"><md-icon class="material-icons edit">mode_edit</md-icon></a>
+	    	<a id="editGroup{{$index}}" class="edit pointer" ng-click="showEditGroupPopUp(group)"><md-icon class="material-icons edit">mode_edit</md-icon></a>
 	    	<button id="groupButton" class="btn btn-block btn-primary" type="button" ng-class="{'selected' : it === ul.selected }" ui-sref="app.selectGroup({id:group.id})">{{group.name}}</button>
 	    </div>
 	</div>
