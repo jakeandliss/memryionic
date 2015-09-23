@@ -11,16 +11,17 @@
       $scope.tags = [];
       $scope.SearchBeginningDate=new Date();
       $scope.SearchEndDate=new Date();
+      $scope.userid=2;
       // Add Entry
       $scope.MobileEntryAdd=function(entry){
         if($scope.entry.title)
         {
-          $scope.entry.tags=[];
-          
+          $scope.entry.tagsList=[{userid:$scope.userid,tags:[]}];
           angular.forEach($scope.tags,function(obj){
             if(obj.id>=0){
               $scope.entry.tagID=obj.id;
-              $scope.entry.tags.push({id:obj.id,'name':obj.text});
+              
+              $scope.entry.tagsList[0].tags.push({id:obj.id,'name':obj.text});
             }else{
               var newTag={}
               var globalTags=Tags.all();
@@ -50,7 +51,7 @@
                 newTag={id:newId,name:obj.text,ancestry:"",children:[]}
               }
               Tags.add(newTag);
-              $scope.entry.tags.push(newTag);
+              $scope.entry.tagsList[0].tags.push({id:obj.id,'name':obj.text});
             }
          });
           // $scope.entries.unshift($scope.entry);
@@ -70,12 +71,12 @@
       };
         
       $scope.entryAdd = function(entry) {
-        $scope.entry.tags=[];
+        $scope.entry.tagsList=[{userid:$scope.userid,tags:[]}];
         $scope.entry.tagID="";
          angular.forEach($scope.tags,function(obj){
             if(obj.id>=0){
               $scope.entry.tagID=obj.id;
-              $scope.entry.tags.push({id:obj.id,'name':obj.text,ancestry:"",children:[]});
+              $scope.entry.tagsList[0].tags.push({id:obj.id,'name':obj.text});
             }else{
               var newTag={}
               var globalTags=Tags.all();
@@ -109,7 +110,7 @@
                 Tags.add(newTag);
               }
              
-              $scope.entry.tags.push(newTag);
+              $scope.entry.tagsList[0].tags.push(newTag);
             }
          }); 
         if(fileDropzone.files){
@@ -130,7 +131,7 @@
         angular.forEach($scope.entries,function(entry){
           if(entry.shared){
             var returnTag=Tags.addSharedTag();
-            Entries.addSharedTag(entry.id,returnTag);
+            Entries.addSharedTag(entry.id,returnTag,$scope.userid);
           }
         });
       }
@@ -158,11 +159,11 @@
 
       // Update Entry
       $scope.update = function(entry) {
-        $scope.selectedEntry.tags=[];
+        $scope.selectedEntry.tagsList=[{userid:$scope.userid,tags:[]}];
         angular.forEach($scope.selectedTags,function(obj){
             if(obj.id>=0){
               $scope.entry.tagID=obj.id;
-              $scope.selectedEntry.tags.push({id:obj.id,'name':obj.text});
+              $scope.selectedEntry.tagsList[0].tags.push({id:obj.id,'name':obj.text});
             }else{
               var newTag={}
               var globalTags=Tags.all();
@@ -193,18 +194,18 @@
                 newTag={id:newId,name:obj.text,ancestry:"",children:[]}
                 Tags.add(newTag);
               }
-              $scope.selectedEntry.tags.push(newTag);
+              $scope.selectedEntry.tagsList[0].tags.push(newTag);
             }
          });
          Entries.update($scope.selectedEntry);
          Entries.modalInstance.dismiss('cancel');
       };
       $scope.updateShare=function(entry){
-        $scope.selectedEntry.tags=[];
+        $scope.selectedEntry.tagsList=[{userid:$scope.userid,tags:[]}];
         angular.forEach($scope.selectedTags,function(obj){
             if(obj.id>=0){
               $scope.entry.tagID=obj.id;
-              $scope.selectedEntry.tags.push({id:obj.id,'name':obj.text});
+              $scope.selectedEntry.tagsList[0].tags.push({id:obj.id,'name':obj.text});
             }else{
               var newTag={}
               var globalTags=Tags.all();
@@ -234,18 +235,18 @@
                 newTag={id:newId,name:obj.text,ancestry:"",children:[]}
                 Tags.add(newTag);
               }
-              $scope.selectedEntry.tags.push(newTag);
+              $scope.selectedEntry.tagsList[0].tags.push(newTag);
             }
          });
          Entries.updateShare($scope.selectedEntry.id,$scope.selectedEntry.tags);
          Entries.modalInstance.dismiss('cancel');
       }
       $scope.mobileUpdate=function(){
-        $scope.selectedEntry.tags=[];
+        $scope.selectedEntry.tagsList=[{userid:$scope.userid,tags:[]}];
         angular.forEach($scope.selectedTags,function(obj){
             if(obj.id>=0){
               $scope.entry.tagID=obj.id;
-              $scope.selectedEntry.tags.push({id:obj.id,'name':obj.text});
+              $scope.selectedEntry.tagsList[0].tags.push({id:obj.id,'name':obj.text});
             }else{
               var newTag={}
               var globalTags=Tags.all();
@@ -275,18 +276,18 @@
                 newTag={id:newId,name:obj.text,ancestry:"",children:[]}
                 Tags.add(newTag);
               }
-              $scope.selectedEntry.tags.push(newTag);
+              $scope.selectedEntry.tagsList[0].tags.push(newTag);
             }
          });
         Entries.update($scope.selectedEntry);
         $scope.editModal.hide();
       }
       $scope.mobileShareUpdate=function(){
-        $scope.selectedEntry.tags=[];
+        $scope.selectedEntry.tagsList=[{userid:$scope.userid,tags:[]}];
         angular.forEach($scope.selectedTags,function(obj){
             if(obj.id>=0){
               $scope.entry.tagID=obj.id;
-              $scope.selectedEntry.tags.push({id:obj.id,'name':obj.text});
+              $scope.selectedEntry.tagsList[0].tags.push({id:obj.id,'name':obj.text});
             }else{
               var newTag={}
               var globalTags=Tags.all();
@@ -316,7 +317,7 @@
                 newTag={id:newId,name:obj.text,ancestry:"",children:[]}
                 Tags.add(newTag);
               }
-              $scope.selectedEntry.tags.push(newTag);
+              $scope.selectedEntry.tagsList[0].tags.push(newTag);
             }
          });
         Entries.updateShare($scope.selectedEntry.id,$scope.selectedEntry.tags);
@@ -545,7 +546,8 @@
         $scope.selectedEntry=angular.copy(Entries.selectedEntry);
         $scope.selectedEntry.date=new Date(Entries.selectedEntry.date);
         $scope.selectedTags=[];
-        var selectTags=$scope.selectedEntry.tags;
+        var userIndex=$scope.selectedEntry.tagsList.map(function(e){return e.userid}).indexOf($scope.userid);
+        var selectTags=$scope.selectedEntry.tagsList[userIndex].tags;
         angular.forEach(selectTags,function(obj){
           $scope.selectedTags.push({id:obj.id,text:obj.name});
         })
@@ -556,7 +558,8 @@
         $scope.selectedEntry=angular.copy(Entries.selectedEntry);
         $scope.selectedEntry.date=new Date(Entries.selectedEntry.date);
         $scope.selectedTags=[];
-        var selectTags=$scope.selectedEntry.tags;
+        var userIndex=$scope.selectedEntry.tagsList.map(function(e){return e.userid}).indexOf($scope.userid);
+        var selectTags=$scope.selectedEntry.tagsList[userIndex].tags;
         angular.forEach(selectTags,function(obj){
           $scope.selectedTags.push({id:obj.id,text:obj.name});
         })
@@ -592,13 +595,16 @@
       $scope.closeShare=function(){
         Entries.modalInstance.dismiss('cancel');
       }
+      
         $scope.selectedEntry=angular.copy(Entries.selectedEntry);
-        //$scope.selectedTags=$scope.selectedEntry.tags;
         $scope.selectedTags=[];
-        var selectTags=$scope.selectedEntry.tags;
+      if($scope.selectedEntry.tagsList){
+        var userIndex=$scope.selectedEntry.tagsList.map(function(e){return e.userid}).indexOf($scope.userid);
+        var selectTags=$scope.selectedEntry.tagsList[userIndex].tags;
         angular.forEach(selectTags,function(obj){
           $scope.selectedTags.push({text:obj.name,id:obj.id});
         })
+      }
       $scope.showBottomSheet = function(entry) {
         Entries.selectedEntry=entry;
         Entries.selectedEntry.date=new Date(entry.date);

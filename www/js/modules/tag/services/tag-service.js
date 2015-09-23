@@ -165,13 +165,11 @@
         remove: function(tag) {
           tags.splice(tags.indexOf(tag), 1);
         },
-        get: function(TagId) {
-          for (var i = 0; i < tags.length; i++) {
-            if (tags[i].id === parseInt(tagId)) {
-              return tags[i];
-            }
-          }
-          return null;
+        get: function(tagId) {
+          var filterTag=tags.filter(function(elem){
+              return elem.id==tagId;
+          })
+          return filterTag;
         },
         add:function(tag){
           if(tag.ancestry){

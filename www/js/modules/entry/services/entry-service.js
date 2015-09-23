@@ -58,14 +58,12 @@
         attachment_file_name: "video-1"
       }],
       date: "2012-04-23",
-      tags: [{
-        id:0,
-        name: 'test 0'
-      }]
+      tagsList:[{userid:1,tags:[{id:0,name:"test 0"},{id:2,name:"test 2"},{id:4,name:"test 4"}]},
+                {userid:2,tags:[{id:1,name:"test 1"},{id:5,name:"test 5"}]}]
     }, {
       id: 1,
       tagID:0,
-      shared:false,
+      shared:true,
       title: 'Max Lynx',
       content: 'Hey, it\'s me',
       image: 'https://avatars3.githubusercontent.com/u/11214?v=3&s=460',
@@ -87,10 +85,8 @@
         attachment_content_type: "audio",
         attachment_file_name: "Dil de Ramp te.mp3"
       }],
-       tags: [{
-        id:0,
-        name: 'test 0'
-      }]
+      tagsList:[{userid:2,tags:[{id:2,name:"test 2"},{id:4,name:"test 4"}]},
+                {userid:1,tags:[{id:3,name:"test 3"},{id:5,name:"test 5"}]}]
     }, {
       id: 2,
       tagID:1,
@@ -113,10 +109,8 @@
         attachment_thumbnail: "https://xenforo.com/community/data/xengallery/111/111665-2c14996ac0401ed7ab0dfc762064120e.jpg",
         attachment_file_name: "video-1"
       }],
-       tags: [{
-        id:1,
-        name: 'test 1'
-      }]
+      tagsList:[{userid:2,tags:[{id:4,name:"test 4"},{id:3,name:"test 3"}]},
+                {userid:1,tags:[{id:1,name:"test 1"},{id:5,name:"test 5"}]}]
     }, {
       id: 3,
       tagID:1,
@@ -134,10 +128,8 @@
         attachment_content_type: "pdf",
         attachment_file_name: "pdf sample file number 2"
       }],
-       tags: [{
-        id:1,
-        name: 'test 1'
-      }]
+      tagsList:[{userid:2,tags:[{id:4,name:"test 4"},{id:6,name:"test 6"}]},
+                {userid:1,tags:[{id:1,name:"test 1"},{id:3,name:"test 3"},{id:5,name:"test 5"}]}]
     }, {
       id: 4,
       tagID:2,
@@ -146,7 +138,8 @@
       content: 'This is wicked good ice cream.',
       image: 'https://pbs.twimg.com/profile_images/578237281384841216/R3ae1n61.png',
       date: "1992-11-05",
-       tags: []
+      tagsList:[{userid:2,tags:[{id:0,name:"test 0"},{id:7,name:"test 7"}]},
+                {userid:1,tags:[{id:1,name:"test 1"},{id:8,name:"test 8"},{id:5,name:"test 5"}]}]
     },{
       id: 5,
       tagID:2,
@@ -154,10 +147,8 @@
       title: 'test id: 5',
       content: 'You on your way? Because there is a really cool party and I want to go to it really really bad. There is only one way to go. With a #friend. You on your way? Because there is a really cool party and I want to go to it really really bad. There is only one way to go. With a #friend. You on your way? Because there is a really cool party and I want to go to it really really bad. There is only one way to go. With a #friend. There is only one way to go. With a #friend. You on your way? Because there is a really cool party and I want to go to it really really bad. There is only one way to go. With a #friend. You on your way? Because there is a really cool party and I want to go to it really really bad.',
       date: "2012-04-23",
-      tags: [{
-        id:2,
-        name: 'test 2'
-      }]
+     tagsList:[{userid:2,tags:[{id:9,name:"test 9"},{id:4,name:"test 4"}]},
+                {userid:1,tags:[{id:1,name:"test 1"},{id:3,name:"test 3"},{id:5,name:"test 5"}]}]
     }, {
       id: 6,
       tagID:3,
@@ -166,7 +157,8 @@
       content: 'Hey, it\'s me',
       image: 'https://avatars3.githubusercontent.com/u/11214?v=3&s=460',
       date: "1929-01-05",
-       tags: []
+      tagsList:[{userid:2,tags:[{id:2,name:"test 2"},{id:3,name:"test 3"}]},
+                {userid:1,tags:[{id:1,name:"test 1"},{id:3,name:"test 3"}]}]
     }, {
       id: 7,
       tagID:4,
@@ -189,7 +181,8 @@
         attachment_thumbnail: "https://xenforo.com/community/data/xengallery/111/111665-2c14996ac0401ed7ab0dfc762064120e.jpg",
         attachment_file_name: "video-1"
       }],
-       tags: []
+     tagsList:[{userid:2,tags:[{id:0,name:"test 0"},{id:4,name:"test 4"}]},
+                {userid:1,tags:[{id:1,name:"test 1"},{id:5,name:"test 5"}]}]
     }, {
       id: 8,
       tagID:5,
@@ -207,10 +200,8 @@
         attachment_content_type: "pdf",
         attachment_file_name: "pdf sample file number 2"
       }],
-       tags: [{
-        id:5,
-        name: 'test 5'
-      }]
+      tagsList:[{userid:2,tags:[{id:0,name:"test 0"},{id:4,name:"test 4"}]},
+                {userid:1,tags:[{id:1,name:"test 1"},{id:5,name:"test 5"}]}]
     }, {
       id: 9,
       tagID:5,
@@ -219,20 +210,16 @@
       content: 'This is wicked good ice cream.',
       image: 'https://pbs.twimg.com/profile_images/578237281384841216/R3ae1n61.png',
       date: "1992-11-05",
-       tags: [{
-        id:5,
-        name: 'test 5'
-      }]
+      tagsList:[{userid:1,tags:[{id:0,name:"test 0"},{id:4,name:"test 4"}]},
+                {userid:2,tags:[{id:1,name:"test 1"},{id:5,name:"test 5"}]}]
     },{
       id:10,
       tagID:5,
       shared:false,
       date: "1992-11-05",
       title:"test id 10",
-      tags: [{
-        id:5,
-        name: 'test 5'
-      }]
+      tagsList:[{userid:2,tags:[{id:2,name:"test 2"},{id:4,name:"test 4"}]},
+                {userid:1,tags:[{id:3,name:"test 3"},{id:5,name:"test 5"}]}]
     }];
       function getNextRecords(after,id){
         if(id>=0){
@@ -343,22 +330,30 @@
               oldEntries.unshift(entry);
               entries.unshift(entry);
             },
-            addSharedTag:function(id,tag){
+            addSharedTag:function(id,tag,userid){
               var index=entries.map(function(e){return e.id}).indexOf(id);
-              var checkSharedTag=entries[index].tags.filter(function(elem){
+              var userIndex=entries[index].tagsList.map(function(e){return e.userid}).indexOf(userid);
+              var checkSharedTag=entries[index].tagsList[userIndex].tags.filter(function(elem){
                 return elem.id==tag.id;
               })
               if(checkSharedTag.length<=0){
                 entries[index].tagID=tag.id;
-                entries[index].tags.push(tag);
+                if(entries[index].tagsList){
+                  var tagIndex= entries[index].tagsList.map(function(e) {return e.userid}).indexOf(userid);
+                  entries[index].tagsList[tagIndex].tags.push(tag)
+                }
               }
               var oldFileIndex=oldEntries.map(function(e){return e.id}).indexOf(id);
-              var checkSharedTagEntries=oldEntries[oldFileIndex].tags.filter(function(elem){
+              var oldUserIndex=oldEntries[oldFileIndex].tagsList.map(function(e){return e.userid}).indexOf(userid);
+              var checkSharedTagEntries=oldEntries[oldFileIndex].tagsList[userIndex].tags.filter(function(elem){
                 return elem.id==tag.id;
               })
               if(checkSharedTagEntries.length<=0){
                 oldEntries[oldFileIndex].tagID=tag.id;
-                oldEntries[oldFileIndex].tags.push(tag);
+                if(oldEntries[oldFileIndex].tagsList){
+                  var tagIndex= entries[index].tagsList.map(function(e) {return e.userid}).indexOf(userid);
+                  oldEntries[oldFileIndex].tagsList[tagIndex].tags.push(tag);
+                }
               }
             },
             update:function(entry){
@@ -367,11 +362,13 @@
               var oldFileIndex=oldEntries.map(function(e){return e.id}).indexOf(entry.id);
               oldEntries[oldFileIndex]=entry;
             },
-            updateShare:function(id,tags){
+            updateShare:function(id,tags,userid){
               var index=entries.map(function(e){return e.id}).indexOf(id);
-              entries[index].tags=tags
+              var userIndex=entries[index].tagsList.map(function(e){return e.userid}).indexOf(userid)
+              entries[index].tagsList[userIndex].tags=tags
               var oldFileIndex=oldEntries.map(function(e){return e.id}).indexOf(id);
-              oldEntries[oldFileIndex].tags=tags;
+              var oldUserIndex=oldEntries[oldFileIndex].tagsList.map(function(e){return e.userid}).indexOf(userid);
+              oldEntries[oldFileIndex].tagsList[oldUserIndex].tags=tags;
             },
             resource:{},
             selectedEntry: {},

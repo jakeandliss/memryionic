@@ -78,8 +78,8 @@
     </div>
       <!-- tags Section -->
       <div class="item item-text-wrap gray">
-         <p class="labels" ng-if="entry.tags.length">
-            Labels: <a href="#" class="subdued" ng-repeat="tag in entry.tags">{{tag.name}}{{$last ? '' : ', '}}</a>
+         <p class="labels" ng-repeat="list in entry.tagsList" ng-if="list.userid==userid">
+            Labels: <a href="#" class="subdued" ng-repeat="tag in list.tags">{{tag.name}}{{$last ? '' : ', '}}</a>
           </p>
       </div>
       <!-- Share Entry -->

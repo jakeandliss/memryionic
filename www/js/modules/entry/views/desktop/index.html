@@ -255,10 +255,14 @@
           </md-card>
         </div>
 
-        <div class="col-xs-3" style="margin-left:-.9rem;">
-          <div ng-repeat="tag in entry.tags" class="margin-bottom">
-            <button class='btn btn-block btn-primary' ui-sref="app.tagEntries({ id: tag.id })">{{tag.name}}</button>
+        <div class="col-xs-3" style="margin-left:-.9rem;" ng-if="entry.tagsList">
+          <div ng-repeat="list in entry.tagsList" >
+            <div ng-if="list.userid==userid">
+            <div  ng-repeat="tag in list.tags" class="margin-bottom">
+              <button class='btn btn-block btn-primary' ui-sref="app.tagEntries({ id: tag.id })">{{tag.name}}</button>
+            </div>
           </div>
+        </div>
         </div>
       </div> 
     </div>

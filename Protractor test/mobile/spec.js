@@ -20,7 +20,7 @@ var memryionic=function(){
 		tagLabel.sendKeys(",");
 		saveEntry.click();
 	}
-	this.checlValidation=function(){
+	this.checkValidation=function(){
 		newEntry.click();
 		titleInput.sendKeys("test");
 		titleInput.clear();
@@ -40,7 +40,7 @@ describe("Add New Entry",function(){
 describe("Validation in new Entry",function(){
 	it("save Entry button should disable un-till invalid",function(){
 		var memry=new memryionic();
-		memry.checlValidation();
+		memry.checkValidation();
 	});
 });
 describe("edit entry",function(){

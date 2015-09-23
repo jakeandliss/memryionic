@@ -96,7 +96,6 @@
     }, 500);
    };
 
-
    $scope.remove = function(tag) {
     Tags.remove(tag);
   };
