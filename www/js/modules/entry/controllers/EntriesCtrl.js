@@ -112,9 +112,12 @@
              
               $scope.entry.tagsList[0].tags.push(newTag);
             }
-         }); 
-        if(fileDropzone.files){
-          fileDropzone.processQueue();
+         });
+         var checkDropzone=Dropzone.forElement('#dropzone')
+        // fileDropzone.processQueue();
+        console.log(checkDropzone);
+        if(checkDropzone.files.length){
+          checkDropzone.processQueue();
         };
         //$scope.entries.unshift($scope.entry);
         Entries.addEntry($scope.entry);
@@ -238,7 +241,7 @@
               $scope.selectedEntry.tagsList[0].tags.push(newTag);
             }
          });
-         Entries.updateShare($scope.selectedEntry.id,$scope.selectedEntry.tags);
+         Entries.updateShare($scope.selectedEntry.id,$scope.selectedEntry.tagsList[0].tags,$scope.userid);
          Entries.modalInstance.dismiss('cancel');
       }
       $scope.mobileUpdate=function(){
@@ -320,7 +323,7 @@
               $scope.selectedEntry.tagsList[0].tags.push(newTag);
             }
          });
-        Entries.updateShare($scope.selectedEntry.id,$scope.selectedEntry.tags);
+        Entries.updateShare($scope.selectedEntry.id,$scope.selectedEntry.tagsList[0].tags,$scope.userid);
         $scope.editShareModal.hide();
       }
       // Remove Entry
@@ -428,7 +431,6 @@
           $scope.selectedEntry.resources=resources;
       }
       $scope.deleteResource=function(){
-        console.log(Entries.selectedEntry);
         if(Entries.selectedEntry.title||Entries.resource.attachment){
           if(Entries.resource.attachment){
             Entries.removeResource(Entries.selectedEntry,Entries.resource);
@@ -696,12 +698,12 @@
       $scope.dropzoneConfig = {
         'options': {
           'previewTemplate': previewTemplate,
-          'paramName': "resource[avatar]",
+          'paramName': "resources[avatar]",
           'thumbnailHeight': 100,
           'thumbnailWidth': 100,
-          'url': '/resources',
+          'url': 'http://localhost:22018/api/Upload/UploadFile',
           'addRemoveLinks': true,
-          "autoProcessQueue": true,
+          "autoProcessQueue": false,
           'dictCancelUpload': "Cancel",
           'dictRemoveFile': "Remove",
           'init':function(){
@@ -709,9 +711,14 @@
           },
         },
         'eventHandlers': {
-          'sending': function(file, xhr, formData) {},
-          'success': function(file, response) {},
-          'error': function(file, response) {},
+          'sending': function(file, xhr, formData) {
+          },
+          'success': function(file, response) {
+            alert("success")
+          },
+          'error': function(file, response) {
+            alert("error");
+          },
           'addedfile': function(file){
             var removeLink = $(file.previewElement).find('.dz-remove').first();
             var $a = $("<a>",{text:"Rename",class:"dz-remove rename"});

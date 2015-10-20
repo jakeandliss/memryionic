@@ -2,8 +2,8 @@
   angular.module('memryApp')
     .service('UserService', UserService);
 
-    UserService.$inject = ['$state'];
-    function UserService($state){
+    UserService.$inject = ['$state','$http'];
+    function UserService($state,$http){
       var Users=[{
       		id: 1,
       		email:"test@gmail.com",
@@ -21,13 +21,18 @@
       		lastName:"user3"
       	}
       ]
+      var baseAddress="http://104.236.57.97:8085/";
       return {
       	getUser:function(email){
       		var filterUser=Users.filter(function(elem){
       			return elem.email==email;
       		});
       		return filterUser
-      	}
+      	},
+        createAccount:function(user){
+          var _userRegistration={"userRegistration":user};
+          return $http({method:"POST",url:baseAddress+"api/v1/users.json",data:_userRegistration})
+        }
       }
     }
 })();
