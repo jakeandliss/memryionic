@@ -273,6 +273,14 @@ tags-input .host {
   border-radius: 5px;
 }
 
+md-tab-item.md-tab {
+    color: #aaa !important;
+}
+
+md-tab-item.md-tab.md-ink-ripple.md-active {
+    color: #444 !important;
+}
+
 .modal-content {
   box-shadow: none;
   border: none;
