@@ -230,6 +230,37 @@ Desktop CSS
   border-radius: 6px;
 }
 
+
+tags-input .tags {
+    padding-top: 4px !important;
+    box-shadow: none !important;
+    border: none !important;
+    margin-bottom: 0 !important;
+}
+
+tags-input .autocomplete {
+    margin-top: 0 !important;
+    border: 2px solid #1abc9c  !important;
+    padding: 0 !important;
+}
+
+tags-input .autocomplete li {
+       color: #666 !important;
+       border-bottom: 1px solid #eee;
+}
+
+tags-input .autocomplete .suggestion-item.selected, tags-input .autocomplete .suggestion-item.selected, .autocomplete .suggestion-item.selected em {
+       color: #fff !important;
+       background-color: #1abc9c !important;
+}
+
+tags-input .host {
+    margin: 0;
+    border-radius: 5px !important;
+    border: 2px #eee solid;
+    margin-bottom: 1rem !important;
+}
+
 .desktop .search .dropdown-menu {
     display: block;
     bottom: 35px !important;
