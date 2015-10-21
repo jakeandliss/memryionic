@@ -2,15 +2,19 @@
   angular.module('memryApp')
     .controller('UserCtrl', UserCtrl);
 
-    UserCtrl.$inject = ['$state', '$scope', '$mdDialog'];
-    function UserCtrl($state, $scope, $mdDialog){
+    UserCtrl.$inject = ['$state', '$scope', '$mdDialog','UserService'];
+    function UserCtrl($state, $scope, $mdDialog,UserService){
       $scope.user = {
         first_name: "Jake",
         last_name: "Thompson",
         email: "test@gmail.com",
         avatar: "https://pbs.twimg.com/profile_images/514549811765211136/9SgAuHeY.png"
       };
-
+      $scope.newUser={}
+      $scope.isSubmit=false;
+      $scope.messages=[];
+      $scope.showErrorMessage=false;
+      $scope.showSuccessMessage=false;
       $scope.showDialog = function(ev) {
         $mdDialog.show({
           templateUrl: 'forgot-password-dialog.html',
@@ -22,6 +26,20 @@
 
       $scope.closeDialog = function() {
           $mdDialog.hide();
-        }
+      }
+      $scope.createAccount=function(){
+        $scope.messages=[];
+        $scope.showErrorMessage=false;
+        $scope.showSuccessMessage=false;
+          UserService.createAccount($scope.newUser).success(function(responce){
+            $scope.showSuccessMessage=true;
+            $scope.newUser={}
+            console.log(responce)
+          }).error(function(responce){
+            $scope.showErrorMessage=true;
+            console.log(responce.message.errors)
+            $scope.messages=responce.message.errors;
+          })
+      }
     };
 })();
