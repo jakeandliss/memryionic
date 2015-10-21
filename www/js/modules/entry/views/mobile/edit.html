@@ -9,25 +9,39 @@
         <h1 class="title">
           Update Entry
         </h1>
-        <input type="submit" value="Update Entry" class="button button-outline button-assertive bold">
+        <input id="UpdateEntry" type="submit" value="Update Entry" class="button button-outline button-assertive bold">
         </input>
       </ion-header-bar>
 
       <div class="list form">
         <label class="item item-input item-icon-right">
           <a href="#"><i class="icon ion-android-attach assertive"></i></a>
-          <input type="text" placeholder="Title this entry" ng-model="selectedTags.title">
+          <input type="text" placeholder="Title this entry" ng-model="selectedEntry.title">
         </label>
         <label class="item item-input">
-          <textarea rows="7" placeholder="What would you like to remember?" ng-model="selectedTags.content"></textarea>
+          <textarea rows="7" placeholder="What would you like to remember?" ng-model="selectedEntry.content"></textarea>
         </label>
-           <!--  <label class="item item-input">
-              <i class="icon ion-ios-pricetag placeholder-icon"></i>
-              <input type="text" placeholder="Labels" ng-model="entry.tags">
-            </label> -->
             <label class="item item-input">
-              <input type="date" placeholder="date" ng-model="selectedTags.date">
+              <input type="date" placeholder="date" ng-model="selectedEntry.date">
             </label>
+        <tags-input name="tagsinput" placeholder="Add labels" class="" ng-model="selectedTags" replace-spaces-with-dashes="false">
+           <auto-complete ng-controller="TagsCtrl as tags" source="loadTags($query)" load-on-down-arrow="true" min-length="1"></auto-complete>
+      </tags-input>
+         <div class="pull-left" ng-repeat="resource in selectedEntry.resources | filter: selectVisuals" ng-if="resource.attachment_content_type == 'image' || resource.attachment_content_type == 'video'">
+            <div ng-mouseover="onHover=true" ng-mouseout="onHover=false" ng-if="resource.attachment_content_type == 'image'">  
+              <img ng-src="{{resource.attachment}}" class="edit-image" >
+              <div>
+                <a ng-click="removefromSelectedFile(resource)" >Delete</a>
+              </div>
+            </div>
+              <div ng-if="resource.attachment_content_type == 'video'" class="">
+                <img ng-src="{{resource.attachment_thumbnail}}" class="edit-image">
+                <div>
+                  <a ng-click="removefromSelectedFile(resource)" >Delete</a>
+                  <i class="icon ion-remove"></i>
+                </div>
+              </div>
+            </div>
             <div class="dropzone"></div>
       </div>
 

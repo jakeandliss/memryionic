@@ -3,10 +3,39 @@
       <div class="item item-icon-left item-dark">
         <i class="icon ion-ios-pricetag"></i>
        <span style="padding-left:65px"> {{childLabel}}</span>
-        <span ng-show="showIt" class="item-note" ng-click="editLabel()">Edit</span>
+       <span class="item-note"> 
+       <span  ng-click="newLabel()">Add New</span>
+       <span ng-show="showIt"  ng-click="editLabel()">| Edit</span>
+      </span>
       </div>
-
-    <ion-list class="list" show-delete="shouldShowDelete" can-swipe="listCanSwipe">
+      <!-- new tag-->
+    <form id="add-tag" name="addtagForm" novalidate ng-show="isNew">
+      <label class="item item-input" ng-class="{'has-error':addtagForm.name.$invalid}">
+        <span class="input-label">Name</span>
+        <input type="text" name="name" id="name" required ng-model="newTag.name">
+      </label>
+      <div class="form-error" ng-show="addtagForm.name.$invalid&&(addtagForm.name.$dirty||addtagForm.name.$touched)">
+        <div ng-show="addtagForm.name.$error.required">Name is required
+      </div>
+      </div>
+      <label class="item item-input item-select">
+        <span class="input-label">
+          Parent
+        </span>
+        <select name="parent_id" ng-model="newTag.ancestry">
+          <option ng-repeat='tag in tags' value='{{tag.id}}'>{{tag.name}}</option>
+        </select>
+      </label>
+      <div class='row'>
+          <div class='col'></div>
+        <div class='col'><a style="float:right;" class="padding-top" ng-click="cancelnewTag()">Cancel</a></div>
+        <div class='col'>
+          <button class="button button-small button-outline button-assertive expand" ng-disabled="addtagForm.$invalid" ng-click="saveNewTagMobile()">Save</button>
+        </div>
+      </div>
+    </form>
+    <!-- tag list -->
+    <ion-list class="list checklist" show-delete="shouldShowDelete" can-swipe="listCanSwipe">
       <ul>
         <li ng-repeat="tag in filteredTags" >
           <ion-item>
@@ -30,7 +59,8 @@
         <span class="input-label">Name</span>
         <input type="text" name="name" id='name' required ng-model="selectedTag.name">
       </label>
-        <div class="form-error" ng-show="tagForm.name.$error.required">Name is required
+      <div class="form-error" ng-show="tagForm.name.$invalid&&(tagForm.name.$dirty||tagForm.name.$touched)">
+        <div ng-show="tagForm.name.$error.required">Name is required </div>
       </div>
 
       <label class="item item-input item-select">

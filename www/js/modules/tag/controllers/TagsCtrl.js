@@ -31,7 +31,7 @@
     $scope.showMenu = true;
     $scope.childLabel="";
     $scope.newTag={};
-
+    $scope.isNew=false;
     $scope.filterTags = function(){
 
       if($stateParams.id)
@@ -39,14 +39,17 @@
         var filterResult = $scope.tags.filter(function(elem){
           return elem.id == $stateParams.id; 
         });
-        $scope.parentTag = filterResult[0];
-        //$scope.selectedTag = filterResult[0];
-        $scope.filteredTags = filterResult[0].children;
-        $scope.childLabel = filterResult[0].name;
-        $scope.label = "";
-        $scope.labelId = filterResult[0].id;
-        $scope.showBackButton=true;
-        
+        if(filterResult.length){
+          $scope.parentTag = filterResult[0];
+          //$scope.selectedTag = filterResult[0];
+          $scope.filteredTags = filterResult[0].children;
+          $scope.childLabel = filterResult[0].name;
+          $scope.label = "";
+          $scope.labelId = filterResult[0].id;
+          $scope.showBackButton=true;
+        }else{
+          $scope.childLabel="Go Back"
+        }
       }
       else
       {
@@ -91,10 +94,6 @@
 
       }
     }, 500);
-
-
-
-
    };
 
 
@@ -105,10 +104,8 @@
   $scope.edit = function($event,tag)
   {
     $scope.selectedTag = {};
-    $scope.selectedTag.name = tag.name;
-    $scope.selectedTag.id = tag.id;
-    $scope.selectedTag.ancestry = tag.ancestry;
-    var test= angular.element($event.target).parent().parent();
+    $scope.selectedTag=angular.copy(tag);
+    var test= angular.element($event.target).parent().parent().parent();
     $scope.selectedId=tag.id;
     $ionicListDelegate.closeOptionButtons();
     test.after(document.querySelector("#edit-tag"));
@@ -117,7 +114,13 @@
 
   $scope.save = function()
   {
-
+    if($scope.selectedTag.name){
+      angular.element(document.getElementsByClassName("checklist")).after(document.querySelector("#edit-tag"));
+      Tags.update($scope.selectedTag);
+      $scope.selectedTag={};
+      $scope.selectedId=null;
+    }
+    $scope.isEditing = false;
   };
 
   $scope.cancel = function()
@@ -129,10 +132,7 @@
  $scope.editLabel =  function()
  {
     $scope.selectedTag = {};
-    $scope.selectedTag.name = $scope.parentTag.name;
-    $scope.selectedTag.id = $scope.parentTag.id;
-    $scope.selectedTag.ancestry = $scope.parentTag.ancestry;
-    //$scope.selectedTag=$scope.parentTag;
+    $scope.selectedTag=angular.copy($scope.parentTag);
     $scope.selectedId="";
     $scope.isEditing = true;
 }
@@ -143,10 +143,7 @@ $scope.listCanSwipe = true;
 
 $scope.showEditLabelPopUp = function(tag){
   $scope.selectedTag = {};
-  $scope.selectedTag.name = tag.name;
-  $scope.selectedTag.id = tag.id;
-  $scope.selectedTag.ancestry = tag.ancestry;
-  
+  $scope.selectedTag=angular.copy(tag);
   $scope.modalInstance = $modal.open({
     templateUrl: '/js/modules/tag/views/desktop/edit-tag.html',
     size:'sm',
@@ -161,56 +158,103 @@ $scope.closeModal = function(){
 
 $scope.saveTag = function(){
   //Todo :: add code for saving the data
+
   $scope.modalInstance.dismiss('cancel');
 };
- $scope.goBack=function(){
-      $scope.showBackButton=false;
-       window.history.back();
-    };
-    $scope.addTag=function(){
-      if($stateParams.id){
-        $scope.newTag.ancestry=$stateParams.id;
-      }
-      console.log($scope.newTag.ancestry);
-      $scope.modalInstance=$modal.open({
-        templateUrl:'js/modules/tag/views/desktop/new-tag.html',
-        size:'sm',
-        scope:$scope,
-      });
-    };
-    $scope.saveNewTag=function(){
-      console.log($scope.newTag);
-      $scope.newTag.children=[];
-      if($scope.newTag.ancestry){
-        var filterForNewTags=$scope.tags.filter(function(elem){
-          return elem.id==$scope.newTag.ancestry;
-        });
-        if(filterForNewTags[0].children){
-          var length=filterForNewTags[0].children.length;
-          if(length==0){
-              $scope.newTag.id=$stateParams.id+1;
-          }else{
-              var lastID=filterForNewTags[0].children[length-1].id;
-              $scope.newTag.id=lastID+1;
-          }
-        }else{
-          filterForNewTags[0].children=[];
-          $scope.newTag.id=$scope.newTag.ancestry+1;
-          
-        }
-        // filterForNewTags[0].children.push($scope.newTag);
-      }else{
-          var length=$scope.tags.length;
-          var lastID=$scope.tags[length-1].id;
-          $scope.newTag.id=parseInt(lastID)+1;
-          // $scope.tags.push($scope.newTag);
-        }
-        console.log($scope.newTag);
-        Tags.add($scope.newTag);
-        $scope.modalInstance.dismiss('cancel');
-        $scope.newTag={};
-    };
+$scope.updateTag=function(){
+  console.log($scope.selectedTag);
+  Tags.update($scope.selectedTag);
+  $scope.modalInstance.dismiss('cancel');
+}
+$scope.goBack=function(){
+    $scope.showBackButton=false;
+     window.history.back();
   };
+$scope.addTag=function(){
+  if($stateParams.id){
+    $scope.newTag.ancestry=$stateParams.id;
+  }
+ $scope.modalInstance=$modal.open({
+    templateUrl:'js/modules/tag/views/desktop/new-tag.html',
+    size:'sm',
+    scope:$scope,
+  });
+};
+$scope.saveNewTag=function(){
+  
+  $scope.newTag.children=[];
+  if($scope.newTag.ancestry){
+    var filterForNewTags=$scope.tags.filter(function(elem){
+      return elem.id==$scope.newTag.ancestry;
+    });
+    if(filterForNewTags[0].children){
+      var length=filterForNewTags[0].children.length;
+      if(length==0){
+          $scope.newTag.id=$stateParams.id+1;
+      }else{
+          var lastID=filterForNewTags[0].children[length-1].id;
+          $scope.newTag.id=lastID+1;
+      }
+    }else{
+      filterForNewTags[0].children=[];
+      $scope.newTag.id=$scope.newTag.ancestry+1;
+      
+    }
+    // filterForNewTags[0].children.push($scope.newTag);
+  }else{
+      var length=$scope.tags.length;
+      var lastID=$scope.tags[length-1].id;
+      $scope.newTag.id=parseInt(lastID)+1;
+      // $scope.tags.push($scope.newTag);
+    }
+    Tags.add($scope.newTag);
+    $scope.modalInstance.dismiss('cancel');
+    $scope.newTag={};
+};
+$scope.saveNewTagMobile=function(){
+  if($scope.newTag.name){
+    if($scope.newTag.ancestry){
+    var filterForNewTags=$scope.tags.filter(function(elem){
+      return elem.id==$scope.newTag.ancestry;
+    });
+    if(filterForNewTags[0].children){
+      var length=filterForNewTags[0].children.length;
+      if(length==0){
+          $scope.newTag.id=$stateParams.id+1;
+      }else{
+          var lastID=filterForNewTags[0].children[length-1].id;
+          $scope.newTag.id=lastID+1;
+      }
+    }else{
+      filterForNewTags[0].children=[];
+      $scope.newTag.id=$scope.newTag.ancestry+1;
+      
+    }
+    // filterForNewTags[0].children.push($scope.newTag);
+  }else{
+      var length=$scope.tags.length;
+      var lastID=$scope.tags[length-1].id;
+      $scope.newTag.id=parseInt(lastID)+1;
+      // $scope.tags.push($scope.newTag);
+    }
+    Tags.add($scope.newTag);
+    $scope.newTag={};
+    $scope.filterTags();
+  }
+  $scope.isNew=false;
+
+};
+$scope.newLabel=function(){
+  if($stateParams.id){
+    $scope.newTag.ancestry=$stateParams.id;
+  }
+  $scope.isNew = true;
+};
+
+$scope.cancelnewTag=function(){
+  $scope.isNew=false;
+};
+};
 })();
 
 

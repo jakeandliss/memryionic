@@ -22,7 +22,8 @@ angular.module('memryApp', [
   'bootstrapLightbox',
   'ngAudio',
   'readMore',
-  'ngTagsInput'
+  'ngTagsInput',
+  'infinite-scroll'
 ])
 
 .run(function ($ionicPlatform, $rootScope, deviceDetector) {
@@ -64,23 +65,11 @@ angular.module('memryApp', [
     // Each state's controller can be found in controllers.js
 
 
+  $mdThemingProvider.theme('default')
+    .primaryPalette('grey')
+    .accentPalette('grey')
 
-    $mdThemingProvider.definePalette('strawberry', {
-        "50": "#fcf4f2", "100": "#f6ddd7", "200": "#f0c7bc", "300": "#eab4a6", "400": "#e5a18f", "500": "#e08e79", "600": "#c47c6a", "700": "#a86b5b", "800": "#8c594c", "900": "#70473d", "A100": "#f6ddd7", "A200": "#f0c7bc", "A400": "#e5a18f", "A700": "#a86b5b",
-        'contrastDefaultColor': 'light',    // whether, by default, text (contrast) on this palette should be dark or light
-        'contrastDarkColors': ['50', '100', '200', '300', '400', 'A100'], //hues which contrast should be 'dark' by default
-    });
-    $mdThemingProvider.definePalette('calm', {
-        "50": "#f9fcfc", "100": "#eef6f5", "200": "#e2f0ee", "300": "#d8eae8", "400": "#cfe5e2", "500": "#c5e0dc", "600": "#acc4c1", "700": "#94a8a5", "800": "#7b8c8a", "900": "#63706e", "A100": "#eef6f5", "A200": "#e2f0ee", "A400": "#cfe5e2", "A700": "#94a8a5",
-        'contrastDefaultColor': 'light',
-        'contrastDarkColors': ['50', '100', '200', '300', '400', '500', 'A100'],
-    });
 
-    $mdThemingProvider.theme('default')
-      .primaryPalette('strawberry')
-      .accentPalette('calm', {
-          'default': '500',
-      });
 
     $stateProvider
     // setup an abstract state for the tabs directive
