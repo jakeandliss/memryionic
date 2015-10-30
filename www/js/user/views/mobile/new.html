@@ -1,0 +1,52 @@
+<ion-view view-title="MemryBook Signup" hide-nav-bar="true">
+  <ion-content ng-controller="UserCtrl">
+
+    <div ng-show="showErrorMessage" class="ng-hide error">
+      Error while create account
+      <div ng-repeat="message in messages">
+        {{($index+1)+")."+message}}
+      </div>
+    </div>
+    <div ng-show="showSuccessMessage" class="ng-hide success">
+        Account create successfully
+    </div>
+    <form id="registration" name="regForm" novalidate>
+      <div class="list list-inset">
+        <label class="item item-input item-icon-left">
+          <input type="text" placeholder="First Name" ng-model="newUser.firstName" name="firstName" required>
+        </label>
+          <span class="error" ng-show="(regForm.firstName.$dirty||regForm.firstName.$touched||isSubmit)&&regForm.firstName.$invalid">
+           <span class="" ng-show="regForm.firstName.$error.required">First Name is Required
+           </span>
+          </span>
+        
+        <label class="item item-input">
+          <input type="text" placeholder="Last Name" ng-model="newUser.lastName" name="lastName" required>
+        </label>
+          <span class="error" ng-show="(regForm.lastName.$dirty||regForm.lastName.$touched||isSubmit)&&regForm.lastName.$invalid">
+            <span ng-show="regForm.lastName.$error.required">
+              Last Name is Required
+            </span>
+          </span>
+        
+        <label class="item item-input">
+          <input type="email" placeholder="Email" ng-model="newUser.email" name="email" required>
+        </label>
+          <span class="error" ng-show="(regForm.email.$dirty||regForm.email.$touched||isSubmit)&&regForm.email.$invalid">
+            <span ng-show="regForm.email.$error.required">Email is Required</span>
+            <span ng-show="regForm.email.$error.email">Must be in email format</span>
+          </span>
+        
+        <label class="item item-input">
+          <input type="password" placeholder="Password" name="password" ng-model="newUser.password" required minlength="8">
+        </label>
+          <span class="error" ng-show="(regForm.password.$dirty||regForm.password.$touched||isSubmit)&&regForm.password.$invalid">
+            <span ng-show="regForm.password.$error.required">password is Required</span>
+            <span ng-show="regForm.password.$error.minlength">password must be more than 8(eight) character</span>
+          </span>
+        
+        <button type="button" ng-click="regForm.$valid?createAccount():isSubmit=true" class="button button-block button-assertive bold">Create My Account</button>
+      </div>
+    </form>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,99 @@
+
+/******************
+
+Mobile
+
+*******************/
+
+.mobile #welcome h1, #welcome p {
+	color: #774F38;
+}
+
+.mobile #welcome img {
+	width: 30%;
+	border-radius: 100%;
+	background-color: #ECE5CE ;
+	padding: 5%;
+}
+
+.mobile #welcome h1 {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.mobile #welcome .pane, #welcome .list {
+	background-color: #C5E0DC ;
+}
+
+.mobile #welcome .item {
+    border: none;
+    margin: 5%;
+		background-color: #eee;
+	  padding: 1% 5%;
+  	text-align: right;
+}
+
+.mobile #welcome .list {
+    margin: 0 15%;
+    border-radius: 5%;
+}
+
+.mobile #registration .row {
+    padding: 0;
+    margin-bottom: 1px;
+}
+
+.mobile #registration .row .first {
+    border-right: none;
+}
+
+.mobile #registration .row .last {
+    border-left: none;
+}
+
+
+/******************
+
+Desktop
+
+*******************/
+
+.desktop .user.footer {
+	margin-top: 1rem;
+	padding: 2rem;
+	background-color: #fff;
+	position: relative;
+	width: 100%;
+	bottom: 0;
+}
+
+.desktop #user .navbar-default {
+  border-bottom: 0 px solid white;
+}
+
+.desktop #user .navbar-default input {
+	border: none;
+}
+
+.desktop #welcome-register span.thin {
+  font-weight: lighter;
+	font-size: 18px;
+}
+
+.desktop #welcome-register .form {
+  box-shadow: 0 0 8px -4px;
+  border-radius: 5px;
+}
+.margin-left{
+	margin-left: 8px;
+}
+.error{
+	color: red
+}
+.success{
+	color: green
+}
+/*
+#welcome-register h1, #welcome-register p, #welcome-register span, #welcome-register h3, #welcome-register label {
+	color: #774F38;
+}*/

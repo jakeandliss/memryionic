@@ -1,0 +1,67 @@
+<div id="welcome-register">
+  <div layout="row">
+    <div flex="40" offset="5">
+      <h1 class="center"><u>Make Memories Last</u></h1>
+
+      <h3><md-icon class="material-icons md-24">message</md-icon> Digitize your memories. <span class="thin">Use images, video, audio, and files to enhance your experience.</span></h3>
+      <h3><md-icon class="material-icons md-24">group_add</md-icon> Share Entries <span class="thin">with users and non-users alike. No account necessary for non-users.</span></h3>
+      <h3><md-icon class="material-icons md-24">money_off</md-icon> Spend Nothing <span class="thin">ever. We believe memories make the world a better place and are committed to keeping MemryBook free forever.</span></h3>
+    </div>
+
+    <div class="bg-white form" flex="40" offset="5" layout-padding>
+      <h1>Quick Signup <span class="thin">Its free and easy.</span></h1>
+      <div ng-show="showErrorMessage" class="ng-hide error">
+        Error while create account
+        <div ng-repeat="message in messages">
+          {{($index+1)+")."+message}}
+        </div>
+      </div>
+      <div ng-show="showSuccessMessage" class="ng-hide success">
+        Account create successfully
+      </div>
+      <form name="regForm" novalidate>
+        <label>What's Your Name?</label>
+          <div class="form-group form-inline row" >
+            <div class="col-md-6" ng-class="{'has-error': regForm.firstName.$invalid&&(regForm.firstName.$dirty||regForm.firstName.$touched||isSubmit) }">
+              <input type="text" class="form-control"  required name="firstName" placeholder="First Name" ng-model="newUser.firstName">
+               <span class="error" ng-show="(regForm.firstName.$dirty||regForm.firstName.$touched||isSubmit)&&regForm.firstName.$invalid">
+               <span class="" ng-show="regForm.firstName.$error.required">First Name is Required
+               </span>
+              </span>
+            </div>
+            <div class="col-md-6" ng-class="{'has-error': regForm.lastName.$invalid&&(regForm.lastName.$dirty||regForm.lastName.$touched||isSubmit) }">
+              <input type="text" class="form-control" placeholder="Last Name" required name="lastName" ng-model="newUser.lastName">
+              <span class="error" ng-show="(regForm.lastName.$dirty||regForm.lastName.$touched||isSubmit)&&regForm.lastName.$invalid">
+                <span class="" ng-show="regForm.lastName.$error.required">
+                  Last Name is Required
+                </span>
+              </span>
+            </div>
+        </div>
+       <div class="form-group">
+          <label>Add Your Email</label>
+          <div ng-class="{'has-error': regForm.email.$invalid&&(regForm.email.$dirty||regForm.email.$touched||isSubmit) }">
+          <input type="email" required name="email" class="form-control" placeholder="Email" ng-model="newUser.email">
+          <span class="error" ng-show="(regForm.email.$dirty||regForm.email.$touched||isSubmit)&&regForm.email.$invalid">
+            <span ng-show="regForm.email.$error.required">Email is Required</span>
+            <span ng-show="regForm.email.$error.email">Must be in email format</span>
+          </span>
+          </div>
+       </div>
+        <div class="form-group">
+          <label>Create Your Password</label>
+          <div ng-class="{'has-error': regForm.password.$invalid&&(regForm.password.$dirty||regForm.password.$touched||isSubmit) }">
+          <input type="password" class="form-control" required name="password"  placeholder="Password" minlength="8" ng-model="newUser.password">
+          <span class="error" ng-show="(regForm.password.$dirty||regForm.password.$touched||isSubmit)&&regForm.password.$invalid">
+            <span ng-show="regForm.password.$error.required">password is Required</span>
+            <span ng-show="regForm.password.$error.minlength">password must be more than 8(eight) character</span>
+          </span>
+          </div>
+        </div>
+        <div class="form-group">
+          <md-button type="button" ng-click="regForm.$valid?createAccount():isSubmit=true" class="md-primary md-raised no-margin">Create My Account <md-icon class="material-icons">launch</md-icon></md-button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
