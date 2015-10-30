@@ -513,3 +513,32 @@ Mobile CSS
     border-top: none;
     padding-top: 0;
 }
+
+.mobile tags-input .host {
+    margin: 0;
+    border-radius: 0 !important;
+    border: none;
+    margin-bottom: 0 !important;
+}
+
+.mobile .edit .title, .mobile .new .title {
+    width: 85%;
+    border: none;
+}
+
+.mobile .edit .title input, .mobile .new .title input {
+    padding-right: 0;
+}
+
+.mobile .click-to-add {
+    float: right;
+    font-size: 30px;
+    margin-top: 5px;
+    width: 15%;
+    text-align: center;
+}
+
+.mobile .edit a.remove-button, .mobile .new a.remove-button {
+    opacity: 1;
+    padding-bottom: 1px !important;
+}

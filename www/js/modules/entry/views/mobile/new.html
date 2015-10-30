@@ -13,11 +13,10 @@
         </input>
       </ion-header-bar>
 
-      <div class="list form">
-        <label class="item item-input item-icon-right" ng-class="{'has-error': entryForm.title.$invalid }">
-          <a href="#"><i class="icon ion-android-attach assertive"></i></a>
-          <input type="text" placeholder="Title this entry" required name="title" ng-model="entry.title" ng-class="{error:entryForm.title.$dirty&& entryForm.title.$invalid}"/>      
-          
+      <div class="list form new">
+        <a href="#"><i class="icon ion-android-attach assertive click-to-add"></i></a>
+        <label class="item item-input title" ng-class="{'has-error': entryForm.title.$invalid }">
+          <input type="text" placeholder="Title this entry" required name="title" ng-model="entry.title" ng-class="{error:entryForm.title.$dirty&& entryForm.title.$invalid}"/>
         </label>
         <div class="form-error" ng-show="entryForm.title.$touched&&entryForm.title.$invalid">
               <span ng-show="entryForm.title.$error.required">Title is required</span>
@@ -25,26 +24,26 @@
         <label class="item item-input">
           <textarea rows="7" placeholder="What would you like to remember?" ng-model="entry.content"></textarea>
         </label>
-         <tags-input name="tagsinput" placeholder="Add labels" class="" ng-model="tags"replace-spaces-with-dashes="false">
-           <auto-complete ng-controller="TagsCtrl as tags" source="loadTags($query)" load-on-down-arrow="true" min-length="1"></auto-complete>
-      </tags-input>
+        <tags-input name="tagsinput" placeholder="Add labels" class="" ng-model="tags" replace-spaces-with-dashes="false">
+          <auto-complete ng-controller="TagsCtrl as tags" source="loadTags($query)" load-on-down-arrow="true" min-length="1"></auto-complete>
+        </tags-input>
         <label class="item item-input">
           <input type="date" placeholder="date" name='date' ng-model="entry.date">
         </label>
-        
+
              <div class="dropzone" dropzone="dropzoneConfig">
             <div class="dz-drag hidden" id="dzdrag"><p></p></div>
             <div class="dz-message default-message" id="dzmessage">
-              <md-icon class="material-icons md-36 pull-left">attach_file</md-icon>
+              <!-- <md-icon class="material-icons md-36 pull-left">attach_file</md-icon>
               <md-tooltip>
                 Attach Video, Image, Audio, or PDF
               </md-tooltip>
-              <p>Click to upload</p>
+              <p>Click to upload</p> -->
             </div>
           </div>
-        
+
         <div class="dropzone" >
-            
+
           </div>
       </div>
     </form>

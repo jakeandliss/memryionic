@@ -13,9 +13,9 @@
         </input>
       </ion-header-bar>
 
-      <div class="list form">
-        <label class="item item-input item-icon-right">
-          <a href="#"><i class="icon ion-android-attach assertive"></i></a>
+      <div class="list form edit">
+        <a href="#" class="click-to-add"><i class="icon ion-android-attach assertive"></i></a>
+        <label class="item item-input title">
           <input type="text" placeholder="Title this entry" ng-model="selectedEntry.title">
         </label>
         <label class="item item-input">
@@ -28,7 +28,7 @@
            <auto-complete ng-controller="TagsCtrl as tags" source="loadTags($query)" load-on-down-arrow="true" min-length="1"></auto-complete>
       </tags-input>
          <div class="pull-left" ng-repeat="resource in selectedEntry.resources | filter: selectVisuals" ng-if="resource.attachment_content_type == 'image' || resource.attachment_content_type == 'video'">
-            <div ng-mouseover="onHover=true" ng-mouseout="onHover=false" ng-if="resource.attachment_content_type == 'image'">  
+            <div ng-mouseover="onHover=true" ng-mouseout="onHover=false" ng-if="resource.attachment_content_type == 'image'">
               <img ng-src="{{resource.attachment}}" class="edit-image" >
               <div>
                 <a ng-click="removefromSelectedFile(resource)" >Delete</a>
