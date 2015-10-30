@@ -22,7 +22,7 @@
       <div class="item item-text-wrap gray">
         <p read-more ng-if="entry.content" ng-model="entry.content" words="true" length="50"></p>
       </div>
-       
+
       <div ng-if="entry.resources" >
       <section ng-controller="PanelCtrl as panel1" ng-init="CreateResourceTypeList(entry.resources)">
          <div class="item tabs tabs-secondary tabs-icon-left" ng-if="ResourceList.length>1">
@@ -46,7 +46,7 @@
               </div>
             </ion-slide>
           </ion-slide-box>
-        </div> 
+        </div>
 
         <!--Audio content -->
           <ion-audio-track track="track" ng-if="fileType.type=='Audio'"  ng-show="isSelected(fileType.id)">
@@ -61,11 +61,11 @@
                 <h4>{{resource.attachment_file_name}}</h4>
                  <a ng-click="removeMobileFile($event,resource,entry)" class="pull-right pointer">Remove</a>
               </div>
-            </div> 
+            </div>
            <!--  <p class="item-body">
               Labels: <a href="#" class="subdued" ng-repeat="tag in entry.tags">{{tag.name}}{{$last ? '' : ','}}</a>
             </p> -->
-         </ion-audio-track> 
+         </ion-audio-track>
 
         <!-- Files content -->
         <div class="item item-body panel" ng-if="fileType.type=='Files'" ng-show="isSelected(fileType.id)">
@@ -73,7 +73,7 @@
             <i class="icon ion-document-text"></i>
             <a href="{{resource.attachment}}">{{resource.attachment_file_name}}</a>
             <a ng-click="removeMobileFile($event,resource,entry)" class="pull-right pointer">Remove</a>
-          </p> 
+          </p>
          <!--  <p class="labels" ng-if="entry.tags.length">
             Labels: <a href="#" class="subdued" ng-repeat="tag in entry.tags">{{tag.name}}{{$last ? '' : ', '}}</a>
           </p> -->
@@ -82,8 +82,8 @@
       </section>
     </div>
       <!-- tags Section -->
-      <div class="item item-text-wrap gray">
-         <p class="labels" ng-if="entry.tags.length">
+      <div class="item item-text-wrap gray labels">
+         <p ng-if="entry.tags.length">
             Labels: <a href="#" class="subdued" ng-repeat="tag in entry.tags">{{tag.name}}{{$last ? '' : ', '}}</a>
           </p>
       </div>

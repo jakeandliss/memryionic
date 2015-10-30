@@ -8,3 +8,4 @@ plugins/
 www/lib/*
 !www/lib/angular-bootstrap-lightbox
 !www/lib/flat-ui
+!www/lib/ionic/scss/_variables.scss

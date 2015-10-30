@@ -508,3 +508,8 @@ Mobile CSS
   height: 100px;
   width:100px;
 }
+
+.mobile #entries .labels {
+    border-top: none;
+    padding-top: 0;
+}
