@@ -13,15 +13,15 @@
 
     <nav class="navbar navbar-default navbar-inverse navbar-embossed" role="navigation">
       <ul class="nav navbar-nav nav-pills nav-stacked">
-      <li ng-class="{ active:panel.isSelected(1) }" class="expand"><a ng-click="panel.selectTab(1)" class="pointer">Edit Profile</a></li>
-      <li ng-class="{ active:panel.isSelected(2) }" class="expand"><a ng-click="panel.selectTab(2)" class="pointer">Update Password</a></li>
-      <li ng-class="{ active:panel.isSelected(3) }" class="expand"><a ng-click="panel.selectTab(3)" class="pointer">Delete Account</a></li>
+      <li ng-class="{ active:isSelected(1) }" class="expand"><a ng-click="selectTab(1)" class="pointer">Edit Profile</a></li>
+      <li ng-class="{ active:isSelected(2) }" class="expand"><a ng-click="selectTab(2)" class="pointer">Update Password</a></li>
+      <li ng-class="{ active:isSelected(3) }" class="expand"><a ng-click="selectTab(3)" class="pointer">Delete Account</a></li>
     </ul>
   </nav>
   </div>
 
   <div class="col-sm-9">
-    <md-content id="content" class="bg-white padding rounded" ng-show="panel.isSelected(1)">
+    <md-content id="content" class="bg-white padding rounded" ng-show="isSelected(1)">
       <form>
         <div class="row">
           <md-input-container class="col-sm-6">
@@ -45,7 +45,7 @@
       </form>
     </md-content>
 
-    <md-content id="content" class="bg-white padding rounded" ng-show="panel.isSelected(2)">
+    <md-content id="content" class="bg-white padding rounded" ng-show="isSelected(2)">
       <form>
         <div class="row">
           <md-input-container class="col-sm-6">
@@ -61,7 +61,7 @@
       </form>
     </md-content>
 
-    <md-content id="content" class="bg-white padding rounded" ng-show="panel.isSelected(3)">
+    <md-content id="content" class="bg-white padding rounded" ng-show="isSelected(3)">
       <h3>Delete My Account</h3>
       <p>We never recommend deleting your account, but this is your private information and we respect your choice to delete it if you'd like.
       By deleting your account, everything you've created will be permanently deleted.</p>

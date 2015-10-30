@@ -16,7 +16,8 @@
     "ngCordova": "latest",
     "flat-ui-sass": "latest",
     " ng-tags-input": "latest",
-    "ngInfiniteScroll":"1.0.0"
+    "ngInfiniteScroll":"1.0.0",
+    "angular-cookies":"1.3.6"
   },
   "dependencies": {
     "ng-device-detector": "~1.1.7",

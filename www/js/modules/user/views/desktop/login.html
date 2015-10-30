@@ -1,3 +1,50 @@
-<p>Login page</p>
+<div id="welcome-register">
+  <div layout="row">
+    <div flex="40" offset="5">
+      <h1 class="center"><u>Make Memories Last</u></h1>
 
-<p> Add login form here</p>
+      <h3><md-icon class="material-icons md-24">message</md-icon> Digitize your memories. <span class="thin">Use images, video, audio, and files to enhance your experience.</span></h3>
+      <h3><md-icon class="material-icons md-24">group_add</md-icon> Share Entries <span class="thin">with users and non-users alike. No account necessary for non-users.</span></h3>
+      <h3><md-icon class="material-icons md-24">money_off</md-icon> Spend Nothing <span class="thin">ever. We believe memories make the world a better place and are committed to keeping MemryBook free forever.</span></h3>
+    </div>
+
+    <div class="bg-white form" flex="40" offset="5" layout-padding>
+      <h1>Login</h1>
+      <div ng-show="showErrorMessage" class="ng-hide error">
+        Error while create account
+        <div ng-repeat="message in messages">
+          {{($index+1)+")."+message}}
+        </div>
+      </div>
+      <div ng-show="showSuccessMessage" class="ng-hide success">
+        Account create successfully
+      </div>
+      <form name="logForm" novalidate>
+       <div class="form-group">
+          <label>Your Email</label>
+	          <div ng-class="{'has-error': logForm.email.$invalid&&(logForm.email.$dirty||logForm.email.$touched||isSubmit) }">
+	          	<input type="email" required name="email" class="form-control" placeholder="Email" ng-model="loginUser.email">
+	          	<span class="error" ng-show="(logForm.email.$dirty||logForm.email.$touched||isSubmit)&&logForm.email.$invalid">
+	            	<span ng-show="logForm.email.$error.required">Email is Required</span>
+	            	<span ng-show="logForm.email.$error.email">Must be in email format</span>
+	          	</span>
+	          </div>
+       </div>
+        <div class="form-group">
+          <label>Your Password</label>
+          <div ng-class="{'has-error': logForm.password.$invalid&&(logForm.password.$dirty||logForm.password.$touched||isSubmit) }">
+          <input type="password" class="form-control" required name="password"  placeholder="Password" minlength="8" ng-model="loginUser.password">
+          <span class="error" ng-show="(logForm.password.$dirty||logForm.password.$touched||isSubmit)&&logForm.password.$invalid">
+            <span ng-show="logForm.password.$error.required">password is Required</span>
+            <span ng-show="logForm.password.$error.minlength">password must be more than 8(eight) character</span>
+          </span>
+          </div>
+        </div>
+        <div class="form-group">
+          <md-button type="button" ng-click="logForm.$valid?login():isSubmit=true" class="md-primary md-raised no-margin">Log In <md-icon class="material-icons">launch</md-icon></md-button>
+          <a href="" ui-sref="user.new">Create New Account</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

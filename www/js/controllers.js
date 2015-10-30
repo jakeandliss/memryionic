@@ -1,9 +1,9 @@
 // controllers not part of any module go in this file
 angular.module('memryApp.controllers', [])
 
-.controller('PanelCtrl', PanelCtrl);
-PanelCtrl.$inject = ['$scope'];
-function PanelCtrl($scope) {
+.controller('ProfilePanelCtrl', ProfilePanelCtrl);
+ProfilePanelCtrl.$inject = ['$scope'];
+function ProfilePanelCtrl($scope) {
   $scope.tab = 1;
   this.selectTab = function(setTab) {
     $scope.tab = setTab;

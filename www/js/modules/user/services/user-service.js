@@ -1,7 +1,7 @@
 (function(){
   angular.module('memryApp')
     .service('UserService', UserService);
-
+ 
     UserService.$inject = ['$state','$http'];
     function UserService($state,$http){
       var Users=[{
@@ -32,6 +32,11 @@
         createAccount:function(user){
           var _userRegistration={"userRegistration":user};
           return $http({method:"POST",url:baseAddress+"api/v1/users.json",data:_userRegistration})
+        },
+        login:function(user){
+          var _user={"user":user}
+          return $http.post(baseAddress+"api/v1/sessions.json",_user)
+          //return $http({method:"POST",url:baseAddress+"api/v1/sessions.json",data:_user})
         }
       }
     }

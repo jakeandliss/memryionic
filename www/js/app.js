@@ -23,10 +23,11 @@ angular.module('memryApp', [
   'ngAudio',
   'readMore',
   'ngTagsInput',
-  'infinite-scroll'
+  'infinite-scroll',
+  'ngCookies'
 ])
 
-.run(function ($ionicPlatform, $rootScope, deviceDetector) {
+.run(function ($ionicPlatform, $rootScope, deviceDetector,$cookieStore,$state) {
     $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
@@ -56,6 +57,27 @@ angular.module('memryApp', [
         window.isDesktopOrTablet = isDesktopOrTablet;
         $rootScope.isDesktopOrTablet = isDesktopOrTablet;
     }
+    // $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams){
+    //   var isLoggedin=false;
+    //   var Token=$cookieStore.get('memryionic');
+    //   console.log(Token)
+    //   if(Token){
+    //     isLoggedin=true;
+    //   }
+    //   var name=toState.name.substr(toState.name.indexOf('.')+1);
+    //   var checkCredential=true;
+    //   if(name=='login'||name=='new'||name=="forgot-password"){
+    //     checkCredential=false;
+    //   }
+    //   if(!isLoggedin&&checkCredential){
+    //     event.preventDefault();
+    //     $state.go('user.login')
+    //   }
+    //   // else if(isLoggedin==true&&!checkCredential){
+    //   //   event.preventDefault();
+    //   //   $state.go('app.entries')
+    //   // }
+    // })
 })
 
 .config(function ($stateProvider, $urlRouterProvider, $mdThemingProvider) {

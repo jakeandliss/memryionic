@@ -11,17 +11,23 @@
         </button>
         <a class="navbar-brand logo" href="#">MemryBook</a>
       </div>
-
-
       <ul class="nav navbar-nav navbar-right">
-        <form class="navbar-form navbar-left">
+        <form class="navbar-form navbar-left" name="loginForm" novalidate>
           <div class="form-group">
-            <input type="email" class="form-control" placeholder="Email" ng-model="user.email">
+            <input type="email" name="email" required class="form-control" placeholder="Email" ng-model="loginUser.email">
+            <span class="error" ng-show="(loginForm.email.$dirty||loginForm.email.$touched||isSubmit)&&loginForm.email.$invalid">
+             <span ng-show="loginForm.email.$error.required">*</span>
+             <span ng-show="loginForm.email.$error.email">invalid</span>
+            </span>
           </div>
           <div class="form-group">
-            <input type="password" class="form-control" placeholder="Password" ng-model="user.password">
+            <input type="password" name="password" required minlength="8" class="form-control" placeholder="Password" ng-model="loginUser.password">
+            <span class="error" ng-show="(loginForm.password.$dirty||loginForm.password.$touched||isSubmit)&&loginForm.password.$invalid">
+            <span ng-show="loginForm.password.$error.required">*</span>
+            <span ng-show="loginForm.password.$error.minlength">More Than 8 Character</span>
+          </span>
           </div>
-          <md-button type="submit" class="md-primary md-raised no-margin">Log In <md-icon class="material-icons">launch</md-icon></md-button>
+          <md-button type="submit" ng-click="loginForm.$invalid?isSubmit=true:login()" class="md-primary md-raised no-margin">Log In <md-icon class="material-icons">launch</md-icon></md-button>
         </form>
         <li><md-button class="button font-white bold" ng-click="showDialog()">Forgot Password?</md-button></li>
       </ul>

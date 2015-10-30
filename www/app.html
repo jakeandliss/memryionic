@@ -43,7 +43,7 @@ navigation history that also transitions its views in and out.
       <ul class="nav navbar-nav">
         <li><a class="a font-white bold" ui-sref="app.entries">Entries</a></li>
         <li><a class="a font-white bold" ui-sref="app.profile">Profile</a></li>
-        <li><a class="a font-white bold" ui-sref="app.tags">Logout</a></li>
+        <li><a class="a font-white bold" ng-controller="UserCtrl" ng-click="logout()">Logout</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </nav><!-- /navbar -->

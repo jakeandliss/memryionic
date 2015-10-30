@@ -1,9 +1,7 @@
 // User module config file
-
 (function(){
   angular.module('memryApp')
     .config(Config);
-
     Config.$inject = ['$stateProvider'];
     function Config($stateProvider){
       $stateProvider
@@ -27,7 +25,6 @@
             }
           }
         })
-
         .state('user.login', {
           url: '/login',
           views: {
@@ -39,7 +36,6 @@
             }
           }
         })
-
         .state('user.forgot-password', {
           url: '/forgot-password',
           views: {
@@ -51,7 +47,6 @@
             }
           }
         })
-
         // user profile
         .state('app.profile', {
           url: '/profile',
